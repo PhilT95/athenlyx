@@ -1,0 +1,2 @@
+# AlmaLinux Setup Guide
+This guide provided a few easy steps get a rather secure baseline AlmaLinux installation. The installation of AlmaLinux itself can be found at the [AlmaLinux Wiki](https://wiki.almalinux.org/documentation/installation-guide.html).
