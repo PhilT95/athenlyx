@@ -76,18 +76,18 @@ Snort rules consist of the following parameters:
 
 ### Payload Detection Rule options
 - **Content**: 	Payload data. It matches specific payload data by ASCII, HEX or both. It is possible to use this option multiple times in a single rule. However, the more you create specific pattern match features, the more it takes time to investigate a packet. Following rules will create an alert for each HTTP packet containing the keyword "GET". This rule option is case sensitive!
-  - ASCII mode - `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; sid: 100001; rev:1;)`
-  - HEX mode - `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"|47 45 54|"; sid: 100001; rev:1;)`
+  - ASCII mode - `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; sid: 1000001; rev:1;)`
+  - HEX mode - `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"|47 45 54|"; sid: 1000001; rev:1;)`
 - **Nocase**: Disabling case sensitivity. Used for enhancing the content searches. \
-`alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; nocase; sid: 100001; rev:1;)`
+`alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; nocase; sid: 1000001; rev:1;)`
 - **Fast_pattern**: Prioritise content search to speed up the payload search operation. By default, Snort uses the biggest content and evaluates it against the rules. "fast_pattern" option helps you select the initial packet match with the specific value for further investigation. This option always works case insensitive and can be used once per rule. Note that this option is required when using multiple "content" options. \
 The following rule has two content options, and the fast_pattern option tells to snort to use the first content option (in this case, "GET") for the initial packet match.\
-`alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; fast_pattern; content:"www";  sid:100001; rev:1;)`
+`alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; fast_pattern; content:"www";  sid:1000001; rev:1;)`
 
 ### Non-Payload Detection Rule ptions
 
 - **ID**: Filtering the IP id field.\
-`alert tcp any any <> any any (msg: "ID TEST"; id:123456; sid: 100001; rev:1;)`
+`alert tcp any any <> any any (msg: "ID TEST"; id:123456; sid: 1000001; rev:1;)`
 - **Flags**:  Filtering the TCP flags: 
   - F - FIN
   - S - SYN
@@ -103,3 +103,8 @@ The following rule has two content options, and the fast_pattern option tells to
 - **Sameip**: Filtering the source and destination IP addresses for duplication.
 
 For a convenient Cheat sheet, see [this one from Tryhackme.com](Snort_Cheatsheet_TryHackMe.pdf)
+
+#### Rule Examples
+|Rule|Explanation|
+|:----|----------|
+|`alert tcp any 21 <> any any (msg:"FTP No Password entered";content:"331";content:"Administrator";sid:1000001;rev:1;)`|This rule will generate an alert for any 21/tcp packages with the return code **331** and **Administrator** inside the content. Regarding the FTP Service this means that there are login attempts by the user **Administrator** without a provided password. See [FTP Return Codes](https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes)
