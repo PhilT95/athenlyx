@@ -108,3 +108,12 @@ For a convenient Cheat sheet, see [this one from Tryhackme.com](Snort_Cheatsheet
 |Rule|Explanation|
 |:----|----------|
 |`alert tcp any 21 <> any any (msg:"FTP No Password entered";content:"331";content:"Administrator";sid:1000001;rev:1;)`|This rule will generate an alert for any 21/tcp packages with the return code **331** and **Administrator** inside the content. Regarding the FTP Service this means that there are login attempts by the user **Administrator** without a provided password. See [FTP Return Codes](https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes)
+|`alert tcp any any <> any any  (msg: "PNG File Found";content:"\|89 50 4E 47 0D 07 0D 0A 1A 0A\|"; sid: 100001;rev:1;)`|This rule will generate an alert for all packages with the given content. The given content resembles the Hex file signature for .PNG-files. See [Hex File Signatures](https://en.wikipedia.org/wiki/List_of_file_signatures)
+
+
+The tool **Strings** can help you figure out, which information are hidden inside the generate log. It can be used like this `sudo strings snort.log | grep GIF`.
+You can inspect the hex values of a log with `sudo snort snort.log -X`.
+
+## Tips and tricks
+- It is very important to analyze the log files with different options or tools to get all the important information out of it.
+- Don't forget to look at the alert files as well.

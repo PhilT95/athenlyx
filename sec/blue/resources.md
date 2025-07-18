@@ -1,0 +1,9 @@
+# Blue Teaming Resources
+To protecting an organization's networks, systems, and data from cyberattacks, specialists need good and reliable resources and tools. Here is a short list with handy tools that can help to identify, analyz and mitigate threats.
+
+- [ABUSE.ch](https://abuse.ch/#platforms): abuse.ch maintains six public platforms, all supported by our partnership with Spamhaus, to aid cybersecurity researchers and practitioners in their day-to-day roles. 
+- [YARA](https://virustotal.github.io/yara/): YARA is a tool aimed at (but not limited to) helping malware researchers to identify and classify malware samples. With YARA you can create descriptions of malware families (or whatever you want to describe) based on textual or binary patterns.
+- [OpenCTI](https://github.com/OpenCTI-Platform/opencti): OpenCTI is an open source platform allowing organizations to manage their cyber threat intelligence knowledge and observables. It has been created in order to structure, store, organize and visualize technical and non-technical information about cyber threats.
+- [MITRE ATT&CK](https://attack.mitre.org/): MITRE ATT&CK® is a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations. The ATT&CK knowledge base is used as a foundation for the development of specific threat models and methodologies in the private sector, in government, and in the cybersecurity product and service community.
+- [MITRE ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/): The ATT&CK Navigator is a web-based tool for annotating and exploring ATT&CK matrices. It can be used to visualize defensive coverage, red/blue team planning, the frequency of detected techniques, and more.
+- [MITRE CAR](https://car.mitre.org/analytics/): The MITRE Cyber Analytics Repository (CAR) is a knowledge base of analytics developed by MITRE based on the MITRE ATT&CK adversary model.
