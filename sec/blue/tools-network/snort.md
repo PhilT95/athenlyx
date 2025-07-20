@@ -25,12 +25,13 @@ All commands are options for launching the **snort** binary.
 |`-dvr`| This will display only the first 10 entries of the log file|`sudo snort -dvr logname.log -n 10`|
 |`-c` `-N`| This will start snort as an IDP/IPS without logging and the provided configuration|`sudo snort -c snort.conf -N`|
 |`-D`| This will start snort as an IDP/IPS in the background and the provided configuration|`sudo snort -c snort.conf -D`|
-|`-A console`| This will start snort as an IDP/IPS with a **fast style alert console (-A console)**|`sudo snort -c snort.conf -A console`|
+|`-A console`| This will start snort as an IDP/IPS with a **fast style alert console (-A console)**. This prevents packages from being dropped.|`sudo snort -c snort.conf -A console`|
 |`-A cmg`| This will start snort as an IDP/IPS with a **basic header details via in hex and text format (-A cmg)**|`sudo snort -c snort.conf -A cmg`|
 |`-A fast`| This will start snort as an IDP/IPS with a fast mode that provides **alerts, messages, timestamps and source/destination ip addresses (-A fast)**. No console output will be shown. Instead a alert file will be created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A fast`|
 |`-A full`| This will start snort as an IDP/IPS with a full mode that provides **all information (-A full)**. Instead a alert file will be created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A full`|
 |`-A none`| This will start snort as an IDP/IPS with a none mode that **doesn't create an alert file. (-A full)**|`sudo snort -c snort.conf -A none`|
-|`-Q --daq afpacket` `-i`| This will start snort with an activated **Data Aquisition (DAQ)** module and use the **afpacket** module to use snort as an IPS on the given intertface **eth0:eth1**|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
+|`-Q --daq afpacket` `-i`| This will start snort with an activated **Data Aquisition (DAQ)** module and use the **afpacket** module to use snort as an IPS on the given intertface **eth0:eth1**. The DAQ is needed for enabling snort to drop packages.|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
+
 
 ## How to read PCAPs with snort
 |Parameter|Function|Example|
