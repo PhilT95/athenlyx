@@ -26,24 +26,24 @@ It is mainly used to gain an overview of the network since its capabilities are 
 
 You can see the list of the pcap files within the **Case Panel**.
 
-![Image](./NetworkMinerCase.png)
+![Image](./NetworkMiner_Data//NetworkMinerCase.png)
 
 The **hosts** menu shows the identified hosts in the pcap file.
 
-![Image](./NetworkMinerHosts.png)
+![Image](./NetworkMiner_Data/NetworkMinerHosts.png)
 
 The **Sessions** menu shows the detected sessions in the pcap file.
 
-![Image](./NetworkMinerSessions.png)
+![Image](./NetworkMiner_Data/NetworkMinerSessions.png)
 
 Another important menu is the **Credentials** menu, which shows extracted credentials and password hashes. You can use [Hashcat](https://github.com/hashcat/hashcat) and [John the Ripper](https://github.com/openwall/john) to decrypt the extracted credentials.
 
-![Image](./NetworkMinerCredentials.png)
+![Image](./NetworkMiner_Data/NetworkMinerCredentials.png)
 
 The **Files** menu shows extracted files from investigated pcaps.
 
-![Image](./NetworkMinerFiles.png)
+![Image](./NetworkMiner_Data/NetworkMinerFiles.png)
 
 The **Messages** menu shows extracted emails, chats and messages from investigated pcaps.
 
-![Image](NetworkMinerMessages.png)
+![Image](NetworkMiner_Data/NetworkMinerMessages.png)
