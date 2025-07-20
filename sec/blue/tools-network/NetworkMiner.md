@@ -14,7 +14,7 @@ It supports the following data types:
 
 ## The Basics
 
-![Image](./NetworkMinerMainPage.png)
+![Image](./NetworkMiner_Data/NetworkMinerMainPage.png)
 
 NetworkMiner comes with to operating modes:
 - **Sniffer Mode**: Although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommened as a sniffer.
