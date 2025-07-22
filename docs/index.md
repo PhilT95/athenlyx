@@ -1,17 +1,19 @@
-# Welcome to MkDocs
+# Welcome Ohana-Cloud.com Docs
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
 
-## Commands
+The documentation is divided into more IT/Infrastructure and Cyber Security related topics. IT related knowledge can be found [here](/it/). Cyber Security Information is collected [here](/sec/).
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
+## Documentation Structure
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+```bash
+docs
+└───docs
+    ├───ai
+    ├───blue
+    │   └───tools-network
+    │       └───NetworkMiner_Data
+    └───servers
+        └───linux
