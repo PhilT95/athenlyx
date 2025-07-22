@@ -3,12 +3,14 @@ This guide provided a few easy steps get a rather secure baseline AlmaLinux inst
 
 ## The Basics 
 Before you start installing applications or anything else, make sure you do the following few tasks:
+
 1. Create a separate user with sudo permissions
 2. Enable login via SSH using a private key for this user
 3. Disable direct root login via ssh
 
 ### Create a new user with sudo permissions
 Follow these steps to create a new user with sudo permissions. You need root permissions to fulfill these steps
+
 1. `useradd username` -> Creates the user with the given name
 2. `passwd username` -> Lets you create a password for the user
 3. `usermod -aG wheel username` -> Assigns the user to the group wheel. This is the sudoer-group within AlmaLinux

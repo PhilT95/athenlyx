@@ -1,0 +1,42 @@
+site_name: Ohana-Cloud.com Docs
+site_url: https://docs.ohana-cloud.com
+nav:
+  - Home: index.md
+  - Blue Teaming:
+    - Network Tools:
+        - Snort IDS/IPS: blue/tools-network/snort.md
+        - Zeek Traffic Analyser: blue/tools-network/zeek.md
+        - NetworkMiner: blue/tools-network/NetworkMiner.md
+    - AI Security:
+        - AI Security Tools: ai/tools-ai.md
+    - Blue Teaming Resources: blue/resources.md
+  - Servers:
+    - Linux:
+      - AlmaLinux Setup Guide: servers/linux/almalinux_setup.md
+      - Basic Commands: servers/linux/commands.md
+    - Firewalld Basics: servers/firewalld.md
+    - SELinux Basics: servers/SELinux.md
+
+
+theme:
+  name: material
+  features:
+    - search.suggest
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tabs
+plugins:
+  - search
+
+markdown_extensions:
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences 

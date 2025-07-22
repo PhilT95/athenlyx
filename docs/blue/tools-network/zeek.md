@@ -9,6 +9,7 @@ Compared to <ins>Snort</ins>, Zeek is harder to use, but offers in-depth traffic
 ### Zeek Architecture
 
 Zeek has to primary layers:
+
 1. **Event Engine**: This layer is where the packets are proccessed. It is called the event core and is responsible for describing the event without focusing on the event details. It devides the packatges into parts souch as
    - Source & Destination address
    - protocol identification
@@ -20,6 +21,7 @@ Zeek has to primary layers:
 Zeek has several frameworks to provide extended functionality in the scripting layer. These frameworks enhance Zeek's flexibility and compatibility with other network components. Each framework focuses on the specific use case and easily runs with Zeek installation.
 
 **Available Frameworks**
+
 |Logging|Notice|Input|Configuration|Intelligence|
 |:------|:-----|:----|:------------|:-----------|
 |Cluster|Broker Communication|Supervisor|GeoLocation|File Analysis|

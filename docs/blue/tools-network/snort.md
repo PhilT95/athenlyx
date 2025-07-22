@@ -34,6 +34,7 @@ All commands are options for launching the **snort** binary.
 
 
 ## How to read PCAPs with snort
+
 |Parameter|Function|Example|
 |:-------| :------|---------|
 |`-r filehere`|Reads a single pcap|`sudo snort -r icmp-test.pcap`|
@@ -45,6 +46,7 @@ You can the number of created alerts, detected TCP packages and much more.
 
 ## Understanding Snort Rules
 Snort rules consist of the following parameters:
+
 - **Type of Action**: Defines how the snort reacts if the conditions of the rule are met. Types of actions are
     - alert: Generate an alert an log the packet
     - log: Log the packet
