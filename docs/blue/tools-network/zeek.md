@@ -129,3 +129,66 @@ You can add and remove fields as you like or need. Bases on the output you can u
 ```bash
 root@machine$ cat conn.log | zeek-cut proto duration | sort
 ```
+
+## Zeek Signatures
+Zeek supports signatures to have rules and event correlations to find noteworthy activities on the network. Zeek signatures use low-level pattern matching and cover conditions similar to Snort rules. Unlike Snort rules, Zeek rules are not the primary event detection point. Zeek has a scripting language and can chain multiple events to find an event of interest. We focus on the signatures in this task, and then we will focus on Zeek scripting in the following tasks.
+
+Zeek signatures consist of three logical paths:
+- **Signature ID**: unique signature name
+- **Conditions**: Filtering the packet headers or the content for source/destination addresses, protocols, port numbers or a specific value/pattern
+- **Action**
+  - *Default action*: Create the signatures.log file in case of a signature match
+  - *Additional action*: Trigger a zeek script
+
+You can run zeek with a signature file this way:
+```bash
+root@machine$ zeek -C -r sample.pcap -s sample.sig
+```
+
+
+### Signature Example 01 - HTTP Cleartext Passwords
+```bash
+signature http-password {
+     ip-proto == tcp
+     dst-port == 80
+     payload /.*password.*/
+     event "Cleartext Password Found!"
+}
+
+# signature: Signature name.
+# ip-proto: Filtering TCP connection.
+# dst-port: Filtering destination port 80.
+# payload: Filtering the "password" phrase.
+# event: Signature match message.
+```
+### Signature Example 02 - FTP Admin Login attempts
+```bash
+signature ftp-admin {
+     ip-proto == tcp
+     ftp /.*USER.*dmin.*/
+     event "FTP Admin Login Attempt!"
+}
+```
+### Signature Example 03 - FTP Brute Force attempts
+This signature looks for the FTP response code **530**
+```bash
+signature ftp-brute {
+     ip-proto == tcp
+     payload /.*530.*Login.*incorrect.*/
+     event "FTP Brute-force Attempt"
+}
+```
+### Signature Example 05 - Multiple signatures
+This signature looks for the FTP response code **530**
+```bash
+signature ftp-username {
+    ip-proto == tcp
+    ftp /.*USER.*/
+    event "FTP Username Input Found!"
+}
+
+signature ftp-brute {
+     ip-proto == tcp
+     payload /.*530.*Login.*incorrect.*/
+     event "FTP Brute-force Attempt"
+}

@@ -10,12 +10,11 @@ The documentation is divided into more IT/Infrastructure and Cyber Security rela
 
 ```bash
 docs
-├───it
-│   └───servers
-│       └───setup
-└───sec
+└───docs
     ├───ai
-    └───blue
-        └───tools-network
-            └───NetworkMiner_Data
+    ├───blue
+    │   └───tools-network
+    │       └───NetworkMiner_Data
+    └───servers
+        └───linux
 ```
