@@ -44,9 +44,12 @@ markdown_extensions:
       custom_checkbox: true
   - tables
   - pymdownx.highlight:
+      use_pygments: true
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
+      auto_title: true
+      linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences 
