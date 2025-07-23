@@ -12,12 +12,14 @@ git pull --rebase
 now="$(git rev-list HEAD -n 1)"
 echo $(date) :  New git HEAD after git pull is $now >> scripts/sync.log
 
-if [ "$now" = "$prev" ]; then
+if [ "$now" != "$prev" ]; then
 	echo $(date) :  Changes detected. Rebuilding web page... >> scripts/sync.log
 	cd /usr/docs
 	echo $(mkdocs build) >> scripts/build.log
 	cp /usr/docs/site/* /www/ -rf
 	echo $(date) :  Sync finalized. >> scripts/sync.log
+ else
+	echo $(date) : No changes detected. >> scripts/sync.log
 fi
 
 
