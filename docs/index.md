@@ -8,8 +8,8 @@ The documentation is divided into:
 - **Servers**
 - **AI**
 
-## Documentation Structure
-
+## Project structure
+This project is build using git, Github and [MkDocs](servers/applications/mkdocs_setup.md).
 
 
 ```bash
