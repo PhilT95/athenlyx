@@ -2,7 +2,7 @@ site_name: Ohana-Cloud.com Docs
 site_url: https://docs.ohana-cloud.com
 nav:
   - Home: index.md
-  - Blue Teaming:
+  - Blue Teaming: blue/blueteaming.md
     - Network Tools:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
