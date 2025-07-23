@@ -66,6 +66,7 @@ zeek         standalone localhost     stopped
 ```
 
 You can also run these commands using 
+
 - `zeekctl status`
 - `zeekctl start`
 - `zeekctl stop`
@@ -74,6 +75,7 @@ If you want to listen to live traffic, Zeek needs to be started as a service. To
 `zeek -C -r sample.pcap`
 
 The main command line parameters are the following
+
 |Parameter|Description|
 |:--------|:----------|
 |`-r`|Reading option, read/process a pcap file|
@@ -97,6 +99,7 @@ In a nutshell, Zeek has the following log files:
 |Zeek Diagnostics| Zeek diagnostic logs cover system messages, actions and some statistics.| broker.log, capture_loss.log, cluster.log, config.log, loaded_scripts.log, packet_filter.log, print.log, prof.log, reporter.log, stats.log, stderr.log, stdout.log.|
 
 Those are a lot of logs, but the most commonly used logs are these:
+
 |Overall Info|Protocol Based|Detection|Observations|
 |:-----------|:-------------|:--------|:-----------|
 |conn.log|http.log|notice.log|known_hosts.log|
@@ -136,6 +139,7 @@ root@machine$ cat conn.log | zeek-cut proto duration | sort
 Zeek supports signatures to have rules and event correlations to find noteworthy activities on the network. Zeek signatures use low-level pattern matching and cover conditions similar to Snort rules. Unlike Snort rules, Zeek rules are not the primary event detection point. Zeek has a scripting language and can chain multiple events to find an event of interest. We focus on the signatures in this task, and then we will focus on Zeek scripting in the following tasks.
 
 Zeek signatures consist of three logical paths:
+
 - **Signature ID**: unique signature name
 - **Conditions**: Filtering the packet headers or the content for source/destination addresses, protocols, port numbers or a specific value/pattern
 - **Action**
@@ -164,6 +168,7 @@ signature http-password {
 # event: Signature match message.
 ```
 ### Signature Example 02 - FTP Admin Login attempts
+
 ```bash
 signature ftp-admin {
      ip-proto == tcp
@@ -172,7 +177,9 @@ signature ftp-admin {
 }
 ```
 ### Signature Example 03 - FTP Brute Force attempts
+
 This signature looks for the FTP response code **530**
+
 ```bash
 signature ftp-brute {
      ip-proto == tcp
@@ -182,6 +189,7 @@ signature ftp-brute {
 ```
 ### Signature Example 05 - Multiple signatures
 This signature looks for the FTP response code **530**
+
 ```bash
 signature ftp-username {
     ip-proto == tcp
@@ -194,3 +202,21 @@ signature ftp-brute {
      payload /.*530.*Login.*incorrect.*/
      event "FTP Brute-force Attempt"
 }
+```
+
+## Zeek Scripts
+Zeek has its own event-driven scripting language, which is as powerful as high-level languages and allows us to investigate and correlate the detected events.
+
+- **Zeek base scripts** are installed by default and not intended to be modified. They are located in `/opt/zeek/share/zeek/base`
+- **User generated or modified scripts** should be located in a specific path `/opt/zeek/share/zeek/site`
+- **Policy scripts** are located in `/opt/zeek/share/zeek/policy`
+- To use a script in sniffing mode, you must identify the script in the Zeek configuration file. You can also use a script for a single run, just like signatures. The configuration file is located in `/opt/zeek/share/zeek/site/local.zeek`
+
+A simple zeek script to extract DHCP hostnames can look like this:
+
+```bash
+event dhcp_message (c: connection, is_orig: bool, msg: DHCP::Msg, options: DHCP::Options)
+{
+print options$host_name;
+}
+```

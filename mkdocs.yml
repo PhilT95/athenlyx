@@ -14,6 +14,8 @@ nav:
     - Linux:
       - AlmaLinux Setup Guide: servers/linux/almalinux_setup.md
       - Basic Commands: servers/linux/commands.md
+    - Applications:
+      - MkDocs: servers/applications/mkdocs_setup.md
     - Firewalld Basics: servers/firewalld.md
     - SELinux Basics: servers/SELinux.md
 
@@ -25,6 +27,10 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.tabs
+  language: en
+  palette:
+    primary: indigo
+
 plugins:
   - search
 
