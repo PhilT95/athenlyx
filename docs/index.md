@@ -9,11 +9,14 @@ The documentation is divided into more IT/Infrastructure and Cyber Security rela
 
 
 ```bash
-docs
-└───docs
-    ├───ai
-    ├───blue
-    │   └───tools-network
-    │       └───NetworkMiner_Data
-    └───servers
-        └───linux
+├───deploy
+├───docs
+│   ├───ai
+│   ├───blue
+│   │   └───tools-network
+│   │       └───NetworkMiner_Data
+│   └───servers
+│       ├───applications
+│       └───linux
+└───scripts
+```
