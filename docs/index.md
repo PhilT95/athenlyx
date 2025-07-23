@@ -2,10 +2,14 @@
 
 This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
 
-The documentation is divided into more IT/Infrastructure and Cyber Security related topics. IT related knowledge can be found [here](/it/). Cyber Security Information is collected [here](/sec/).
+The documentation is divided into:
 
+- **Blue Teaming**
+- **Servers**
+- **AI**
 
 ## Documentation Structure
+
 
 
 ```bash
@@ -20,3 +24,4 @@ The documentation is divided into more IT/Infrastructure and Cyber Security rela
 │       └───linux
 └───scripts
 ```
+
