@@ -2,7 +2,8 @@ site_name: Ohana-Cloud.com Docs
 site_url: https://docs.ohana-cloud.com
 nav:
   - Home: index.md
-  - Blue Teaming: blue/blueteaming.md
+  - Blue Teaming:
+    - blue/blueteaming.md
     - Network Tools:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
@@ -30,10 +31,39 @@ theme:
     - navigation.tabs.sticky
     - toc.follow
     - content.code.copy
-    - content.code.select
   language: en
   palette:
-    primary: indigo
+
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+extra:
+  social:
+    - icon: material/github
+      link: https://github.com/PhilT95/docs
+    - icon: material/linkedin
+      link: https://www.linkedin.com/in/phil-trommer/
+  generator: false
+copyright: Copyright &copy; 2025 Phil Trommer
+  
+
 
 plugins:
   - search

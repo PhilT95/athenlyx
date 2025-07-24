@@ -75,20 +75,20 @@ Open the file, for example with the text editor `nano`.
 
 The file should look like this:
 
-```yml
+```yaml
 site_name: My Docs
 ```
 
 First we will adjust the name and url of the website. Change `My Docs` to the name you want to be displayed and add a new line for the URL of the website.
 
-```yml
+```yaml
 site_name: YourProject
 site_url: https://example.com
 ```
 
 Now we can add the navigation, which defines the structure of the pages and how they are ordered. You can make it resemble your actual file structure, but this is not a must. The `nav` parameter works by creating a set of directories and files (webpages), which will be compiled accordingly to the configuration. Here is an example of a simple navigation structure.
 
-```yml
+```yaml
 nav:
     - Home: index.md
     - Cooking & Baking:
@@ -102,7 +102,7 @@ Adapt this to your needs and add it to your **mkdocs.yml** file.
 
 To use the **Material** theme and get access to its extended functionality, we need to tell MkDocs to use it. We can do that by adding
 
-```yml
+```yaml
 theme:
   name: material
   features:
@@ -116,14 +116,14 @@ to the configuration file. This tell MkDocs to use the **Material** theme and ac
 
 As a final touch, to enable a powerful search function, add 
 
-```yml
+```yaml
 plugins:
   - search
 ```
 
 to your configuration file and save it. Your file should look like this now:
 
-```yml
+```yaml
 site_name: YourProject
 site_url: https://example.com
 
