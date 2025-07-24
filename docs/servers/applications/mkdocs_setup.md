@@ -149,7 +149,7 @@ plugins:
 ### Compiling your project
 Now that you have structured your project and configured the configuration file for MkDocs you can build the webpage. 
 
-```bash
+```console
 [user@machine project]$ mkdocs build
 INFO    -  Cleaning site directory
 INFO    -  Building documentation to directory: /path/to/your/project/site
