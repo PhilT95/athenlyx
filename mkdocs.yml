@@ -53,6 +53,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  icon:
+    annotation: material/chevron-right-circle
 
 extra:
   social:
@@ -62,6 +64,7 @@ extra:
       link: https://www.linkedin.com/in/phil-trommer/
   generator: false
 copyright: Copyright &copy; 2025 Phil Trommer
+
   
 
 
@@ -69,6 +72,8 @@ plugins:
   - search
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - def_list
   - pymdownx.tasklist:
       custom_checkbox: true

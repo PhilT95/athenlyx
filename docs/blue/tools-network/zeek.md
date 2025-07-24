@@ -110,7 +110,7 @@ Those are a lot of logs, but the most commonly used logs are these:
 To read the log files, a program called **zeek-cut** can be used to reduce the effort of extracting specific columns from log files.
 This works by using **cat** to read the information and piping it into **zeek-cut**, which can extract only the important fields.
 
-```bash
+```console
 root@machine$ cat conn.log
 #fields	ts	uid	id.orig_h	id.orig_p	id.resp_h	id.resp_p	proto	service	duration	orig_bytes	resp_bytes	conn_state	local_orig	local_resp	missed_bytes	history	orig_pkts	orig_ip_bytes	resp_pkts	resp_ip_bytes	tunnel_parents
 #types	time	string	addr	port	addr	port	enum	string	intervalcount	count	string	bool	bool	count	string	count	count	count	count	set[string]
@@ -172,7 +172,7 @@ signature http-password {
 ```bash
 signature ftp-admin {
      ip-proto == tcp
-     ftp /.*USER.*dmin.*/
+     ftp /.*USER.*admin.*/
      event "FTP Admin Login Attempt!"
 }
 ```
@@ -214,9 +214,91 @@ Zeek has its own event-driven scripting language, which is as powerful as high-l
 
 A simple zeek script to extract DHCP hostnames can look like this:
 
-```bash
+```zeek
 event dhcp_message (c: connection, is_orig: bool, msg: DHCP::Msg, options: DHCP::Options)
 {
 print options$host_name;
 }
 ```
+
+Some scripts contain operators, types, attributes, declarations, statements and directives.
+
+```zeek
+event zeek_init()
+    {
+     print ("Started Zeek!");
+    }
+event zeek_done()
+    {
+    print ("Stopped Zeek!");
+    }
+
+# zeek_init: Do actions once Zeek starts its process.
+# zeek_done: Do activities once Zeek finishes its process.
+# print: Prompt a message on the terminal.
+```
+
+To print a data packet to the terminal and see the raw data, you can write
+
+```zeek
+event new_connection(c: connection)
+{
+	print c;
+}
+```
+
+To filter the data from the command 
+
+```console
+root@machine$ zeek -C -r sample.pcap script.zeek
+```
+
+you can add options to the scritp.
+
+```zeek
+event new_connection(c: connection)
+{
+	print ("###########################################################");
+	print ("");
+	print ("New Connection Found!");
+	print ("");
+	print fmt ("Source Host: %s # %s --->", c$id$orig_h, c$id$orig_p);
+	print fmt ("Destination Host: resp: %s # %s <---", c$id$resp_h, c$id$resp_p);
+	print ("");
+}
+
+# %s: Identifies string output for the source.
+# c$id: Source reference field for the identifier.
+```
+
+A script to detect if the rule for **ftp-admin** got triggered ([see FTP Admin](#signature-example-02---ftp-admin-login-attempts)).
+
+```zeek
+event signature_match (state: signature_state, msg: string, data: string)
+{
+if (state$sig_id == "ftp-admin")
+    {
+    print ("Signature hit! --> #FTP-Admin ");
+    }
+}
+```
+
+You can also use scripts together with signatures.
+
+```console
+root@machine$ zeek -C -r sample.pcap -s ftp-admin.sig ftp.zeek
+```
+
+You can load all local scripts identified in your *local.zeek* file. Note that base scripts cover multiple framework functionalities. You can load all base scripts by easily running the `local` command. As stated before ([Beginning of Zeek Scripts](#zeek-scripts)) these scripts are located in `/opt/zeek/share/zeek/base`
+
+```console
+root@machine$ zeek -C -r sample.pcap local (1) 
+```
+{. annotate }
+
+1. You can load specific local rules by using the full path `/opt/zeek/share/zeek/policy/protocols/ftp/detect-bruteforcing.zeek`
+
+
+
+
+
