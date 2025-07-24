@@ -12,7 +12,7 @@ Before you can install **MkDocs** and its extensions you need to have fulfill th
 
 Using `dnf` you can install Python and pip using these commands:
 
-```bash
+```console
 [user@machine ~]$ sudo dnf install python3 python3-pip
 ```
 
@@ -22,19 +22,19 @@ Regarding your documentation, I'd recommend to keep nesting of directories up to
 ### mkdocs Installation
 The first thing to do is installing **MkDocs** itself using pip. 
 
-```bash
+```console
 [user@machine ~]$ pip install mkdocs
 ```
 
 Verify the installation and version of mkdocs.
 
-```bash
+```console
 [user@machine ~]$ mkdocs --version
 mkdocs, version 1.6.1 from /home/user/.local/lib/python3.12/site-packages/mkdocs (Python 3.12)
 ```
 **Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of functionality and customization. We will be using it in this guide since its setup is very easy as well.
 
-```bash
+```console
 [user@machine ~]$ pip install mkdocs-material
 ```
 
@@ -45,7 +45,7 @@ Now that you have installed MkDocs we can start to get your project ready to com
 
 First navigate to the root of your documentation and create a new MkDocs project.
 
-```bash
+```console
 [user@machine ~]$ cd /path/to/your/project
 [user@machine project]$ mkdocs new project-name
 ```
@@ -53,7 +53,7 @@ First navigate to the root of your documentation and create a new MkDocs project
 This command will create a new folder `docs` with an **index.md** file and a **mkdocs.yml** file within the root directory of your project.
 You directory structure should look like this now:
 
-```bash
+```console
 /path/to/your/project
 ├── docs
 │   ├── index.md
@@ -69,7 +69,7 @@ Once you have all your files in this directory, we can start preparing the **mkd
 
 Open the file, for example with the text editor `nano`.
 
-```bash
+```console
 [user@machine project]$ nano mkdocs.yml
 ```
 
@@ -162,7 +162,7 @@ To make your files available via http or https, you need to setup a web server. 
 
 The installation of nginx is very simple. For AlmaLinux, just use this command.
 
-```bash
+```console
 [user@machine project]$ sudo dnf install nginx
 ```
 
@@ -171,7 +171,7 @@ It should not be very different for other Linux distributions.
 
 Now we have to configure nginx. Go the the nginx directory as root.
 
-```bash
+```console
 [user@machine project]$ sudo su
 [root@machine project]$ cd /etc/nginx
 ```
@@ -249,13 +249,13 @@ As you can see, the root location of the webserver points to the directory ``/ww
 
 Once the configuration is done, we need to activate the configuration. To do this, we have to create a symbolic link of this file to the `sites-enabled` directory we created earlier.
 
-```bash
+```console
 [root@machine nginx]$ ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
 ```
 
 We quickly test the configuration and if there are no errors, reload nginx.
 
-```bash
+```console
 [root@machine nginx]$ nginx -t
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful

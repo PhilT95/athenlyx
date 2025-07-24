@@ -4,7 +4,7 @@ This is a collection of documentations, guides and How-To's for Infrastructure M
 
 The documentation is divided into:
 
-- **Blue Teaming**
+- [Blue Teaming](blue/blueteaming.md)
 - **Servers**
 - **AI**
 
@@ -12,7 +12,7 @@ The documentation is divided into:
 This project is build using git, Github and [MkDocs](servers/applications/mkdocs_setup.md).
 
 
-```bash
+```console
 ├───deploy
 ├───docs
 │   ├───ai
