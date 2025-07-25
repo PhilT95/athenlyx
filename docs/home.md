@@ -5,6 +5,7 @@ This is a collection of documentations, guides and How-To's for Infrastructure M
 The documentation is divided into:
 
 - [Blue Teaming](blue/blueteaming.md)
+- **Applications**
 - **Servers**
 - **AI**
 

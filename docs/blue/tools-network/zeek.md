@@ -37,7 +37,7 @@ Zeek always needs to be started with superuser permissions!
 
 You can run `zeekctl` to get the following output and puts you into the **ZeekControl** console
 
-```bash
+```console
 Warning: new zeek version detected (run the zeekctl "deploy" command)
 
 Welcome to ZeekControl 2.4.0
@@ -49,7 +49,7 @@ Type "help" for help.
 
 You can run commands like **status**,**start** and **stop** within this console
 
-```bash
+```console
 [ZeekControl] > status
 Name         Type       Host          Status    Pid    Started
 zeek         standalone localhost     stopped
@@ -131,7 +131,7 @@ udp	192.168.121.2	64199	192.168.121.254	65535
 ```
 
 You can add and remove fields as you like or need. Bases on the output you can use another pipe to sort and further filter your data by using
-```bash
+```console
 root@machine$ cat conn.log | zeek-cut proto duration | sort
 ```
 
@@ -147,7 +147,7 @@ Zeek signatures consist of three logical paths:
   - *Additional action*: Trigger a zeek script
 
 You can run zeek with a signature file this way:
-```bash
+```console
 root@machine$ zeek -C -r sample.pcap -s sample.sig
 ```
 
@@ -296,7 +296,28 @@ root@machine$ zeek -C -r sample.pcap local (1)
 ```
 {. annotate }
 
-1. You can load specific local rules by using the full path `/opt/zeek/share/zeek/policy/protocols/ftp/detect-bruteforcing.zeek`
+1. :You can load specific local rules by using the full path `/opt/zeek/share/zeek/policy/protocols/ftp/detect-bruteforcing.zeek`
+
+
+## Zeek Package Manager
+The Zeek Package Manager provides an easy way to intall third-party scripts and plugins to extend the functionality of Zeek. The package manager is bundled with zeek and available with the `zkg` command.
+
+|Command|Description|
+|:------|:----------|
+|`zkg install package_path`| Installs a package.|
+|`zkg install git_url`| Installs a package directly from a git url like https://github.com/corelight/ztest .|
+|`zkg list`| List all installed packages.|
+|`zkg refresh`|Check version updates for installed packages.|
+|`zkg upgrade`|Update installed packages.|
+|`zkg remove`|Removes installed packages.|
+
+A few example packages are:
+
+- `zkg install zeek/cybera/zeek-sniffpass`
+- 
+
+
+
 
 
 
