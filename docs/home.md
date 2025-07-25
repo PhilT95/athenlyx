@@ -10,7 +10,7 @@ The documentation is divided into:
 - **AI**
 
 ## Project structure
-This project is build using git, Github and [MkDocs](servers/applications/mkdocs_setup.md).
+This project is build using git, Github and [MkDocs](applications/mkdocs_setup.md).
 
 
 ```console

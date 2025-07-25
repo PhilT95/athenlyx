@@ -18,7 +18,7 @@ nav:
     - Firewalld Basics: servers/firewalld.md
     - SELinux Basics: servers/SELinux.md
   - Applications:
-    - MkDocs: servers/applications/mkdocs_setup.md
+    - MkDocs: applications/mkdocs_setup.md
   - About me: about.md
 
 
