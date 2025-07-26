@@ -291,7 +291,7 @@ root@machine$ zeek -C -r sample.pcap -s ftp-admin.sig ftp.zeek
 
 You can load all local scripts identified in your *local.zeek* file. Note that base scripts cover multiple framework functionalities. You can load all base scripts by easily running the `local` command. As stated before ([Beginning of Zeek Scripts](#zeek-scripts)) these scripts are located in `/opt/zeek/share/zeek/base`
 
-```console annoate
+```console
 root@machine$ zeek -C -r sample.pcap local # (1)
 ```
 

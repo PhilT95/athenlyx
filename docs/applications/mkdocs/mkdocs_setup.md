@@ -264,5 +264,6 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 Your website should now be reachable. If you are using SSL, please make sure to setup a certificate or you will run into SSL erros. You can use **certbot** by **LetsEncrypt** to quickly get a valid certificate. The certbot will also edit your nginx configuration to insert your certificate.
 
+
 ## Conclusion
-MkDocs is a very easy and simple tool to transform Markdown documentation collections into a simple and easy to navigate web page. With the help of nginx, you can quickly host your own collection.
+MkDocs is a very easy and simple tool to transform Markdown documentation collections into a simple and easy to navigate web page. With the help of nginx, you can quickly host your own collection. If you want to update and compile your documentation automatically, you can use **git** and a simple **cron job** to set this up. You can read more [here](mkdocs_autoupdate.md).
