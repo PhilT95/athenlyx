@@ -3,6 +3,7 @@ site_url: https://docs.ohana-cloud.com
 nav:
   - Home: home.md
   - Blue Teaming:
+    - Blue Teaming: blue/blueteaming.md
     - Network Tools:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
@@ -31,6 +32,7 @@ theme:
     - navigation.tabs.sticky
     - toc.follow
     - content.code.copy
+    - content.code.annotate
   language: en
   palette:
 
