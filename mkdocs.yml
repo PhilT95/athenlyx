@@ -7,6 +7,7 @@ nav:
     - Network Tools:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
+        - BRIM: blue/tools-network/brim.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
