@@ -1,6 +1,13 @@
+---
+hide:
+    - toc
+    - navigation
+---
+
+
 # Welcome Ohana-Cloud.com Docs
 
-![Image](/docs/images/general/logo-blue_Banner.png)
+![Image](images/general/logo-blue_Banner.png)
 
 
 This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
@@ -13,7 +20,7 @@ The documentation is divided into:
 - **AI**
 
 ## Project structure
-This project is build using git, Github and [MkDocs](applications/mkdocs_setup.md).
+This project is build using git, Github and [MkDocs](applications/mkdocs/mkdocs_setup.md).
 You can find the git [here](https://github.com/PhilT95/docs).
 
 
@@ -22,6 +29,7 @@ You can find the git [here](https://github.com/PhilT95/docs).
 ├───docs
 │   ├───ai
 │   ├───applications
+│   │   └───mkdocs
 │   ├───blue
 │   │   └───tools-network
 │   │       ├───Brim_data
@@ -32,5 +40,6 @@ You can find the git [here](https://github.com/PhilT95/docs).
 │   └───servers
 │       └───linux
 └───scripts
+
 ```
 
