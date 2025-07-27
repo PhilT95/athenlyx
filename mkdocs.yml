@@ -1,5 +1,7 @@
 site_name: Ohana-Cloud.com Docs
 site_url: https://docs.ohana-cloud.com
+repo_url: https://github.com/PhilT95/docs
+repo_name: PhilT95/docs
 nav:
   - Home: home.md
   - Blue Teaming:
@@ -63,6 +65,7 @@ theme:
         name: Switch to system preference
   icon:
     annotation: material/chevron-right-circle
+    repo: fontawesome/brands/git-alt
 
 extra:
   social:
@@ -78,6 +81,9 @@ copyright: Copyright &copy; 2025 Phil Trommer
 
 plugins:
   - search
+  - git-revision-date-localized:
+    enable_creation_date: true
+
 
 markdown_extensions:
   - attr_list
@@ -98,3 +104,5 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences 
   - pymdownx.details
+  - pymdownx.tabbed: 
+    alternate_style: true
