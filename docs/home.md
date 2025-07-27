@@ -5,7 +5,7 @@ hide:
 ---
 
 
-# Welcome Ohana-Cloud.com Docs
+# Welcome to Ohana-Cloud.com Docs
 
 ![Image](images/general/logo-blue_Banner.png)
 

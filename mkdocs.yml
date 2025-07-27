@@ -10,6 +10,7 @@ nav:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
         - BRIM: blue/tools-network/brim.md
+        - Wirehark: blue/tools-network/wireshark.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
@@ -82,7 +83,7 @@ copyright: Copyright &copy; 2025 Phil Trommer
 plugins:
   - search
   - git-revision-date-localized:
-    enable_creation_date: true
+      enable_creation_date: true
 
 
 markdown_extensions:
@@ -102,7 +103,7 @@ markdown_extensions:
       linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences 
+  - pymdownx.superfences
   - pymdownx.details
-  - pymdownx.tabbed: 
-    alternate_style: true
+  - pymdownx.tabbed:
+      alternate_style: true
