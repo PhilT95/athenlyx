@@ -83,6 +83,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - def_list
+  - admonition
   - pymdownx.tasklist:
       custom_checkbox: true
   - tables
@@ -96,3 +97,4 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences 
+  - pymdownx.details
