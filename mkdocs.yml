@@ -42,6 +42,7 @@ theme:
     - toc.follow
     - content.code.copy
     - content.code.annotate
+    - content.tooltips
   language: en
   palette:
 
@@ -107,3 +108,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
+
+watch:
+  - includes
