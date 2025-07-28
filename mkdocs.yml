@@ -89,6 +89,7 @@ plugins:
 
 markdown_extensions:
   - attr_list
+  - abbr
   - md_in_html
   - def_list
   - admonition

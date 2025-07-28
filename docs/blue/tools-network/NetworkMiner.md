@@ -3,11 +3,13 @@
 
 
 NetworkMiner is a great tool to get:
+
 - Context of captured hosts like their IP and MAC, hostnames, or OS information
 - List of potential attack indicators or anomalies like traffic spikes or port scans
 - Tools or toolkits used to perform the potential attacks like Nmap
 
 It supports the following data types:
+
 - Live Traffic
 - Traffic Captures
 - Log Files
@@ -17,6 +19,7 @@ It supports the following data types:
 ![Image](./NetworkMiner_Data/NetworkMinerMainPage.png)
 
 NetworkMiner comes with to operating modes:
+
 - **Sniffer Mode**: Although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommened as a sniffer.
 - **Packet Parsing/Processing**: NetworkMiner can parse traffic captures to have a quick overview and information on the investigated capture. This operation mode is mainly suggested to grab the "low hanging fruit" before diving into a deeper investigation.
   
