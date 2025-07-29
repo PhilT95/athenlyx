@@ -10,7 +10,9 @@ nav:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyser: blue/tools-network/zeek.md
         - BRIM: blue/tools-network/brim.md
-        - Wirehark: blue/tools-network/wireshark.md
+        - Wirehark:
+          - Wireshark Basics: blue/tools-network/wireshark/wireshark.md
+          - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
@@ -44,6 +46,8 @@ theme:
     - content.code.annotate
     - content.tooltips
   language: en
+  logo: assets/logo-black_Banner_small.png
+  favicon: assets/ohana-cloud-website-favicon-color.png
   palette:
 
     # Palette toggle for automatic mode

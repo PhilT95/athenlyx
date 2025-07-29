@@ -1,20 +1,36 @@
-# Ohana-Cloud.com Docs
+# Welcome to Ohana-Cloud.com Docs GitHub
 
-This is a collection of documentations, guides and How-TOs for Infrastructure Management as well as Cyber Security and its tools.
-
-The documentation is divided into more IT/Infrastructure and Cyber Security related topics. IT related knowledge can be found [here](/it/). Cyber Security Information is collected [here](/sec/).
+![Image](/docs/images/general/logo-blue_Banner.png)
 
 
-## Documentation Structure
+This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
+
+The documentation is divided into:
+
+- [Blue Teaming](/docs/blue/blueteaming.md)
+- **Applications**
+- **Servers**
+- **AI**
+
+## Project structure
+This project is build using git, Github and [MkDocs](/docs/applications/mkdocs/mkdocs_setup.md).
 
 
-```bash
-docs
-└───docs
-    ├───ai
-    ├───blue
-    │   └───tools-network
-    │       └───NetworkMiner_Data
-    └───servers
-        └───linux
+```shell
+├───deploy
+├───docs
+│   ├───ai
+│   ├───applications
+│   │   └───mkdocs
+│   ├───blue
+│   │   └───tools-network
+│   │       ├───Brim_data
+│   │       └───NetworkMiner_Data
+│   ├───images
+│   │   ├───blue
+│   │   └───general
+│   └───servers
+│       └───linux
+└───scripts
+
 ```

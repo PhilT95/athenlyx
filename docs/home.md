@@ -33,12 +33,15 @@ You can find the git [here](https://github.com/PhilT95/docs).
 │   ├───blue
 │   │   └───tools-network
 │   │       ├───Brim_data
-│   │       └───NetworkMiner_Data
+│   │       ├───NetworkMiner_Data
+│   │       └───wireshark
+│   │           └───images
 │   ├───images
 │   │   ├───blue
 │   │   └───general
 │   └───servers
 │       └───linux
+├───includes
 └───scripts
 
 ```
