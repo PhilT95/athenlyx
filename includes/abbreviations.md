@@ -10,3 +10,4 @@
 *[DNS]: Domain Name System
 *[DHCP]: Dynamic Host Configuration Protocol
 *[IEEE]: Institute of Electrical and Electronics Engineers
+*[TTL]: Time to live
