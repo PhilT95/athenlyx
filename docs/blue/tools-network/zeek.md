@@ -1,5 +1,5 @@
 # Zeek - Traffic Analyser
->Zeek (formerly Bro) is the world's leading platform for network security monitoring. Flexible, open-source, and powered by defenders." "Zeek is a passive, open-source network traffic analyser. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement and troubleshooting.
+>Zeek (formerly Bro) is the world's leading platform for network security monitoring. Flexible, open-source, and powered by defenders. Zeek is a passive, open-source network traffic analyser. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement and troubleshooting.
 
 ## Zeek Basics
 **Zeek** differs from known monitoring and IDS/IPS (like [Snort](./snort.md)) tools by providing a wide range of detailed logs ready to investigate both forensic and data analysis actions.
