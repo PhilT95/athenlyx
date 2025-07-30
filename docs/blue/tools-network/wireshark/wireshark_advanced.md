@@ -230,3 +230,77 @@ Similar to TCP and UDP filters, *Application-level* protocol filters are used to
 Wireshark provided a built-in option that stores all supported protocol structures to assist in creating display filters. If you don't recall the required filter or you are unsure, you can access this menu using **Analyse --> Display Filter Expressions**.
 
 ![Image](images/wireshark-advanced_filterexpressions.png)
+
+## Advanced Filtering
+
+### Filter - Contains
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Comparison Operator|
+|**Description**|Search a value inside packets. It is case-sensitive and provides similar functionality to the "Find" option by focusing on a specific field|
+|**Example**|Find all *Apache* servers|
+|**Workflow**|List all HTTP packets where the *server* field contains the *Apache* keyword|
+|**Usage**|`http.server contains "Apache`|
+
+### Filter - Matches
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Comparison Operator|
+|**Description**|Search a pattern of a regular expression. It is case insensitive, and complex queries have a margin of error|
+|**Example**|Find all .php and .html pages|
+|**Workflow**|List all HTTP packets where packets the *host* fields match keywords *.php* or *.html*|
+|**Usage**|`http.host matches "\.(php\|html)"`|
+
+### Filter - In
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Set Membership|
+|**Description**|Search a value or field inside of a specific scope/range|
+|**Example**|Find all packets that use ports 80, 443 or 8080.|
+|**Workflow**|List all TCP packets where the *port* fields have values of 80, 443 or 8080|
+|**Usage**|`tcp.port in {80 443 8080}`|
+
+### Filter - Upper
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Function|
+|**Description**|Convert a string value to uppercase|
+|**Example**|Find all *APACHE* servers|
+|**Workflow**|Convert the *server* fields of all HTTP packets to uppercase and lists packets that contain the *APACHE* keyword|
+|**Usage**|`upper(http.server) contains "APACHE"`|
+
+### Filter - Lower
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Function|
+|**Description**|Convert a string value to lowercase|
+|**Example**|Find all *apache* servers|
+|**Workflow**|Convert the *server* fields of all HTTP packets to lowercase and lists packets that contain the *apache* keyword|
+|**Usage**|`lower(http.server) contains "apache"`|
+
+### Filter - String
+
+|Filter|contains|
+|:-----|:-------|
+|**Type**|Function|
+|**Description**|Convert a non-string value to a string|
+|**Example**|Find all frames with odd numbers|
+|**Workflow**|Convert all *frame number* fields to string values, and list frames end with odd values.|
+|**Usage**|`string(frame.number) matches "[13579]$"`|
+
+### Bookmarks
+
+You can create filters and **bookmark** them to save them for later. You can this straight from the filter toolbar.
+
+![Image](images/wireshark-advanced_bookmark.png)
+
+### Profiles
+
+Wireshark also supports Profiles for different investiggation cases. You can create and mangage these using the **Edit --> Configuration Profiles** menu or the **lower right bottom of the status bar --> Profile** section.
+
+![Image](images/wireshark-advanced_profiles.png)
