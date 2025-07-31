@@ -11,3 +11,5 @@
 *[DHCP]: Dynamic Host Configuration Protocol
 *[IEEE]: Institute of Electrical and Electronics Engineers
 *[TTL]: Time to live
+*[Nmap]: Network Mapper
+*[ARP]: Address Resolution Protocol

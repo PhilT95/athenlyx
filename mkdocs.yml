@@ -3,7 +3,7 @@ site_url: https://docs.ohana-cloud.com
 repo_url: https://github.com/PhilT95/docs
 repo_name: PhilT95/docs
 nav:
-  - Home: home.md
+  - Home: index.md
   - Blue Teaming:
     - blue/blueteaming.md
     - Network Tools:
