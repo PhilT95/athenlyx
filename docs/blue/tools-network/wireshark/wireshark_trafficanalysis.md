@@ -104,3 +104,64 @@ ARP analysis boils down to:
 |**Hunt**: ARP scanning|`arp.dst.hw_mac==00:00:00:00:00:00`|
 |**Hunt**: Possible ARP poisoning detection|`arp.duplicate-address-detected or arp.duplicate-address-frame`|
 |**Hunt**: Possible ARP flooding from detection|`((arp) && (arp.opcode == 1)) && (arp.src.hw_mac == target-mac-address)`|
+
+A suspicious situation means having two different ARP responses (conflict) for a particular IP address. Wireshark alerts you, but it only shows the second occurrence of the duplicate value to highlight the conflict. Identifying the malicious packet from the legitimate one is your challenge.
+
+## Identifying Hosts
+
+When investigating a compromise or malware infection, you should know how to identify the host on the network apart from IP to MAC address match. One way to to di is identifying the host and users on the network to decide the investigation's starting point and list the hosts and users assiciated with the malicious traffic/activity. These protocols can be used in Host and user identification:
+
+- DHCP traffic
+- NetBIOS traffic
+- Kerberos traffic
+
+### DHCP Analysis
+
+DHCP is used to automatically manage OP addresses and their assignments.
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`dhcp` or `bootp`|
+|**DHCP Request** packets contain the hostname information|`dhcp.option.dhcp == 3`|
+|**DHCP ACK** packets represent the accepted requests|`dhcp.option.dhcp == 5`|
+|**DHCP NAK** packets represent denied requests|`dhcp.option.dhcp == 6`|
+|**DHCP Request** can be filteres for the following options <ul><li>**Option 12**: Hostname</li><li>**Option 50**: Requested IP address</li><li>**Option 51**: Requested IP lease time</li><li>**Option 61**: Client's MAC address</li></ul>|`dhcp.option.hostname contains "keyword"`|
+|**DHCP ACK** options: <ul><li>**Option 15**: Domain name</li><li>**Option 51**: Assigned IP lease time</li></ul>|`dhcp.otion.domain_name contains "keyword"`|
+|**DHCP NAK** options: <ul><li>**Option 56**: Message (rejection details/reason)</li></ul>|Since the message could be unique to the situation, it is suggested to read the message instead of filtering it.|
+
+??? info "Option 53"
+    Due to the nature of the protocol, only **Option 53** (request type) has predefined static values. You should filter the packet type first and then you can filter the rest of the options by either using **applying as column** or us the advanced filters like **contains** or **matches**.
+
+!!! tip "Accesing Options"
+    The Options are part of the packet details and filtering depends on the protocol. Insepct the specific protocol and you will see the option. Just set a filter using the **Apply Filter** menu and you can modify the query further yourself!
+
+### NetBIOS Analysis
+
+NetBIOS is responisble for allowing applications on different hosts to communicate with each other.
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`nbns`|
+|**NBNS** options is **Queries**, which are filters for Query details and can contain:<ul><li>**name**</li><li>**TTL**</li><li>**IP address details**</li></ul>|`nbns.name contains ""keyword"`|
+
+### Kerberos Analysis
+
+Kerberos is the default authentication service within Microsoft Windows domains. It is responsible for authenticating service requests between 2 or more computers over the untrusted network. The goal is to prove identiy securely.
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`kerberos`|
+|User account search using **CNameString**, which is the username|<ul><li>`kerberos.CNameString contains "keyword"`</li><li>`kerberos.CNameString and !(kerberos.CNameString contains "$")`</li></ul>|
+|**pvno**: Protocol version|`kerberos.pvno == 5`|
+|**realm**: Domain name for the generated ticket|`kerberos.realm contains ".org"`|
+|**sname**: Service and domain name for the generated ticket|`kerberos.SNameString == "krbtg"`|
+|**addresses**: Client IP address and NetBIOS name|`kerberos.addresses`|
+
+!!! note 
+    The **addresses* information is only available in request packets.
+
+??? info "User Account search confusion"
+    Some packets could provide hostname information in the **CNameString** field. To avoid this confusion, filter the **\$** value. The values end with **\$** are hostnames, the ones without it are user names.
+
+
+

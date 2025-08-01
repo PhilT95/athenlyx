@@ -13,3 +13,4 @@
 *[TTL]: Time to live
 *[Nmap]: Network Mapper
 *[ARP]: Address Resolution Protocol
+*[NetBIOS]: Network Basic Input/Output System
