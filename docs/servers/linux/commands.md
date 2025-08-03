@@ -5,7 +5,7 @@
 |:-------|:------|:----------------|:-------|
 |Basic|`history`| Views the command history||
 ||`!10`| Execute the 10th command in history||
-||!!|Execute the previous command||
+||`!!`|Execute the previous command||
 |Read File|`cat`|Read a file|`cat sample.txt`|
 ||`head`|Read the first 10 lines of a file|`head sample.txt`|
 ||`tail`|Read the last 10 lines of a file|`tail sample.txt`|
