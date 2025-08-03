@@ -13,6 +13,7 @@ nav:
         - Wirehark:
           - Wireshark Basics: blue/tools-network/wireshark/wireshark.md
           - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
+          - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
@@ -45,8 +46,9 @@ theme:
     - content.code.copy
     - content.code.annotate
     - content.tooltips
+    - announce.dismiss
   language: en
-  logo: assets/logo-black_Banner_small.png
+  logo: assets/logo-no-background.png
   favicon: assets/ohana-cloud-website-favicon-color.png
   palette:
 
@@ -97,6 +99,7 @@ markdown_extensions:
   - md_in_html
   - def_list
   - admonition
+  - footnotes
   - pymdownx.tasklist:
       custom_checkbox: true
   - tables

@@ -197,18 +197,15 @@ TCP filters exist to filter the traffic according to the protocol level informat
 
 Some example filters are:
 
-<div class="annotate" markdown>
 
 |Filter|Description|
 |:-----|:----------|
 |`tcp.port == 80`|Shows all TCP packets with port 80|
 |`tcp.srcport == 443`|Shows all TCP packets with the source port 443|
 |`tcp.destport == 80`|Shows all TCP packets with the destination port 80|
-|`udp.port == 1337`|Shows all UDP packets with the port 53 (1)|
+|`udp.port == 1337`|Shows all UDP packets with the port 53[^1]|
 
-</div>
-
-1. UDP can be used analog to TCP
+[^1]: UDP can be used analog to TCP
 
 ### Application Level Protocol Filters - HTTP and DNS
 
