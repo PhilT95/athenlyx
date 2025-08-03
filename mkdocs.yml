@@ -29,6 +29,7 @@ nav:
       - MkDocs : applications/mkdocs/mkdocs.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
+    - SafeLine: applications/safeline/safeline.md
   - About me: about.md
 
 
