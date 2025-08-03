@@ -25,11 +25,11 @@ You can find the git [here](https://github.com/PhilT95/docs).
 
 
 ```console
-├───deploy
 ├───docs
 │   ├───ai
 │   ├───applications
 │   │   └───mkdocs
+│   ├───assets
 │   ├───blue
 │   │   └───tools-network
 │   │       ├───Brim_data
@@ -43,6 +43,5 @@ You can find the git [here](https://github.com/PhilT95/docs).
 │       └───linux
 ├───includes
 └───scripts
-
 ```
 

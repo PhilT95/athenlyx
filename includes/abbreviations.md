@@ -16,3 +16,5 @@
 *[NetBIOS]: Network Basic Input/Output System
 *[DoS]: Denial of service
 *[C2]: Command and Control
+*[WAF]: Web application firewall
+*[DDoS]:Distributed Denial of Service
