@@ -263,6 +263,9 @@ Wireshark provided a built-in option that stores all supported protocol structur
 |**Workflow**|List all TCP packets where the *port* fields have values of 80, 443 or 8080|
 |**Usage**|`tcp.port in {80 443 8080}`|
 
+??? tip "How to filter a port range"
+    `udp.port in {55..70}`
+
 ### Filter - Upper
 
 |Filter|contains|

@@ -11,3 +11,8 @@
 *[DHCP]: Dynamic Host Configuration Protocol
 *[IEEE]: Institute of Electrical and Electronics Engineers
 *[TTL]: Time to live
+*[Nmap]: Network Mapper
+*[ARP]: Address Resolution Protocol
+*[NetBIOS]: Network Basic Input/Output System
+*[DoS]: Denial of service
+*[C2]: Command and Control
