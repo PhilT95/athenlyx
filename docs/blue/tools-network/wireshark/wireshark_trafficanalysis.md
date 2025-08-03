@@ -164,4 +164,78 @@ Kerberos is the default authentication service within Microsoft Windows domains.
     Some packets could provide hostname information in the **CNameString** field. To avoid this confusion, filter the **\$** value. The values end with **\$** are hostnames, the ones without it are user names.
 
 
+## Tunneling Traffic
+
+Traffic tunenling, also known as **port forwarding** is a way to transfer data in a secure method to segments and zones. It can be used for *internet to private networks* flows. There is an encapsulation process to hide the data so the transferred data appears natural, but it contains private data packets and transfers them to the final destination securely.  
+Tunneling provides anonymity and security and is therefore used by enterprise networks. However, this level of data encryption also makes it a method for attackers to bypass security perimeters using the standard and trusted protocols used in everyday traffic like ICMP and DNS.
+
+### ICMP Analysis
+
+ICMP is designed for diagonosing and reporting network communication issues. It is a trusted network layer protocol and also sometimes used for DoS attacks. It is also used in data exfiltration and C2 tunneling activities.
+
+Usually ICMP tunneling attacks are anomalies appearing after a malware execution or vulnerability exploitation. As the ICMP packet can transfer additional data payloads, it can be used to exfiltrate data and establish a C2 connection. Within the ICMP traffic could be TCP, HTTP or SSH data. Most of the time, these custom ICMP packets are blocked by default, but adversaries can match these default packets.
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`icmp`|
+|Packet length|`data.len > 64 and icmp`|
+|ICMP destination address||
+|Encapsulated protocol signs in ICMP payload||
+
+### DNS Analysis
+
+DNS is designed to translate domain names to IP addresses. It is a very crucial part for web services and the Internet in general. It is very commonly used and trusted and therefore often ignored. Like [ICMP](#icmp-analysis), it is also used for data exfiltration and C2 activities.
+
+Similar to ICMP tunnels, DNS attacks are anomalies that appear after a malware execution or vulnerability exploitation. Domain addresses can be created and configured as a C2 channel. The commands or malware sends DNS queries to the C2 server. However, these queries are longer than default queries and crafted for subdomain addresses. These addresses are not real and used to encode commands like  
+
+**encoded-commands.example.org**
+
+When this query is routed to the C2 server, the server sends the actual malicous commands to the host.
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`dns`|
+|Query length|`dns.qry.name.len`|
+|Long DNS addresses with encoded subdomain addresses|`dns.qry.len > 15`|
+|Kown patterns like dnscat and dns2tcp|`dns contains "dnscat"`|
+|**!mdns**: Disable local link device queries|`dns.qry.name.len > 15 and !mdns`|
+
+
+## Cleartext Protocol Analysis
+
+### FTP Analysis
+
+FTP is designed to transfer files easily. With its simplicity comes a lack of security. THis protocol should not be used in unsecured environments because it creates risks like:
+
+- Man-in-the-middle attacks
+- Credential stealing and unauthorized access
+- Phishing
+- Malware planting
+- Data exfiltration
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search|`ftp`|
+|**FTP option 211**: System status|`ftp.response.code == 211`|
+|**FTP option 212**: Directory status|`ftp.response.code == 212`|
+|**FTP option 213**: File status|`ftp.response.code == 213`|
+|**FTP option 220**: Service ready|`ftp.response.code == 220`|
+|**FTP option 227**: Entering passive mode|`ftp.response.code == 227`|
+|**FTP option 228**: Long passive mode|`ftp.response.code == 228`|
+|**FTP option 229**: Extended passive mode|`ftp.response.code == 229`
+|**FTP option 230**: User login|`ftp.response.code == 230`|
+|**FTP option 231**: User logout|`ftp.response.code == 231`|
+|**FTP option 331**: Valid username|`ftp.response.code == 331`|
+|**FTP option 430**: Invalid username or password|`ftp.response.code == 430`|
+|**FTP option 530**: No login, invalid password|`ftp.response.code == 530`|
+|**USER**: Username|`ftp.request.command == "USER"`|
+|**PASS**: Password|`ftp.request.command == "PASS"`|
+|**Bruteforce signal**: List failed login attempts|`ftp.response.code == 530`|
+|**Bruteforce signal**: List target username|`(ftp.response.code == 530) and (ftp.response.arg contains "username")`|
+|**Password spray signal**: List targets for a static password|`(ftp.response.command == "PASS") and (ftp.request.arg == "password")`|
+
+!!! tip
+    You can use the *Follow TCP* option to see more details from a packet with the response code **213**.
+
+
 

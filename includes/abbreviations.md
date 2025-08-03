@@ -14,3 +14,5 @@
 *[Nmap]: Network Mapper
 *[ARP]: Address Resolution Protocol
 *[NetBIOS]: Network Basic Input/Output System
+*[DoS]: Denial of service
+*[C2]: Command and Control
