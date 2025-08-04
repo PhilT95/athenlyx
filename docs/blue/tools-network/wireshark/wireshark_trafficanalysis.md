@@ -237,5 +237,97 @@ FTP is designed to transfer files easily. With its simplicity comes a lack of se
 !!! tip
     You can use the *Follow TCP* option to see more details from a packet with the response code **213**.
 
+### HTTP Analysis
 
+HTTP is a cleartext-based, request-response and client-server protocol. It is used as a standard to request and serve web pages and counts as one of the standard type of network activity. It common that it is not blocked and since it is unencrypted, an easy target. The following attacks can be detected by analyzing HTTP.
+
+- Phishing pages
+- Web Attacks
+- Data exfiltration
+- C2 traffic
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|Global search for HTTP|`http`|
+|Global search for HTTP2[^1]|`http2`|
+|**GET** request method|`http.request.method == "GET"`|
+|**POST** request method|`http.request.method == "POST"`|
+|List all requests|`http.request`|
+|**Response code 200 OK**: Request successful|`http.response.code == 200`|
+|**Response code 301 Moved Permanently**: Resource is moved to a new URL/path permanently|`http.response.code == 301`|
+|**Response code 302 Moved temporarily**: Resource is moved to a new URL/path temporarily|`http.response.code == 302`|
+|**Response code 400 Bad request**: Server didn't understand the request|`http.response.code == 400`|
+|**Response code 401 Unauthorised**: URL needs authorisation|`http.response.code == 401`|
+|**Response code 403 Forbidden**: No access to the requested URL|`http.response.code == 403`|
+|**Response code 404 Not Found**: Server can't find the requested URL|`http.response.code == 404`|
+|**Response code 405 Method not allowed**: Used method is not suitable or blocker|`http.response.code == 405`|
+|**Response code 408 Request Timeout**: Request took longer than server wait time|`http.response.code == 408`|
+|**Response code 500 Server Error**: Request not completed, unexpected error|`http.response.code == 500`|
+|**Response code 503 Service Unavailable**: Request not completed server or service is down|`http.response.code == 503`|
+|**User agent**: Brwoser and operating system identification to a web server application|`http.user_agent contains "nmap"`|
+|**Request URI**: Points the requested resource from the server|`http.request.uri contains "admin"`|
+|**Full URI**: Complete URI information|`http.request.full_uri contains "admin"`|
+|**Server**: Server service name|`http.server contains "apache"`|
+|**Host**: Hostname of the server|`http.host contains "hostname"`|
+|**Connection**|Connection status|`http.connection == "Keep-Alive"`|
+|**Line-based text data**: Cleartext data provided by the server|`data-text-lines contains "search term"`|
+
+[^1]: HTTP2 is a revision of the HTTP protocol for better performance and security. It supports binary data transfer and Request & Response multiplexing.
+
+#### User Agent
+
+The user-agent field is a good resource for spotting anomalies in HTTP traffic. In some cases, the user-agent data is successfully modified by attackers, which makes it look normal. Therefore you can't rely only on the user-agent field to detect anomalies. This is also a reason to **never** whitelist a specific user agent.
+
+You can access the user agent by filtering for `http.user_agent`. You can look for typical data within this field using `contains`, for example 
+
+`http.user_agent contains "Nmap"`
+
+
+## HTTPS Traffic Decryption
+
+Since HTTP is not a very secure protocol, most of the time the traffic will be encrypted by using HTTPS instead. It uses TLS to encrypt the communication, which makes it impossible to decrypt the traffic and view the transferred data without decrypting it.
+
+!!! note
+    Wireshark will display encrypted HTTP traffic in different colors. Additional information about the protocol and info details won't be fully visible.
+
+
+|Notes|Wireshark filter|
+|:----|:---------------|
+|**Request**: Listing all requests|`http.request`|
+|**TLS**: Global TLS search|`tls`|
+|**TLS Client request**|`tls.handshake.type == 1`|
+|**TLS Server response**|`tls.handshake.type == 2`|
+|**Local SSDP**[^2]|`ssdp`|
+
+[^2]: SSDP is a network protocol that provides advertisement and discovery of network services.
+
+Simiar to the TCP three-way handshake process, the TLS protocol has its own hanshake process. It begins with 2 messages, the **Client Hello** and **Server Hello** message.
+
+- Client Hello -> `(http.request or tls.handshake.type == 1) and !(ssdp)`
+- Server Hello -> `(http.request or tls.handshake.type == 2) and !(ssdp)`
+
+An encryption key log file is a text file which contains unique key paris to decrypt the encrypted traffic within the session. These pairs are automatically creates for each session when a connection is established by accesing an SSL/TLS-enabled webpage (like this one). These processes are handled by your webbrowser, so if you want to access these values you need to adjust your system.
+
+1. Set up an environment variable and create the **SSLKEYLOGFILE**
+2. Let the browwser dump the keys to this file while browsing the web
+
+!!! warning 
+    Since SSL/TLS key pars are created per session at the connection time, it is important to dump the keys during the traffic capture.
+
+You can add or remove key log files to Wireshark using the **right-click** menu or via **Edit -> Preferences -> Protocols -> TLS**.
+
+![Image](images/wireshark_traffic-httpsdecrypt.png)
+
+
+## Seraching for Cleartext credentials.
+
+Some Wireshark dissectors (FTP, HTTP, IMAP, pop and SMTP) are programmed to extract cleartext passwords from the capture file. You can view these credentials using the **Tools -> Credentials** menu. This feature only works with particular protocols, so it is suggested to have manual checks and not to rely on this feature alone.
+
+![Image](images/wireshark_traffic-credentials.png)
+
+## WireShark Firewall Rules
+
+Wireshark can also help you to a degree creating firewall rules for packets. Just select a specific package and use the **Tools -> Firewall ACL Rules** menu. It generates the commands to create rules based on that package and the selected firewall tool.
+
+![image](images/wireshark_traffic-firewall.png)
 
