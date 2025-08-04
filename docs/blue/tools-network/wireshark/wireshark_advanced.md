@@ -221,6 +221,7 @@ Similar to TCP and UDP filters, *Application-level* protocol filters are used to
 |`dns.flags.response == 0`|Shows all DNS requests|
 |`dns.flags.response == 1`|Shows all DNS responses|
 |`dns.qry.type == 1`|Shows all DNS **A** records|
+ 
 
 ### Display Filters Expression
 
