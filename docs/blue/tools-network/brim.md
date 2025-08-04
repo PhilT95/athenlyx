@@ -9,7 +9,7 @@ It can handle two types of data as an input:
 Brim is built on different open-source platforms:
 
 - [**Zeek**](zeek.md): Log generating engine.
-- **Zed Language**: Log querying language that allows performing keywoırd searches with filters and pipelines.
+- **Zed Language**: Log querying language that allows performing keyword searches with filters and pipelines.
 - **ZNG Data Format**: Data storage format that supports saving data streams.
 - **Electron and React**: Cross-platform UI.
 
@@ -32,7 +32,7 @@ Quieres help us to correlate finding and find the event of interest. History sto
 
 ![Image](Brim_data/brim_queries_history.png) 
 
-You can also see the 12 premade queries the Brim offers.
+You can also see the 12 pre-made queries the Brim offers.
 
 Using those queries, you can go through specific zeek log files directly and filter them:
 

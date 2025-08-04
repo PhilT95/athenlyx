@@ -25,7 +25,7 @@ AlmaLinux comes with podman instead of Docker. If the usage of your server requi
 
 #### Update your system
 
-Always update your system's package repositories to ensure you getting the lastest versions.
+Always update your system's package repositories to ensure you getting the latest versions.
 
 ```console
 sudo dnf --refresh update
@@ -48,7 +48,7 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 
 #### Installing Docker
 
-Now you can install the docker packages using the default package manger from the offical Docker repository itself.
+Now you can install the docker packages using the default package manger from the official Docker repository itself.
 
 ```
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin

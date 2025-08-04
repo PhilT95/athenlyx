@@ -2,7 +2,7 @@
 
 Using the knowledge from [Wireshark Basics](wireshark.md) and [Wireshark - Advanced Features](wireshark_advanced.md) you can now investigate anmd correlate packet-level information and start seeing the big picture behind in network traffic like detectin anomalies and malicious activities.
 
-## Detectin Nmap scans
+## Detecting Nmap scans
 
 Nmap is a very commonly used tool for mapping networks, identifying live hosts and discovering services. But it also leaves a pattern which can be detected. The most common Nmap scan types are:
 
@@ -10,7 +10,7 @@ Nmap is a very commonly used tool for mapping networks, identifying live hosts a
 - SYN scans
 - UPD scans
 
-To be able to detect Nmaps activity, you need to understand its scan behaviour on the network.
+To be able to detect Nmaps activity, you need to understand its scan behavior on the network.
 
 ### TCP flags summary
 
@@ -82,7 +82,7 @@ The UDP Scan:
 
 <p align="right"><a herf="https://en.wikipedia.org/wiki/Address_Resolution_Protocol">Wikipedia.org</a></p>
 
-ARP Poisoning, also known as ARP Spoofing or Man in the Middle attack, is a type of attack that involves network jamming/manipulating by sending malivous ARP packets to the default gateway. The goal of this attack is to manipulate the **IP to MAC address table** and sniff the traffic of the target host.
+ARP Poisoning, also known as ARP Spoofing or Man in the Middle attack, is a type of attack that involves network jamming/manipulating by sending malicious ARP packets to the default gateway. The goal of this attack is to manipulate the **IP to MAC address table** and sniff the traffic of the target host.
 
 ARP analysis boils down to:
 
@@ -109,7 +109,7 @@ A suspicious situation means having two different ARP responses (conflict) for a
 
 ## Identifying Hosts
 
-When investigating a compromise or malware infection, you should know how to identify the host on the network apart from IP to MAC address match. One way to to di is identifying the host and users on the network to decide the investigation's starting point and list the hosts and users assiciated with the malicious traffic/activity. These protocols can be used in Host and user identification:
+When investigating a compromise or malware infection, you should know how to identify the host on the network apart from IP to MAC address match. One way to to di is identifying the host and users on the network to decide the investigation's starting point and list the hosts and users associated with the malicious traffic/activity. These protocols can be used in Host and user identification:
 
 - DHCP traffic
 - NetBIOS traffic
@@ -132,8 +132,8 @@ DHCP is used to automatically manage OP addresses and their assignments.
 ??? info "Option 53"
     Due to the nature of the protocol, only **Option 53** (request type) has predefined static values. You should filter the packet type first and then you can filter the rest of the options by either using **applying as column** or us the advanced filters like **contains** or **matches**.
 
-!!! tip "Accesing Options"
-    The Options are part of the packet details and filtering depends on the protocol. Insepct the specific protocol and you will see the option. Just set a filter using the **Apply Filter** menu and you can modify the query further yourself!
+!!! tip "Accessing Options"
+    The Options are part of the packet details and filtering depends on the protocol. Inspect the specific protocol and you will see the option. Just set a filter using the **Apply Filter** menu and you can modify the query further yourself!
 
 ### NetBIOS Analysis
 
@@ -171,7 +171,7 @@ Tunneling provides anonymity and security and is therefore used by enterprise ne
 
 ### ICMP Analysis
 
-ICMP is designed for diagonosing and reporting network communication issues. It is a trusted network layer protocol and also sometimes used for DoS attacks. It is also used in data exfiltration and C2 tunneling activities.
+ICMP is designed for diagnosing and reporting network communication issues. It is a trusted network layer protocol and also sometimes used for DoS attacks. It is also used in data exfiltration and C2 tunneling activities.
 
 Usually ICMP tunneling attacks are anomalies appearing after a malware execution or vulnerability exploitation. As the ICMP packet can transfer additional data payloads, it can be used to exfiltrate data and establish a C2 connection. Within the ICMP traffic could be TCP, HTTP or SSH data. Most of the time, these custom ICMP packets are blocked by default, but adversaries can match these default packets.
 
@@ -190,7 +190,7 @@ Similar to ICMP tunnels, DNS attacks are anomalies that appear after a malware e
 
 **encoded-commands.example.org**
 
-When this query is routed to the C2 server, the server sends the actual malicous commands to the host.
+When this query is routed to the C2 server, the server sends the actual malicious commands to the host.
 
 |Notes|Wireshark filter|
 |:----|:---------------|

@@ -21,7 +21,7 @@ It is best practice to define services to create firewall rules. To create a new
 
 1. Navigate to the service directory of firewalld at `/usr/lib/firewalld/services`
 2. Copy any given service using **cp** and rename the file to the service of your choosing.
-3. Change the port and protocol as well as the description to fit the service youre defining. Your service should look like this example for the AIO interface of Nextcloud
+3. Change the port and protocol as well as the description to fit the service you're defining. Your service should look like this example for the AIO interface of NextCloud
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

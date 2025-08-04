@@ -1,5 +1,5 @@
 # Auto-Update using git
-Once you set up your server, you usally have to manually update your documentation and build the webpages again on the webserver itself, as well as copying the newly generated files into the web directory. Using **crontab** we can automate this process and you don't have to touch your server again to update your website.
+Once you set up your server, you usually have to manually update your documentation and build the webpages again on the webserver itself, as well as copying the newly generated files into the web directory. Using **crontab** we can automate this process and you don't have to touch your server again to update your website.
 
 Just create a scripts directory within the git repository and create a new bash file.
 

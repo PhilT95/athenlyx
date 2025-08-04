@@ -18,3 +18,4 @@
 *[C2]: Command and Control
 *[WAF]: Web application firewall
 *[DDoS]:Distributed Denial of Service
+*[IPS]: Intrusion Prevention System

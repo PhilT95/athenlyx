@@ -1,3 +1,8 @@
+# Ignoring the MkDocs build (only needed on the webserver)
 /site
 
+# Ingoring log files
 *.log
+
+# Ignoring the Material for MkDocs plugin cache which is used to build the website faster, for example by caching pictures.
+.cache/
