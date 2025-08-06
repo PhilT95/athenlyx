@@ -30,6 +30,7 @@ nav:
       - MkDocs : applications/mkdocs/mkdocs.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
+    - SafeLine: applications/safeline/safeline.md
   - About me: about/index.md
 
 
@@ -90,6 +91,9 @@ copyright: Copyright &copy; 2025 Phil Trommer
 
 plugins:
   - search
+  - social
+  - privacy
+  - glightbox
   - git-revision-date-localized:
       enable_creation_date: true
 

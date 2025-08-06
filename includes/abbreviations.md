@@ -18,4 +18,11 @@
 *[C2]: Command and Control
 *[WAF]: Web application firewall
 *[DDoS]:Distributed Denial of Service
+*[URI]: Uniform Resource Identifier
+*[HTTPS]: Hypertext Transfer Protocol Secure
+*[TLS]: Transport Layer Security
+*[SSDP]: Simple Service Discovery Protocol
+*[IMAP]: Internet Message Access Protocol
+*[SMTP]: Simple Mail Transfer Protocol
+*[ACL]: Access-control list
 *[IPS]: Intrusion Prevention System
