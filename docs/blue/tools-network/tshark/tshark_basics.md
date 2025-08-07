@@ -45,6 +45,8 @@ TShark is a text-based tool suitable for data carving, in-depth packet analysis 
 
 ## TShark Fundamentals
 
+### Basic parameters
+
 Understanding and knowing the parameters of TShark is essential. Using the built-in options and associated parameters are needed to keep control of the output and avoid being flooded with the detailed output of TShark.
 Some of the most common parameters are:
 
@@ -55,3 +57,9 @@ Some of the most common parameters are:
 |`-D`|List available sniffing interfaces|`tshark -D`|
 |`-i`|Choose an interface to capture live traffic|`tshark -i 1`<br>`tshark -i ens55`|
 |**No parameter**|Sniff the traffic like tcpdump|`tshark`|
+|`-r`|Reads a capture file|`tshark -r demo.pcapng`|
+|`-c`|Stop after capturing a specified number of packages|`tshark -c 10`|
+|`-w`|Write the sniffed traffic to a file|`tshark -w sample-capture.pcap`|
+|`-V`|**Verbose** - Provide detailed information for **each packet**|`tshark -V`|
+|`-q`|Suppress the packet output on the terminal (silent mode)|`tshark -q`|
+|`-x`|Show packet details in Hex and ASCII dump for each packet|`tshark -x`|
