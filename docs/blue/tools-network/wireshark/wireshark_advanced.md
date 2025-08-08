@@ -6,7 +6,7 @@ The statistics menu provides multiple statistics options to investigate and help
 
 ### Resolve Addresses
 
-Resolving addresses helps to identify addresses and DNS names available in the capture files by providing the list of the resolved addresses and their hostnames. You can quickly identify accessed resources by using this menu and evaluate these ressources according to the event. This option is available through the **Statistics --> Resolved Addresses** menu.
+Resolving addresses helps to identify addresses and DNS names available in the capture files by providing the list of the resolved addresses and their hostnames. You can quickly identify accessed resources by using this menu and evaluate these resources according to the event. This option is available through the **Statistics --> Resolved Addresses** menu.
 
 ![Image](images/wireshark-advanced_resolved.png)
 
@@ -48,11 +48,11 @@ The name resolution is not limited to only MAC addresses. Wireshark also offers 
 
 ![Image](images/wireshark-advanced_nameresolution.png)
 
-Additionally, Wireshark also provides an IP geolocation mapping to identify the geolocation of source and destination addresses. This feature is also not enabled by default and needs additional data from services like the GeoIP database. Wireshark currently supports MaxMind databases and the lastest version comes configured with a MaxMind DB resolver. You still need to provide the DB files and provide this database to Wireshark using **Edit --> Preferences --> Name Resolution --> MaxMind database directories**.
+Additionally, Wireshark also provides an IP geolocation mapping to identify the geolocation of source and destination addresses. This feature is also not enabled by default and needs additional data from services like the GeoIP database. Wireshark currently supports MaxMind databases and the latest version comes configured with a MaxMind DB resolver. You still need to provide the DB files and provide this database to Wireshark using **Edit --> Preferences --> Name Resolution --> MaxMind database directories**.
 
 ### IPv4 and IPv6
 
-Until now, almost all options provided information that contained both IPv4 and IPv6. The statistics menu has 2 options to narrow down the statistics on packets containig a specific IP version. This way you can identify and list all events linked to specific IP versions in a single windows. This can be accessed via the **Statistics --> IPvX Statistics** menu.
+Until now, almost all options provided information that contained both IPv4 and IPv6. The statistics menu has 2 options to narrow down the statistics on packets containing a specific IP version. This way you can identify and list all events linked to specific IP versions in a single windows. This can be accessed via the **Statistics --> IPvX Statistics** menu.
 
 ![Image](images/wireshark-advanced_ipvx.png)
 
@@ -73,7 +73,7 @@ This option can be accessed via the **Statistics --> DNS** menu.
 
 ### HTTP
 
-This function breaks down all HTTP packets from the capture file and helps to view the findings in a tree view based on packet counters and percentages of the HTTP protocol. You cann access this via the **Statistics --> HTTP** menu.
+This function breaks down all HTTP packets from the capture file and helps to view the findings in a tree view based on packet counters and percentages of the HTTP protocol. You can access this via the **Statistics --> HTTP** menu.
 
 ![Image](images/wireshark-advanced_http.png)
 
@@ -82,7 +82,7 @@ This function breaks down all HTTP packets from the capture file and helps to vi
 
 ## Packet Filtering with queries
 
-If you dont remember the basics about filtering, check the [Wireshark Basics for filtering](wireshark.md/#package-filtering).
+If you don't remember the basics about filtering, check the [Wireshark Basics for filtering](wireshark.md/#package-filtering).
 
 The typical use case is to capture everything and filter the captured packets. But you can also filter while sniffing the traffic.
 
@@ -91,25 +91,25 @@ The typical use case is to capture everything and filter the captured packets. B
 
 ### Capture Filter Syntax
 
-These filters use byte offests hex values and masks with boolean operators, which makes it harder to understand the filters purpose at first glance. The base syntax is as follows:
+These filters use byte offsets hex values and masks with boolean operators, which makes it harder to understand the filters purpose at first glance. The base syntax is as follows:
 
 - **Scope**: host, net, port and port range
 - **Direction**: src, dst, srtc or dst, src and dest
 - **Protocol**: ether, wlan, ip, ip6, rarp, tcp and udp
 - **Sample filter to capture port 80 traffic**: `tcp port 80`
 
-You can read more about capture filter syntax in the offical Wireshark documentation [here](https://www.wireshark.org/docs/man-pages/pcap-filter.html) and [here](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters). A quick reference is available with the **Capture --> Capture Filters** menu.
+You can read more about capture filter syntax in the official Wireshark documentation [here](https://www.wireshark.org/docs/man-pages/pcap-filter.html) and [here](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters). A quick reference is available with the **Capture --> Capture Filters** menu.
 
 ![Image](images/wireshark-advanced_capturefilter.png)
 
 #### Display Filter Syntax
 
-This feature supports 3000 protocols and allows conducting packet-level searches under the protocol breakdown. The offical [Display Filter Reference](https://www.wireshark.org/docs/dfref/) provides all supported protocols for filtering. 
+This feature supports 3000 protocols and allows conducting packet-level searches under the protocol breakdown. The official [Display Filter Reference](https://www.wireshark.org/docs/dfref/) provides all supported protocols for filtering. 
 
 ??? example "Sample filter to capture port 80 traffic"
     `tcp.port == 80`
 
-Wireshark offers a built-in option that stores all supported protocol structures to help create display filters (Display Filter Expression). You can access these using the **Analyse --> Display Filters** menu.
+Wireshark offers a built-in option that stores all supported protocol structures to help create display filters (Display Filter Expression). You can access these using the **Analyze --> Display Filters** menu.
 
 ![Image](images/wireshark-advanced_displayfilter.png)
 
@@ -140,7 +140,7 @@ Wireshark also supports boolean syntax by using logical operators while creating
 |not|!|Logical NOT|`!(ip.src == 10.10.0.2)`|
 
 !!! info
-    The usage of `!value` is deprecated and using it could provide inconsistent results. Using the `!(value)` style is suggestet for more conistent results.
+    The usage of `!value` is deprecated and using it could provide inconsistent results. Using the `!(value)` style is suggested for more consistent results.
 
 ### Packet Filter Toolbar
 
@@ -148,7 +148,7 @@ The filter toolbar is the place where you create and apply your display filters.
 
 - Packet filters are defined in *lowercase*
 - Packet filters have an autocomplete feature which breaks down protocol details and each detail is represented by a *dot*
-- Packet filters have a 3-color represenation
+- Packet filters have a 3-color representation
 
 |Color|Explanation|
 |:----|:----------|
@@ -225,7 +225,7 @@ Similar to TCP and UDP filters, *Application-level* protocol filters are used to
 
 ### Display Filters Expression
 
-Wireshark provided a built-in option that stores all supported protocol structures to assist in creating display filters. If you don't recall the required filter or you are unsure, you can access this menu using **Analyse --> Display Filter Expressions**.
+Wireshark provided a built-in option that stores all supported protocol structures to assist in creating display filters. If you don't recall the required filter or you are unsure, you can access this menu using **Analyze --> Display Filter Expressions**.
 
 ![Image](images/wireshark-advanced_filterexpressions.png)
 
@@ -302,6 +302,6 @@ You can create filters and **bookmark** them to save them for later. You can thi
 
 ### Profiles
 
-Wireshark also supports Profiles for different investiggation cases. You can create and mangage these using the **Edit --> Configuration Profiles** menu or the **lower right bottom of the status bar --> Profile** section.
+Wireshark also supports Profiles for different investigation cases. You can create and manage these using the **Edit --> Configuration Profiles** menu or the **lower right bottom of the status bar --> Profile** section.
 
 ![Image](images/wireshark-advanced_profiles.png)

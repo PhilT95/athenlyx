@@ -7,14 +7,17 @@ nav:
   - Blue Teaming:
     - blue/blueteaming.md
     - Network Tools:
+        - blue/tools-network/network-tools.md
         - Snort IDS/IPS: blue/tools-network/snort.md
-        - Zeek Traffic Analyser: blue/tools-network/zeek.md
-        - BRIM: blue/tools-network/brim.md
-        - Wirehark:
+        - Zeek Traffic Analyzer: blue/tools-network/zeek.md      
+        - Wireshark:
           - Wireshark Basics: blue/tools-network/wireshark/wireshark.md
           - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
           - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
+        - TShark:
+          - TShark Basics: blue/tools-network/tshark/tshark_basics.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
+        - BRIM: blue/tools-network/brim.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
@@ -30,7 +33,7 @@ nav:
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
     - SafeLine: applications/safeline/safeline.md
-  - About me: about.md
+  - About me: about/index.md
 
 
 theme:
@@ -121,6 +124,7 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.blocks.caption
 
 watch:
   - includes

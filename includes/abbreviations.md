@@ -25,3 +25,7 @@
 *[IMAP]: Internet Message Access Protocol
 *[SMTP]: Simple Mail Transfer Protocol
 *[ACL]: Access-control list
+*[IPS]: Intrusion Prevention System
+*[CLI]: Command Line Interface
+*[BPF]: Berkeley Packet Filters
+*[IANA]: Internet Assigned Numbers Authority

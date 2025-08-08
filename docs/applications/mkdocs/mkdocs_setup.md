@@ -262,7 +262,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 [root@machine nginx]$ systemctl reload nginx
 ```
 
-Your website should now be reachable. If you are using SSL, please make sure to setup a certificate or you will run into SSL erros. You can use **certbot** by **LetsEncrypt** to quickly get a valid certificate. The certbot will also edit your nginx configuration to insert your certificate.
+Your website should now be reachable. If you are using SSL, please make sure to setup a certificate or you will run into SSL errors. You can use **certbot** by **LetsEncrypt** to quickly get a valid certificate. The certbot will also edit your nginx configuration to insert your certificate.
 
 
 ## Conclusion

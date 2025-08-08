@@ -1,5 +1,5 @@
 # Snort - Intrusion Prevention System (IPS)
->Snort is the foremost Open Source Intrusion Prevention System (IPS) in the world. Snort IPS uses a series of rules that help define malicious network activity and uses those rules to find packets that match against them and generates alerts for users.
+>Snort is the foremost Open Source IPS in the world. Snort IPS uses a series of rules that help define malicious network activity and uses those rules to find packets that match against them and generates alerts for users.
 >
 > Snort can be deployed inline to stop these packets, as well. Snort has three primary uses: As a packet sniffer like tcpdump, as a packet logger — which is useful for network traffic debugging, or it can be used as a full-blown network intrusion prevention system. Snort can be downloaded and configured for personal and business use alike.  
 
@@ -30,7 +30,7 @@ All commands are options for launching the **snort** binary.
 |`-A fast`| This will start snort as an IDP/IPS with a fast mode that provides **alerts, messages, timestamps and source/destination ip addresses (-A fast)**. No console output will be shown. Instead a alert file will be created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A fast`|
 |`-A full`| This will start snort as an IDP/IPS with a full mode that provides **all information (-A full)**. Instead a alert file will be created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A full`|
 |`-A none`| This will start snort as an IDP/IPS with a none mode that **doesn't create an alert file. (-A full)**|`sudo snort -c snort.conf -A none`|
-|`-Q --daq afpacket` `-i`| This will start snort with an activated **Data Aquisition (DAQ)** module and use the **afpacket** module to use snort as an IPS on the given intertface **eth0:eth1**. The DAQ is needed for enabling snort to drop packages.|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
+|`-Q --daq afpacket` `-i`| This will start snort with an activated **Data Aquisition (DAQ)** module and use the **afpacket** module to use snort as an IPS on the given interface **eth0:eth1**. The DAQ is needed for enabling snort to drop packages.|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
 
 
 ## How to read PCAPs with snort
@@ -52,24 +52,24 @@ Snort rules consist of the following parameters:
     - log: Log the packet
     - drop: Block and log the packet
     - reject: Block the packet, log it and terminate the packet session
-- **Protocol**: Protocol parameter identifies the type of the protocol that is filteres by the rule. This can be used in combination with ports. Snort supports only:
+- **Protocol**: Protocol parameter identifies the type of the protocol that is filtered by the rule. This can be used in combination with ports. Snort supports only:
     - IP
     - TCP
     - UDP
     - ICMP
 - **Source and Destination IP**
-- **Soure and Desination Port**
+- **Source and Destination Port**
 - **Direction**: This operator indicates the traffic flow filtered by Snort. The left side shows the source and the right side shows the destination.
     - -> means Source to destination
     - <> means bidirectional flow
 -  **Options**: There are 3 main rule options in snort:
-   -  *General Rule Options*: Fudemental rule options for snort
+   -  *General Rule Options*: Fundamental rule options for snort
    -  *Payload Rule Options*: Rule options that help to investigate the payload data
-   -  *Non-Payload Rule Options*: Rule options that focus on non-payload data. This option can be used to create specific pattersn to identify network issues.
+   -  *Non-Payload Rule Options*: Rule options that focus on non-payload data. This option can be used to create specific patterns to identify network issues.
 
 
 ### Fudemental rule options
-- **Msg**: The message field is a basic prompt and quick identifier of the rule. Once the rule is triggered, the message filed will appear in the console or log. Usually, the message part is a one-liner that summarises the event.
+- **Msg**: The message field is a basic prompt and quick identifier of the rule. Once the rule is triggered, the message filed will appear in the console or log. Usually, the message part is a one-liner that summarizes the event.
 - **Sid**: Snort rule IDs (SID) come with a pre-defined scope, and each rule must have a SID in a proper format. There are three different scopes for SIDs shown below:
   - **<100**: Reserved rules
   - **100-999,999**: Rules came with the build.
@@ -83,11 +83,11 @@ Snort rules consist of the following parameters:
   - HEX mode - `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"|47 45 54|"; sid: 1000001; rev:1;)`
 - **Nocase**: Disabling case sensitivity. Used for enhancing the content searches. \
 `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; nocase; sid: 1000001; rev:1;)`
-- **Fast_pattern**: Prioritise content search to speed up the payload search operation. By default, Snort uses the biggest content and evaluates it against the rules. "fast_pattern" option helps you select the initial packet match with the specific value for further investigation. This option always works case insensitive and can be used once per rule. Note that this option is required when using multiple "content" options. \
+- **Fast_pattern**: Prioritize content search to speed up the payload search operation. By default, Snort uses the biggest content and evaluates it against the rules. "fast_pattern" option helps you select the initial packet match with the specific value for further investigation. This option always works case insensitive and can be used once per rule. Note that this option is required when using multiple "content" options. \
 The following rule has two content options, and the fast_pattern option tells to snort to use the first content option (in this case, "GET") for the initial packet match.\
 `alert tcp any any <> any 80  (msg: "GET Request Found"; content:"GET"; fast_pattern; content:"www";  sid:1000001; rev:1;)`
 
-### Non-Payload Detection Rule ptions
+### Non-Payload Detection Rule options
 
 - **ID**: Filtering the IP id field.\
 `alert tcp any any <> any any (msg: "ID TEST"; id:123456; sid: 1000001; rev:1;)`
@@ -117,6 +117,6 @@ For a convenient Cheat sheet, see [this one from Tryhackme.com](Snort_Cheatsheet
 The tool **Strings** can help you figure out, which information are hidden inside the generate log. It can be used like this `sudo strings snort.log | grep GIF`.
 You can inspect the hex values of a log with `sudo snort snort.log -X`.
 
-## Tips and tricks
-- It is very important to analyze the log files with different options or tools to get all the important information out of it.
-- Don't forget to look at the alert files as well.
+!!! tip "Tips and tricks
+  - It is very important to analyze the log files with different options or tools to get all the important    information out of it.
+  - Don't forget to look at the alert files as wel

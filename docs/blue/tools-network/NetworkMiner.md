@@ -1,4 +1,4 @@
-# NetworkMiner - Open Source Traffic Sniifer and more
+# NetworkMiner - Open Source Traffic Sniffer and more
 >NetworkMiner is an open source NFAT for Windows (but also works in Linux / MacOSX / FreeBSD). NetworkMiner can be used as a passive network sniffer/packet capturing tool to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse PCAP files for off-line analysis and to regenerate/reassemble transmitted files and certificates from PCAP files.
 
 
@@ -20,7 +20,7 @@ It supports the following data types:
 
 NetworkMiner comes with to operating modes:
 
-- **Sniffer Mode**: Although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommened as a sniffer.
+- **Sniffer Mode**: Although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommended as a sniffer.
 - **Packet Parsing/Processing**: NetworkMiner can parse traffic captures to have a quick overview and information on the investigated capture. This operation mode is mainly suggested to grab the "low hanging fruit" before diving into a deeper investigation.
   
 It is mainly used to gain an overview of the network since its capabilities are limited but its use is easy.

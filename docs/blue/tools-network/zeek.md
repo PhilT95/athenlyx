@@ -1,5 +1,5 @@
-# Zeek - Traffic Analyser
->Zeek (formerly Bro) is the world's leading platform for network security monitoring. Flexible, open-source, and powered by defenders. Zeek is a passive, open-source network traffic analyser. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement and troubleshooting.
+# Zeek - Traffic Analyzer
+>Zeek (formerly Bro) is the world's leading platform for network security monitoring. Flexible, open-source, and powered by defenders. Zeek is a passive, open-source network traffic analyzer. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement and troubleshooting.
 
 ## Zeek Basics
 **Zeek** differs from known monitoring and IDS/IPS (like [Snort](./snort.md)) tools by providing a wide range of detailed logs ready to investigate both forensic and data analysis actions.
@@ -10,7 +10,7 @@ Compared to <ins>Snort</ins>, Zeek is harder to use, but offers in-depth traffic
 
 Zeek has to primary layers:
 
-1. **Event Engine**: This layer is where the packets are proccessed. It is called the event core and is responsible for describing the event without focusing on the event details. It devides the packatges into parts souch as
+1. **Event Engine**: This layer is where the packets are processed. It is called the event core and is responsible for describing the event without focusing on the event details. It divides the packages into parts such as
    - Source & Destination address
    - protocol identification
    - session analysis
@@ -33,7 +33,8 @@ You can find more about frameworks [here](https://docs.zeek.org/en/master/framew
 ### Basic Commands
 Once you start Zeek, it will automatically start investigation the traffic or any given pcap file and generate logs. If you process a pcap file, the logs will be generated in the working directory. If Zeek runs as a service, the default directory is ``/opt/zeek/logs`` 
 
-Zeek always needs to be started with superuser permissions!
+!!! note
+    Zeek always needs to be started with superuser permissions.
 
 You can run `zeekctl` to get the following output and puts you into the **ZeekControl** console
 
@@ -74,12 +75,12 @@ You can also run these commands using
 If you want to listen to live traffic, Zeek needs to be started as a service. To run Zeek as a packet investigator for processing pcaps for example, you need to execute the following command:
 `zeek -C -r sample.pcap`
 
-The main command line parameters are the following
+The main command line parameters are the following:
 
 |Parameter|Description|
 |:--------|:----------|
 |`-r`|Reading option, read/process a pcap file|
-|`-C`|Ingnoring checksum erros|
+|`-C`|Ignoring checksum errors|
 |`-v`|Version information|
 |`zeekctl`|Starts the ZeekControl module|
 
@@ -103,7 +104,7 @@ Those are a lot of logs, but the most commonly used logs are these:
 |Overall Info|Protocol Based|Detection|Observations|
 |:-----------|:-------------|:--------|:-----------|
 |conn.log|http.log|notice.log|known_hosts.log|
-|files.log|dns.log|singatures.log|known_services.log|
+|files.log|dns.log|signatures.log|known_services.log|
 |intel.log|ftp.log|pe.log|software.log|
 |loaded_scripts.log|ssh.log|traceroute.log|weird.log|
 
@@ -253,7 +254,7 @@ To filter the data from the command
 root@machine$ zeek -C -r sample.pcap script.zeek
 ```
 
-you can add options to the scritp.
+you can add options to the script.
 
 ```zeek
 event new_connection(c: connection)
@@ -300,7 +301,7 @@ root@machine$ zeek -C -r sample.pcap local # (1)
 
 
 ## Zeek Package Manager
-The Zeek Package Manager provides an easy way to intall third-party scripts and plugins to extend the functionality of Zeek. The package manager is bundled with zeek and available with the `zkg` command.
+The Zeek Package Manager provides an easy way to install third-party scripts and plugins to extend the functionality of Zeek. The package manager is bundled with zeek and available with the `zkg` command.
 
 |Command|Description|
 |:------|:----------|

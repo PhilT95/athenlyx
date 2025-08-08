@@ -9,7 +9,7 @@
 
 ### Use Cases
 
-Wireshark is one, if not the most potent traffic analyser tools available. It is often used for
+Wireshark is one, if not the most potent traffic analyzer tools available. It is often used for
 
 - Detecting and troubleshooting network problems, such as network load failure points and congestion.
 - Detecting security anomalies, such as rogue hosts, abnormal port usage, and suspicious traffic.
@@ -24,11 +24,11 @@ The wireshark GUI opens with a single all-in-one page, which provides a way for 
 
 <div class="annotate" markdown>
 
-- **Toolbar**: The main toolbar contains menus and shortcuts for packet sniffing and processing, including filtering, sorting summarising, exporting and merging.
+- **Toolbar**: The main toolbar contains menus and shortcuts for packet sniffing and processing, including filtering, sorting summarizing, exporting and merging.
 - **Display Filter Bar**: This bar is the main query and filtering section.
 - **Recent Files**: This is a list of recently investigated files. (1)
 - **Capture Filter and Interfaces**: Here you can find capture filters and available sniffing points (network interfaces). The interface is a connection between a system and a network.
-- **Status Bar**: Provides the Tool status, profile and numeric packet informations.
+- **Status Bar**: Provides the Tool status, profile and numeric packet information.
 
 </div>
 
@@ -38,7 +38,7 @@ The wireshark GUI opens with a single all-in-one page, which provides a way for 
 
 ### Loading PCAP files
 
-When we load a pcap file, whireshark shows its potential.
+When we load a pcap file, Wireshark shows its potential.
 
 ![Image](images/wireshark_pcap.png)
 
@@ -58,7 +58,7 @@ Wireshark colors packets in order of different conditions and the used protocol 
 You can get to the Coloring Rules Menu by opening the **right-click menu** or via **View--> Coloring Rules** to create permanent rules. Temporary rules can also be created within the right-click menu or **View-->Conversation Filter**.
 
 ### Traffic Sniffing
-Using the **shark button**, Whireshark can start a network sniffer to capture traffic. Pressing the red button will stop the capture process and the green one restarts it.
+Using the **shark button**, Wireshark can start a network sniffer to capture traffic. Pressing the red button will stop the capture process and the green one restarts it.
 
 ![Image](images/wireshark_capture.png)
 
@@ -109,7 +109,7 @@ To find packets by content, you can use the **Edit --> Find packet** menu to sta
 
 ### Mark packages
 
-Marking packages is used to point to an event of interest or export particular packets from capture. You an use the **Edit** or the **right-click** menu to mark or unmark packets.
+Marking packages is used to point to an event of interest or export particular packets from capture. You an use the **Edit** or the **right-click** menu to mark or un-mark packets.
 
 ![Image](images/wireshark_markpackages.png)
 
@@ -121,12 +121,12 @@ Based on a Color Scheme, the are 4 different severities.
 
 |Severity|Color|Info|
 |:-------|:----|:---|
-|Chat|Blue|Information on usual worflow|
+|Chat|Blue|Information on usual workflow|
 |Note|Cyan|Notable events like application error codes|
 |Warn|Yellow|Warnings like unusual error codes or problems|
 |Error|Red|Problems like malformed packets|
 
-You can use the **lower left bottom section** in the status bar or **Analyse --> Expert Information** menu to view all available information entries via a dialogue box.
+You can use the **lower left bottom section** in the status bar or **Analyze --> Expert Information** menu to view all available information entries via a dialogue box.
 
 ![Image](images/wireshark_expertinfo.png)
 
@@ -155,19 +155,19 @@ You can also highlight linked packets without applying a display filter and decr
 
 ### Prepare as filter
 
-This is similar to the [Apply as Filter](#apply-as-filter). The difference between both filters is that the *apply as filter* doesn't apply the filters after the choice. It adds the quiry to the pane and waits for execution. You can add more filters using the **and/or** from the right-click menu.
+This is similar to the [Apply as Filter](#apply-as-filter). The difference between both filters is that the *apply as filter* doesn't apply the filters after the choice. It adds the query to the pane and waits for execution. You can add more filters using the **and/or** from the right-click menu.
 
 ### Apply as Column
  
- By default, the packet list pane provides basic information about each packet. You can use the **right-click** meni or **Analyse --> Apply as Column** to add columns to the packet list pane.
+ By default, the packet list pane provides basic information about each packet. You can use the **right-click** menu or **Analyze --> Apply as Column** to add columns to the packet list pane.
 
  ![image](images/wireshark_applyascolumn.png)
 
 ### Follow Stream
 
- Wireshark displays everything in packet portion sizes. It is possible to reconstruct the streams and view raw traffic as it is presentated at the application level. Following the protocol, streams are used to recreate application-level data and understand specific events. It is also possible to view the unencrypted protocol data like usernames, passwords and other data.
+ Wireshark displays everything in packet portion sizes. It is possible to reconstruct the streams and view raw traffic as it is presented the application level. Following the protocol, streams are used to recreate application-level data and understand specific events. It is also possible to view the unencrypted protocol data like usernames, passwords and other data.
 
- You can access this using the **right-click** menu or **Analyse --> Follow TCP/UDP/HTTP Stream**. Streams are shown in a separate dialogue box.
+ You can access this using the **right-click** menu or **Analyze --> Follow TCP/UDP/HTTP Stream**. Streams are shown in a separate dialogue box.
 
  ![Image](images/wireshark_followstream.png)
 
