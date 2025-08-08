@@ -82,7 +82,7 @@ Since TShark is a network sniffer and packet analyzer, TShark can also be config
 
 ## Capture & Display filters
 
-TShark, like other tools, can be used to filter **live (capture)** and *display **(post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
+TShark, like other tools, can be used to filter **live (capture)** and **display (post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
 
 - Predefined Syntax
 - BPF
