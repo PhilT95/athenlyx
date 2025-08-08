@@ -5,9 +5,9 @@ repo_name: PhilT95/docs
 nav:
   - Home: index.md
   - Blue Teaming:
-    - blue/blueteaming.md
+    - blue/index.md
     - Network Tools:
-        - blue/tools-network/network-tools.md
+        - blue/tools-network/index.md
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyzer: blue/tools-network/zeek.md      
         - Wireshark:
