@@ -2,7 +2,7 @@
 
 
 # Sets the correct working directory
-cd /path/to/your/project
+cd /usr/docs
 echo $(date) :  Starting sync with git... >> scripts/sync.log
 
 # This script checks if a new update has been pulled by comparing the HEAD before and after a git pull --rebase
