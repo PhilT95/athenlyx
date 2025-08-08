@@ -63,3 +63,80 @@ Some of the most common parameters are:
 |`-V`|**Verbose** - Provide detailed information for **each packet**|`tshark -V`|
 |`-q`|Suppress the packet output on the terminal (silent mode)|`tshark -q`|
 |`-x`|Show packet details in Hex and ASCII dump for each packet|`tshark -x`|
+
+### Capture Condition parameters
+
+Since TShark is a network sniffer and packet analyzer, TShark can also be configured to count packets and stop at a specific point or return in a loop structure. The most common parameters for this purpose are:
+
+|Parameter|Description|Example|
+|:--------|:----------|:------|
+|`-a duration`|Sniff the traffic and stop after a given amount of seconds.|`tshark -w output.pcap -a duration:1`|
+|`-a filesize`|Define the maximum capture file size and stop after reaching it (in **KB**)|`tshark -w output.pcap -a filesize:10`|
+|`-a files`|Defines the maximum number of output files.|`tshark -w output.pcap -a filesize:10 -a files:3`|
+
+!!! tip "Define capture conditions for multiple runs/loops"
+    If you replace `-a` with the `-b` parameter using the same syntax, you can run these commands in an **Infinite Loop**. You need to use at least one *autostop* (`-a`) parameter if you want to stop the infinite loop.
+
+!!! note
+    You can only use these capture condition parameters while TShark is in *capture/sniffing* mode. 
+
+## Capture & Display filters
+
+TShark, like other tools, can be used to filter **live (capture)** and *display **(post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
+
+- Predefined Syntax
+- BPF
+
+TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture** and **Display Filters**.(1)#
+
+{ .annotate }
+
+1. You can read more about these filters in [Wireshark](../wireshark/wireshark.md#package-filtering).
+
+Capture filters have limited filtering features, and the purpose is to implement a scope by range, protocol and direction filtering. They can be used to limit file size and focus on important traffic. Display filters investigate the capture files in-depth without modifying the packet.
+
+|Parameter|Description|
+|:--------|:----------|
+|`-f`|Capture filters using the syntax as BPF and Wireshark's capture filter|
+|`-Y`|Display filters using the same syntax as Wireshark's display filters|
+
+### Capture Filters
+
+TShark uses Wireshark's capture filter syntax here. Below are a few examples, but if you want to read more, you can visit [Wireshark.org](https://www.wireshark.org/docs/man-pages/pcap-filter.html) or [WireShark GitLab](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters).
+
+|Qualifier|Details and Available Options|Examples|
+|:--------|:----------------------------|:-------|
+|**Type**|You can filter IP addresses, host names, IP ranges  and port numbers. If you don't set a qualifier, the *host* qualifier will be used by default.|Filtering a host<br>`tshark -f "host 10.0.0.10"`|
+|||Filtering a network range<br>`tshark -f "net 10.0.10.0/24"`|
+|||Filtering a port<br>`tshark -f "port 80"`|
+|||Filtering a port range<br>`tshark -f "portrange 80-100"`|
+|**Direction**|Filter for the target direction/flow. If you don't use the direction operator, it will be equal to *either* and cover both directions.|Filtering source address<br>`tshark -f "src host 10.10.0.10"`|
+|||Filtering destination address<br>`tshark -f "dst host 10.10.0.10"`|
+|**Protocol**|Filter for the protocol.|Filtering TCP<br>`tshark -f "tcp"`|
+|||Filtering MAC address<br>`tshark -f "ether host F8:D8:C6:A3:5D:81"`|
+|||You can also filter protocols with IP protocol number assigned by IANA<br>`tshark -f "ip proto 1"`|
+
+### Display Filters
+
+TShark also uses Wireshark's syntax here. You can use the [official documentation](https://www.wireshark.org/docs/dfref/) or use WireShark's built-in **Display Filter Expression** menu. Some common filtering option are below.
+
+!!! note
+    Using single quotes for capture filters is recommended to avoid space and bash expansion problems. You can also refer to the [Wireshark Advanced Features Guide](../wireshark/wireshark_advanced.md).
+
+|Display Filter Category|Examples|
+|:----------------------|:-------|
+|**Protocol:  IP**|Filtering an IP without specifying a direction<br>`tshark -Y 'ip.addr == 10.0.0.10'`|
+||Filtering a network range<br>`tshark -Y 'ip.addr == 10.0.0.10/24'`|
+||Filtering a source IP<br>`tshark -Y 'ip.src == 10.0.0.10'`|
+||Filtering a destination IP<br>`tshark -Y 'ip.dst == 10.0.0.10'`|
+|**Protocol:  TCP**|Filter TCP Port<br>`tshark -Y 'tcp.port == 80'`|
+||Filter TCP source Port<br>`tshark -Y 'tcp.srcport == 80'`|
+|**Protocol:  HTTP**|Filter HTTP Packets<br>`tshark -Y 'http'`|
+||Filter HTTP Packets with response code **200**<br>`tshark -Y 'http.response.code == 200'`|
+|**Protocol:  DNS**|Filter DNS packets<br>`tshark -Y 'dns'`|
+||Filter all DNS **A** packets<br>`tshark -Y 'dns.qry.type == 1'`|
+
+
+
+
+
