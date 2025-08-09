@@ -1,6 +1,7 @@
 # Blue Teaming Resources
 To protecting an organization's networks, systems, and data from cyber attacks, specialists need good and reliable resources and tools. Here is a short list with handy tools that can help to identify, analyze and mitigate threats.
 
+
 - [ABUSE.ch](https://abuse.ch/#platforms): abuse.ch maintains six public platforms, all supported by a partnership with Spamhaus, to aid cybersecurity researchers and practitioners in their day-to-day roles. 
 - [YARA](https://virustotal.github.io/yara/): YARA is a tool aimed at (but not limited to) helping malware researchers to identify and classify malware samples. With YARA you can create descriptions of malware families (or whatever you want to describe) based on textual or binary patterns.
 - [OpenCTI](https://github.com/OpenCTI-Platform/opencti): OpenCTI is an open source platform allowing organizations to manage their cyber threat intelligence knowledge and observables. It has been created in order to structure, store, organize and visualize technical and non-technical information about cyber threats.
