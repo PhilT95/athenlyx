@@ -37,7 +37,7 @@ A few mre interesting statistics are:
 
 
 ```console title="TShark Statistics Example"
-user@host: ~$ tshark -r demo.pcapng -z conv,ip -q
+user@host:~$ tshark -r demo.pcapng -z conv,ip -q
 ================================================================================
 IPv4 Conversations
 Filter:<No Filter>
@@ -54,7 +54,7 @@ Filter:<No Filter>
 This option provides statistics on IPv4 and IPv6 packets. Having these protocol statistics helps you to overview distribution according to the protocol type. You can filter available protocol types and view the details using `-z ptype,tree -q`
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z ptype,tree -q
+user@host:~$ tshark -r demo.pcapng -z ptype,tree -q
 
 ==================================================================================================================================
 IPv4 Statistics/IP Protocol Types:
@@ -73,7 +73,7 @@ You can also create a summary of the hosts in a single view. You can filter all 
 - **IPv6**: `-z ipv6_hosts,tree -q`
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z ip_hosts,tree -q
+user@host:~$ tshark -r demo.pcapng -z ip_hosts,tree -q
 
 =================================================================================================================================
 IPv4 Statistics/All Addresses:
@@ -94,7 +94,7 @@ For a more in-depth analysis, you need to correlate the finding by focusing on t
 - **IPv6**: `-z ipv6_srcdst, tree -q`
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z ip_srcdst,tree -q
+user@host:~$ tshark -r demo.pcapng -z ip_srcdst,tree -q
 
 ================================================================================================================================================
 IPv4 Statistics/Source and Destination Addresses:
@@ -120,7 +120,7 @@ In some cases you will need to focus on the outgoing traffic to spot used servic
 - **IPv6**: `-z ipv6_dests,tree -q`
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z dests,tree -q
+user@host:~$ tshark -r demo.pcapng -z dests,tree -q
 
 =======================================================================================================================================
 IPv4 Statistics/Destinations and Ports:
@@ -151,7 +151,7 @@ Destinations and Ports  43                                                      
 This option provides statistics on DNS packets by summarizing available information. You can filter the packets and view the details using the `-z dns,tree -q` parameters.
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z dns,tree -q
+user@host:~$ tshark -r demo.pcapng -z dns,tree -q
 
 ==============================================================================================================================================
 DNS:
@@ -201,7 +201,7 @@ This option provides statistics on HTTP packets by summarizing load distribution
 - **Requests and responses**: `-z http_seq,tree -q`
 
 ```console
-user@host: ~$ tshark -r demo.pcapng -z http,tree -q
+user@host:~$ tshark -r demo.pcapng -z http,tree -q
 
 =======================================================================================================================================
 HTTP/Packet Counter:
