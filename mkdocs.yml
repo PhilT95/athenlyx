@@ -30,6 +30,7 @@ nav:
     - Firewalld Basics: servers/firewalld.md
     - SELinux Basics: servers/SELinux.md
   - Applications:
+    - applications/index.md
     - MkDocs:
       - MkDocs : applications/mkdocs/mkdocs.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
