@@ -29,3 +29,7 @@
 *[CLI]: Command Line Interface
 *[BPF]: Berkeley Packet Filters
 *[IANA]: Internet Assigned Numbers Authority
+*[DICOM]: Digital Imaging and Communications in Medicine
+*[SMB]: Server Message Block
+*[TFTP]: Trivial File Transfer Protocol
+*[IMF]: Internet Message Format
