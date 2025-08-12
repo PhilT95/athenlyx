@@ -399,3 +399,91 @@ ip.src	ip.dst	http.request.method
 145.254.160.237	216.239.59.99	GET
 ```
 
+## Extracting data
+
+While investigating it is important to know how to extract hostnames, DNS queries and user agents. 
+
+### Extract Hostnames
+
+The option to extract hostnames is `-e dhcp.option.hostname`
+
+```console
+user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname
+92-rkd
+92-rkd
+T3400
+
+T3400
+
+60-alfb-sec2
+60-alfb-sec2
+
+
+aminott
+aminott
+90-tasd-sec
+
+90-tasd-sec
+
+...
+```
+
+This is the output delivered by DHCP packets. It isn't easy to manage when multiple duplicate values exists. Using a few Linux tools and utilities helps you to manage and organize the command line output.
+
+```console
+user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname  | awk NF | sort -r | uniq -c | sort -r
+     26 202-ac
+     18 92-rkd
+     14 93-sts-sec
+     12 prus-pc
+     10 90-tasd-sec
+     10 60-alfb-sec2
+      8 12-wew-sec
+      6 temp_open
+      6 off-admin-ass
+      6 aminott
+      ...
+```
+
+!!! note
+  You can find more about these Linux utilities [here](../../../servers/linux/commands.md)
+
+### Extract DNS Queries
+
+```console
+user@host:~$ tshark -r dns-queries.pcap -T fields -e dns.qry.name | awk NF | sort -r | uniq -c | sort -r
+    472 db.rhodes.edu
+     96 connectivity-check.ubuntu.com.rhodes.edu
+     94 connectivity-check.ubuntu.com
+      8 3.57.20.10.in-addr.arpa
+      4 e.9.d.b.c.9.d.7.1.b.0.f.a.2.0.2.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+      4 6.7.f.8.5.4.e.f.f.f.0.d.4.d.8.8.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+      4 3.4.b.1.3.c.e.f.f.f.4.0.e.e.8.7.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+      4 1.1.a.2.6.2.e.f.f.f.1.9.9.f.8.6.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+      4 1.0.18.172.in-addr.arpa
+      4 1.0.17.172.in-addr.arpa
+      4 0.f.2.5.6.b.e.f.f.f.b.7.2.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa
+      2 _ipps._tcp.local,_ipp._tcp.local
+      2 84.170.224.35.in-addr.arpa
+      2 22.2.10.10.in-addr.arpa
+      2 21.2.10.10.in-addr.arpa
+```
+
+### Extract User Agents
+
+```console
+user@host:~$ tshark -r user-agents.pcap -T fields -e http.user_agent | awk NF | sort -r | uniq -c | sort -r
+      9 Wfuzz/2.4
+      6 Mozilla/5.0 (Windows; U; Windows NT 6.4; en-US) AppleWebKit/534.10 (KHTML, like Gecko) Chrome/8.0.552.237 Safari/534.10
+      5 Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0
+      5 Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36
+      4 sqlmap/1.4#stable (http://sqlmap.org)
+      3 Wfuzz/2.7
+      3 Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)
+      2 Microsoft-WNS/10.0
+      1 Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36
+```
+
+
+
+
