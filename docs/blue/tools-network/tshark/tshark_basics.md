@@ -82,13 +82,12 @@ Since TShark is a network sniffer and packet analyzer, TShark can also be config
 
 ## Capture & Display filters
 
-TShark, like other tools, can be used to filter **live (capture)** and *display **(post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
+TShark, like other tools, can be used to filter **live (capture)** and **display (post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
 
 - Predefined Syntax
 - BPF
 
-TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture** and **Display Filters**.(1)#
-
+TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture** and **Display Filters**.(1)
 { .annotate }
 
 1. You can read more about these filters in [Wireshark](../wireshark/wireshark.md#package-filtering).

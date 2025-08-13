@@ -5,9 +5,9 @@ repo_name: PhilT95/docs
 nav:
   - Home: index.md
   - Blue Teaming:
-    - blue/blueteaming.md
+    - blue/index.md
     - Network Tools:
-        - blue/tools-network/network-tools.md
+        - blue/tools-network/index.md
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyzer: blue/tools-network/zeek.md      
         - Wireshark:
@@ -16,6 +16,7 @@ nav:
           - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
         - TShark:
           - TShark Basics: blue/tools-network/tshark/tshark_basics.md
+          - TShark CLI: blue/tools-networks/tshark/tshark_cli_wireshark.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
         - BRIM: blue/tools-network/brim.md
     - AI Security:
@@ -25,9 +26,12 @@ nav:
     - Linux:
       - AlmaLinux Setup Guide: servers/linux/almalinux_setup.md
       - Basic Commands: servers/linux/commands.md
+      - Hardening:
+        - servers/linux/hardening/index.md
     - Firewalld Basics: servers/firewalld.md
     - SELinux Basics: servers/SELinux.md
   - Applications:
+    - applications/index.md
     - MkDocs:
       - MkDocs : applications/mkdocs/mkdocs.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md

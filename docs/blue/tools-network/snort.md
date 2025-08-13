@@ -1,7 +1,7 @@
 # Snort - Intrusion Prevention System (IPS)
 >Snort is the foremost Open Source IPS in the world. Snort IPS uses a series of rules that help define malicious network activity and uses those rules to find packets that match against them and generates alerts for users.
 >
-> Snort can be deployed inline to stop these packets, as well. Snort has three primary uses: As a packet sniffer like tcpdump, as a packet logger — which is useful for network traffic debugging, or it can be used as a full-blown network intrusion prevention system. Snort can be downloaded and configured for personal and business use alike.  
+> Snort can be deployed inline to stop these packets, as well. Snort has three primary uses: As a packet sniffer like tcpdump, as a packet logger — which is useful for network traffic debugging, or it can be used as a full-blown network IPS. Snort can be downloaded and configured for personal and business use alike.  
 
 <p align="right"><a herf="https://www.snort.org/">snort.org</a></p>
  
@@ -41,8 +41,11 @@ All commands are options for launching the **snort** binary.
 |`--pcap-list=""`|Reads pcaps provided in command (space separated)|`sudo snort -r --pcap-list=="icmp-test.pcap http2.pcap" `|
 |`--pcap-show`|Shows pcap name on console during processing|`sudo snort -c /etc/snort/snort.conf -q --pcap-list="icmp-test.pcap http2.pcap" -A console --pcap-show `|
 
-A handy command to get a full overview over the results is `sudo snort -c /etc/snort/snort.conf -A full -l . -r file.pcap` \
-You can the number of created alerts, detected TCP packages and much more.
+
+!!! tip "Command to get full result overview"
+  A handy command to get a full overview over the results is `sudo snort -c /etc/snort/snort.conf -A full -l . -r file.pcap`  
+  You can the number of created alerts, detected TCP packages and much more.
+
 
 ## Understanding Snort Rules
 Snort rules consist of the following parameters:
@@ -117,6 +120,6 @@ For a convenient Cheat sheet, see [this one from Tryhackme.com](Snort_Cheatsheet
 The tool **Strings** can help you figure out, which information are hidden inside the generate log. It can be used like this `sudo strings snort.log | grep GIF`.
 You can inspect the hex values of a log with `sudo snort snort.log -X`.
 
-!!! tip "Tips and tricks
+!!! tip "Tips and tricks"
   - It is very important to analyze the log files with different options or tools to get all the important    information out of it.
   - Don't forget to look at the alert files as wel

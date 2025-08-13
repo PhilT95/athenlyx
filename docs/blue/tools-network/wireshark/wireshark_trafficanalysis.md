@@ -264,7 +264,7 @@ HTTP is a cleartext-based, request-response and client-server protocol. It is us
 |**Response code 408 Request Timeout**: Request took longer than server wait time|`http.response.code == 408`|
 |**Response code 500 Server Error**: Request not completed, unexpected error|`http.response.code == 500`|
 |**Response code 503 Service Unavailable**: Request not completed server or service is down|`http.response.code == 503`|
-|**User agent**: Brwoser and operating system identification to a web server application|`http.user_agent contains "nmap"`|
+|**User agent**: Browser and operating system identification to a web server application|`http.user_agent contains "nmap"`|
 |**Request URI**: Points the requested resource from the server|`http.request.uri contains "admin"`|
 |**Full URI**: Complete URI information|`http.request.full_uri contains "admin"`|
 |**Server**: Server service name|`http.server contains "apache"`|
@@ -319,7 +319,7 @@ You can add or remove key log files to Wireshark using the **right-click** menu 
 ![Image](images/wireshark_traffic-httpsdecrypt.png)
 
 
-## Seraching for Cleartext credentials.
+## Searching for Cleartext credentials.
 
 Some Wireshark dissectors (FTP, HTTP, IMAP, pop and SMTP) are programmed to extract cleartext passwords from the capture file. You can view these credentials using the **Tools -> Credentials** menu. This feature only works with particular protocols, so it is suggested to have manual checks and not to rely on this feature alone.
 

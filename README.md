@@ -16,7 +16,7 @@ The documentation is divided into:
 ## Project structure
 This project is build using git, Github, [MkDocs](/docs/applications/mkdocs/mkdocs_setup.md) and the [MkDocs Material Theme](https://squidfunk.github.io/mkdocs-material/).
 
-You can find the compiled and prepared web server providing thid documentation for easier navigation [here](docs.ohana-cloud.com).
+You can find the compiled and prepared web server providing this documentation for easier navigation [here](docs.ohana-cloud.com).
 
 ```shell
 ├───docs
