@@ -50,6 +50,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.indexes
     - navigation.top
+    - navigation.footer
     - toc.follow
     - content.code.copy
     - content.code.annotate
@@ -89,6 +90,11 @@ extra:
       link: https://github.com/PhilT95/docs
     - icon: material/linkedin
       link: https://www.linkedin.com/in/phil-trommer/
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/philadelphia95.bsky.social
+    - icon: material/mail
+      link: mailto:docs@s-guard.simplelogin.com
+
   generator: false
 copyright: Copyright &copy; 2025 Phil Trommer
 
