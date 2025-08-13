@@ -13,8 +13,8 @@ This is a collection of documentations, guides and How-To's for Infrastructure M
 
 The documentation is divided into:
 
-- [Blue Teaming](blue/blueteaming.md)
-- **Applications**
+- [**Blue Teaming**](blue/blueteaming.md)
+- [**Applications**](applications/index.md)
 - **Servers**
 - **AI**
 
@@ -56,5 +56,5 @@ You can find the git [here](https://github.com/PhilT95/docs).
 
 |Date|Change|
 |:---|:-----|
-|**25/08/10**|Added the changelog and TShark|
+|**25/08/13**|Added the changelog and TShark Documentation. Introduced some fixes and correction to MkDocs and the documentation in general.|
 
