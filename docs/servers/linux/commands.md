@@ -21,3 +21,4 @@
 |||Print lines between 10-15.|`cat sample.txt \| sed -n '10,15p'`|
 ||`awk`|Print lines below 11.|`cat sample.txt \| awk 'NR < 11 {print $0}'`|
 |||Print line 11|`cat sample.txt \| awk 'NR == 11 {print $0}'`|
+||`sha256sum`|Generates the SHA-256 value of a given file|`sha256sum file.txt`|
