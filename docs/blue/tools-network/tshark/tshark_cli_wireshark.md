@@ -228,11 +228,11 @@ Total HTTP Packets      4                                                       
 A lot of filters are designed for multiple purposes. The most common filtering operations are described below.
 
 !!! note
-  Most of these commands are CLI versions of the corresponding Wireshark features.
+    Most of these commands are CLI versions of the corresponding Wireshark features.
 
 ### Follow Stream
 
-**Follow Stream** helps to follow traffic streams similar to [Wireshark](../wireshark/wireshark_trafficanalysis.md).The query structure words with the following parameters
+**Follow Stream** helps to follow traffic streams similar to [Wireshark](../wireshark/wireshark_trafficanalysis.md). The query structure words with the following parameters
 
 - **Main Parameter and protocol**: `-z follow,tcp`
 - **View Mode**: Can be set to *ASCII* or *HEX*
@@ -241,7 +241,7 @@ A lot of filters are designed for multiple purposes. The most common filtering o
 To filter the packets and follow a TCP stream, you use the query `-z follow,tcp,ascii,0 -q`
 
 !!! tip
-  You can exchange `-z follow,tcp,...` for `-z follow,udp` or `-z follow,http` to filter for **UDP** or **HTTP** streams
+    You can exchange `-z follow,tcp,...` for `-z follow,udp` or `-z follow,http` to filter for **UDP** or **HTTP** streams
 
 ```console
 user@host:~$ tshark -r demo.pcapng -z follow,tcp,ascii,1 -q
@@ -294,7 +294,7 @@ This option is used to extract files from DICOM, HTTP, SMB and TFTP. The query c
 To filter the packets and extract the files within the HTTP protocol you can use a query like `--export-objects http,/path/to/your/folder -q`
 
 !!! tip
-  Like with [Streams](#follow-stream), you can switch the HTTP protocol with DICOM, IMF, SMB and TFTP.
+    Like with [Streams](#follow-stream), you can switch the HTTP protocol with DICOM, IMF, SMB and TFTP.
 
 ```console
 user@host:~$ tshark -r demo.pcapng --export-objects http,/home/ubuntu/Desktop/extracted -q
@@ -345,10 +345,10 @@ Packet     Protocol         Username         Info
 Sometimes, in-depth packet analysis requires special filtering that is not covered by default filters. TShark supports Wireshark's **contains** and **matches** operators, which are the key to advanced filtering options. You can find more about these operators in the [Wireshark Advanced Guide](../wireshark/wireshark_advanced.md#advanced-filtering).
 
 !!! note
-  **contains** and **matches** cannot be used with fields consisting of *integer* values.
+    **contains** and **matches** cannot be used with fields consisting of *integer* values.
 
 !!! tip
-  Using HEX and regex values instead of ASCII always has a better chance of a match.
+    Using HEX and regex values instead of ASCII always has a better chance of a match.
 
 ### Extract fields
 
@@ -361,7 +361,7 @@ This option is used to extract specific parts of the data from packets. It enabl
 An example query looks for the *IPv4 Source and Destination* looks like `-T fields -e ip.src -e ip.dst -E header=y`.
 
 !!! note
-  You need to use the `-e` parameter for each field you want to display.
+    You need to use the `-e` parameter for each field you want to display.
 
 ```console
 user@host:~$ tshark -r demo.pcapng -T fields -e ip.src -e ip.dst -E header=y -c 5
@@ -446,7 +446,7 @@ user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname  | awk
 ```
 
 !!! note
-  You can find more about these Linux utilities [here](../../../servers/linux/commands.md)
+    You can find more about these Linux utilities [here](../../../servers/linux/commands.md)
 
 ### Extract DNS Queries
 

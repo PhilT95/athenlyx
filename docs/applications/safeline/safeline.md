@@ -97,7 +97,7 @@ You should see the following output, with the password readable:
 [SafeLine] Done
 ```
 
-Now you can logg into the Web UI using your new credentials and you should be greeted by the **Statistics** page.
+Now you can log into the Web UI using your new credentials and you should be greeted by the **Statistics** page.
 
 ![Image](images/safeline_statistics.png)
 

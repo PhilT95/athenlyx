@@ -1,9 +1,3 @@
----
-hide:
-    - toc
-    - navigation
----
-
 # Applications
 
 ![Image](../images/applications/applications.png)
