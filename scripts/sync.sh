@@ -18,7 +18,7 @@ if [ "$now" != "$prev" ]; then
 	echo $(date) :  Changes detected. Rebuilding web page... >> scripts/sync.log
 	cd /path/to/your/project
 	echo $(/home/linuxadmin/.local/bin/mkdocs build) >> scripts/build.log
-	cp /path/to/your/project/site/* /path/to/your/webdir -rf
+	cp /usr/docs/site* /www/ -rf
 	echo $(date) :  Sync finalized. >> scripts/sync.log
  else
 	echo $(date) : No changes detected. >> scripts/sync.log
