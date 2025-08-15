@@ -33,3 +33,5 @@
 *[SMB]: Server Message Block
 *[TFTP]: Trivial File Transfer Protocol
 *[IMF]: Internet Message Format
+*[CPU]: Central Processing Unit
+*[DLL]: Dynamic Link Library
