@@ -19,6 +19,10 @@ nav:
           - TShark CLI: blue/tools-network/tshark/tshark_cli_wireshark.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
         - BRIM: blue/tools-network/brim.md
+    - Endpoint Security:
+        - blue/endpoint-security/index.md
+        - Windows Security:
+          - Fundamentals: blue/endpoint-security/windows/fundamentals.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
@@ -50,6 +54,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.indexes
     - navigation.top
+    - navigation.footer
     - toc.follow
     - content.code.copy
     - content.code.annotate
@@ -89,6 +94,11 @@ extra:
       link: https://github.com/PhilT95/docs
     - icon: material/linkedin
       link: https://www.linkedin.com/in/phil-trommer/
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/philadelphia95.bsky.social
+    - icon: material/mail
+      link: mailto:docs@s-guard.simplelogin.com
+
   generator: false
 copyright: Copyright &copy; 2025 Phil Trommer
 
