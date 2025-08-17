@@ -59,4 +59,5 @@ You can find the git [here](https://github.com/PhilT95/docs).
 |Date|Change|
 |:---|:-----|
 |**25/08/13**|Added the changelog and TShark Documentation. Introduced some fixes and correction to MkDocs and the documentation in general.|
+|**25/08/17**|Added a new section about Endpoint Security focusing in Windows for now.|
 
