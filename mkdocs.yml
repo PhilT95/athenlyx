@@ -19,6 +19,10 @@ nav:
           - TShark CLI: blue/tools-network/tshark/tshark_cli_wireshark.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
         - BRIM: blue/tools-network/brim.md
+    - Endpoint Security:
+        - blue/endpoint-security/index.md
+        - Windows Security:
+          - Fundamentals: blue/endpoint-security/windows/fundamentals.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md

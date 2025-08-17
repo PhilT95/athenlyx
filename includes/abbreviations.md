@@ -35,3 +35,7 @@
 *[IMF]: Internet Message Format
 *[CPU]: Central Processing Unit
 *[DLL]: Dynamic Link Library
+*[XML]: Extensible Markup Language
+*[SIEM]: Security information and event management
+*[CMD]: Windows Command Prompt
+*[EDR]: Endpoint detection and response
