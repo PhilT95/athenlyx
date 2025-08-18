@@ -29,6 +29,9 @@ The following processes are Core Windows processes and them running is considere
 
 Except the **System** process, no process that isn't depicted with a parent process should have one. The **System** process can only have the **System Idle Process (0)** as its parent.
 
+!!! note
+    You can out more about Core Windows Processes [in this article](./core_windows_processes.md).
+
 ## Sysinternals
 
 The **Sysinternals** tools are a compilation of over 70 Windows-based tools. Each of these tools falls into one of these categories:
