@@ -33,5 +33,44 @@ Since the Task Manager doesn't provide a *parent-child* process view, other tool
 
 1. The tool *System Informer* was known under the name **Process Hacker**.
 
+## Windows Process - System
+
+The **System** process, which always gets the PID 4, is a special kind of thread that runs only in *kernel-mode*. System threads have all attributes and contexts of regular *user-mode* threads[^1] but are different in that they run only in kernel-mode executing code loaded in system space like loading device drivers. In addition, system threads don't have a user process address space and hence must allocate any dynamic storage from OS memory heaps, such as a paged or nonpaged pool. If you want to know more about *kernel mode* and *user mode* follow [this](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) link.
+
+[^1]: Such as a hardware context, priority and more
 
 
+=== "Process Explorer"
+
+
+    Using the **Process Explorer** tool, you can view these properties and we can identify the normal behavior of this process.
+
+    ![System Properties using Process Explorer](images/process_system-properties.png)
+
+
+    The important information for this process is:
+
+    - **Image Path**: N/A
+    - **Parent Process**: None
+    - **Number of Instances**: One
+    - **User Account**: Local System
+    - **Start Time**: At boot time
+
+
+=== "System Informer"
+
+    If you use the **System Informer** tool, the information looks a bit different.
+
+    ![System properties using System Informer](images/process_system-propertiesSI.png)
+
+    The important information that you can see here, which is different from the one provided by the Process Explorer, is:
+
+    - **Image Path**: ``C:\Windows\system32\ntoskrnl.exe``
+    - **Parent Process**: System Idle Process (0)
+
+    Using this information, unusual behavior for this process would be:
+
+    - Having a parent process aside from the *System Idle Process (0)*
+    - Multiple instances of System, because it should only be one
+    - A different PID instead of 4
+    - Not running in Session 0
