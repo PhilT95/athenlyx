@@ -68,9 +68,70 @@ The **System** process, which always gets the PID 4, is a special kind of thread
     - **Image Path**: ``C:\Windows\system32\ntoskrnl.exe``
     - **Parent Process**: System Idle Process (0)
 
-    Using this information, unusual behavior for this process would be:
+Using this information, unusual behavior for this process would be:
 
-    - Having a parent process aside from the *System Idle Process (0)*
-    - Multiple instances of System, because it should only be one
-    - A different PID instead of 4
-    - Not running in Session 0
+- Having a parent process aside from the *System Idle Process (0)*
+- Multiple instances of System, because it should only be one
+- A different PID instead of 4
+- Not running in Session 0
+
+## Windows Process - Session Manager Subsystem
+
+The process **smss.exe** (Session Manager Subsystem) is also known as the **Windows Session Manager** and responsible for creating new sessions. It is the first user-mode process started by the kernel. It then starts the kernel and user modes of the Windows subsystem.[^2]
+
+[^2]: You can read more about the NT Architecture [here](https://en.wikipedia.org/wiki/Architecture_of_Windows_NT). This subsystem includes:
+
+- **win32k.sys** (kernel mode)
+- **winsrv.dll** (user mode)
+- **csrss.exe** (user mode)
+
+The *smss.exe* starts the *csrss.exe** (Windows Subsystem) and the *wininit.exe* in Session 0, an isolated Windows session for the OS. Csrss.exe and winlogon.exe start in Session 1, which is the user session. The first child instance creates a child instance in new sessions, done by smss.exe copying itself into the new session and self-terminating. You can find more detailed information about this process [here](https://en.wikipedia.org/wiki/Session_Manager_Subsystem).
+
+
+![Session 0](images/process_smss-session0.png)
+
+As you can see in this Screenshot, there are multiple csrss.exe processes running. Below you can see that they have different Session IDs
+
+
+=== "Session 0"
+
+    ![Session 0 Token](images/process_smss-session0proof.png)
+
+
+=== "Session 1"
+
+    ![Session 1 Token](images/process_smss-session1.png)
+
+
+Any other subsystem listed in the **Required** value of the Registry Key ``HKLM\System\CurrentControlSet\Control\Session Manager\Subsystems`` is also launched.
+
+![Required Subsystems](images/process_smss-required.png)
+
+SMSS is also responsible for creating *environment variables*, virtual memory paging files and starts the winlogon.exe (Windows Logon Manger). 
+
+The normal behavior of this process is:
+
+- **Image Path**: ``%SystemRoot%\System32\smss.exe``
+- **Parent Process**: System
+- **Number of instances**: One master instance and child instance per session. Child instances exit after creating the session.
+- **User Account**: Local System
+- **Start Time**: Within seconds of boot time for the master instance
+
+![Normal Behavior of smss.exe](images/process_smss-normal.png)
+
+Based on this, unusual behavior would be:
+
+- A different parent process other than System (4)
+- The image path is different
+- More than one running process, since the child processes terminate and exit after each new session
+- The running User is not the *System* user
+- Unexpected registry entries for Subsystem
+
+
+
+
+
+
+
+
+
