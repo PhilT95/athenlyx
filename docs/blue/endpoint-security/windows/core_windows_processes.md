@@ -128,10 +128,46 @@ Based on this, unusual behavior would be:
 - Unexpected registry entries for Subsystem
 
 
+## Windows Process - Client Server Runtime Process
+
+The **csrss.exe** (Client Server Runtime Process) is the user-mode side of the Windows subsystem. It is always running and critical to system operation. This process is responsible for the Win32 console windows and process thread creation and deletion. For each instance, these DLLs are loaded:
+
+- csrsv.dll
+- basesrv.dll
+- winsrv.dll
+
+!!! warning
+    The termination of this process will result in system failure.
+
+!!! note
+    csrss.exe and winlogon.exe are called from the [smss.exe](#windows-process---session-manager-subsystem) at startup for Session 1
+
+The normal behavior for Session 0 and Session 1 should look like below
+
+=== "Session 0"
+
+    ![Session 0](images/process_csrss-session00.png)
 
 
+=== "Session 1"
+
+    ![Session 1](images/process_csrss-session01.png)
 
 
+You can see the different parent process and that they are **non-existent** since the *smss.exe* terminates itself.
 
+The normal behavior of this process is:
 
+- **Image Path**: ``%SystemRoot%\System32\csrss.exe``
+- **Parent Process**: Created by an instance of smss.exe
+- **Number of instances**: Two or more
+- **User Account**: Local System
+- **Start Time**: Within seconds of boot time for the first 2 instances (Session 0 and 1). Start times for additional instances occur as new sessions are created, but usually only Session 0 and 1 exist.
+
+Bases on this, unusual behavior would be:
+
+- An actual parent process since smss.exe, which calls this process, terminates itself
+- A different Image File path
+- Subtle misspellings to hide rogue processes masquerading as csrss.exe
+- The user is not the *System* user
 
