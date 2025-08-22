@@ -171,3 +171,34 @@ Bases on this, unusual behavior would be:
 - Subtle misspellings to hide rogue processes masquerading as csrss.exe
 - The user is not the *System* user
 
+
+## Windows Process - Windows Initialization Process
+
+The **wininit.exe** (Windows Initialization Process) is responsible for launching the
+
+- **services.exe**: Service Control Manger
+- **lsass.exe**: Local Security Authority
+- **lsaiso.exe**
+
+It is also classified as a critical Windows process that runs in the background, along with its child processes. It is always created within Session 0.
+
+!!! note
+    lsaiso.exe is a process associated with **Credential Guard and KeyGuard**. This process only appears if Credential Guard is enabled.
+
+The normal behavior of the process is as follows:
+
+![Normal wininit.exe](images/process_wininit-normal.png)
+
+- **Image Path**: ``%SystemRoot%\System32\wininit.exe``
+- **Parent Process**: Created by an instance of smss.exe
+- **Number of instances**: One
+- **User Account**: Local System
+- **Start Time**: Within seconds of boot time
+
+Based on this, unusual behavior would be:
+
+- An actual parent process, since smss.exe calls this process and self-terminates
+- A different Image file path
+- Subtle misspellings to hide rogue processes in plain sight
+- Multiple running instances
+- Not running as System
