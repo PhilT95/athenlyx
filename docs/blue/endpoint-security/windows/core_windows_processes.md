@@ -109,23 +109,22 @@ Any other subsystem listed in the **Required** value of the Registry Key ``HKLM\
 
 SMSS is also responsible for creating *environment variables*, virtual memory paging files and starts the winlogon.exe (Windows Logon Manger). 
 
-The normal behavior of this process is:
+|Service Property|Normal Behavior|Unusual Behavior|
+|:---------------|:--------------|:---------------|
+|**Image Path**|``%SystemRoot%\System32\smss.exe``|A different image file path|
+|**Parent Process**|System|A different parent process other than System (4)s|
+|**Number of Instances**|One master instance and child instance per session. Child instances exit after creating the session|More than one running process, since the child processes terminate and exit after each new session|
+|**User Account**|Local System|Not running as *SYSTEM*|
+|**Start Time**|Within seconds of boot time for the master instance||
 
-- **Image Path**: ``%SystemRoot%\System32\smss.exe``
-- **Parent Process**: System
-- **Number of instances**: One master instance and child instance per session. Child instances exit after creating the session.
-- **User Account**: Local System
-- **Start Time**: Within seconds of boot time for the master instance
 
 ![Normal Behavior of smss.exe](images/process_smss-normal.png)
 
-Based on this, unusual behavior would be:
 
-- A different parent process other than System (4)
-- The image path is different
-- More than one running process, since the child processes terminate and exit after each new session
-- The running User is not the *System* user
-- Unexpected registry entries for Subsystem
+!!! note
+    Unexpected registry entries for the subsystem are also counted towards unusual behavior.
+
+
 
 
 ## Windows Process - Client Server Runtime Process
@@ -156,20 +155,14 @@ The normal behavior for Session 0 and Session 1 should look like below
 
 You can see the different parent process and that they are **non-existent** since the *smss.exe* terminates itself.
 
-The normal behavior of this process is:
 
-- **Image Path**: ``%SystemRoot%\System32\csrss.exe``
-- **Parent Process**: Created by an instance of smss.exe
-- **Number of instances**: Two or more
-- **User Account**: Local System
-- **Start Time**: Within seconds of boot time for the first 2 instances (Session 0 and 1). Start times for additional instances occur as new sessions are created, but usually only Session 0 and 1 exist.
-
-Bases on this, unusual behavior would be:
-
-- An actual parent process since smss.exe, which calls this process, terminates itself
-- A different Image File path
-- Subtle misspellings to hide rogue processes masquerading as csrss.exe
-- The user is not the *System* user
+|Service Property|Normal Behavior|Unusual Behavior|
+|:---------------|:--------------|:---------------|
+|**Image Path**|``%SystemRoot%\System32\csrss.exe``|A different image file path|
+|**Parent Process**|Created by an instance of smss.exe|An actual parent process, since smss.exe calls this process and self-terminates|
+|**Number of Instances**|Two or more||
+|**User Account**|Local System|Not running as *SYSTEM*|
+|**Start Time**|Within seconds of boot time for the first 2 instances (Session 0 and 1). Start times for additional instances occur as new sessions are created, but usually only Session 0 and 1 exist.||
 
 
 ## Windows Process - Windows Initialization Process
@@ -185,20 +178,67 @@ It is also classified as a critical Windows process that runs in the background,
 !!! note
     lsaiso.exe is a process associated with **Credential Guard and KeyGuard**. This process only appears if Credential Guard is enabled.
 
-The normal behavior of the process is as follows:
+|Service Property|Normal Behavior|Unusual Behavior|
+|:---------------|:--------------|:---------------|
+|**Image Path**|``%SystemRoot%\System32\wininit.exe``|A different image file path|
+|**Parent Process**|Created by an instance of smss.exe|An actual parent process, since smss.exe calls this process and self-terminates|
+|**Number of Instances**|One|Multiple running instances|
+|**User Account**|Local System|Not running as *SYSTEM*|
+|**Start Time**|Within seconds of boot time||
 
 ![Normal wininit.exe](images/process_wininit-normal.png)
 
-- **Image Path**: ``%SystemRoot%\System32\wininit.exe``
-- **Parent Process**: Created by an instance of smss.exe
-- **Number of instances**: One
-- **User Account**: Local System
-- **Start Time**: Within seconds of boot time
 
-Based on this, unusual behavior would be:
+## Windows Process - Service Control Manager (SCM)
 
-- An actual parent process, since smss.exe calls this process and self-terminates
-- A different Image file path
-- Subtle misspellings to hide rogue processes in plain sight
-- Multiple running instances
-- Not running as System
+The **SCM** or **services.exe** is primarily responsible to handle system services. This includes:
+
+- loading services
+- interacting with services
+- starting and stopping services
+
+It maintains a database that can be queried using the built-in Windows utility **sc.exe**.
+
+```powershell
+PS C:\Users\Administrator> sc.exe
+DESCRIPTION:
+        SC is a command line program used for communicating with the
+        Service Control Manager and services.
+USAGE:
+        sc <server> [command] [service name] <option1> <option2>...
+```
+
+Information regarding the services is stored within the registry under the path ``HKLM\System\CurrentControlSet\Services``
+
+![Services Path in Registry](images/process_services-regpath.png)
+
+This process also leads device drivers marked as *auto-start* into memory.
+
+When a user logs into a machine successfully, it also is responsible for setting the value of the Last Known Good control set (Last Known Good Configuration) to that of the *CurrenControlSet*. Tha value of the Last Known Good control set can be found in the registry key ``HKLM\System\Select\`` within the value **LastKnownGood**.
+
+![Last Known Good Control Set](images/process_services-lastknowngood.png)
+
+The process is a parent to several other key processes like:
+
+- svchost.exe
+- spoolsv.exe
+- msmpeng.exe
+- dllhost.exe
+
+You can find more detailed information about this process [here](https://en.wikipedia.org/wiki/Service_Control_Manager).
+
+![Service.exe Child Processes](images/process_services-children.png)
+
+
+
+|Service Property|Normal Behavior|Unusual Behavior|
+|:---------------|:--------------|:---------------|
+|**Image Path**|``%SystemRoot%\System32\services.exe``|A different image file path|
+|**Parent Process**|wininit.exe|Another parent process than wininit.exe|
+|**Number of Instances**|One|Multiple running instances|
+|**User Account**|Local System|Not running as *SYSTEM*|
+|**Start Time**|Within seconds of boot time||
+
+![Normal behavior of Services.exe](images/process_services-properties.png)
+
+![Token of Services.exe](images/process_services-token.png)
