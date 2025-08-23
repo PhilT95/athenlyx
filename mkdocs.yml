@@ -1,7 +1,7 @@
-site_name: Ohana-Cloud.com Docs
-site_url: https://docs.ohana-cloud.com
-repo_url: https://github.com/PhilT95/docs
-repo_name: PhilT95/docs
+site_name: athenlyx.com
+site_url: https://athenlyx.com
+repo_url: https://github.com/PhilT95/athenlyx
+repo_name: PhilT95/athenlyx
 nav:
   - Home: index.md
   - Blue Teaming:
@@ -61,8 +61,8 @@ theme:
     - content.tooltips
     - announce.dismiss
   language: en
-  logo: assets/logo-no-background.png
-  favicon: assets/ohana-cloud-website-favicon-color.png
+  logo: assets/icon_round.png
+  favicon: assets/icon_round.png
   palette:
 
     # Palette toggle for automatic mode

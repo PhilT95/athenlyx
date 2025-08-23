@@ -4,10 +4,10 @@ hide:
     - navigation
 ---
 
-# Welcome to Ohana-Cloud.com Docs
+# Welcome to Athenlyx.com
 
-![Image](images/general/logo-no-background_banner.png#only-dark)
-![Image](images/general/logo-no-background-black.png#only-light)
+![Image](images/general/athenlyx-high-resolution-logo-transparent.png#only-dark)
+![Image](images/general/athenlyx-high-resolution-logo_banner.png#only-light)
 
 
 
