@@ -103,6 +103,9 @@ extra:
   generator: false
 copyright: Copyright &copy; 2025 AthenlyX
 
+extra_css:
+  - stylesheets/extra.css
+
   
 
 

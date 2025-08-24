@@ -20,21 +20,31 @@ You can find the compiled and prepared web server providing this documentation f
 
 ```shell
 ├───docs
+│   ├───about
 │   ├───ai
 │   ├───applications
-│   │   └───mkdocs
+│   │   ├───mkdocs
+│   │   └───safeline
+│   │       └───images
 │   ├───assets
 │   ├───blue
+│   │   ├───endpoint-security
+│   │   │   └───windows
+│   │   │       └───images
 │   │   └───tools-network
 │   │       ├───Brim_data
 │   │       ├───NetworkMiner_Data
+│   │       ├───tshark
 │   │       └───wireshark
 │   │           └───images
 │   ├───images
+│   │   ├───applications
 │   │   ├───blue
 │   │   └───general
 │   └───servers
 │       └───linux
+│           └───hardening
 ├───includes
+├───overrides
 └───scripts
 ```
