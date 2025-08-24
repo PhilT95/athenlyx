@@ -100,7 +100,7 @@ extra:
       link: mailto:docs@s-guard.simplelogin.com
 
   generator: false
-copyright: Copyright &copy; 2025 Phil Trommer
+copyright: Copyright &copy; 2025 AthenlyX
 
   
 
@@ -139,6 +139,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.blocks.caption
+  - pymdownx.keys
 
 watch:
   - includes
