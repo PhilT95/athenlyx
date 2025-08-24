@@ -312,7 +312,8 @@ LSASS.exe is another prominent targt for malicious activity. Common tools like *
 
 ### Windows Logon
 
-The **winlogon.exe** process is responsible for handling the **Secure Attention Sequence** (SAS). It is the ++ctrl+als+del++ key combinations users press to enter their username and password. It is also responsible for loading the user profile by loading the user's **NTUSER.DAT** into ``HKCU``. The **userinit.exe** loads the user's shell. You can out more about this process [here](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc939862(v=technet.10)?redirectedfrom=MSDN).
+The **winlogon.exe** process is responsible for handling the **Secure Attention Sequence** (SAS). It is the 
+++ctrl+alt+del++ key combinations users press to enter their username and password. It is also responsible for loading the user profile by loading the user's **NTUSER.DAT** into ``HKCU``. The **userinit.exe** loads the user's shell. You can out more about this process [here](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc939862(v=technet.10)?redirectedfrom=MSDN).
 
 ![Winlogon.exe Registry config](images/process_winlogon-registry.png)
 
