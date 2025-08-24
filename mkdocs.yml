@@ -22,7 +22,7 @@ nav:
     - Endpoint Security:
         - blue/endpoint-security/index.md
         - Windows Security:
-        - blue/endpoint-security/windows/fundamentals.md
+          - blue/endpoint-security/windows/fundamentals.md
           - Windows Core Services: blue/endpoint-security/windows/core_windows_processes.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
