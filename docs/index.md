@@ -36,14 +36,17 @@ You can find the git [here](https://github.com/PhilT95/docs).
 │   │       └───images
 │   ├───assets
 │   ├───blue
+│   │   ├───endpoint-security
+│   │   │   └───windows
+│   │   │       └───images
 │   │   └───tools-network
 │   │       ├───Brim_data
 │   │       ├───NetworkMiner_Data
 │   │       ├───tshark
-│   │       │   └───images
 │   │       └───wireshark
 │   │           └───images
 │   ├───images
+│   │   ├───applications
 │   │   ├───blue
 │   │   └───general
 │   └───servers
@@ -60,4 +63,5 @@ You can find the git [here](https://github.com/PhilT95/docs).
 |:---|:-----|
 |**25/08/13**|Added the changelog and TShark Documentation. Introduced some fixes and correction to MkDocs and the documentation in general.|
 |**25/08/23**|Added new documentation about Endpoint Security, focusing on Windows. Also changed to new domain athenlyx.com|
+|**25/08/24**|Added Windows Core Processes documentation. Also extended mkdocs functionality by using the Keyboard Keys function.|
 
