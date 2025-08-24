@@ -201,7 +201,7 @@ The **SCM** or **services.exe** is primarily responsible to handle system servic
 
 It maintains a database that can be queried using the built-in Windows utility **sc.exe**.
 
-```powershell
+```pwsh-session
 PS C:\Users\Administrator> sc.exe
 DESCRIPTION:
         SC is a command line program used for communicating with the
