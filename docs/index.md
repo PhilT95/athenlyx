@@ -4,10 +4,10 @@ hide:
     - navigation
 ---
 
-# Welcome to Ohana-Cloud.com Docs
+# Welcome to Athenlyx.com
 
-![Image](images/general/logo-no-background_banner.png#only-dark)
-![Image](images/general/logo-no-background-black.png#only-light)
+![Image](images/general/athenlyx-high-resolution-logo-transparent.png#only-dark)
+![Image](images/general/athenlyx-high-resolution-logo_banner.png#only-light)
 
 
 
@@ -36,14 +36,17 @@ You can find the git [here](https://github.com/PhilT95/docs).
 │   │       └───images
 │   ├───assets
 │   ├───blue
+│   │   ├───endpoint-security
+│   │   │   └───windows
+│   │   │       └───images
 │   │   └───tools-network
 │   │       ├───Brim_data
 │   │       ├───NetworkMiner_Data
 │   │       ├───tshark
-│   │       │   └───images
 │   │       └───wireshark
 │   │           └───images
 │   ├───images
+│   │   ├───applications
 │   │   ├───blue
 │   │   └───general
 │   └───servers
@@ -59,4 +62,6 @@ You can find the git [here](https://github.com/PhilT95/docs).
 |Date|Change|
 |:---|:-----|
 |**25/08/13**|Added the changelog and TShark Documentation. Introduced some fixes and correction to MkDocs and the documentation in general.|
+|**25/08/23**|Added new documentation about Endpoint Security, focusing on Windows. Also changed to new domain athenlyx.com|
+|**25/08/24**|Added Windows Core Processes documentation. Also extended mkdocs functionality by using the Keyboard Keys function.|
 

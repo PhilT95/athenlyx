@@ -1,7 +1,7 @@
-site_name: Ohana-Cloud.com Docs
-site_url: https://docs.ohana-cloud.com
-repo_url: https://github.com/PhilT95/docs
-repo_name: PhilT95/docs
+site_name: athenlyx.com
+site_url: https://athenlyx.com
+repo_url: https://github.com/PhilT95/athenlyx
+repo_name: PhilT95/athenlyx
 nav:
   - Home: index.md
   - Blue Teaming:
@@ -22,7 +22,8 @@ nav:
     - Endpoint Security:
         - blue/endpoint-security/index.md
         - Windows Security:
-          - Fundamentals: blue/endpoint-security/windows/fundamentals.md
+          - blue/endpoint-security/windows/index.md
+          - Windows Core Services: blue/endpoint-security/windows/core_windows_processes.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
@@ -61,8 +62,8 @@ theme:
     - content.tooltips
     - announce.dismiss
   language: en
-  logo: assets/logo-no-background.png
-  favicon: assets/ohana-cloud-website-favicon-color.png
+  logo: assets/icon_round.png
+  favicon: assets/icon_round.png
   palette:
 
     # Palette toggle for automatic mode
@@ -100,7 +101,7 @@ extra:
       link: mailto:docs@s-guard.simplelogin.com
 
   generator: false
-copyright: Copyright &copy; 2025 Phil Trommer
+copyright: Copyright &copy; 2025 AthenlyX
 
   
 
@@ -139,6 +140,7 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.blocks.caption
+  - pymdownx.keys
 
 watch:
   - includes
