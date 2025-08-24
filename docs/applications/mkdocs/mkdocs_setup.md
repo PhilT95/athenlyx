@@ -19,7 +19,7 @@ Using `dnf` you can install Python and pip using these commands:
 Regarding your documentation, I'd recommend to keep nesting of directories up to maximal 4 levels.
 
 ## Setup
-### mkdocs Installation
+### MkDocs Installation
 The first thing to do is installing **MkDocs** itself using pip. 
 
 ```console
@@ -32,11 +32,36 @@ Verify the installation and version of mkdocs.
 [user@machine ~]$ mkdocs --version
 mkdocs, version 1.6.1 from /home/user/.local/lib/python3.12/site-packages/mkdocs (Python 3.12)
 ```
+
+### Material for MkDocs
+
 **Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of functionality and customization. We will be using it in this guide since its setup is very easy as well.
 
 ```console
 [user@machine ~]$ pip install mkdocs-material
 ```
+
+#### MkDocs Extension & Plugins
+
+Material for MkDocs uses various plugins and extensions to provide a smoother and more modern website experience. The default installation already comes with a few plugins, but certain functions need to be installed manually.
+
+To provide more efficient image processing, the built-in plugins depend on external libraries that need to be installed. 
+
+```console
+[user@machine ~]$ pip install "mkdocs-material[imaging]"
+[user@machine ~]$ pip install mkdocs-glightbox
+[user@machine ~]$ sudo dnf install cairo-devel
+[user@machine ~]$ sudo dnf install pngquant
+```
+
+You can also use an extension to display the creating and last time a site has been updated by linking your website to a git repository. To make use of this functionality, you need to install the extension.
+
+```console
+[user@machine ~]$ pip install mkdocs-git-revision-date-localized-plugin
+```
+
+You can find out more about these plugins [here](https://squidfunk.github.io/mkdocs-material/plugins/requirements/image-processing/) and [here](https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#revisioning).
+
 
 If this installation is completed, we can begin to prepare the project.
 

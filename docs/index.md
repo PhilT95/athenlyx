@@ -4,12 +4,10 @@ hide:
     - navigation
 ---
 
-# Welcome to Athenlyx.com
-
 ![Image](images/general/athenlyx-high-resolution-logo-transparent.png#only-dark)
 ![Image](images/general/athenlyx-high-resolution-logo_banner.png#only-light)
 
-
+# Welcome to Athenlyx.com
 
 This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
 

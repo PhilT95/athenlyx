@@ -30,7 +30,7 @@ echo $(date) :  New git HEAD after git pull is $now >> scripts/sync.log
 if [ "$now" != "$prev" ]; then
 	echo $(date) :  Changes detected. Rebuilding web page... >> scripts/sync.log
 	cd /path/to/your/project
-	echo $(/home/linuxadmin/.local/bin/mkdocs build) >> scripts/build.log
+	echo $(/home/user/.local/bin/mkdocs build) >> scripts/build.log
 	cp /path/to/your/project/site/* /path/to/your/webdir -rf
 	echo $(date) :  Sync finalized. >> scripts/sync.log
  else
