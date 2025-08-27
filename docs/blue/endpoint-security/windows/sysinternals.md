@@ -34,5 +34,28 @@ Following the Download of the Sysinternals [ZIP File](https://download.sysintern
 
     Now you should be able to run the Sysinternals tools from anywhere using the CMD.
 
+You can also use **Sysinternals** executables directory from the Web without downloading it beforehand. Simply enter a tool's Sysinternals Live path into Windows Explorer or a CMD session as ``\\live.sysinternals.com\tools\<toolname>``. 
+
+!!! note
+    To access this web path from your system, you usually need to install and start the WebDAV client on the machine. On most modern Windows machines the client will already be installed, but you need to run it manually. You can start the service from a powershell admin session.
+
+    ```pwsh-session
+    PS C:\WINDOWS\system32> Get-Service webclient
+
+    Status   Name               DisplayName
+    ------   ----               -----------
+    Stopped  WebClient          webclient
+
+    PS C:\WINDOWS\system32> Start-Service webclient
+    PS C:\WINDOWS\system32> Get-Service webclient
+
+    Status   Name               DisplayName
+    ------   ----               -----------
+    Running  WebClient          webclient
+    ```
+
+    You also need to enable **Network Discovery**. You can find more about this topic [here](https://support.microsoft.com/en-us/windows/file-sharing-over-a-network-in-windows-b58704b2-f53a-4b82-7bc1-80f9994725bf).
+
+
 
 
