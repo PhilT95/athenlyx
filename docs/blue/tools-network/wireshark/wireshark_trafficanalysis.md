@@ -1,6 +1,6 @@
 # Wireshark - Traffic analysis
 
-Using the knowledge from [Wireshark Basics](wireshark.md) and [Wireshark - Advanced Features](wireshark_advanced.md) you can now investigate anmd correlate packet-level information and start seeing the big picture behind in network traffic like detectin anomalies and malicious activities.
+Using the knowledge from [Wireshark Basics](index.md) and [Wireshark - Advanced Features](wireshark_advanced.md) you can now investigate anmd correlate packet-level information and start seeing the big picture behind in network traffic like detectin anomalies and malicious activities.
 
 ## Detecting Nmap scans
 

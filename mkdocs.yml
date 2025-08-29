@@ -11,7 +11,7 @@ nav:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyzer: blue/tools-network/zeek.md      
         - Wireshark:
-          - Wireshark Basics: blue/tools-network/wireshark/wireshark.md
+          - blue/tools-network/wireshark/index.md
           - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
           - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
         - TShark:
@@ -39,7 +39,7 @@ nav:
   - Applications:
     - applications/index.md
     - MkDocs:
-      - MkDocs : applications/mkdocs/mkdocs.md
+      - applications/mkdocs/index.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
     - SafeLine: applications/safeline/safeline.md
