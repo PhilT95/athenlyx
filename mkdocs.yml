@@ -24,6 +24,7 @@ nav:
         - Windows Security:
           - blue/endpoint-security/windows/index.md
           - Windows Core Services: blue/endpoint-security/windows/core_windows_processes.md
+          - Sysinternals: blue/endpoint-security/windows/sysinternals.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
