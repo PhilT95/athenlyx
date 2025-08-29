@@ -2,7 +2,7 @@
 
 ## Statistics
 
-As explained in [TShark Basics](./tshark_basics.md), it is considered the CLI version of Wireshark. That means that TShark can accomplish several features of Wireshark.
+As explained in [TShark Basics](./index.md), it is considered the CLI version of Wireshark. That means that TShark can accomplish several features of Wireshark.
 
 !!! note
     The following options apply to all packets in scope unless a *Display Filter* is provided. 
