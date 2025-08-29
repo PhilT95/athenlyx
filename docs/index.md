@@ -4,12 +4,13 @@ hide:
     - navigation
 ---
 
-# Welcome to Athenlyx.com
+
 
 ![Image](images/general/athenlyx-high-resolution-logo-transparent.png#only-dark)
 ![Image](images/general/athenlyx-high-resolution-logo_banner.png#only-light)
 
 
+# Welcome to Athenlyx.com
 
 This is a collection of documentations, guides and How-To's for Infrastructure Management as well as Cyber Security and its tools.
 
@@ -63,5 +64,8 @@ You can find the git [here](https://github.com/PhilT95/docs).
 |:---|:-----|
 |**25/08/13**|Added the changelog and TShark Documentation. Introduced some fixes and correction to MkDocs and the documentation in general.|
 |**25/08/23**|Added new documentation about Endpoint Security, focusing on Windows. Also changed to new domain athenlyx.com|
+|**25/08/24**|Added Windows Core Processes documentation. Also extended MkDocs functionality by using the Keyboard Keys function.|
+|**25/08/29**|Added Sysinternals documentation. Changed a few paths and fixed a few mistakes.|
 |**25/08/24**|Added Windows Core Processes documentation. Also extended mkdocs functionality by using the Keyboard Keys function.|
+
 

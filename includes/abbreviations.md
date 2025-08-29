@@ -42,3 +42,5 @@
 *[GUI]: Graphical user interface
 *[PID]: Process identifier number
 *[RDP]: Remote Desktop Protocol
+*[NTFS]: New Technology File System
+*[ADS]: Alternate Data Streams

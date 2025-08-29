@@ -15,7 +15,7 @@ nav:
           - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
           - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
         - TShark:
-          - TShark Basics: blue/tools-network/tshark/tshark_basics.md
+          - blue/tools-network/tshark/index.md
           - TShark CLI: blue/tools-network/tshark/tshark_cli_wireshark.md
         - NetworkMiner: blue/tools-network/NetworkMiner.md
         - BRIM: blue/tools-network/brim.md
@@ -102,6 +102,10 @@ extra:
 
   generator: false
 copyright: Copyright &copy; 2025 AthenlyX
+
+extra_css:
+  - stylesheets/extra.css
+
 
   
 
