@@ -4,8 +4,11 @@ hide:
     - navigation
 ---
 
+
+
 ![Image](images/general/athenlyx-high-resolution-logo-transparent.png#only-dark)
 ![Image](images/general/athenlyx-high-resolution-logo_banner.png#only-light)
+
 
 # Welcome to Athenlyx.com
 
@@ -63,4 +66,6 @@ You can find the git [here](https://github.com/PhilT95/docs).
 |**25/08/23**|Added new documentation about Endpoint Security, focusing on Windows. Also changed to new domain athenlyx.com|
 |**25/08/24**|Added Windows Core Processes documentation. Also extended MkDocs functionality by using the Keyboard Keys function.|
 |**25/08/29**|Added Sysinternals documentation. Changed a few paths and fixed a few mistakes.|
+|**25/08/24**|Added Windows Core Processes documentation. Also extended mkdocs functionality by using the Keyboard Keys function.|
+
 
