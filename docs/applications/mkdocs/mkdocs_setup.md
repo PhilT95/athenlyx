@@ -1,4 +1,4 @@
-# Material for MkDocs - Make documentation beautiful (again)
+# Material for MkDocs - Setup Guide
 This guide will show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It will be centered around the Linux distribution **AlmaLinux 9** and **MkDocs**.
 
 ## Prerequisites

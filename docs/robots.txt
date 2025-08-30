@@ -16,4 +16,4 @@ User-agent: DuckDuckBot
 Disallow:
 User-agent: *
 Disallow: /
-Sitemap: https://docs.ohana-cloud.com/sitemap.xml
+Sitemap: https://athenlyx.com/sitemap.xml

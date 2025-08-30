@@ -1,3 +1,5 @@
+![SafeLine Banner](images/safeline_banner.png)
+
 # Safeline - The Open Source WAF
 
 > SafeLine is a self-hosted WAF to protect your web apps from attacks and exploits.
