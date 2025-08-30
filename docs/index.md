@@ -24,6 +24,12 @@ The documentation is divided into:
 
 Athenlyx.com and the infrastructure behind it is based on an **Open-Source Stack**. It is used as an example that open source products can be combined to host and publish websites and services securely without the need for closed source and licensing.
 
+The Infrastructure is hosted by Hetzner and consists of:
+
+- **OPNSense** Firewall as the primary Firewall and Gateway
+- **SafeLine** WAF to secure the web applications
+- The Webserver itself
+
 
 ## Project structure
 This project is build using git, Github, [MkDocs](applications/mkdocs/mkdocs_setup.md) and the [MkDocs Material Theme](https://squidfunk.github.io/mkdocs-material/).
