@@ -166,7 +166,7 @@ Minimum  :
 Property :
 ```
 
-??? Example "Example wevtutil query"
+??? Example "Example wevtutil.exe query"
 
     ```pwsh-session title="Example Query using wevtutil.exe"
     PS C:\Users\Administrator> wevtutil.exe qe Application /c:3 /rd:true /f:text
