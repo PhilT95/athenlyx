@@ -259,4 +259,80 @@ Property :
     svchost (1076,U,98) DS_Token_DB: The database engine has successfully completed recovery steps.
     ```
 
+### Get-WinEvent
 
+The PowerShell cmdlet [**Get-WinEvent**](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent?view=powershell-5.1) gets events from event logs and event tracing log files on local and remote machines. It provides information on event logs and event providers. Additionally, it can combine numerous events from multiple sources into a single command and filter using:
+
+- XPath queries
+- structured XML queries
+- hash table queries
+  
+
+??? example "Example 1: Get all logs from a computer"
+    This example will obtain all event logs locally, lists them starting with classic logs first followed by new Windows Event logs.
+
+    ```pwsh-session
+    PS C:\Users\Administrator> Get-WinEvent -ListLog *
+
+    LogMode   MaximumSizeInBytes RecordCount LogName
+    -------   ------------------ ----------- -------
+    Circular            20971520        1280 Application
+    Circular            20971520           0 HardwareEvents
+    Circular             1052672           0 Internet Explorer
+    Circular            20971520           0 Key Management Service
+    Circular            20971520       28258 Security
+    Circular            20971520       24265 System
+    ...
+    ```
+
+
+??? example "Example 2: Get event log providers and log names"
+    This command will show the event log providers and their associated logs. The **Name** variable is the provider and **LogLinks** the log that is written to.
+
+    ```pwsh-session
+    PS C:\Users\Administrator> Get-WinEvent -ListProvider *
+
+
+    Name     : .NET Runtime
+    LogLinks : {Application}
+    Opcodes  : {}
+    Tasks    : {}
+
+    Name     : .NET Runtime Optimization Service
+    LogLinks : {Application}
+    Opcodes  : {}
+    Tasks    : {}
+    ...
+    ```
+
+
+??? example "Example 3: Log filtering"
+    Log filtering makes it possible to select events from an event log. Event logs can be filtered using the **Where-Object** cmdlet.
+
+    ```pwsh-session
+    PS C:\Users\Administrator> Get-WinEvent -LogName Application | Where-Object { $_.ProviderName -Match "WLMS" }
+
+
+   ProviderName: WLMS
+
+    TimeCreated                     Id LevelDisplayName Message
+    -----------                     -- ---------------- -------
+    12/21/2020 4:23:47 AM          100
+    12/18/2020 3:18:57 PM          100
+    12/15/2020 8:50:22 AM          100
+    12/15/2020 8:48:34 AM          101
+    12/15/2020 8:18:34 AM          100
+    12/15/2020 7:48:34 AM          100
+    12/14/2020 7:12:18 PM          101
+    12/14/2020 6:42:18 PM          100
+    12/14/2020 6:12:18 PM          100
+    12/14/2020 6:09:09 PM          101
+    12/14/2020 5:39:08 PM          100
+    12/14/2020 5:09:08 PM          100
+    ```
+
+If you are working with large event logs, the **Where-Object** command is not recommended. The use of the **Get-WinEvent** parameter **FilterHashtable** is a better way to filter. To get the same result as in example 3, the following command can be used:
+
+```pwsh-session
+PS C:\Users\Administrator> Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='WLMS'}
+```
