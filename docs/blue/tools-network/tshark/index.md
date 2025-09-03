@@ -1,6 +1,6 @@
 # TShark - Basics
 
-> **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/wireshark.md) and various other tools.
+> **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/index.md) and various other tools.
 
 <p align="right"><a herf="https://www.wireshark.org/docs/man-pages/tshark.html">wireshark.org</a></p>
 
@@ -90,7 +90,7 @@ TShark, like other tools, can be used to filter **live (capture)** and **display
 TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture** and **Display Filters**.(1)
 { .annotate }
 
-1. You can read more about these filters in [Wireshark](../wireshark/wireshark.md#package-filtering).
+1. You can read more about these filters in [Wireshark](../wireshark/index.md#package-filtering).
 
 Capture filters have limited filtering features, and the purpose is to implement a scope by range, protocol and direction filtering. They can be used to limit file size and focus on important traffic. Display filters investigate the capture files in-depth without modifying the packet.
 
