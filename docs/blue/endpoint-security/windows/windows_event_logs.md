@@ -336,3 +336,137 @@ If you are working with large event logs, the **Where-Object** command is not re
 ```pwsh-session
 PS C:\Users\Administrator> Get-WinEvent -FilterHashtable @{LogName='Application'; ProviderName='WLMS'}
 ```
+
+
+## XPath Queries
+
+**XPath Queries** or **XML Path Language** is used to provide a standard syntax and semantics for addressing parts of an XML document and manipulating strings, numbers and booleans. The Windows Event Log supports a subset of [XPath 1.0](https://www.w3.org/TR/1999/REC-xpath-19991116/).
+
+??? example "XPath Query Example"
+    The following query selects all events from the channel or log file where the severity level is less than or equal to 3 and the event occurred in the last 24 hours.
+
+    ``XPath Query: *[System[(Level <= 3) and TimeCreated[timediff(@SystemTime) <= 86400000]]]``
+
+
+You can construct your XPath query using the event viewer and its XML view.
+
+![Event Viewer XML View](images/events/events_xpath-eventxml.png)
+
+In this view you can see the XML and its structure. If you want to start by the event itself you can use ``Get-WinEvent -LogName Application -FilterXPath '*'``.(3)
+{ .annotate }
+
+3.  You can also use the word ``Event`` instead of ``*``.
+
+Going down the XML tree, the next tag would be ``System``. The command changes to ``Get-WinEvent -LogName Application -FilterXPath '*/System/'``.
+
+!!! tip
+    It is best practice to explicitly use the keyword ``System`` but ``*`` can be used instead with the ``Event`` keyword. The query ``-FilterXPath '*/*'`` is still valid.
+
+Using the **EventID 6000**, the command will look like ``Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=6000'``.
+
+
+=== "XPath Query using Get-WinEvent cmdlet"
+
+    ```pwsh-session
+    PS C:\Users\Administrator> Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=6000'
+
+
+    ProviderName: Microsoft-Windows-Winlogon
+
+    TimeCreated                     Id LevelDisplayName Message
+    -----------                     -- ---------------- -------
+    12/21/2020 7:29:30 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/21/2020 7:24:00 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/21/2020 6:32:42 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/18/2020 1:19:56 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/18/2020 1:19:56 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/17/2020 1:59:43 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/17/2020 1:59:32 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/17/2020 1:59:32 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/17/2020 1:59:15 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/17/2020 1:58:25 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/17/2020 1:58:25 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/15/2020 5:50:40 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/15/2020 8:48:35 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/15/2020 8:48:35 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/15/2020 7:48:52 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/14/2020 7:12:19 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/14/2020 7:12:18 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/14/2020 6:12:27 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/14/2020 6:09:10 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/14/2020 6:09:10 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/10/2020 8:59:17 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/8/2020 11:03:24 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/8/2020 11:02:56 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/8/2020 11:02:56 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/8/2020 11:01:10 AM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/4/2020 4:56:36 PM          6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    12/4/2020 4:56:36 PM          6000 Information      The winlogon notification subscriber <WSearch> was unavailable t...
+    12/4/2020 4:55:40 PM          6000 Information      The winlogon notification subscriber <SessionEnv> was unavailabl...
+    ```
+
+=== "XPath Query using Wevtutil.exe"
+
+    ```pwsh-session
+    PS C:\Users\Administrator> wevtutil.exe qe Application /q:*/System[EventID=6000] /f:text /c:1
+    Event[0]:
+        Log Name: Application
+        Source: Microsoft-Windows-Winlogon
+        Date: 2020-12-04T16:55:40.554
+        Event ID: 6000
+        Task: N/A
+        Level: Information
+        Opcode: N/A
+        Keyword: Classic
+        User: N/A
+        User Name: N/A
+        Computer: WIN-1O0UJBNP9G7
+        Description:
+    ```
+
+You can also combine multiple queries using keywords like **and**.
+
+```pwsh-session
+PS C:\Users\Administrator> Get-WinEvent -LogName Application -FilterXPath '*/System/EventID=6000 and */System/Provider[@Name="Microsoft-Windows-Winlogon"]'
+
+
+   ProviderName: Microsoft-Windows-Winlogon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+12/21/2020 7:29:30 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable to handle a notification event.
+12/21/2020 7:24:00 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable to handle a notification event.
+12/21/2020 6:32:42 AM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable to handle a notification event.
+12/18/2020 1:19:56 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailable to handle a notification event.
+12/18/2020 1:19:56 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable to handle a notification event.
+12/17/2020 1:59:43 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailable to handle a notification event.
+12/17/2020 1:59:32 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailable to handle a notification event.
+12/17/2020 1:59:32 PM         6000 Information      The winlogon notification subscriber <WSearch> was unavailable to handle a notification event.
+12/17/2020 1:59:15 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailable to handle a notification event.
+12/17/2020 1:58:25 PM         6000 Information      The winlogon notification subscriber <SessionEnv> was unavailable to handle a notification event.
+```
+
+You can also create XPath queries for elements within the **EventData** block. 
+
+```pwsh-session
+PS C:\Users\Administrator>  Get-WinEvent -LogName Security -FilterXPath '*/EventData/Data[@Name="TargetUserName"]="System"' -MaxEvents 5
+
+
+   ProviderName: Microsoft-Windows-Security-Auditing
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+9/3/2025 10:23:33 AM          4624 Information      An account was successfully logged on....
+9/3/2025 10:23:19 AM          4624 Information      An account was successfully logged on....
+9/3/2025 10:23:19 AM          4624 Information      An account was successfully logged on....
+9/3/2025 10:23:15 AM          4624 Information      An account was successfully logged on....
+9/3/2025 10:19:26 AM          4624 Information      An account was successfully logged on...
+```
+
+!!! note
+    The ``-MaxEvents'' parameters limits the output the 5 most recent events that fit the query.
+
+
+
+
+
