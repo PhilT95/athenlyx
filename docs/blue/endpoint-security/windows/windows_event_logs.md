@@ -464,7 +464,7 @@ TimeCreated                     Id LevelDisplayName Message
 ```
 
 !!! note
-    The ``-MaxEvents'' parameters limits the output the 5 most recent events that fit the query.
+    The ``-MaxEvents`` parameters limits the output the 5 most recent events that fit the query.
 
 
 
