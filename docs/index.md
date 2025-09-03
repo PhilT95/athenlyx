@@ -34,10 +34,3 @@ The Infrastructure is hosted by Hetzner and consists of:
 ## Project structure
 This project is build using git, Github, [MkDocs](applications/mkdocs/mkdocs_setup.md) and the [MkDocs Material Theme](https://squidfunk.github.io/mkdocs-material/).
 You can find the git [here](https://github.com/PhilT95/docs).
-
-
-
-
-
-
-
