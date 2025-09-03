@@ -272,7 +272,7 @@ event new_connection(c: connection)
 # c$id: Source reference field for the identifier.
 ```
 
-A script to detect if the rule for **ftp-admin** got triggered ([see FTP Admin](#signature-example-02---ftp-admin-login-attempts)).
+A script to detect if the rule for **ftp-admin** got triggered ([see FTP Admin](#signature-example-02-ftp-admin-login-attempts)).
 
 ```zeek
 event signature_match (state: signature_state, msg: string, data: string)

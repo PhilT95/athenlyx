@@ -11,6 +11,6 @@ I'm Phil and I'm an IT and Cyber Security specialist located in Germany. I use t
 I am currently going through the SOC Level 1 [TryHackMe](https://tryhackme.com/) Learning path and I'm adding what I learned to this documentation as well.  
 
 <div>
-    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5059033" style='border:none;' width="400" height="125"></iframe>
+    <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5059033" style='border:none;' width="329" height="88"></iframe>
 </div>
 

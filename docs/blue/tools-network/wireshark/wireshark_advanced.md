@@ -82,7 +82,7 @@ This function breaks down all HTTP packets from the capture file and helps to vi
 
 ## Packet Filtering with queries
 
-If you don't remember the basics about filtering, check the [Wireshark Basics for filtering](wireshark.md/#package-filtering).
+If you don't remember the basics about filtering, check the [Wireshark Basics for filtering](index.md/#package-filtering).
 
 The typical use case is to capture everything and filter the captured packets. But you can also filter while sniffing the traffic.
 

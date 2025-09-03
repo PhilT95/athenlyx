@@ -44,3 +44,4 @@
 *[RDP]: Remote Desktop Protocol
 *[NTFS]: New Technology File System
 *[ADS]: Alternate Data Streams
+*[MMC]: Microsoft Management Console

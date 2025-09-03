@@ -141,7 +141,7 @@ The **csrss.exe** (Client Server Runtime Process) is the user-mode side of the W
     The termination of this process will result in system failure.
 
 !!! note
-    csrss.exe and winlogon.exe are called from the [smss.exe](#windows-process-session-manager-subsystem) at startup for Session 1
+    csrss.exe and winlogon.exe are called from the [smss.exe](#session-manager-subsystem) at startup for Session 1
 
 The normal behavior for Session 0 and Session 1 should look like below
 

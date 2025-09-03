@@ -11,7 +11,7 @@ nav:
         - Snort IDS/IPS: blue/tools-network/snort.md
         - Zeek Traffic Analyzer: blue/tools-network/zeek.md      
         - Wireshark:
-          - Wireshark Basics: blue/tools-network/wireshark/wireshark.md
+          - blue/tools-network/wireshark/index.md
           - Wireshark Advanced Features: blue/tools-network/wireshark/wireshark_advanced.md
           - Wireshark Traffic Analysis: blue/tools-network/wireshark/wireshark_trafficanalysis.md
         - TShark:
@@ -24,6 +24,8 @@ nav:
         - Windows Security:
           - blue/endpoint-security/windows/index.md
           - Windows Core Services: blue/endpoint-security/windows/core_windows_processes.md
+          - Sysinternals: blue/endpoint-security/windows/sysinternals.md
+          - Windows Event Logs: blue/endpoint-security/windows/windows_event_logs.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
@@ -38,7 +40,7 @@ nav:
   - Applications:
     - applications/index.md
     - MkDocs:
-      - MkDocs : applications/mkdocs/mkdocs.md
+      - applications/mkdocs/index.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
     - SafeLine: applications/safeline/safeline.md
