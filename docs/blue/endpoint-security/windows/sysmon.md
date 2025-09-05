@@ -1,0 +1,155 @@
+# Sysmon
+
+**Sysmon** is a Windows system service and device driver that, if its installed, remains resident across system reboots to monitor and log system activity to the Windows event log. It provides detailed information about process creations,  network connections and changes to file creation time.
+
+It basically gathers detailed and high-quality logs as well as event tracing that assists in identifying anomalies. This is a reason it is commonly used together with SIEM systems or other log parsing solutions.
+
+Event within Sysmon are stored in ``Applications and Services Logs/Microsoft/Windows/Sysmon/Operation``.
+
+## Sysmon Configuration Overview
+
+Sysmon requires a config file in order to tell the binary how to analyze the events that it is receiving. Sysmon files can be created individually or already existing ones can be downloaded. One of these examples is a config file to identify anomalies which is created by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config). Sysmon includes 29 different types of Event IDs, which can all be used within the configuration to specify how events should be handled an analyzed. 
+
+When creating or modifying configuration files, it can be noticed that a majority of rules in *sysmon-config* will exclude events rather than include events. This helps to filter out normal activity in an environment and decrease the number of events and alerts that would need to be manually audited or searched through within a SIEM. There are also rulesets that take a more proactive approach by using a lot of includes.
+
+
+### Event ID 1: Process Creation
+
+This event will look for any processes that have been created. It can be used to look for known suspicious processes or processes with typos that would be considered an anomaly. It uses the **CommandLine** and **Image** XML tags.
+
+
+??? example "Event ID  1 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+        <ProcessCreate onmatch="exclude">
+            <CommandLine condition="is">C:\Windows\system32\svchost.exe -k appmodel -p -s camsvc</CommandLine>
+        </ProcessCreate>
+    </RuleGroup>
+    ```
+
+    This specifies the Event ID to pull from as well as what condition to look for. Here it is excluding **svchost.exe** from the event logs.
+
+### Event ID 3: Network Connection
+
+The network connection event will look for events that occur remotely. This includes files and sources of suspicious binaries as well as opened ports. It uses **Image** and **DestinationPort** tags.
+
+??? example "Event ID 3 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <NetworkConnect onmatch="include">
+	 	    <Image condition="image">nmap.exe</Image>
+	 	    <DestinationPort name="Alert,Metasploit" condition="is">4444</DestinationPort>
+	    </NetworkConnect>
+    </RuleGroup>
+    ```
+
+    This code will identify files transmitted over open ports, specifically looking for nmap.exe. It also will identify open ports, specifically port 4444. If the condition is met an event will be created.
+
+
+### Event ID 7: Image Loaded
+
+This event will look for DLLs loaded by processes, which is useful when hunting for DLL Injection and DLL Hijacking attacks. It is recommended to exercise caution when using this Event ID as it causes a high system load. It uses the **Image**, **Signed**, **ImageLoaded** and **Signature** XML tags.
+
+
+??? example "Event ID 7 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <ImageLoad onmatch="include">
+	 	    <ImageLoaded condition="contains">\Temp\</ImageLoaded>
+	    </ImageLoad>
+    </RuleGroup>
+    ```
+
+
+### Event ID 8: CreateRemoteThread
+
+The CreateRemoteThread Event ID monitors for processes injecting code into other processes. It is used for legitimate tasks and applications, however it can be used by malware to hide malicious activity. The event uses the **SourceImage**, **TargetImage**, **StartAddress** and **StartFunction** XML tags
+
+??? example "Event ID 8 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <CreateRemoteThread onmatch="include">
+	 	    <StartAddress name="Alert,Cobalt Strike" condition="end with">0B80</StartAddress>
+	 	    <SourceImage condition="contains">\</SourceImage>
+	    </CreateRemoteThread>
+    </RuleGroup> 
+    ```
+
+    This will monitor by
+
+    1. Looking at the memory address for a specific ending condition which could be an indicator of a Cobalt Strike beacon
+    2. Looking for injected processes that do not have a parent process, which can be considered an anomaly.
+
+
+### Event ID 11: File Created
+
+This event ID logs events when files are created or overwritten. It can be used to identify file names and signatures of files that are written to the disk and uses the **TargetFileName** XML tags.
+
+??? example "Event ID 11 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <FileCreate onmatch="include">
+	 	    <TargetFilename name="Alert,Ransomware" condition="contains">HELP_TO_SAVE_FILES</TargetFilename>
+	    </FileCreate>
+    </RuleGroup>
+    ```
+
+    This is an example of an ransomware event monitor.
+
+
+### Event ID 12/13/14: Registry Event
+
+These events look for changes or modifications to the registry. Malicious activity from the registry can include persistence and credential abuse. It uses the **TargetObject** XML tags.
+
+
+??? example "Event ID 12/13/14 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <RegistryEvent onmatch="include">
+	 	    <TargetObject name="T1484" condition="contains">Windows\System\Scripts</TargetObject>
+	    </RegistryEvent>
+    </RuleGroup>
+    ```
+
+    This will look for registry objects that are in the ``Windows\System\Scripts`` directory since this is a common directory to place scripts to establish persistence.
+
+### Event ID 15: FileCreateStreamHash
+
+The FileCreateStreamHash event looks for any files created in an alternate data stream. This is a common technique to hide malware. It uses the **TargetFilename** XML tags.
+
+
+??? example "Event ID 15 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <FileCreateStreamHash onmatch="include">
+	 	    <TargetFilename condition="end with">.hta</TargetFilename>
+	    </FileCreateStreamHash>
+    </RuleGroup>
+    ```
+
+    This will look for files with the **.hta** extension that have been placed within alternate data streams.
+
+
+### Event ID 22: DNS Event
+
+This event logs all DNS queries. The most common way to deal with these events is to exclude all trusted domain that are very common within a given environment since it is easier to look for anomalies without the *noise*. It uses the **QueryName** XML tags.
+
+
+??? example "Event ID 22 Example"
+
+    ```xml
+    <RuleGroup name="" groupRelation="or">
+	    <DnsQuery onmatch="exclude">
+	 	    <QueryName condition="end with">.microsoft.com</QueryName>
+	    </DnsQuery>
+    </RuleGroup>
+    ```
+
+    This will exclude any DNS events with the **.microsoft.com** query.
