@@ -153,3 +153,34 @@ This event logs all DNS queries. The most common way to deal with these events i
     ```
 
     This will exclude any DNS events with the **.microsoft.com** query.
+
+
+## Sysmon Installation
+
+The installation for Sysmon is simple and only requires downloading the binary from Microsoft directly. If the [Sysinternals](sysinternals.md) tools are already downloaded/installed, Sysmon will already be there as well since it is included. The binary is also available via Powershell using the command ``Download-SysInternalsTools C:\Sysinternals``. 
+
+To start Sysmon, a PowerShell session or Command prompt, running as the Administrator, is required. 
+
+```pwsh-session
+C:\Users\Administrator\Desktop\Tools\Sysmon>Sysmon.exe -accepteula -i ..\Configurations\swift.xml
+
+System Monitor v12.03 - System activity monitor
+Copyright (C) 2014-2020 Mark Russinovich and Thomas Garnier
+Sysinternals - www.sysinternals.com
+
+Loading configuration file with schema version 4.10
+Sysmon schema version: 4.40
+Configuration file validated.
+Sysmon installed.
+SysmonDrv installed.
+Starting SysmonDrv.
+SysmonDrv started.
+Starting Sysmon..
+```
+
+After Sysmon is installed, events are stored within the Event Viewer under ``Applications and Services Logs/Microsoft/Windows/Sysmon/Operational``.
+
+!!! note
+    The configuration file can be changed anytime by uninstalling or updating the current configuration and replacing it with a new one. The Sysmon help menu offers more information.
+
+![Sysmon Event Viewer](images/sysmon/sysmon-eventviewer.png)
