@@ -184,3 +184,19 @@ After Sysmon is installed, events are stored within the Event Viewer under ``App
     The configuration file can be changed anytime by uninstalling or updating the current configuration and replacing it with a new one. The Sysmon help menu offers more information.
 
 ![Sysmon Event Viewer](images/sysmon/sysmon-eventviewer.png)
+
+## Reducing the noise
+
+Most normal activity or *noise* seen on a network is excluded or filtered out with Sysmon. That leaves the meaningful events that need to be focused on. There are a few ways to optimize this filtration process. The following best practice tips can help reducing this *noise*.
+
+|Best practice|Explanation|
+|:------------|:----------|
+|**Exclude > Include**| When creating rules for Sysmon configuration files it is best to prioritize excluding events rather than including them. This prevents accidentally missing crucial events and only seeing events that matter most.|
+|**CLI gives further control**|Since it is common with most applications the CLI gives the most control and filtering capabilities allowing further granular control. The CLI can be used via either the ``Get-WinEvent`` cmdlet or the ``wevutil.exe`` binary to access and filter logs.|
+|**Know the environment before implementation**|Knowing the environment to be monitored is important when implementing any platform or tool.
+
+
+!!! note
+    More information about Windows Event filtering can be found [here](windows_event_logs.md).
+
+
