@@ -45,3 +45,4 @@
 *[NTFS]: New Technology File System
 *[ADS]: Alternate Data Streams
 *[MMC]: Microsoft Management Console
+*[RAT]: Remote Access Trojan

@@ -199,4 +199,200 @@ Most normal activity or *noise* seen on a network is excluded or filtered out wi
 !!! note
     More information about Windows Event filtering can be found [here](windows_event_logs.md).
 
+## Real Life Examples
 
+### Metasploit
+
+**Metasploit** is a commonly used exploit framework for penetration testing and red team operations. It can be used to easily run exploits on a machine and connect back to a **meterpreter** shell. By default, Metasploit is using port 4444, but port 5555 is also commonly used.
+
+The Sysmon configuration to look for Metasploit looks as follows:
+
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<NetworkConnect onmatch="include">
+		<DestinationPort condition="is">4444</DestinationPort>
+		<DestinationPort condition="is">5555</DestinationPort>
+	</NetworkConnect>
+</RuleGroup>
+```
+
+This uses the Event ID 3 along with the destination port to identify active connections on these ports. But you can also *hunt* for metasploit using the PowerShell cmdlet **Get-WinEvent**.
+
+```pwsh-session
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Metasploit.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=4444'
+
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 2:21:32 AM              3 Information      Network connection detected:...
+```
+
+
+### Mimikatz
+
+**Mimikatz** is a well known tool for dumping credentials from memory along with other Windows post-exploitation activity. It is mainly known for dumping [LSASS](./core_windows_processes.md#local-security-authority-subsystem-service).
+
+Mimikatz can be identified in different ways. The first way is to just look for files created with the name **Mimikatz**. This is simple, but can still help when the Antivirus-Software has been bypassed.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<FileCreate onmatch="include">
+		<TargetFileName condition="contains">mimikatz</TargetFileName>
+	</FileCreate>
+</RuleGroup>
+```
+
+Knowing how the **LSASS** process works and what its normal behavior is, a configuration for Sysmon can be created to target anomalies of the process. For example, since LSASS is always a child process of [svchost.exe](./core_windows_processes.md#service-host), it is a good way to look for LSASS processes that don't fit this.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<ProcessAccess onmatch="exclude">
+		<SourceImage condition="image">svchost.exe</SourceImage>
+	</ProcessAccess>
+	<ProcessAccess onmatch="include">
+		<TargetImage condition="image">lsass.exe</TargetImage>
+	</ProcessAccess>
+</RuleGroup>
+```
+
+Using PowerShell, this can be achieved using the following command:
+
+```pwsh-session
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Mimikatz.evtx -FilterXPath '*/System/EventID=10 and */EventData/Data[@Name="TargetImage"] and */EventData/Data="C:\Windows\system32\lsass.exe"'
+
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 3:22:52 AM             10 Information      Process accessed:...
+```
+
+### Malware - RAT and backdoor
+
+Malware itself has many forms and variations with different end goals. Two important types are RATs and backdoors. RATs are used similar to any other payload to gain access to a machine. They typically come with Anti-Virus or EDR evasion techniques that make them different than other payloads like *MSFVenom*. A RAT typically uses a Client-Server model and comes with an interface for easy user administration. Examples for RATs are **Xeexe** and **Quasar**. 
+
+The first way to hunt for RATs and C2 Servers is similar to hunting [Metasploit](#metasploit). An example configuration for Sysmon can look like this:
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<NetworkConnect onmatch="include">
+		<DestinationPort condition="is">1034</DestinationPort>
+		<DestinationPort condition="is">1604</DestinationPort>
+	</NetworkConnect>
+	<NetworkConnect onmatch="exclude">
+		<Image condition="image">OneDrive.exe</Image>
+	</NetworkConnect>
+</RuleGroup>
+```
+
+Using PowerShell, this can be done with the following example:
+
+
+```pwsh-session
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Rats.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=8000'
+
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+1/5/2021 4:44:35 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:31 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:27 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:24 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:20 AM              3 Information      Network connection detected:...
+1/5/2021 4:44:17 AM              3 Information      Network connection detected:...
+```
+
+
+### Looking for Persistence
+
+**Persistence** is used by attackers to maintain access to a machine once it is compromised. There are a lot of different ways to gain persistence on a machine. For example, startup scripts are commonly used. Using Sysmon, the relevant startup directories can be observed for file creations that can indicate persistence.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<FileCreate onmatch="include">
+		<TargetFilename name="T1023" condition="contains">\Start Menu</TargetFilename>
+		<TargetFilename name="T1165" condition="contains">\Startup\</TargetFilename>
+	</FileCreate>
+</RuleGroup>
+```
+
+Modifications to the registry, where for example a script can be placed inside ``CurrentVersion\Windows\Run`` or other registry locations, can be detected as well.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+	<RegistryEvent onmatch="include">
+		<TargetObject name="T1060,RunKey" condition="contains">CurrentVersion\Run</TargetObject>
+		<TargetObject name="T1484" condition="contains">Group Policy\Scripts</TargetObject>
+		<TargetObject name="T1060" condition="contains">CurrentVersion\Windows\Run</TargetObject>
+	</RegistryEvent>
+</RuleGroup>
+```
+
+### Detecting Evasion techniques
+
+There are a number of evasion techniques used by malware authors to evade both Anti-Virus and detections like:
+
+- Alternate Data Streams
+- Injections
+- Masquerading
+- Packing/Compressing
+- Recompiling
+- Obfuscation
+- Anti-Reversing Techniques
+
+For example, to detect alternate data streams, [Event ID 15](#event-id-15-filecreatestreamhash) can be monitored. This Event ID will hash and log any NTFS Streams that are included within the Sysmon configuration file. That makes it possible to hunt for malware that evades detections using Alternate Data Streams. An example that hunts for files in the ``Temp`` and ``Download`` folder as well as looking for ``.hta`` and ``.bat`` extensions can look like the following example.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+    <FileCreateStreamHash onmatch="include">
+        <TargetFilename condition="contains">Downloads</TargetFilename>
+        <TargetFilename condition="contains">Temp\7z</TargetFilename>
+        <TargetFilename condition="ends with">.hta</TargetFilename>
+        <TargetFilename condition="ends with">.bat</TargetFilename>
+    </FileCreateStreamHash>
+</RuleGroup>
+```
+
+Adversaries also commonly use remote threads to evade detections in combination with other techniques. Remote threads are created using the Windows API **CreateRemoteThread** and can be accessed using **OpenThread** and **ResumeThread**. This is used for evasion techniques like:
+
+- DLL Injection
+- Thread Hijacking
+- Process Hollowing
+
+The Sysmon [Event ID 8](#event-id-8-createremotethread) can be used. A configuration that will exclude common remote threads withing including any specific attributes can look like the snippet below.
+
+```xml
+<RuleGroup name="" groupRelation="or">
+    <CreateRemoteThread onmatch="exclude">
+        <SourceImage condition="is">C:\Windows\system32\svchost.exe</SourceImage>
+        <TargetImage condition="is">C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</TargetImage>
+    </CreateRemoteThread>
+</RuleGroup>
+```
+
+Using PowerShell, this can look like the following example:
+
+```pwsh-session
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Detecting_RemoteThreads.evtx -FilterXPath '*/System/EventID=8'
+
+
+   ProviderName: Microsoft-Windows-Sysmon
+
+TimeCreated                     Id LevelDisplayName Message
+-----------                     -- ---------------- -------
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+7/3/2019 8:39:30 PM              8 Information      CreateRemoteThread detected:...
+```
