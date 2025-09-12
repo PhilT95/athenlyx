@@ -220,7 +220,7 @@ The Sysmon configuration to look for Metasploit looks as follows:
 This uses the Event ID 3 along with the destination port to identify active connections on these ports. But you can also *hunt* for metasploit using the PowerShell cmdlet **Get-WinEvent**.
 
 ```pwsh-session
-PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Metasploit.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=4444'
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\Administrator\log.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=4444'
 
 
    ProviderName: Microsoft-Windows-Sysmon
@@ -261,7 +261,7 @@ Knowing how the **LSASS** process works and what its normal behavior is, a confi
 Using PowerShell, this can be achieved using the following command:
 
 ```pwsh-session
-PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Mimikatz.evtx -FilterXPath '*/System/EventID=10 and */EventData/Data[@Name="TargetImage"] and */EventData/Data="C:\Windows\system32\lsass.exe"'
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\Administrator\log.evtx -FilterXPath '*/System/EventID=10 and */EventData/Data[@Name="TargetImage"] and */EventData/Data="C:\Windows\system32\lsass.exe"'
 
 
    ProviderName: Microsoft-Windows-Sysmon
@@ -293,7 +293,7 @@ Using PowerShell, this can be done with the following example:
 
 
 ```pwsh-session
-PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Hunting_Rats.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=8000'
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\Administrator\log.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=8000'
 
 
    ProviderName: Microsoft-Windows-Sysmon
@@ -379,7 +379,7 @@ The Sysmon [Event ID 8](#event-id-8-createremotethread) can be used. A configura
 Using PowerShell, this can look like the following example:
 
 ```pwsh-session
-PS C:\Windows\system32> Get-WinEvent -Path C:\Users\THM-Analyst\Desktop\Scenarios\Practice\Detecting_RemoteThreads.evtx -FilterXPath '*/System/EventID=8'
+PS C:\Windows\system32> Get-WinEvent -Path C:\Users\Administrator\log.evtx -FilterXPath '*/System/EventID=8'
 
 
    ProviderName: Microsoft-Windows-Sysmon
