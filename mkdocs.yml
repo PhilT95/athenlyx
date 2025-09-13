@@ -118,7 +118,22 @@ plugins:
   - search
   - social
   - privacy
-  - glightbox
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      zoomable: true
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+      caption_position: bottom
+      auto_themed: true
+      auto_caption: true
+      shadow: true
+      manual: false
+      slide_effect: slide
+
   - git-revision-date-localized:
       enable_creation_date: true
 
