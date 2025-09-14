@@ -115,6 +115,8 @@ osquery> select gid, uid, description, username, directory from users;
 +-----+------+-------------------------------------------------------------------------------------------------+--------------------+---------------------------------------------+
 ```
 
+The [Official Documentation](https://osquery.io/schema/5.19.0) provides more detailed information about the schemas used.
+
 ### Display Mode
 
 OSquery comes with multiple display modes. Refer to the ``.help`` function or the example below.
