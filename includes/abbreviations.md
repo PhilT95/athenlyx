@@ -46,3 +46,4 @@
 *[ADS]: Alternate Data Streams
 *[MMC]: Microsoft Management Console
 *[RAT]: Remote Access Trojan
+*[SQL]: Structured query language
