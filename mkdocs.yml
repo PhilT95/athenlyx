@@ -27,6 +27,7 @@ nav:
           - Sysinternals: blue/endpoint-security/windows/sysinternals.md
           - Windows Event Logs: blue/endpoint-security/windows/windows_event_logs.md
           - Sysmon: blue/endpoint-security/windows/sysmon.md
+          - OSquery: blue/endpoint-security/windows/osquery.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
