@@ -2,6 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
+|**25/09/18**|Added OSquery article. Configured the mkdocs-glightbox extension.|
 |**25/09/12**|Added Sysmon and OpenSCAP article.|
 |**25/09/03**|Added Windows Event Logs documentation. Also changed the website structure a bit and fixed the sync script regarding the domain change. Minor fixes to compiling errors.|
 |**25/08/29**|Added Sysinternals documentation. Changed a few paths and fixed a few mistakes.|
