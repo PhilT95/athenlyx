@@ -245,3 +245,5 @@ osquery> select p.pid, p.name, p.path, u.username from processes p JOIN users u 
 | 5736 | RuntimeBroker.exe       | C:\Windows\System32\RuntimeBroker.exe                                           | Administrator    |
 +------+-------------------------+---------------------------------------------------------------------------------+----------+
 ```
+
+
