@@ -7,7 +7,7 @@
 If you want to install Wazuh and how to configure it have a look at this [Setup Guide](wazuh_setup.md).
 
 
-## Vulnerability Assessment & Security Events
+## Vulnerability Assessment
 
 Wazuh's vulnerability assessment module is a powerful tool that can be used to periodically scan an agent's operating system for installed applications and their corresponding versions.
 
@@ -24,4 +24,18 @@ Wazuh can use this information, retrieved by the agent, to compare it against a 
         <run_on_start>yes</run_on_start>
     ```
 
-Wazuh is also capable of testing an agent's configuration against certain rulesets to check for compliance. These compliance checks are usually very sensitive and a lot of events will be recorded.
+When everything is configured correctly, each agent will provide an overview of the detected vulnerabilities.
+
+![Agent Vulnerability Dashboard](images/wazuh_agents-vulnerabilities.png)
+
+
+## Compliance & Policy Auditing
+
+Wazuh has the capabilities to audit and monitor an agent's configuration whilst proactively recording event logs. These audits are performed against a variety of frameworks an legislations such as [NIST](https://www.nist.gov/cyberframework), [MITRE](https://evals.mitre.org/) or [CIS](https://www.cisecurity.org/cis-benchmarks).
+
+![Compliance Audit Based on CIS](images/wazuh_agents-compliance.png)
+
+This Overview shows the percentage on how many checks have been passed by the system, which checks have not and navigating to the **Events** tab gives an insight on events related to settings that were audited.
+
+!!! tip
+    While Wazuhs compliance check is a good way to check your systems configuration and hardening level, it usually gives more insight to run the audit manually using tools like [OpenScap](../../servers/linux/hardening/openscap.md).
