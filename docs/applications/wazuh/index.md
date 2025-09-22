@@ -39,3 +39,21 @@ This Overview shows the percentage on how many checks have been passed by the sy
 
 !!! tip
     While Wazuhs compliance check is a good way to check your systems configuration and hardening level, it usually gives more insight to run the audit manually using tools like [OpenScap](../../servers/linux/hardening/openscap.md).
+
+
+## Logon Monitoring
+
+Wazuh's security event monitor can also actively record both successful and unsuccessful authentication attempts. You can find these logs by navigating to an agent and go into the **Threat Hunting** menu.
+
+![Threat Hunting Dashboard](images/wazuh_agents-threathunting.png)
+
+Clicking on one of these events using the icon on the left will provide more detail to the event.
+
+![Threat Hunting Login Example](images/wazuh_agents-threat.png)
+
+The alert was created because a user logged onto a system. You can see that this is classified as **Rule 5501**, which indicates a successful login. For example, **Rule 5503** indicates a failed login. 
+
+You can find and add rules by navigating to the **Rules** menu which is located under the left side tab called **Server Management**.
+
+![Wazuh Rules Menu](images/wazuh_rules.png)
+
