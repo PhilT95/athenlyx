@@ -85,7 +85,8 @@ bash -c "$(curl -fsSLk https://waf.chaitin.com/release/latest/manager.sh)" -- --
 
 Once the deployment is completed, which is signaled by the command finishing, you can access the Web UI of SafeLine using `https://safeline-ip:9443/`. You can also replace the IP address with an already configured DNS name.
 
-!!! tip "Reset Safeline password
+!!! tip "Reset Safeline password"
+
     Usually, after deployment a new login will be generated and will be presented within the console. If this isn't the case, you can use the following command to reset the password.
 
     ```console

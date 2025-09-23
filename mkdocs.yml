@@ -46,7 +46,8 @@ nav:
       - applications/mkdocs/index.md
       - MkDocs Setup : applications/mkdocs/mkdocs_setup.md
       - MkDocs Auto-Update : applications/mkdocs/mkdocs_autoupdate.md
-    - SafeLine: applications/safeline/safeline.md
+    - SafeLine:
+      - applications/safeline/index.md
   - About me: about/index.md
 
 
