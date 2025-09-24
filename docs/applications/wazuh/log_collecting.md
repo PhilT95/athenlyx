@@ -127,3 +127,39 @@ This can be added below the already existing ``localfile`` snippets. After this,
 </group>
 ```
 
+## Collecting Linux Logs
+
+Capturing logs from a Linux agent is a more simple process similar to capturing events from a Windows agent. Wazuh already has many *out of the box* rules to analyze log files which can be found here ``/var/ossec/ruleset/rules`` on the Wazuh server.
+
+```console
+[user@wazuh user]# ls /var/ossec/ruleset/rules/
+0010-rules_config.xml       0110-ms_dhcp_rules.xml           0215-policy_rules.xml      0320-clam_av_rules.xml           0420-freeipa_rules.xml                 0530-mysql_audit_rules.xml         0625-cisco-asa_rules.xml          0830-sysmon_id_11.xml
+0015-ossec_rules.xml        0115-arpwatch_rules.xml          0220-msauth_rules.xml      0325-opensmtpd_rules.xml         0425-cisco-estreamer_rules.xml         0535-mariadb_rules.xml             0625-mcafee_epo_rules.xml         0840-win_event_channel.xml
+0016-wazuh_rules.xml        0120-symantec-av_rules.xml       0225-mcafee_av_rules.xml   0330-sysmon_rules.xml            0430-ms_wdefender_rules.xml            0540-pfsense_rules.xml             0630-nextcloud_rules.xml          0850-audit_rules.xml
+0017-wazuh-api_rules.xml    0125-symantec-ws_rules.xml       0230-ms-se_rules.xml       0335-unbound_rules.xml           0435-ms_logs_rules.xml                 0545-osquery_rules.xml             0635-owlh-zeek_rules.xml          0860-sysmon_id_13.xml
+0020-syslog_rules.xml       0130-trend-osce_rules.xml        0235-vmware_rules.xml      0340-puppet_rules.xml            0440-ms_sqlserver_rules.xml            0550-kaspersky_rules.xml           0640-junos_rules.xml              0870-sysmon_id_8.xml
+0025-sendmail_rules.xml     0135-hordeimp_rules.xml          0240-ids_rules.xml         0345-netscaler_rules.xml         0445-identity_guard_rules.xml          0555-azure_rules.xml               0675-panda-paps_rules.xml         0900-firewall_rules.xml
+0030-postfix_rules.xml      0140-roundcube_rules.xml         0245-web_rules.xml         0350-amazon_rules.xml            0450-mongodb_rules.xml                 0560-docker_integration_rules.xml  0680-checkpoint-smart1_rules.xml  0905-cisco-ftd_rules.xml
+0035-spamd_rules.xml        0145-wordpress_rules.xml         0250-apache_rules.xml      0360-serv-u_rules.xml            0455-docker_rules.xml                  0565-ms_ipsec_rules.xml            0690-gcp_rules.xml                0910-ms-exchange-proxylogon_rules.xml
+0040-imapd_rules.xml        0150-cimserver_rules.xml         0255-zeus_rules.xml        0365-auditd_rules.xml            0460-jenkins_rules.xml                 0570-sca_rules.xml                 0695-f5_bigip_rules.xml           0915-win-powershell_rules.xml
+...
+```
+
+Not all of these rules are enabled but can be by editing the Wazuh agent configuration that is sending logs to the Wazuh management server with the configuration file ``/var/ossec/etc/ossec.conf``.
+
+
+!!! example "Adding nginx monitoring to the agent ruleset"
+    To let the Wazuh agent monitor the nginx logs, the following snippet needs to be added to the configuration file:
+
+    ```xml
+    <!-- nginx Log Analysis -->
+    <localfile>
+      <location>/var/log/nginx/website.com\:443.access.log</location>
+      <log_format>syslog</log_format>
+    </localfile>
+    ```
+
+    Please adjust the config to the configuration file(s) you want to monitor.
+
+
+
