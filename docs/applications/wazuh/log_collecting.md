@@ -161,5 +161,70 @@ Not all of these rules are enabled but can be by editing the Wazuh agent configu
 
     Please adjust the config to the configuration file(s) you want to monitor.
 
+### Auditing Commands
+
+Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat and its derivates. ``auditd`` monitors the system for certain actions and events and will write this to a log file. The log collector then can be used to read this log file and send it to the Wazuh management server for processing. On AlmaLinux (a RedHat derivate) for example, this package is installed by default. If not, the installation is rather simple.
+
+
+=== "Ubuntu"
+
+    ```console
+    $ sudo apt-get install auditd audispd-plugins
+    $ sudo systemctl enable auditd.service
+    $ sudo systemctl start auditd.service
+    ```
+
+=== "Almalinux"
+
+    ```console
+    [user@server ~] sudo dnf -y install auditd
+    [user@server ~] sudo systemctl enable --now auditd
+    ```
+
+=== "Debian"
+
+  ```console
+  user@server:~# sudo apt -y install auditd
+  ```
+
+``Auditd`` can also be used to monitor custom commands and events. For example, it can be extended to monitor for commands like ``tcpdump``, ``netcat`` or ``cat`` for files such as ``/etc/passwd`` which are signs of a breach. The rules for ``Auditd`` can be found in the directory ```/etc/auditd/rules.d/audit.rules``. 
+
+!!! example "Monitoring commands executed as root"
+
+    To monitor commands executed as root, ``-a exit,always -F arch=b64 -F euid=0 -S execve -k audit-wazuh-c`` needs to be added to the ``audit.rules`` file.
+
+    ```    
+    ## First rule - delete all
+    -D
+
+    ## Increase the buffers to survive stress events.
+    ## Make this bigger for busy systems
+    -b 8192
+
+    ## This determine how long to wait in burst of events
+    --backlog_wait_time 60000
+
+    ## Set failure mode to syslog
+    -f 1
+
+    -a exit,always -F arch=b64 -F euid=0 -S execve -k audit-wazuh-c
+    ```
+
+    ``Auditd`` needs to be informed of this new rule. This can be done using the following command:
+
+    ```console
+    [user@server]# sudo auditctl -R /etc/audit/rules.d/audit.rules
+    ```
+
+    Verify that the Wazuh agent is already monitoring the log file located under ``/var/log/audit/audit.log``. The following snippet needs to exist inside the configuration.
+
+    ```xml    
+    <localfile>
+      <log_format>audit</log_format>
+      <location>/var/log/audit/audit.log</location>
+    </localfile>
+    ```
+
+
 
 
