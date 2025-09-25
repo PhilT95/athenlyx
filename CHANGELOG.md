@@ -2,7 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
-|**25/09/25**|Added main Wazuh article.|
+|**25/09/25**|Added main Wazuh article. Fixed minor things like syntax with some articles.|
 |**25/09/18**|Added OSquery article. Configured the mkdocs-glightbox extension.|
 |**25/09/12**|Added Sysmon and OpenSCAP article.|
 |**25/09/03**|Added Windows Event Logs documentation. Also changed the website structure a bit and fixed the sync script regarding the domain change. Minor fixes to compiling errors.|
