@@ -122,6 +122,6 @@ Wazuh provides a reporting module that allows a summarized breakdown of events t
 
 ![Wazuh Agent Report Navigation](images/wazuh_agents-report.png)
 
-Clicking on it will generate a PDF report that can be downloaded.
+Clicking on it will generate a PDF report that can be downloaded. All generated report can be found within the Report menu which can be found using the left navigation bar.
 
 
