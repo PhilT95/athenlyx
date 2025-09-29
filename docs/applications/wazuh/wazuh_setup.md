@@ -73,3 +73,56 @@ This menu guides through the OS selection as well as other key information requi
 
 ![Deploy Agent Menu](images/wazuh_agents-deploymenu.png)
 
+## Wazuh API
+
+The Wazuh management server features a rich and extensive API to allow CLI-based interaction. This API requires authentication. To do this, a token needs to be generated and then used.
+
+```bash
+# Lets create the Token for the authentication
+TOKEN=$(curl -u : -k -X GET "https://WAZUH_MANAGEMENT_SERVER_IP:55000/security/user/authenticate?raw=true")
+
+# Lets use the token to access the API
+curl -k -X GET "https://MACHINE_IP:55000/" -H "Authorization: Bearer $TOKEN"
+```
+
+The standard HTTP request methods like
+
+- GET
+- POST
+- PUT
+- DELETE
+
+can be used by providing relevant parameters, for example ``-X GET``. 
+
+!!! note
+    
+    This example uses ``curl``. Other tools can also be used to access the Wazuh API
+
+
+??? example "Getting information about the Wazuh Manger"
+
+    To list some statistics and important information about the Wazuh management server, including what services are being monitored and some general settings, the following command can be used:
+
+    ```bash
+    curl -k -X GET "https://MACHINE_IP:55000/manager/configuration?pretty=true§ion=global" -H "Authorization: Bearer $TOKEN"
+    ```
+
+??? example "Using the API to interact with an agent"
+
+    This command can be used to interact with an Wazuh agent:
+
+    ```bash
+    curl -k -X GET "https://MACHINE_IP:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
+    ```
+
+### Wazuh API Console
+
+Wazuh also offers a powerful, integrated API console within the Wazuh website to query management servers and agents. This is not as extensive as using CLI-Tools where scripts and programs can be used to construct more complex queries, but more convenient.
+
+The API console can be found by navigating to **Server management** and then clicking on the **Dev Tools** menu.
+
+![Wazuh API Console Navigation](images/wazuh_api-navigation.png)
+
+The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that will appear to the right of the line.
+
+![Wazu API Console](images/wazuh_api.png)
