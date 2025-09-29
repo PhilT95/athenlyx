@@ -57,6 +57,7 @@ You can find and add rules by navigating to the **Rules** menu which is located 
 
 ![Wazuh Rules Menu](images/wazuh_rules.png)
 
+
 ## Wazuh API
 
 The Wazuh management server features a rich and extensive API to allow CLI-based interaction. This API requires authentication. To do this, a token needs to be generated and then used.
@@ -123,5 +124,3 @@ Wazuh provides a reporting module that allows a summarized breakdown of events t
 ![Wazuh Agent Report Navigation](images/wazuh_agents-report.png)
 
 Clicking on it will generate a PDF report that can be downloaded. All generated report can be found within the Report menu which can be found using the left navigation bar.
-
-
