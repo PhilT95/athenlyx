@@ -50,6 +50,8 @@ nav:
       - applications/safeline/index.md
     - Wazuh:
       - applications/wazuh/index.md
+      - Wazuh Setup: applications/wazuh/wazuh_setup.md
+      - Collecting Logs: applications/wazuh/log_collection.md
   - About me: about/index.md
 
 
