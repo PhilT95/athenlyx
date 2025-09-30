@@ -49,3 +49,4 @@
 *[SQL]: Structured query language
 *[NIST]: National Institute of Standards and Technology
 *[CIS]: Center for Internet Security
+*[ELK]: Elasticsearch, Logstash, and Kibana

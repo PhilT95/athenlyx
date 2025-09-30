@@ -26,13 +26,13 @@ Wazuh itself recommends the following hardware capabilities depending on the amo
 Wazuh offers an *Installation assistant* that completely deploys all requirements and installs the essentials components of Wazuh.
 
 
-```bash-session
+```console
 [root@wazuh user]# curl -sO https://packages.wazuh.com/4.12/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
 
 Once the installation assistant finishes the installation, the console will display the web interface as well as the default user and password.
 
-```bash-session
+```console
 INFO: --- Summary ---
 INFO: You can access the web interface https://<WAZUH_DASHBOARD_IP_ADDRESS>
     User: admin
