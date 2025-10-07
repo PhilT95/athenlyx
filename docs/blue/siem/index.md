@@ -137,4 +137,33 @@ The left panel of the Kibana Discovery interface shows the list of the normalize
 ![Kibana Fields Panel](images/kibana_discovery-fields.png)
 
 
+### KQL - Kibana Query Language
+
+The **KQL** is a search query language used to search the ingested documents in Elasticsearch. Apart from the KQL language, Kibana also supports **Lucene Query Language**. 
+
+
+!!! note
+    You can disable the KQL by clicking on the KQL button next to the search bar.
+
+
+|Operators|Description|Example Query|
+|:--------|:----------|:------------|
+|**Wild Card**|KQL allows the wild card ``*`` to match parts of the term/word.|``Nginx*``|
+|**OR**|The ``OR`` operator shows logs that contain one or another search term.|``"Nginx" OR "httpd"``|
+|**AND**|The ``AND`` operator shows logs that contain one and another search term.|``"Nginx" AND "httpd"``|
+|**NOT**|THe ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
+
+
+#### Free text search
+
+Free text search provides a way to search for the logs based on the **text-only**. That means the search will return all documents that contains the search term, irrespective of the field.
+
+#### Field-based search
+
+The Field-based search works by providing the field name and a value that is being looked for in the logs. The syntax is ``FIELD:VALUE``, where the ``:`` operator is the separator between the field and the value.
+
+
+
+
+
 
