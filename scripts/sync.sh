@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+# Defining maximum log file size in kB
+fSize=1000
+
 # Sets the correct working directory
 cd /usr/athenlyx
 echo $(date) :  Starting sync with git... >> scripts/sync.log
@@ -22,4 +25,16 @@ if [ "$now" != "$prev" ]; then
 	echo $(date) :  Sync finalized. >> scripts/sync.log
  else
 	echo $(date) : No changes detected. >> scripts/sync.log
+fi
+
+
+# Checking if file is too big and shrinking it by half
+
+halfSize=$(expr $fSize / 2 )
+actualSize=$(du -k /usr/athenlyx/scripts/sync.log | cut -f 1)
+if [ $actualSize -ge $fSize ]; then
+	echo File is bigger than $fSize kilobytes and gets halfed
+	truncate -s ${halfSize}K /usr/athenlyx/scripts/sync.log
+else
+	echo Log size still okay
 fi

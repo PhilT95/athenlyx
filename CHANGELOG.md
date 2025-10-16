@@ -2,6 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
+|**25/10/15**|Added SIEM and Elastic Stack pages and fixed some errors.|
 |**25/09/29**|Added further Wazuh articles like the setup guide. Fixed a few minor things.|
 |**25/09/25**|Added main Wazuh article. Fixed minor things like syntax with some articles.|
 |**25/09/18**|Added OSquery article. Configured the mkdocs-glightbox extension.|
