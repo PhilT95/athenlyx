@@ -20,11 +20,11 @@ The **Elastic Stack** is the collection of different open-source components link
 **Beats** is a host-based agent known as *Data-shippers* that is used to *ship* or *transfer* data from endpoints to Elasticsearch. Each beat is a single-purpose agent that sends specific data to the Elasticsearch. You can find alle existing **Beats** by looking at the [official documentation](https://www.elastic.co/guide/en/beats/libbeat/8.19/beats-reference.html).
 
 
-# Kibana
+## Kibana
 
 **Kibana** is a web-based data visualization that works with Elasticsearch to analyze, investigate and visualize the data stream in real-time. It allows users to create multiple visualizations and dashboards for better visibility.
 
-## Kibana Discovery Tab
+### Kibana Discovery Tab
 
 The **Kibana** Discovery tab is a place where the ingested logs, the search bar, normalized fields etc can be found.(1) The following tasks can be performed here:
 { .annotate }
@@ -41,25 +41,25 @@ It contains the logs being ingested manually or in real-time, the time-chart, no
 
 ![Kibana Discovery Tab](images/kibana_discovery.png)
 
-### Time Filter
+#### Time Filter
 
 The **Time filter** provides a way to apply a log filter based on the time. It has different options on how to select the timeframe.
 
 ![Kibana Discovery Time Filter](images/kibana_discovery-timefilter.png)
 
-### Quick Select
+#### Quick Select
 
 The **Quick Select Tab** is another useful tab within Kibana that offers multiple predefined timeframe options to select from. 
 
 ![Kibana Discovery Quick Select](images/kibana_discovery-quickselect.png)
 
-### Timeline
+#### Timeline
 
 The **Timeline** pane provides an overview of the number of the events that occurred for the selected time/data. The bar can be selected to show only the logs of the selected period. The count at the top left displays the number of documents/events that have been found in that timeframe.
 
 ![Kibana Discovery Timeline](images/kibana_discovery-timeline.png)
 
-### Index Pattern
+#### Index Pattern
 
 Kibana, by default, requires an index pattern to access the data stored or being ingested in the Elasticsearch. **Index Patterns** tell Kibana which Elasticsearch data should be explored. Each pattern corresponds to certain defined properties of the fields. A single pattern can point to multiple indices.
 
@@ -68,7 +68,7 @@ Each log source has a different log structure, therefore, when logs are ingested
 ![Kibana Index Patterns](images/kibana_discovery-indexpatterns.png)
 
 
-### Left Panel - Fields
+#### Left Panel - Fields
 
 The left panel of the Kibana Discovery interface shows the list of the normalized fields it finds in the available document/logs. Select any field, and the Top 5 values and the percentages of the occurrences will be shown.
 
@@ -79,7 +79,7 @@ The left panel of the Kibana Discovery interface shows the list of the normalize
 ![Kibana Fields Panel](images/kibana_discovery-fields.png)
 
 
-## KQL - Kibana Query Language
+### KQL - Kibana Query Language
 
 The **KQL** is a search query language used to search the ingested documents in Elasticsearch. Apart from the KQL language, Kibana also supports **Lucene Query Language**. 
 
@@ -96,10 +96,10 @@ The **KQL** is a search query language used to search the ingested documents in 
 |**NOT**|THe ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
 
 
-### Free text search
+#### Free text search
 
 Free text search provides a way to search for the logs based on the **text-only**. That means the search will return all documents that contains the search term, irrespective of the field.
 
-### Field-based search
+#### Field-based search
 
 The Field-based search works by providing the field name and a value that is being looked for in the logs. The syntax is ``FIELD:VALUE``, where the ``:`` operator is the separator between the field and the value.
