@@ -1,3 +1,5 @@
+![Splunk Banner](images/splunk_banner.png)
+
 # Splunk
 
 Splunk consist of three main components:

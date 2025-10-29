@@ -28,9 +28,13 @@ nav:
           - Windows Event Logs: blue/endpoint-security/windows/windows_event_logs.md
           - Sysmon: blue/endpoint-security/windows/sysmon.md
           - OSquery: blue/endpoint-security/windows/osquery.md
+    - Security Assessment:
+          - blue/security-assessment/index.md
+          - OpenSCAP: blue/security-assessment/openscap.md
     - SIEM:
         - blue/siem/index.md
         - Elastic Stack: blue/siem/elastic.md
+        - Splunk: blue/siem/splunk.md
     - AI Security:
         - AI Security Tools: ai/tools-ai.md
     - Blue Teaming Resources: blue/resources.md
@@ -38,9 +42,6 @@ nav:
     - Linux:
       - AlmaLinux Setup Guide: servers/linux/almalinux_setup.md
       - Basic Commands: servers/linux/commands.md
-      - Hardening:
-        - servers/linux/hardening/index.md
-        - OpenSCAP: servers/linux/hardening/openscap.md
     - Firewalld Basics: servers/firewalld.md
     - SELinux Basics: servers/SELinux.md
   - Applications:

@@ -52,3 +52,6 @@
 *[ELK]: Elasticsearch, Logstash, and Kibana
 *[JSON]: JavaScript Object Notation
 *[KQL]: Kibana Query Language
+*[DISA]: US Defense Information Systems Agency
+*[STIG]: Security Technical Implementation Guides
+*[SCAP]: Security Content Automation Protocols
