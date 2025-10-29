@@ -1,3 +1,5 @@
+![SIEM Banner](images/siem_banner.png)
+
 # Security Information and Event Management system
 
 A **SIEM** is a tool that collects data from various endpoints and network devices across an network, stores them at a centralized place and performs correlation on them.
