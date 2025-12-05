@@ -17,7 +17,7 @@ A SIEM is based on working with logs. It can use **Host-Centric** and **Network-
 
 ### Log Sources and Log Ingestion
 
-Every device in a network generates logs when certain activities are performed, like visiting a website or establishing an SSH connection. Windows provides its logs through the [**Windows Event Viewer](../endpoint-security/windows/windows_event_logs.md). With Linux the location of the logs can vary. Some common location are for example:
+Every device in a network generates logs when certain activities are performed, like visiting a website or establishing an SSH connection. Windows provides its logs through the [**Windows Event Viewer**](../endpoint-security/windows/windows_event_logs.md). With Linux the location of the logs can vary. Some common location are for example:
 
 |Path|Description|
 |:---|:----------|
