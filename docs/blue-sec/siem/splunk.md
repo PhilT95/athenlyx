@@ -14,7 +14,7 @@ Splunk consist of three main components:
 The **Splunk Forwarder** is a lightweight agent installed on endpoints intended to be monitored and its main task is to collect the data and send it to the Splunk instance. It does not affect the endpoint's performance since its lightweight implementation. Some key data sources are:
 
 - Web server generating web traffic
-- Windows machines generating [Windows Event Logs](../endpoint-security/windows/windows_event_logs.md), PowerShell and [Sysmon](../endpoint-security/windows/sysmon.md)
+- Windows machines generating [Windows Event Logs](../endpoint-sec/windows/windows_event_logs.md), PowerShell and [Sysmon](../endpoint-sec/windows/sysmon.md)
 - Linux hosts generating host-centric logs
 - Databases generating database connection requests, responses and errors
 
