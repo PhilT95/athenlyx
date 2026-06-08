@@ -56,4 +56,5 @@
 *[STIG]: Security Technical Implementation Guides
 *[SCAP]: Security Content Automation Protocols
 *[DFIR]: Digital Forensics and Incident Response
-*[KAPE]: Kroll Artifact Parser and Extractor 
+*[KAPE]: Kroll Artifact Parser and Extractor
+*[IaC]: Infrastructure as Code
