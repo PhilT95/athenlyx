@@ -446,7 +446,7 @@ user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname  | awk
 ```
 
 !!! note
-    You can find more about these Linux utilities [here](../../../servers/linux/commands.md)
+    You can find more about these Linux utilities [here](../../../linux-admin/redhat-alma/commands.md)
 
 ### Extract DNS Queries
 

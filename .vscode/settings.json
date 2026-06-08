@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
         "Velociraptor"
-    ]
+    ],
+    "markdown.validate.enabled": true,
+    "markdown.validate.referenceLinks": "warning"
 }

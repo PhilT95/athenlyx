@@ -73,7 +73,7 @@ Server: Docker Engine - Community
 Docker Compose version v2.38.1
 ```
 
-If you want to install docker on AlmaLinux you can follow [this Guide](../../servers/linux/almalinux_setup.md/#installing-docker).
+If you want to install docker on AlmaLinux you can follow [this Guide](../../../linux-admin/rhel-alma/almalinux_setup.md/#installing-docker).
 
 ### SafeLine Deployment
 

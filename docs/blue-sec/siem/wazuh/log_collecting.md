@@ -2,7 +2,7 @@
 
 ## Collecting Windows Logs with Wazuh
 
-All sorts of actions and events are captured on a Windows OS. This includes authentication attempts, networking connections and many more. This information is stored in the [Windows Event Logs](../../blue/endpoint-security/windows/windows_event_logs.md) using the [Sysmon](../../blue/endpoint-security/windows/sysmon.md) tool.
+All sorts of actions and events are captured on a Windows OS. This includes authentication attempts, networking connections and many more. This information is stored in the [Windows Event Logs](../../endpoint-sec/windows/windows_event_logs.md) using the [Sysmon](../../endpoint-sec/windows/sysmon.md) tool.
 
 Wazuh can be used to aggregate these events recorded by *Sysmon* for processing to the Wazuh manager. This requires configuration changes to both the Wazuh agent and the Sysmon application. 
 
