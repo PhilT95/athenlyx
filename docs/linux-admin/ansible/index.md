@@ -8,7 +8,7 @@ Ansible is a collection of software tools used to automate infrastructure manage
 2. Configuration management
 3. Application deployment
 
-
+It can be used to do various tasks on various hosts and, in combination with **Terraform** also enable the deployment and configuration of entire infrastructures.
 
 ## Basics of Ansible
 
@@ -24,4 +24,6 @@ Once all these components are setup Ansible can connect to the machines that are
 
 !!! info
     Ansible usually connects using the user that is currently executing the command. Therefore, the dedicated Ansible user should also exist on the Ansible server and execute the command itself. This user should exist on all managed devices that are to be managed by Ansible.
+
+## Important Terms & Topics
 
