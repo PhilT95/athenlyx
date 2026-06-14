@@ -447,10 +447,14 @@ user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname  | awk
 
 !!! note
 <<<<<<< HEAD
+<<<<<<< HEAD
     You can find more about these Linux utilities [here](../../../linux-admin/rhel-alma/commands.md)
 =======
     You can find more about these Linux utilities [here](../../../linux-admin/redhat-alma/commands.md)
 >>>>>>> aa43cff (Re-Did the document structure to be more cohesive and logical. Adapted links, but not mkdocs.yml yet.)
+=======
+    You can find more about these Linux utilities [here](../../../linux-admin/rhel-alma/commands.md)
+>>>>>>> e35a9d5 (Fixed broken link and updated Changelog)
 
 ### Extract DNS Queries
 
