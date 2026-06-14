@@ -19,14 +19,14 @@ This part of the setup is pretty straight-forward. Connect to your AlmaLinux 10 
 
 ```console
 [admin@ansible ~]$ sudo su
-[root@ansible ~]$ dnf upgrade -y
-[root@ansible ~]$ dnf install ansible-core -y
+[root@ansible ~]# dnf upgrade -y
+[root@ansible ~]# dnf install ansible-core -y
 ```
 
 Verify the ansible installation and version using the `ansible --version` command.
 
 ```console
-[root@ansible ~] ansible --version
+[root@ansible ~]# ansible --version
 ansible [core 2.16.16]
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
@@ -53,20 +53,56 @@ Since Ansible usually connects to different systems and therefore is a bigger se
 To start, the user needs to be created and a password should be set. You will be asked to enter and confirm the password for the new user *ansible*.
 
 ```console
-[root@ansible ~] useradd ansible
-[root@ansible ~] passwd ansible
+[root@ansible ~]# useradd ansible
+[root@ansible ~]# passwd ansible
 ```
 
 We also create a new group to make the management of permission independent of the user and add the user to the group.
 
 ```console
-[root@ansible ~] groupadd g-ansible
-[root@ansible ~] usermod -aG g-ansible ansible
+[root@ansible ~]# groupadd g-ansible
+[root@ansible ~]# usermod -aG g-ansible ansible
 ```
 
-Once the user is created we need to give him the necessary permission to edit the ansible configuration files. The easiest way to do this is using the tool `setfacl`, which based on group memberships allows you to assign file and directory permission to a user.
+Once the user and the group is created we need to give the members of the group necessary permissions to edit the ansible configuration files. The easiest way to do this is using the tool `setfacl`, which based on group memberships allows you to assign file and directory permission to a user.
 
-```bash
-[root@ansible ~] dnf install acl
+```console
+[root@ansible ~]# dnf install acl
+[root@ansible ~]# setfacl -R -m g:ansible:rwx /etc/ansible/
+```
+
+We can confirm with `ls -l` if the group permissions are assigned correctly.
+
+```console
+
+[root@ansible]# ls -l
+total 48
+-rw-rwxr--+ 1 root g-ansible  614 Feb 10 00:00 ansible.cfg
+-rw-rwxr--+ 1 root g-ansible 1175 Feb 10 00:00 hosts
+drwxrwsr-x+ 2 root g-ansible 4096 Jun  2 18:28 playbooks
+drwxrwsr-x+ 2 root g-ansible 4096 Jun  2 17:46 prod
+-rw-rwxr--+ 1 root g-ansible  151 Jun  7 08:37 prod.ini
+drwxrwsr-x+ 2 root g-ansible 4096 Jun  2 17:46 roles
 
 ```
+
+The final step is setting up the SSH key the ansible user will use to connect safely to the other systems. To do that, use the `su` command to log into the ansible user out of the root user session. Use the default values and a passphrase if needed.
+
+
+
+```console
+[root@ansible ~]# su ansible
+[ansible@ansible ~] ssh-keygen
+```
+
+Once the key is installed you will need to create an ansible user on the relevant target systems and deploy the public key to its authorized keys for SSH authentication. Once done, verify the connection by connection to the target systems using SSH from the Ansible host. 
+
+!!! note
+  Please make sure the Ansible user on the target systems has the required sudo privileges **AND** that the user does not need a password to escalate its privileges. For the beginning you can give the Ansible user root access, but it is safer to reduce the granted permissions only to the necessary once.
+
+
+### Inventory Setup
+
+
+
+
