@@ -103,6 +103,68 @@ Once the key is installed you will need to create an ansible user on the relevan
 
 ### Inventory Setup
 
+As explained [here](index.md), the Ansible inventory contains all necessary information about the hosts that Ansible should work on. To create a new Ansible inventory file, navigate to the Ansible directory `\etc\ansible\` and create a YAML-file there.
+
+```console
+[ansible@ansible ~]$ cd /etc/ansible 
+[ansible@ansible ansible]$ touch hosts.yml
+```
 
 
 
+Once the file is created we can edit it and start adding our systems. You can group hosts into different topics or just leave them as *ungrouped*.
+
+```yml
+ungrouped:
+  hosts:
+    nogroup.example.com:
+webservers:
+  hosts:
+    web01.example.com:
+    web02.example.com:
+dbservers:
+  hosts:
+    db01.example.com:
+    db02.example.com:
+    testdb.example.com:
+```
+
+!!! tip
+  Ansible supports both YAML and INI files for its inventory. It comes down to what you prefer. The same inventory as in the example above would look like this:
+  
+  ```ini
+  nogroup.example.com
+
+  [webservers]
+  web01.example.com
+  web02.example.com
+
+  [dbservers]
+  db01.example.com
+  db02.example.com
+  testdb.example.com
+  ```
+
+
+You can also modify certain aspects of a host by adding or editing variables. For example, to make ansible use a local connection if you want to make the server manage itself via Ansible, you have to set the variable `ansible_connection` to `local`.
+
+=== "YAML"
+
+  ```yml
+  ungrouped:
+    hosts:
+      nogroup.example.com:
+        ansible_connection: local
+  ```
+
+=== "INI"
+
+  ```ini
+  nogroup.example.com ansible_connection=local
+  ```
+
+If you have created your inventory, save the file.
+
+### Playbook Setup
+
+As mentioned [here](index.md), Ansible Playbooks define the actual tasks that should be executed on certain servers. They can combine multiple different steps and also only apply to a subset of servers within one or more given inventory files.
