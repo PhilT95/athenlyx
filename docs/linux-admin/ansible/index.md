@@ -27,3 +27,6 @@ Once all these components are setup Ansible can connect to the machines that are
 
 ## Important Terms & Topics
 
+|Term|Description|
+|:-------|:-------|
+|**Ansible facts**|Ansible can retrieve or discover information about remote systems or about Ansible itself and store these information in variables. These are called **facts** and can for example contain information about IP addresses, file systems, system and service states and much more.|

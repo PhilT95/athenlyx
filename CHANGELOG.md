@@ -2,7 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
-|**26/06/XX**|Adding Ansible documentation and Github Actions|
+|**26/06/17**|Adding Ansible documentation and Github Actions and finished Ansible setup Guide.|
 |**26/06/08**|Reworking entire documentation in preparation for migration from mkdocs to Zensical|
 |**25/10/29**|Restructured the Navigation and added the Splunk article.|
 |**25/10/15**|Added SIEM and Elastic Stack pages and fixed some errors.|

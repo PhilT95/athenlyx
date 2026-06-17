@@ -168,3 +168,92 @@ If you have created your inventory, save the file.
 ### Playbook Setup
 
 As mentioned [here](index.md), Ansible Playbooks define the actual tasks that should be executed on certain servers. They can combine multiple different steps and also only apply to a subset of servers within one or more given inventory files.
+
+For this guide we will setup the task to update *dnf* packages on a AlmaLinux 10 host that is within the *webserver* group of our inventory. First we need to create the playbook YAML-file. Create a file `update-local.yml` inside the ansible directory and open it with a text editor.
+
+```console
+[ansible@ansible ansible]$ touch update_webservers.yml
+[ansible@ansible ansible]$ nano update_webservers.yml
+```
+
+Once you are inside the file, you need to define the basics of the playbook by giving it a name, declare the hosts or groups that should be targeted by the playbook and which user should execute the playbook.
+
+```yml
+- name: Update local Ansible server
+  hosts: webservers
+  remote_user: ansible
+```
+
+!!! warning
+  Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade` and added the public key we set up earlier to the user on the remote system.
+
+With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in dnf tools. We will add 2 tasks in total, one that verifies that the `dnf` package manager is actually available on the system and another that will update all packages. 
+
+```yml
+- name: Update local Ansible server
+  hosts: webservers
+  remote_user: ansible
+
+  tasks:
+  - name: Ensure dnf is available
+    ansible.builtin.package_facts:
+      manager: auto
+  
+  - name: Update packages
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+      update_cache: true
+```
+
+The first tasks is gathering the [facts](index.md#important-terms--topics) about the installed package manager to ensure the update of all packages using `dnf` will actually work.
+
+Finally we add one more line disabling the default gathering of facts which, for this playbook, is not required and another which will indicate that for this task the user needs to elevate its permissions with `sudo`
+
+```yml
+- name: Update local Ansible server
+  hosts: webservers
+  remote_user: ansible
+  become: true
+  gather_facts: false
+  tasks:
+  - name: Ensure dnf is available
+    ansible.builtin.package_facts:
+      manager: auto
+  
+  - name: Update packages
+    ansible.builtin.dnf:
+      name: "*"
+      state: latest
+      update_cache: true
+```
+
+Save the playbook and now you can start using the playbook in combination with the inventory to run the playbook.
+
+```console
+[ansible@ansible ansible]$ ansible-playbook -i hosts.yml update_webservers.yml
+
+PLAY [DNF Update on all servers] *************************************************************************************************************************************************************************************************************************************************************
+
+TASK [Ensure dnf is available] ***************************************************************************************************************************************************************************************************************************************************************
+ok: [web02.example.com]
+ok: [web02.example.com]
+
+TASK [Update packages] ***********************************************************************************************************************************************************************************************************************************************************************
+ok: [web01.example.com]
+ok: [web02.example.com]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************************
+web01.example.com              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+web02.example.com              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+```
+
+!!! note
+  The task status *changed* means that updates were found and installed and is no reason to be worried. *Ok* means no updates have been found.
+
+## Summary
+
+All in all, within a few minutes you can set up Ansible and centralize the management of remote systems with ease. The automation of the playbooks can be easily achieved by creating a scheduled **chron** job which executes the `ansible-playbook` command.
+
+

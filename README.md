@@ -2,6 +2,7 @@
 
 # Welcome to AthenlyX.com Github
 
+[![Build Check](https://github.com/PhilT95/athenlyx/actions/workflows/build.yml/badge.svg)](https://github.com/PhilT95/athenlyx/actions/workflows/build.yml)
 
 This is the git repository the website [AthenlyX.com](https://athenlyx.com) is build from using [MkDocs](https://athenlyx.com/applications/mkdocs). If you want to use this repository as a base for your documentation, please make sure you adapt and change all domain-specific values and don't forget to change the documents with yours!
 
