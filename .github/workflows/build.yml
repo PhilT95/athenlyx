@@ -1,0 +1,27 @@
+name: Build Check
+
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-material mkdocs-glightbox mkdocs-git-revision-date-localized-plugin pillow cairosvg
+
+      - name: Build site
+        run: mkdocs build --strict
+
+
