@@ -98,7 +98,7 @@ The final step is setting up the SSH key the ansible user will use to connect sa
 Once the key is installed you will need to create an ansible user on the relevant target systems and deploy the public key to its authorized keys for SSH authentication. Once done, verify the connection by connection to the target systems using SSH from the Ansible host. 
 
 !!! note
-  Please make sure the Ansible user on the target systems has the required sudo privileges **AND** that the user does not need a password to escalate its privileges. For the beginning you can give the Ansible user root access, but it is safer to reduce the granted permissions only to the necessary once.
+    Please make sure the Ansible user on the target systems has the required sudo privileges **AND** that the user does not need a password to escalate its privileges. For the beginning you can give the Ansible user root access, but it is safer to reduce the granted permissions only to the necessary once.
 
 
 ### Inventory Setup
@@ -130,7 +130,7 @@ dbservers:
 ```
 
 !!! tip
-  Ansible supports both YAML and INI files for its inventory. It comes down to what you prefer. The same inventory as in the example above would look like this:
+    Ansible supports both YAML and INI files for its inventory. It comes down to what you prefer. The same inventory as in the example above would look like this:
   
   ```ini
   nogroup.example.com
@@ -149,19 +149,16 @@ dbservers:
 You can also modify certain aspects of a host by adding or editing variables. For example, to make ansible use a local connection if you want to make the server manage itself via Ansible, you have to set the variable `ansible_connection` to `local`.
 
 === "YAML"
-
-  ```yml
-  ungrouped:
-    hosts:
-      nogroup.example.com:
-        ansible_connection: local
-  ```
-
+    ```yml
+    ungrouped:
+      hosts:
+        nogroup.example.com:
+          ansible_connection: local
+    ```
 === "INI"
-
-  ```ini
-  nogroup.example.com ansible_connection=local
-  ```
+    ```ini
+    nogroup.example.com ansible_connection=local
+    ```
 
 If you have created your inventory, save the file.
 
@@ -185,7 +182,7 @@ Once you are inside the file, you need to define the basics of the playbook by g
 ```
 
 !!! warning
-  Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade` and added the public key we set up earlier to the user on the remote system.
+    Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade` and added the public key we set up earlier to the user on the remote system.
 
 With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in dnf tools. We will add 2 tasks in total, one that verifies that the `dnf` package manager is actually available on the system and another that will update all packages. 
 
@@ -250,7 +247,7 @@ web02.example.com              : ok=2    changed=0    unreachable=0    failed=0 
 ```
 
 !!! note
-  The task status *changed* means that updates were found and installed and is no reason to be worried. *Ok* means no updates have been found.
+    The task status *changed* means that updates were found and installed and is no reason to be worried. *Ok* means no updates have been found.
 
 ## Summary
 

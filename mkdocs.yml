@@ -13,6 +13,7 @@ nav:
       - Command Cheat Sheet: linux-admin/rhel-alma/commands.md
     - Ansible:
       - linux-admin/ansible/index.md
+      - Ansible Setup Guide: linux-admin/ansible/ansible_setup.md
   - Security - Blue Teaming:
     - blue-sec/index.md
     - Network Security:
