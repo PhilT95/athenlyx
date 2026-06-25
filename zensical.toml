@@ -1,0 +1,226 @@
+[project]
+site_name = "athenlyx.com"
+site_url = "https://athenlyx.com"
+site_author = "Phil Trommer"
+repo_url = "https://github.com/PhilT95/athenlyx"
+copyright = "&copy; 2026 Phil Trommer"
+docs_dir = "docs"
+use_directory_urls = false
+extra_css = ["stylesheets/extra.css"]
+watch = ["includes"]
+
+
+nav = [
+    {"Home" = "index.md"},
+    {"Linux Administration" = [
+                {"AlmaLinux" = [
+                    {"AlmaLinux Setup Guide" = "linux-admin/rhel-alma/almalinux_setup.md"},
+                    {"firewalld basics" = "linux-admin/rhel-alma/firewalld.md"},
+                    {"SELinux basics" = "linux-admin/rhel-alma/SELinux.md"},
+                    {"Command Cheat Sheet" = "linux-admin/rhel-alma/commands.md"}
+                ]},
+                {"Ansible" = [
+                    "linux-admin/ansible/index.md",
+                    {"Ansible Setup Guide" = "linux-admin/ansible/ansible_setup.md"}
+                ]}
+    ]},
+    {"Security - Blue Teaming" = [
+        "blue-sec/index.md",
+        {"Network Security" = [
+            "blue-sec/network-sec/index.md",
+            {"Snort IDS/IPS" = "blue-sec/network-sec/snort.md"},
+            {"Zeek Traffic Analyzer" = "blue-sec/network-sec/zeek.md"},
+            {"Wireshark" = [
+                "blue-sec/network-sec/wireshark/index.md",
+                {"Wireshark Advanced Features" = "blue-sec/network-sec/wireshark/wireshark_advanced.md"},
+                {"Wireshark Traffic Analysis" = "blue-sec/network-sec/wireshark/wireshark_trafficanalysis.md"}
+            ]},
+            {"TShark" = [
+                "blue-sec/network-sec/tshark/index.md",
+                {"TShark CLI" = "blue-sec/network-sec/tshark/tshark_cli_wireshark.md"}
+            ]},
+            {"NetworkMiner" = "blue-sec/network-sec/NetworkMiner.md"},
+            {"BRIM" = "blue-sec/network-sec/brim.md"}
+        ]},
+        {"Endpoint Security" = [
+            "blue-sec/endpoint-sec/index.md",
+            {"Windows Security" = [
+                "blue-sec/endpoint-sec/windows/index.md",
+                {"Windows Core Services" = "blue-sec/endpoint-sec/windows/core_windows_processes.md"},
+                {"Sysinternals" = "blue-sec/endpoint-sec/windows/sysinternals.md"},
+                {"Windows Event Log" = "blue-sec/endpoint-sec/windows/windows_event_logs.md"},
+                {"Sysmon" = "blue-sec/endpoint-sec/windows/sysmon.md"},
+                {"OSquery" = "blue-sec/endpoint-sec/windows/osquery.md"}
+            ]}
+        ]},
+        {"Web Security" = [
+            {"SafeLine WAF" = [
+                "blue-sec/web-sec/safeline/index.md"
+            ]}
+        ]},
+        {"SIEM" = [
+            "blue-sec/siem/index.md",
+            {"Elastic" = "blue-sec/siem/elastic.md"},
+            {"Splunk" = "blue-sec/siem/splunk.md"},
+            {"Wazuh" = [
+                "blue-sec/siem/wazuh/index.md",
+                {"Wazuh Setup" = "blue-sec/siem/wazuh/wazuh_setup.md"},
+                {"Wazuh Log Collection" = "blue-sec/siem/wazuh/log_collecting.md"}
+            ]}
+        ]},
+        {"Security Assessment" = [
+            "blue-sec/security-assessment/index.md",
+            {"OpenSCAP" = "blue-sec/security-assessment/openscap.md"}
+        ]},
+        {"DFIR" = [
+            "blue-sec/dfir/index.md"
+        ]},
+        {"Resources" = "blue-sec/resources.md"}
+    ]},
+    {"Self-Hosted Apps & Services" = [
+        "services/index.md",
+        {"MkDocs" = [
+            "services/mkdocs/index.md",
+            {"MkDocs Setup" = "services/mkdocs/mkdocs_setup.md"},
+            {"MkDocs Auto-Update" = "services/mkdocs/mkdocs_autoupdate.md"}
+        ]}
+    ]},
+    {"AI" = [
+        {"AI Tools Cheat Sheet" = "ai/tools-ai.md"}
+    ]},
+    {"About me" = "about/index.md"}
+]
+
+
+[project.theme]
+custom_dir = "overrides"
+logo = "assets/icon_round.png"
+favicon = "assets/icon_round.png"
+language = "en"
+features = [
+    "navigation.instant",
+    "navigation.instant.progress",
+    "navigation.tracking",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
+    "navigation.expand",
+    "navigation.path",
+    "navigation.prune",
+    "navigation.indexes",
+    "navigation.top",
+    "navigation.footer",
+    "toc.follow",
+    "toc.integrate",
+    "search.highlight",
+    "content.code.copy",
+    "content.code.select",
+    "content.code.annotate",
+    "content.footnote.tooltips",
+    "content.tooltips",
+    "announce.dismiss",
+    "search.suggest"   
+]
+
+[project.theme.icon] 
+repo = "fontawesome/brands/git-alt"
+annotation = "material/chevron-right-circle"
+
+# Palette toggle for automatic mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Palette toggle for dark mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+# Social media links in the footer
+[project.extra]
+generator = false
+banner_enabled = false
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/PhilT95/docs"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/linkedin"
+link = "https://www.linkedin.com/in/phil-trommer/"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/bluesky"
+link = "https://bsky.app/profile/philadelphia95.bsky.social"
+
+[[project.extra.social]]
+icon = "material/mail"
+link = "mailto:docs@s-guard.simplelogin.com"
+
+# Markdown Extensions for Admonitions & Content Tabs
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.superfences]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+
+# Markdown Extensions for Emojis & Icons
+[project.markdown_extensions.pymdownx.emoji]
+emoji_index = "zensical.extensions.emoji.twemoji"
+emoji_generator = "zensical.extensions.emoji.to_svg"
+
+# Markdown Extension only for Content Tabs
+[project.markdown_extensions.pymdownx.tabbed.slugify]
+object = "pymdownx.slugs.slugify"
+kwds = { case = "lower" }
+
+# Markdown Extensions for Buttons
+[project.markdown_extensions.attr_list]
+
+# Markdown Extension for Grids
+[project.markdown_extensions.md_in_html]
+
+# Markdown Extension for Images
+[project.markdown_extensions.pymdownx.blocks.caption]
+
+# Markdown Extensions for Code Blocks
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+use_pygments = true
+auto_title = true
+linenums = true
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.snippets]
+auto_append = ["includes/abbreviations.md"]
+
+
+# Markdown Extension for tables
+[project.markdown_extensions.tables]
+
+# Markdown Extension for footnotes
+[project.markdown_extensions.footnotes]
+
+# Markdown Extensions for various formatting features
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.tilde]
+
+# Markdown Extensions for lists
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.pymdownx.tasklist]
+custom_checkbox = true
+
+

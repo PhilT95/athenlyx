@@ -10,7 +10,7 @@ The **Elastic Stack** is the collection of different open-source components link
 
 ## Logstash
 
-**Logstash** is a data processing engine used to take the data form different sources, apply the filter on it or normalize it, then send it to the destination which could be [**Kibana**](#kibana) or a listening port. A **Logstash** configuration file is divided into three parts.
+**Logstash** is a data processing engine used to take the data form different sources, apply the filter on it or normalize it, then send it to the destination which could be [**Kibana**](#kibana-discovery-tab) or a listening port. A **Logstash** configuration file is divided into three parts.
 
 - [**Input**](https://www.elastic.co/guide/en/logstash/8.19/input-plugins.html): This part is where the source from which the data is being ingested is defined.
 - [**Filter**](https://www.elastic.co/guide/en/logstash/8.19/filter-plugins.html): This part is where filter options to normalize the ingested logs is specified.

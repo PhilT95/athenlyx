@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block announce %}
+  {% if config.extra.banner_enabled %}
   <strong>Heads up!</strong> This project is preparing to migrate from Material for MkDocs to
   <strong><a href="https://zensical.org/" target="_blank">Zensical</a></strong>.
+  {% endif %}
 {% endblock %}

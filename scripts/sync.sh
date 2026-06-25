@@ -16,11 +16,11 @@ now="$(git rev-list HEAD -n 1)"
 echo $(date) :  New git HEAD after git pull is $now >> scripts/sync.log
 
 
-# If the HEAD after git pull is different, changes have been downloaded and mkdocs will be used to generate the websites accordingly.
+# If the HEAD after git pull is different, changes have been downloaded and zensical will be used to generate the websites accordingly.
 if [ "$now" != "$prev" ]; then
 	echo $(date) :  Changes detected. Rebuilding web page... >> scripts/sync.log
 	cd /usr/athenlyx/
-	echo $(/home/linuxadmin/.local/bin/mkdocs build) >> scripts/build.log
+	echo $(/home/linuxadmin/.local/bin/zensical build) >> scripts/build.log
 	cp /usr/athenlyx/site/* /www/ -rf
 	echo $(date) :  Sync finalized. >> scripts/sync.log
  else
