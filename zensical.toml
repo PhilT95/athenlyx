@@ -148,6 +148,7 @@ toggle.name = "Switch to system preference"
 # Social media links in the footer
 [project.extra]
 generator = false
+banner_enabled = false
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
