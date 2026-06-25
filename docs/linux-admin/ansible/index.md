@@ -25,7 +25,7 @@ Once all these components are setup Ansible can connect to the machines that are
 !!! info
     Ansible usually connects using the user that is currently executing the command. Therefore, the dedicated Ansible user should also exist on the Ansible server and execute the command itself. This user should exist on all managed devices that are to be managed by Ansible.
 
-## Important Terms & Topics
+## Important Terms and Topics
 
 |Term|Description|
 |:-------|:-------|

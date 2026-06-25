@@ -203,7 +203,7 @@ With the basics now defined we can start adding tasks to the playbook. The tasks
       update_cache: true
 ```
 
-The first tasks is gathering the [facts](index.md#important-terms--topics) about the installed package manager to ensure the update of all packages using `dnf` will actually work.
+The first tasks is gathering the [facts](index.md#important-terms-and-topics) about the installed package manager to ensure the update of all packages using `dnf` will actually work.
 
 Finally we add one more line disabling the default gathering of facts which, for this playbook, is not required and another which will indicate that for this task the user needs to elevate its permissions with `sudo`
 
