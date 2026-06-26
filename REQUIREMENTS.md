@@ -9,6 +9,7 @@
 
 ```sh
 pip install zensical
+pip install mkdocs-ultralytics-plugin
 ```
 
 Zensical bundles all its dependencies automatically — no additional packages are needed.
