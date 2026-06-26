@@ -21,6 +21,7 @@ if [ "$now" != "$prev" ]; then
 	echo $(date) :  Changes detected. Rebuilding web page... >> scripts/sync.log
 	cd /usr/athenlyx/
 	echo $(/home/linuxadmin/.local/bin/zensical build) >> scripts/build.log
+	echo $(python3 scripts/ultralytics.py) >> scripts/build.log
 	cp /usr/athenlyx/site/* /www/ -rf
 	echo $(date) :  Sync finalized. >> scripts/sync.log
  else
