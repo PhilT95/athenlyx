@@ -58,3 +58,4 @@
 *[DFIR]: Digital Forensics and Incident Response
 *[KAPE]: Kroll Artifact Parser and Extractor
 *[IaC]: Infrastructure as Code
+*[WAAP]: Web Application & API Protection
