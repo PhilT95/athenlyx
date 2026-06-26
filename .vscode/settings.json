@@ -1,6 +1,14 @@
 {
     "cSpell.words": [
-        "Velociraptor"
+        "libyaml",
+        "Velociraptor",
+        "usermod",
+        "rwxr",
+        "drwxrwsr",
+        "nogroup",
+        "webservers",
+        "dbservers",
+        "testdb"
     ],
     "markdown.validate.enabled": true,
     "markdown.validate.referenceLinks": "warning"

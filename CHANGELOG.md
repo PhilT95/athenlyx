@@ -2,6 +2,8 @@
 
 |Date|Change|
 |:---|:-----|
+|**26/06/26**|Corrected some errors, added Github Issue templates, requirements and updated the about me site.|
+|**26/06/25**|Migrated from Material for MkDocs to Zensical.|
 |**26/06/17**|Adding Ansible documentation and Github Actions and finished Ansible setup Guide.|
 |**26/06/08**|Reworking entire documentation in preparation for migration from mkdocs to Zensical|
 |**25/10/29**|Restructured the Navigation and added the Splunk article.|

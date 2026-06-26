@@ -65,7 +65,7 @@ Athenlyx.com is hosted on an **Open-Source Stack** and serves as a real-world ex
 
 ## Project Structure
 
-This project is built using Git, [MkDocs](services/mkdocs/mkdocs_setup.md) and the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme. You can find the repository on [GitHub](https://github.com/PhilT95/athenlyx).
+This project is built using Git and [Zensical](https://zensical.org/). You can find the repository on [GitHub](https://github.com/PhilT95/athenlyx).
 
 ---
 

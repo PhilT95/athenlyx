@@ -114,7 +114,7 @@ As explained [here](index.md), the Ansible inventory contains all necessary info
 
 Once the file is created we can edit it and start adding our systems. You can group hosts into different topics or just leave them as *ungrouped*.
 
-```yml
+```yaml
 ungrouped:
   hosts:
     nogroup.example.com:
@@ -149,7 +149,7 @@ dbservers:
 You can also modify certain aspects of a host by adding or editing variables. For example, to make ansible use a local connection if you want to make the server manage itself via Ansible, you have to set the variable `ansible_connection` to `local`.
 
 === "YAML"
-    ```yml
+    ```yaml
     ungrouped:
       hosts:
         nogroup.example.com:
@@ -175,7 +175,7 @@ For this guide we will setup the task to update *dnf* packages on a AlmaLinux 10
 
 Once you are inside the file, you need to define the basics of the playbook by giving it a name, declare the hosts or groups that should be targeted by the playbook and which user should execute the playbook.
 
-```yml
+```yaml
 - name: Update local Ansible server
   hosts: webservers
   remote_user: ansible
@@ -186,7 +186,7 @@ Once you are inside the file, you need to define the basics of the playbook by g
 
 With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in dnf tools. We will add 2 tasks in total, one that verifies that the `dnf` package manager is actually available on the system and another that will update all packages. 
 
-```yml
+```yaml
 - name: Update local Ansible server
   hosts: webservers
   remote_user: ansible
@@ -207,7 +207,7 @@ The first tasks is gathering the [facts](index.md#important-terms-and-topics) ab
 
 Finally we add one more line disabling the default gathering of facts which, for this playbook, is not required and another which will indicate that for this task the user needs to elevate its permissions with `sudo`
 
-```yml
+```yaml
 - name: Update local Ansible server
   hosts: webservers
   remote_user: ansible
