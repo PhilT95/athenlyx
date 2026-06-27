@@ -2,6 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
+|**26/06/27**|Added some fixes and integrated ultralytics for SEO optimization.|
 |**26/06/26**|Corrected some errors, added Github Issue templates, requirements and updated the about me site.|
 |**26/06/25**|Migrated from Material for MkDocs to Zensical.|
 |**26/06/17**|Adding Ansible documentation and Github Actions and finished Ansible setup Guide.|
