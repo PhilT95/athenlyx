@@ -225,8 +225,64 @@ Once this file is created we need to tell `systemd` to enable and start it.
 [root@minecraftserver server]$ systemctl start minecraft
 ```
 
-Now your server should run without any problems and you can start or stop the server in the background by using `systemctl start minecraft` or `systemctl stop minecraft`.
+Now your server should run without any problems and you can start or stop the server in the background by using `systemctl start minecraft` or `systemctl stop minecraft`. 
 
 ### Configuring the local firewall
 
-Since we are exposing a network service from our system it is best practice to lock down the network interface by only allowing connection to relevant ports.
+Since we are exposing a network service from our system it is best practice to lock down the network interface by only allowing connection to relevant ports. Since the Minecraft server application uses the port 25565 as a standard, we will need to keep this port and SSH for management open to the system. AlmaLinux comes with a pre-installed but not enabled local firewall called [firewalld](../../linux-admin/rhel-alma/firewalld.md), which we will use. With AlmaLinux 10, firewalld already comes with a Minecraft service template which you can check by accessing its configuration file under `/usr/lib/firewalld/services/minecraft.xml`. The file should look like this:
+
+```xml
+<service>
+  <short>Minecraft</short>
+  <description>
+    Minecraft is a sandbox game developed by Mojang Studios.
+  </description>
+  <port protocol="tcp" port="25565"/>
+  <port protocol="udp" port="25565"/>
+</service>
+```
+If the file does not exist, create it and add the information from above, then safe the file. Once that is done we will create a firewall rule to allow traffic using the ports required.
+
+Before we can setup `firewalld` we need to enable and start the service for it run along the system permanently.
+
+```
+[root@minecraftserver server]$ systemctl enable firewalld
+[root@minecraftserver server]$ systemctl start firewalld
+```
+
+Once the `firewalld` service is running we can add the minecraft service, reload the ruleset and verify the configuration.
+
+
+```console
+[root@minecraftserver server]$ firewall-cmd --add-service minecraft --zone=public --permanent
+success
+[root@minecraftserver server]$ firewall-cmd --reload
+success
+[root@minecraftserver server]$ firewall-cmd --list-all
+public (default, active)
+  target: default
+  ingress-priority: 0
+  egress-priority: 0
+  icmp-block-inversion: no
+  interfaces: eth0
+  sources:
+  services: cockpit dhcpv6-client minecraft ssh
+  ports:
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+```
+
+The configuration should now look mostly like this. It is important that `minecraft` is listed here. At this point your minecraft server should be able to be accessed through the Minecraft client.
+
+!!! note "Accessing the server through the internet"
+    Please make sure that the server is actually reachable through the internet, especially that the ports are not blocked by any other network device like routers or firewalls. Port-Forwarding may need to be enabled depending on your setup.
+
+    Also note that the server might be reachable, but to login, please continue following the guide.
+
+### Setting up users
+
