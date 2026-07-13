@@ -1,4 +1,4 @@
-# Minecraft Java Server Installation Guide for AlmaLinux 10 - with Mods
+# Minecraft Java Server Installation Guide for AlmaLinux 10 - with Mod support
 
 In this guide we will setup a Minecraft Java server with mod support on an AlmaLinux 10 system and add basic configuration to let the server run automatically as a service on the server.
 
@@ -50,6 +50,8 @@ This command will create the user `minecraft`. The `-r` option sets the flag tha
 !!! note
     You can give the account you create any name you want by changing `minecraft` to the name you want to use.
 
+
+---
 
 ### Downloading and preparing the Minecraft server application
 
@@ -120,6 +122,8 @@ Now the installer will setup the `server` directory with all configuration and t
 
 Now we are ready to configure the server for its first run.
 
+---
+
 ### Preparing the server start
 
 To start the server successfully, we need 
@@ -185,6 +189,8 @@ Now everything is set up to start the server for the first time. Just execute th
 [minecraft@minecraftserver server]$ ./run.sh
 ```
 
+---
+
 ### Setup the server as a service
 
 Now that the server is running we can see that it is running directly from the minecraft user session. If something happens to the user session (logoff, shutdown etc.) the Minecraft server will stop and has to be restarted manually. To simplify this we will implement the application as a system service running in the background in the context of the minecraft user without a need to be logged in.
@@ -226,6 +232,8 @@ Once this file is created we need to tell `systemd` to enable and start it.
 ```
 
 Now your server should run without any problems and you can start or stop the server in the background by using `systemctl start minecraft` or `systemctl stop minecraft`. 
+
+---
 
 ### Configuring the local firewall
 
@@ -284,5 +292,81 @@ The configuration should now look mostly like this. It is important that `minecr
 
     Also note that the server might be reachable, but to login, please continue following the guide.
 
+---
+
 ### Setting up users
+
+Minecraft servers use the authentication via Minecraft (now Microsoft) Accounts. Using this method, to add allow a player to connect to the server we need to add him to the list of allowed players. While we are doing that, we will also give the player we whitelist in this step *Operator* status, granting him admin commands. 
+
+We will need to enter the server command line for this step, so first we stop the minecraft service that we setup earlier before we can continue setting up the Operator for the server.
+
+
+```console
+[root@minecraftserver server]# systemctl stop minecraft
+[root@minecraftserver server]# su minecraft
+[minecraft@minecraft01 server]$ ./run.sh
+[13:53:08] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forge_server, --nogui]
+[13:53:08] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: JVM identified as Red Hat, Inc. OpenJDK 64-Bit Server VM 25.0.3+9-LTS
+[13:53:08] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.2.4 starting: java version 25.0.3 by Red Hat, Inc.; OS Linux arch amd64 version 6.12.0-211.7.4.el10_2.x86_64
+[13:53:08] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forge_server
+[13:53:08] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=jar:file:///home/minecraft/server/libraries/org/spongepowered/mixin/0.8.7/mixin-0.8.7.jar!/ Service=ModLauncher Env=SERVER
+[13:53:09] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[13:53:09] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forge_server' with arguments [--nogui]
+Jul 13, 2026 1:53:15 PM de.gnm.voxeldash.VoxelDashMod <init>
+INFO: Starting VoxelDash Forge...
+[13:53:15] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 64.0.8, for MC 26.1.2 with MCP 20260409.101008
+[13:53:15] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v64.0.8 Initialized
+[13:53:15] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Opening jdk.naming.dns/com.sun.jndi.dns to java.naming
+[13:53:15] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[13:53:16] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: BETA_OUTDATED Current: 64.0.8 Target: 64.0.11
+[13:53:16] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[13:53:18] [main/INFO] [minecraft/RecipeManager]: Loaded 1515 recipes
+[13:53:18] [main/INFO] [minecraft/AdvancementTree]: Loaded 1617 advancements
+[13:53:18] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 26.1.2
+[13:53:18] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[13:53:18] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[13:53:18] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[13:53:18] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[13:53:19] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "grafenberg"
+[13:53:19] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[13:53:19] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 100%
+[13:53:19] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 15 ms
+[13:53:19] [Server thread/INFO] [minecraft/DedicatedServer]: Done (0.335s)! For help, type "help"
+....
+```
+
+After starting this server you should see output similar to the one above. Once the server start is done your console should now look like this:
+
+```console
+[13:54:20] [Server thread/INFO] [minecraft/MinecraftServer]: Server empty for 60 seconds, pausing
+>
+```
+
+The **>** sign indicated that the minecraft server console is now available. Here we can now add user accounts and promote them to Operators.
+
+```console
+> whitelist add PlayerName
+[13:59:18] [Server thread/INFO] [minecraft/MinecraftServer]: Player is whitelisted
+> op ScarBytes
+[13:59:58] [Server thread/INFO] [minecraft/MinecraftServer]: Player promoted to operator
+```
+
+Once this is done we can safely shutdown the server by pressing ++crtl++c++ together. Now we can start the server again using `systemctl`.
+
+!!! warning
+    Before you start the service, make sure you are back into the root shell.
+
+    ```console
+    [minecraft@minecraft01 server]$ exit
+    [root@minecraft01 server]#
+    ```
+
+```console
+[minecraft@minecraft01 server]$ systemctl start minecraft
+```
+
+Now the server should be up and running and the user you added can log into the server using your minecraft client.
+
+!!! tip
+    Once you're logged into your server you can use the console inside the game to add users and promote them to Operators without needing to restart the server or reloading the setting from the shell.
 

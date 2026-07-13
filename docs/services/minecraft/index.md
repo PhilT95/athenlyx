@@ -18,3 +18,4 @@ Here you can find a few guides on how to set up your own Minecraft server from t
 
 |Guide|Short Description|
 |:----|:----------------|
+|[**Minecraft Java Server Installation Guide for AlmaLinux 10 - with Mod support**](minecraft_server_install.md)| This is a step-by-step guide on how to install a Minecraft Java Server on AlmaLinux 10 with Mod support.|
