@@ -17,6 +17,11 @@ Follow these steps to create a new user with sudo permissions. You need root per
 4. Create a file called within the newly created users home directory called **authorized_keys** under `~/.ssh/`. You might need to create the directory first. Copy your public key into this file and save it.
 5. Make sure the Setting **PermitRootLogin** within the ssh config files in the directory `/etc/ssh/` is set to **No**. The file usually is called `sshd_config`
 
+!!! tip
+    If you need help creating an SSH key, refer to this [guide](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html) for example.
+
+
+
 ## Installing Tools and Applications
 
 ### Installing Docker

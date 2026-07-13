@@ -83,6 +83,10 @@ nav = [
             "services/mkdocs/index.md",
             {"MkDocs Setup" = "services/mkdocs/mkdocs_setup.md"},
             {"MkDocs Auto-Update" = "services/mkdocs/mkdocs_autoupdate.md"}
+        ]},
+        {"Minecraft" = [
+            "services/minecraft/index.md",
+            {"Minecraft Java Server Setup with Mod support" = "services/minecraft/minecraft_server_install.md" }
         ]}
     ]},
     {"AI" = [
