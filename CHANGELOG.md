@@ -2,6 +2,7 @@
 
 |Date|Change|
 |:---|:-----|
+|**26/07/13**|Added Minecraft server setup guide and the Minecraft sub category to services.|
 |**26/06/27**|Added some fixes and integrated ultralytics for SEO optimization.|
 |**26/06/26**|Corrected some errors, added Github Issue templates, requirements and updated the about me site.|
 |**26/06/25**|Migrated from Material for MkDocs to Zensical.|

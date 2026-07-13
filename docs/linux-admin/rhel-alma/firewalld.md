@@ -12,7 +12,9 @@ The service can be configured using the `firewall-cmd` binary.
 |`--list-all`|List all currently active rules|`firewall-cmd  --list-all`|
 |`--reload`|Reloads the firewalld configuration. Easy way to load changed without restarting the service.|`firewall-cmd --reload`|
 |`--add-port port/protocol`|Adds the specified port to the ruleset.|`firewall-cmd --add-port=80/tcp --zone=public`|
+|`--remove-port port/protocol`|Removes the specified port from the ruleset.|`firewall-cmd -remove-port=80/tcp --zone=public`|
 |`--add-service service`|Adds a predefined or custom service to the ruleset.|`firewall-cmd --add-service=http --zone=public`|
+|`--remove-service service`|Removes a predefined or custom service from the ruleset.|`firewall-cmd --remove-service=http --zone=public`|
 |`--zone=public`|Defines to which zone the rule applies. Default Zone is public.|*|
 |`--permanent`|Adds a rule to the permanent rule set. Otherwise the rule will be lost after the next config reload.|`firewall-cmd --add-service=http --zone=public --internal`|
 
