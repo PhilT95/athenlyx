@@ -6,7 +6,7 @@ In this guide we will setup a Minecraft Java server with mod support on an AlmaL
 
 Before we need the following requirements before continuing with the setup
 
-- An AlmaLinux 10 system
+- [x] An AlmaLinux 10 system
     * [x] with at least 2 cores
     * [x] with at least 30 GB of storage space
     * [x] with at least 4 GB of RAM
@@ -253,7 +253,7 @@ If the file does not exist, create it and add the information from above, then s
 
 Before we can setup `firewalld` we need to enable and start the service for it run along the system permanently.
 
-```
+```console
 [root@minecraftserver server]$ systemctl enable firewalld
 [root@minecraftserver server]$ systemctl start firewalld
 ```
@@ -351,7 +351,7 @@ The **>** sign indicated that the minecraft server console is now available. Her
 [13:59:58] [Server thread/INFO] [minecraft/MinecraftServer]: Player promoted to operator
 ```
 
-Once this is done we can safely shutdown the server by pressing ++crtl++c++ together. Now we can start the server again using `systemctl`.
+Once this is done we can safely shutdown the server by pressing ++crtl+c++ together. Now we can start the server again using `systemctl`.
 
 !!! warning
     Before you start the service, make sure you are back into the root shell.
