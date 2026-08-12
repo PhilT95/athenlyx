@@ -48,7 +48,9 @@ voxeldash_forge26-1.2.1.jar                                             100%[===
 This will download the mod file directly to the download folder. Now the Minecraft server needs to be restarted. With the next start the mod will be initialized and loaded. 
 You can now access the dashboard through `http://<your-ip>:7867` or any DNS name that resolves to this system. 
 
-To set the initial dashboard password log into your Minecraft server to access the Minecraft console with operator/server admin permissions. Once there type in the command `\voxeldash password <password>`. 
+To set the initial dashboard password log into your Minecraft server to access the Minecraft console with operator/server admin permissions. Once there type in the command `\voxeldash password <password>`.
+
+Once the password is set you can access the dashboard log in and start managing your minecraft server without accessing the shell of your server directly. 
 
 !!! warning
     In this state the dashboard is only accessible with the unsecure http protocol which offers no encryption. It is recommended to use a reverse proxy or WAF in between the anyone accessing VoxelDash since these tools can and should upgrade the communication to an encrypted https to enhance security or your password can be intercepted. It is also recommended to install nginx on the Minecraft server itself and to disable access to http in anyway to the server.

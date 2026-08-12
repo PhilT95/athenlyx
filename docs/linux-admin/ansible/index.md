@@ -1,4 +1,4 @@
-![Ansible Banner](images/ansible_logo.png)
+![Ansible Banner](images/ansible_logo.png){ width=500 }
 
 # Ansible - Automation and Infrastructure as Code
 
