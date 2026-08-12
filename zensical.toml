@@ -86,13 +86,17 @@ nav = [
         ]},
         {"Minecraft" = [
             "services/minecraft/index.md",
-            {"Minecraft Java Server Setup with Mod support" = "services/minecraft/minecraft_server_install.md" }
+            {"Minecraft Java Server Setup with Mod support" = "services/minecraft/minecraft_server_install.md" },
+            {"Minecraft Server Dashboard Setup - VoxelDash" = "services/minecraft/voxeldash_install.md"}
         ]}
     ]},
     {"AI" = [
         {"AI Tools Cheat Sheet" = "ai/tools-ai.md"}
     ]},
-    {"About me" = "about/index.md"}
+    {"About me" = [
+        "about/index.md",
+        {"Publishing Log" = "about/changelog.md"}
+    ]}
 ]
 
 
