@@ -1,7 +1,6 @@
 ---
 hide:
     - toc
-    - navigation
 ---
 
 # About Me
