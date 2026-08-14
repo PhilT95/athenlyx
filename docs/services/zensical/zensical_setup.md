@@ -27,3 +27,31 @@ To begin with the Zensical setup, connect to your system using SSH. Once logged 
 ### Installation Dependency & Zensical
 
 Once the updates are installed we can continue with the installation of all Zensical dependencies and Zensical itself.
+
+First we will need to ensure that Python3 is installed on the system.
+
+```console
+[root@zensical user]# dnf install python3
+```
+
+Once python is installed we can install all required python components using a virtual environment. Since it is recommended create this environment without the root permissions within the user context on the local machine that will be used together with Zensical.
+
+```console
+[root@zensical user]# exit
+[user@zensical ~]$ python3 -m venv .venv
+[user@zensical ~]$ source .venv/bin/activate
+[user@zensical ~]$ pip install zensical
+```
+
+!!! info
+    For the initial setup this is sufficient. We will discuss the installation of extensions and plugins later.
+
+### Initialize a basic Zensical project
+
+Zensical offers a quick way to setup a new project with a single command. We can verify this by checking the structure and files created. 
+
+```console
+[user@zensical ~]$ zensical new ./myproject
+```
+
+
