@@ -1,6 +1,9 @@
 # Material for MkDocs - Setup Guide
 This guide will show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It will be centered around the **AlmaLinux 10** and **Material for MkDocs**.
 
+!!! warning "Outdated"
+    Material for MkDocs will not be maintained anymore. The developers moved to a new project which is replacing MkDocs itself. See [Zensical](../zensical/index.md) for more information.
+
 ## Prerequisites
 Before you can install **MkDocs** and its extensions you need to have fulfill these following:
 
