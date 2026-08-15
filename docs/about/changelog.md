@@ -10,7 +10,7 @@ This page keeps track of recently published files and guides.
 -   :material-calendar-month: __2026__
 
     ---
-
+    - **2026-08-15** - Added Zensical and a Zensical setup guide.
     - **2026-08-12** — Added the VoxelDash mod setup guide and fixed some errors.
     - **2026-07-13** — Added the Minecraft server setup guide and the Minecraft sub category to services.
     - **2026-06-26** — Updated the About me page.
