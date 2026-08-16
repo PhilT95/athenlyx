@@ -1,34 +1,36 @@
 # Zensical Setup on AlmaLinux 10
 
-This guide will help you setup Zensical on a system running AlmaLinux 10 and how publish them using nginx.
+This guide will help you setup a Zensical project on a AlmaLinux 10 system. This includes the installation and secure configuration ob Zensical and nginx using the `certbot` to easily integrate SSL and create the necessary **LetsEncrypt** certificate.
 
 
 ## Requirements
 
-The Zensical setup is a very straight-forward process and does not differ a lot from other Linux distributions but there are a few things that you should have ready.
+The Zensical setup is a very straight-forward process and does not differ a lot between Linux distributions but there are a few things required..
 
 - [x] A system running AlmaLinux 10 with
     - [X] SSH access
     - [X] Root permissions
     - [X] Internet access
 - [X] A basic understanding how to interact with a shell
+- [X] Ideally a domain that can point to the system which is supposed to host the Zensical project 
 
 ## Setup
 
 ### Login & Update
 
-To begin with the Zensical setup, connect to your system using SSH. Once logged in we will make the system is up-to-date. Since we need root permissions to update the system and will be needing these permissions to install all required components as well we switch into the root session using the ``su`` command.
+To begin with the Zensical setup, connect to your system using SSH. Once logged in we will make sure the it is fully updated. Since we need root permissions to update the system and will be needing these permissions to install all required components as well we switch into the root session using the ``su`` command.
 
 ```console
 [user@zensical ~]$ sudo su
 [root@zensical user]# dnf update -y
 ```
 
-### Installation Dependency & Zensical
+### Installing Dependencies & Zensical
 
-Once the updates are installed we can continue with the installation of all Zensical dependencies and Zensical itself.
+Once all updates are installed we can continue installing of all Zensical dependencies and Zensical itself.
+The only dependency required to install Zensical is `Python3`. It is required to install Zensical and various Python libraries required by the different Zensical extensions.
 
-First we will need to ensure that Python3 is installed on the system.
+We will use the built-in package manger to install python and verify its installation.
 
 ```console
 [root@zensical user]# dnf install python3
@@ -36,7 +38,7 @@ First we will need to ensure that Python3 is installed on the system.
 Python 3.12.13
 ```
 
-Once python is installed we can install all required python components using a virtual environment. Since it is recommended create this environment without the root permissions within the user context on the local machine that will be used together with Zensical.
+Once python is installed we can install all required python components ideally within a separate virtual  Python environment. Since we want to run Zensical without root permission and it is recommended to use the virtual environment without them as well we will continue inside the normal user context.
 
 ```console
 [root@zensical user]# exit
@@ -48,18 +50,18 @@ Once python is installed we can install all required python components using a v
 ```
 
 !!! info
-    For the initial setup this is sufficient. We will discuss the installation of extensions and plugins later.
+    The initial setup does not need more components to be installed. If you want to know more on how to install plugins and extensions, please refer to [this](#extensions-plugins) part of this guide.
 
 ### Initialize a basic Zensical project
 
-Zensical offers a quick way to setup a new project with a single command. We can verify this by checking the structure and files created. 
+Zensical offers a quick way to setup a new project with a single command. This will create the necessary files and folders for a basic Zensical website to work.
 
 ```console
 [user@zensical ~]$ zensical new myproject
 [user@zensical ~]$ cd myproject
 ```
 
-The following structure with the first pages under `docs`, a workflow for github within the `.github/workflows` directory and the `zensical.toml` file at the root should now exist.
+After executing the `zensical new` command and navigating into the newly created directory we can verify it by checking if the project structure resembles the structure below.
 
 ```console
 .
@@ -71,9 +73,14 @@ The following structure with the first pages under `docs`, a workflow for github
 │       └── docs.yml
 └── zensical.toml
 ```
-- Within the `markdown.md` basic markdown syntax is provided as a cheat sheet
-- Within the `index.md` file you are able to discover the various editing options that Zensical offers which extend basic markdown features
-- The workflow configured within `docs.yml` aims to provide a quick deployment option using Github Pages.
+
+To understand what the various files and folders are supposed to be used for here a quick overview
+
+- The `docs` directory is the place where all markdown files, that should be transformed into webpages, will be placed 
+    - Within the `markdown.md` basic markdown syntax is provided as a cheat sheet
+    - Within the `index.md` file you are able to discover the various editing options that Zensical offers which extend basic markdown features
+- The `.github` directory is used by Github for its CI/CD pipeline configuration
+    - The workflow configured within `docs.yml` aims to provide a quick deployment option using Github Pages.
 - `zensical.toml` is the main configuration file which defines
     - Basic information about the website
     - Which features are enabled and how they will work
@@ -104,24 +111,25 @@ You can already launch this website using the `zensical serve` command which wil
     └── stylesheets
     ```
 
+    The structure and files from your project can and should differ to the one shown above.
+
 ### Setting up nginx
 
-As one of the most common and simple webservers nginx is ideal to quickly and securely host a Zensical website.
-First we need to install nginx, set it up correctly and configure it to run as a background service.
+Nginx is one of the most reliable and lightweight webserver engines. It is an ideal way to easily and securely host Zensical projects.
+Before we can host Zensical using nginx we need to install it, set it up correctly and configure it to run as a background service.
 
 ```console
 [user@zensical ~]$ sudo su
 [root@zensical ~]$ dnf install nginx -y
 ```
 
-Once nginx is installed navigate to `/etc/nginx`. You need to create a config file inside nginx. The file needs to point to the directory where the output from `zensical build` are located.
-
+Once nginx is installed navigate to the nginx directory `/etc/nginx`. There we need to create a dedicated nginx config file for the project. 
 
 ```console 
 [root@zensical nginx]$ nano yourwebsite.example.com.conf
 ```
 
-Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory.
+Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration will redirect all requests via **http**  to the **https** port. The second `server` block contains the **https** configuration with certain security and logging features as well as caching configured.
 
 ```nginx
 
@@ -175,7 +183,7 @@ server {
 !!! note
     If you don't have a domain name you can also use an IP-Address within the `server_name` directive.
 
-Please note that there is currently no SSL certificate provided for https, which is required. It is recommended to use the `certbot` to get a valid LetsEncrypt certificate. It will also take care of adapting your nginx configuration once it created a valid SSL certificate.
+Please note that there is currently no SSL certificate provided for https, which is required for **https** to work. It is recommended to use the `certbot` to get a valid LetsEncrypt certificate. `certbot` also takes care of adapting your nginx configuration once it created a valid SSL certificate.
 
 Now we just need to register nginx as a system service and start it.
 
@@ -184,9 +192,12 @@ Now we just need to register nginx as a system service and start it.
 [root@zensical nginx]$ systemctl start nginx
 ```
 
-Now you can verify if your website is reachable using the domain. You might need to edit firewall rules to allow communication via http/https to reach your webserver.
+Once the nginx service it setup and running we can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via http/https to reach your webserver.
 
 If you want to update the website you only need to update the files within the Zensical project, run `zensical build` and make sure the new files replace the old ones.
+
+
+## Extensions & Plugins
 
 
 
