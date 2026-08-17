@@ -199,6 +199,9 @@ If you want to update the website you only need to update the files within the Z
 
 ## Extensions & Plugins
 
+Most extensions that Zensical is using are provided by the [Python Markdown Extension](https://zensical.org/docs/setup/extensions/python-markdown/) that is usually installed by default with Python itself.
+
+If you want to enable the various features that are provided using this extension please refer to the Zensical documentation itself. To enable and configure these extensions the `zensical.toml` file needs to be edited. You can refer to the toml-file for [this project](https://github.com/PhilT95/athenlyx/blob/main/zensical.toml).
 
 
 

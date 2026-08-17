@@ -132,8 +132,8 @@ Once the file is created we can edit it and start adding our systems. You can gr
         db02.example.com:
         testdb.example.com:
     ```
-
-=== "INI
+    
+=== "INI"
     ```ini
     nogroup.example.com
 
