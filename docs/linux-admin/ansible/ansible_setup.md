@@ -6,10 +6,10 @@ This guide will provide step-by-step instructions and necessary commands to inst
 
 To continue with the following guide please make sure that your setup meets the following requirements:
 
-- A AlmaLinux 10 instance with internet access
-- SSH & root access to this AlmaLinux machine
-- Network & SSH access to at least one other system from the instance
-- Root access to this other system
+- [X] A AlmaLinux 10 instance with internet access
+- [X] SSH & root access to this AlmaLinux machine
+- [X] Network & SSH access to at least one other system from the instance
+- [X] Root access to this other system
 
 ## Setup
 
