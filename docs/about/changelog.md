@@ -3,7 +3,7 @@
 This page keeps track of recently published files and guides.
 
 !!! info "Latest addition"
-    The most recent addition is the **VoxelDash mod setup guide** (2026-08-12).
+    The most recent addition is the **Zensical and Zensical setup guide** (2026-08-21).
 
 <div class="grid cards" markdown>
 
