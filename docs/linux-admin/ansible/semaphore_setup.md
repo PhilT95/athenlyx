@@ -92,9 +92,107 @@ sudo dnf install semaphore_2.19.8_linux_amd64.rpm -y
 
 ### Setting up Semaphore
 
+Semaphore provides its own setup creation process which will ask for all required information and creates a configuration file for running the the application. For this purpose we create a new configuration directory for semaphore where the configuration file will be saved to.
 
+```bash
+mkdir /etc/semaphore && cd /etc/semaphore
+semaphore setup
+```
 
+Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the onces below.
 
+```console semaphore setup
+Hello! You will now be guided through a setup to:
 
+1. Set up configuration for a MySQL/MariaDB database
+2. Set up a path for your playbooks (auto-created)
+3. Run database Migrations
+4. Set up initial semaphore user & password
 
+What database to use:
+   1 - MySQL
+   2 - BoltDB (DEPRECATED!!!)
+   3 - PostgreSQL
+   4 - SQLite
+ (default 1): 1
+
+db Hostname (default 127.0.0.1:3306):
+
+db User (default root): semaphore
+
+db Password:
+
+db Name (default semaphore): ^C
+[root@command tmp]# semaphore setup
+
+Hello! You will now be guided through a setup to:
+
+1. Set up configuration for a MySQL/MariaDB database
+2. Set up a path for your playbooks (auto-created)
+3. Run database Migrations
+4. Set up initial semaphore user & password
+
+What database to use:
+   1 - MySQL
+   2 - BoltDB (DEPRECATED!!!)
+   3 - PostgreSQL
+   4 - SQLite
+ (default 1): 1
+
+db Hostname (default 127.0.0.1:3306):
+
+db User (default root): semaphore
+
+db Password: <your-password>
+
+db Name (default semaphore):
+
+Playbook path (default /tmp/semaphore): /etc/semaphore/playbooks
+
+Public URL (optional, example: https://example.com/semaphore):
+
+Enable email alerts? (yes/no) (default no):
+
+Enable telegram alerts? (yes/no) (default no):
+
+Enable slack alerts? (yes/no) (default no):
+
+Enable Rocket.Chat alerts? (yes/no) (default no):
+
+Enable Microsoft Team Channel alerts? (yes/no) (default no):
+
+Enable LDAP authentication? (yes/no) (default no):
+
+Config output directory (default /tmp): /etc/semaphore
+
+```
+
+Once you finish the last step the tool will verify database access and create a configuration file with the details. 
+
+```json Example Configuration file
+{
+        "mysql": {
+                "host": "127.0.0.1:3306",
+                "user": "semaphore",
+                "pass": "your-password",
+                "name": "semaphore"
+        },
+        "dialect": "mysql",
+        "tmp_path": "/etc/semaphore/playbooks",
+        "cookie_hash": "some_hash",
+        "cookie_encryption": "some_hash",
+        "access_key_encryption": "some_hash"
+ }
+
+```
+
+Using this configuration file we an start the Semaphore UI application.
+
+```bash
+sudo semaphore server --config /etc/semaphore/config.json
+```
+
+If everything is setup correctly you can now access the web application through **http://localhost:3000/** . You can login using the username and credentials you created and used during the Semaphore setup.
+
+## Semaphore Configuration
 
