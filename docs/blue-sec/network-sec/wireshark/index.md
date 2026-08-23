@@ -20,7 +20,7 @@ Wireshark is one, if not the most potent traffic analyzer tools available. It is
 
 ### GUI and data
 
-The wireshark GUI opens with a single all-in-one page, which provides a way for users to investigate traffic. There are 5 important sections at first glance:
+The Wireshark GUI opens with a single all-in-one page, which provides a way for users to investigate traffic. There are 5 important sections at first glance:
 
 <div class="annotate" markdown>
 

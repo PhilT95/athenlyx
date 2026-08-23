@@ -1,3 +1,5 @@
+<!-- vale Google.EmDash = NO -->
+
 # Recently Published
 
 This page keeps track of recently published files and guides.
