@@ -20,9 +20,9 @@ The Zensical setup is a very straight-forward process and does not differ a lot 
 
 To begin with the Zensical setup, connect to your system using SSH. Once logged in we will make sure the it is fully updated. Since we need root permissions to update the system and will be needing these permissions to install all required components as well we switch into the root session using the ``su`` command.
 
-```console
-[user@zensical ~]$ sudo su
-[root@zensical user]# dnf update -y
+```bash
+sudo su
+dnf update -y
 ```
 
 ### Installing Dependencies & Zensical
@@ -32,21 +32,19 @@ The only dependency required to install Zensical is `Python3`. It is required to
 
 We will use the built-in package manger to install python and verify its installation.
 
-```console
-[root@zensical user]# dnf install python3
-[root@zensical user]# python3 --version
-Python 3.12.13
+```bash
+dnf install python3
+python3 --version
 ```
 
 Once python is installed we can install all required python components ideally within a separate virtual  Python environment. Since we want to run Zensical without root permission and it is recommended to use the virtual environment without them as well we will continue inside the normal user context.
 
-```console
-[root@zensical user]# exit
-[user@zensical ~]$ python3 -m venv .venv
-[user@zensical ~]$ source .venv/bin/activate
-[user@zensical ~]$ pip install zensical
-[user@zensical ~]$ zensical --version
-0.0.46
+```bash
+exit
+python3 -m venv .venv
+source .venv/bin/activate
+pip install zensical
+zensical --version
 ```
 
 !!! info
@@ -56,9 +54,9 @@ Once python is installed we can install all required python components ideally w
 
 Zensical offers a quick way to setup a new project with a single command. This will create the necessary files and folders for a basic Zensical website to work.
 
-```console
-[user@zensical ~]$ zensical new myproject
-[user@zensical ~]$ cd myproject
+```bash
+zensical new myproject
+cd myproject
 ```
 
 After executing the `zensical new` command and navigating into the newly created directory we can verify it by checking if the project structure resembles the structure below.
@@ -118,15 +116,15 @@ You can already launch this website using the `zensical serve` command which wil
 Nginx is one of the most reliable and lightweight webserver engines. It is an ideal way to easily and securely host Zensical projects.
 Before we can host Zensical using nginx we need to install it, set it up correctly and configure it to run as a background service.
 
-```console
-[user@zensical ~]$ sudo su
-[root@zensical ~]$ dnf install nginx -y
+```bash
+sudo su
+dnf install nginx -y
 ```
 
 Once nginx is installed navigate to the nginx directory `/etc/nginx`. There we need to create a dedicated nginx config file for the project. 
 
-```console 
-[root@zensical nginx]$ nano yourwebsite.example.com.conf
+```bash
+nano yourwebsite.example.com.conf
 ```
 
 Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration will redirect all requests via **http**  to the **https** port. The second `server` block contains the **https** configuration with certain security and logging features as well as caching configured.
@@ -187,9 +185,9 @@ Please note that there is currently no SSL certificate provided for https, which
 
 Now we just need to register nginx as a system service and start it.
 
-```console
-[root@zensical nginx]$ systemctl enable nginx
-[root@zensical nginx]$ systemctl start nginx
+```bash
+systemctl enable nginx
+systemctl start nginx
 ```
 
 Once the nginx service it setup and running we can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via http/https to reach your webserver.

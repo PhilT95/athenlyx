@@ -3,13 +3,14 @@
 This page keeps track of recently published files and guides.
 
 !!! info "Latest addition"
-    The most recent addition is the **Zensical and Zensical setup guide** (2026-08-21).
+    The most recent addition is the [**Semaphore Setup Guide**](../linux-admin/ansible/semaphore_setup.md) (2026-08-23).
 
 <div class="grid cards" markdown>
 
 -   :material-calendar-month: __2026__
 
     ---
+    - **2026-08-23** - Added Semaphore Setup Guide
     - **2026-08-15** - Added Zensical and a Zensical setup guide.
     - **2026-08-12** — Added the VoxelDash mod setup guide and fixed some errors.
     - **2026-07-13** — Added the Minecraft server setup guide and the Minecraft sub category to services.

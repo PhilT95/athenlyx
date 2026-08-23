@@ -21,7 +21,8 @@ nav = [
                 ]},
                 {"Ansible" = [
                     "linux-admin/ansible/index.md",
-                    {"Ansible Setup Guide" = "linux-admin/ansible/ansible_setup.md"}
+                    {"Ansible Setup Guide" = "linux-admin/ansible/ansible_setup.md"},
+                    {"Semaphore Setup Guide" = "linux-admin/ansible/semaphore_setup.md"}
                 ]}
     ]},
     {"Security - Blue Teaming" = [

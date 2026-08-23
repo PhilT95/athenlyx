@@ -17,10 +17,10 @@ To continue with the following guide please make sure that your setup meets the 
 
 This part of the setup is pretty straight-forward. Connect to your AlmaLinux 10 instance where you want to install Ansible using SSH. Once you are connected you will need root access so we can update and install ansible.
 
-```console
-[admin@ansible ~]$ sudo su
-[root@ansible ~]# dnf upgrade -y
-[root@ansible ~]# dnf install ansible-core -y
+```bash
+sudo su
+dnf upgrade -y
+dnf install ansible-core -y
 ```
 
 Verify the ansible installation and version using the `ansible --version` command.
@@ -42,8 +42,8 @@ This command also reveals the location of the ansible configuration files, inclu
 
 Finally, using **Ansible Galaxy**, the collection that enables ansible to handle *dnf* packages needs to be installed.
 
-```console
-[root@ansible ~] ansible-galaxy collection install community.general
+```bash
+ansible-galaxy collection install community.general
 ```
 
 ### Ansible user setup
@@ -52,29 +52,28 @@ Since Ansible usually connects to different systems and therefore is a bigger se
 
 To start, the user needs to be created and a password should be set. You will be asked to enter and confirm the password for the new user *ansible*.
 
-```console
-[root@ansible ~]# useradd ansible
-[root@ansible ~]# passwd ansible
+```bash
+useradd ansible
+passwd ansible
 ```
 
 We also create a new group to make the management of permission independent of the user and add the user to the group.
 
-```console
-[root@ansible ~]# groupadd g-ansible
-[root@ansible ~]# usermod -aG g-ansible ansible
+```bash
+groupadd g-ansible
+usermod -aG g-ansible ansible
 ```
 
 Once the user and the group is created we need to give the members of the group necessary permissions to edit the ansible configuration files. The easiest way to do this is using the tool `setfacl`, which based on group memberships allows you to assign file and directory permission to a user.
 
-```console
-[root@ansible ~]# dnf install acl
-[root@ansible ~]# setfacl -R -m g:ansible:rwx /etc/ansible/
+```bash
+dnf install acl
+setfacl -R -m g:ansible:rwx /etc/ansible/
 ```
 
 We can confirm with `ls -l` if the group permissions are assigned correctly.
 
 ```console
-
 [root@ansible]# ls -l
 total 48
 -rw-rwxr--+ 1 root g-ansible  614 Feb 10 00:00 ansible.cfg
@@ -90,9 +89,9 @@ The final step is setting up the SSH key the ansible user will use to connect sa
 
 
 
-```console
-[root@ansible ~]# su ansible
-[ansible@ansible ~] ssh-keygen
+```bash
+su ansible
+ssh-keygen
 ```
 
 Once the key is installed you will need to create an ansible user on the relevant target systems and deploy the public key to its authorized keys for SSH authentication. Once done, verify the connection by connection to the target systems using SSH from the Ansible host. 
@@ -105,9 +104,9 @@ Once the key is installed you will need to create an ansible user on the relevan
 
 As explained [here](index.md), the Ansible inventory contains all necessary information about the hosts that Ansible should work on. To create a new Ansible inventory file, navigate to the Ansible directory `\etc\ansible\` and create a YAML-file there.
 
-```console
-[ansible@ansible ~]$ cd /etc/ansible 
-[ansible@ansible ansible]$ touch hosts.yml
+```bash
+cd /etc/ansible 
+touch hosts.yml
 ```
 
 
@@ -169,9 +168,9 @@ As mentioned [here](index.md), Ansible Playbooks define the actual tasks that sh
 
 For this guide we will setup the task to update *dnf* packages on a AlmaLinux 10 host that is within the *webserver* group of our inventory. First we need to create the playbook YAML-file. Create a file `update-local.yml` inside the ansible directory and open it with a text editor.
 
-```console
-[ansible@ansible ansible]$ touch update_webservers.yml
-[ansible@ansible ansible]$ nano update_webservers.yml
+```bash
+touch update_webservers.yml
+nano update_webservers.yml
 ```
 
 Once you are inside the file, you need to define the basics of the playbook by giving it a name, declare the hosts or groups that should be targeted by the playbook and which user should execute the playbook.
