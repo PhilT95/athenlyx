@@ -18,9 +18,9 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install zensical
+        run: pip install zensical==0.0.57
 
       - name: Build site
-        run: zensical==0.0.57 build --strict
+        run: zensical build --strict
 
 
