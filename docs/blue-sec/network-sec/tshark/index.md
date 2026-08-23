@@ -2,7 +2,7 @@
 
 > **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/index.md) and various other tools.
 
-<p align="right"><a herf="https://www.wireshark.org/docs/man-pages/tshark.html">wireshark.org</a></p>
+<p align="right"><a href="https://www.wireshark.org/docs/man-pages/tshark.html">wireshark.org</a></p>
 
 
 ## Command-Line Packet Analysis

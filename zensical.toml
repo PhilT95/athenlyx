@@ -7,7 +7,7 @@ copyright = "&copy; 2026 Phil Trommer"
 docs_dir = "docs"
 use_directory_urls = false
 extra_css = ["stylesheets/extra.css"]
-watch = ["includes"]
+watch = ["includes","overrides"]
 
 
 nav = [

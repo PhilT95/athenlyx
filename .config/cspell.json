@@ -13,6 +13,15 @@
         "usermod",
         "Velociraptor",
         "webservers",
-        "Zensical"
+        "Zensical",
+        "Wazuh",
+        "setfactl",
+        "certbot",
+        "venv",
+        "myproject",
+        "mkdocs",
+        "yourwebsite",
+        "nosniff",
+        "SIEM"
     ]
 }

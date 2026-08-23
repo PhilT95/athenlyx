@@ -3,7 +3,7 @@
 >
 > Snort can be deployed inline to stop these packets, as well. Snort has three primary uses: As a packet sniffer like tcpdump, as a packet logger — which is useful for network traffic debugging, or it can be used as a full-blown network IPS. Snort can be downloaded and configured for personal and business use alike.  
 
-<p align="right"><a herf="https://www.snort.org/">snort.org</a></p>
+<p align="right"><a href="https://www.snort.org/">snort.org</a></p>
  
 
 ## Basic commands

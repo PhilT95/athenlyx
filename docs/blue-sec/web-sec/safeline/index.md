@@ -6,7 +6,7 @@
 >
 > A web application firewall helps protect web apps by filtering and monitoring HTTP traffic between a web application and the Internet. It typically protects web apps from attacks such as SQL injection, XSS, code injection, os command injection, CRLF injection, ldap injection, xpath injection, RCE, XXE, SSRF, path traversal, backdoor, brute-force, http-flood, bot abused, among others.
 
-<p align="right"><a herf="https://github.com/chaitin/SafeLine/">github.com/chaitin/SafeLine</a></p>
+<p align="right"><a href="https://github.com/chaitin/SafeLine/">github.com/chaitin/SafeLine</a></p>
 
 
 ## Setup

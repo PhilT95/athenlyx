@@ -80,7 +80,7 @@ The UDP Scan:
 !!! Quote "What is ARP?"
     The ARP is a communication protocol for discovering the link layer address, such as a MAC address, associated with a internet layer address, typically an IPv4 address.
 
-<p align="right"><a herf="https://en.wikipedia.org/wiki/Address_Resolution_Protocol">Wikipedia.org</a></p>
+<p align="right"><a href="https://en.wikipedia.org/wiki/Address_Resolution_Protocol">Wikipedia.org</a></p>
 
 ARP Poisoning, also known as ARP Spoofing or Man in the Middle attack, is a type of attack that involves network jamming/manipulating by sending malicious ARP packets to the default gateway. The goal of this attack is to manipulate the **IP to MAC address table** and sniff the traffic of the target host.
 
