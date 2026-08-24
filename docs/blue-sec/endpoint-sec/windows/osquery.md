@@ -1,6 +1,6 @@
-# OSquery
+# Osquery
 
-**OSquery** is an open-soruce agent created by Facebook in 2014. It converts the operating system into a relational database and allows to ask questions from the tables using SQL queries like:
+**Osquery** is an open-soruce agent created by Facebook in 2014. It converts the operating system into a relational database and allows to ask questions from the tables using SQL queries like:
 
 - returning the list of running processes
 - a user account created on the host
@@ -13,9 +13,9 @@ It is widely used by Security Analysts, Incident Responders etc. and can be used
 - MacOS
 - FreeBSD
 
-## Basics of OSquery
+## Basics of Osquery
 
-One way to interact with **OSquery** is the interactive mode. It can be used with a terminal by running the ``osqueryi`` binary. The ``.help`` parameter provides more information.
+One way to interact with **Osquery** is the interactive mode. It can be used with a terminal by running the ``osqueryi`` binary. The ``.help`` parameter provides more information.
 
 ```pwsh-session
 PS C:\Users\Administrator> osqueryi
@@ -119,7 +119,7 @@ The [Official Documentation](https://osquery.io/schema/5.19.0) provides more det
 
 ### Display Mode
 
-OSquery comes with multiple display modes. Refer to the ``.help`` function or the example below.
+Osquery comes with multiple display modes. Refer to the ``.help`` function or the example below.
 
 ```pwsh-session
 osquery> .help
@@ -133,9 +133,9 @@ osquery> .help
 
 ## SQL Queries
 
-The SQL language implemented in **OSquery** is not an entire SQL language that is usually used, but rather a superset of SQLite.
+The SQL language implemented in **Osquery** is not an entire SQL language that is usually used, but rather a superset of SQLite.
 
-Most of the time, the queries start with the **SELECT** statement, because OSquery only queries information on an endpoint. There is no updating of information or data.
+Most of the time, the queries start with the **SELECT** statement, because Osquery only queries information on an endpoint. No updating of information or data takes place.
 
 !!! note
     Statements like **UPDATE** and **DELETE** can be used, but only when run-time tables (views) are created or an extensions is used that supports this.
@@ -208,11 +208,14 @@ The following filtering options exist.
 
 The wildcard rules for folder structures works as follows
 
+<!-- vale Vale.Spelling = NO -->
+
 - ``%``: Match all files and folders for one level
-- ``%%``: Match all files anf folders recursively
+- ``%%``: Match all files and folders recursively
 - ``%abc``: Match all within-level ending in **abc**
 - ``abc%``: Match all within-level starting with **abc**
 
+<!-- vale Vale.Spelling = YES -->
 
 !!! warning
     Some tables *require* a ``WHERE`` clause, such as the **file** table.
@@ -226,7 +229,7 @@ The wildcard rules for folder structures works as follows
 
 ### JOIN Function
 
-OSquery can also be used to join 2 tables based on a column that is shared by both.
+Osquery can also be used to join 2 tables based on a column that is shared by both.
 
 ```pwsh-session
 osquery> select p.pid, p.name, p.path, u.username from processes p JOIN users u on u.uid=p.uid LIMIT 10;

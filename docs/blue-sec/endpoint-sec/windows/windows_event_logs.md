@@ -4,11 +4,11 @@
 
 <p align="right"><a href="https://en.wikipedia.org/wiki/Logging_(computing)">Wikipedia.org</a></p>
 
-This definition mostly applies to system administrators, technicians etc. In Cyber Security, Event Logs are used by blue teamers to analyze and correlate (unrelated) events on different servers. This is usually done by a SIEM.
+This definition mostly applies to system administrators, technicians etc. In Cybersecurity, Event Logs are used by blue teams to analyze and correlate (unrelated) events on different servers. This is usually done by a SIEM.
 
 Windows Event Logs are not presented as simple text files. They are stored in a proprietary binary format with an .evt or .evtx extension. To view them, built-in Windows tools can be used to translate them into XML. The log files usually can be found in ``C:\Windows\System32\winevt\Logs``.
 
-There are 3 main ways of accessing event logs within a Windows system:
+Accessing event logs within a Windows System can be done in 3 different ways:
 
 1. **Event Viewer**: GUI-based application
 2. **Wevtutil.exe**: CLI Tool
@@ -68,7 +68,7 @@ The properties of this log show key information like:
 - Creation time
 - Last modified
 - Last accessed
-- Maximum log size and log size actions (e.g. log rotation)
+- Maximum log size and log size actions (for example log rotation)
 
 ![Event Log Properties](images/events/events_eventviewer-logproperties.png)
 

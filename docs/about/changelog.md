@@ -32,7 +32,7 @@ This page keeps track of recently published files and guides.
 
     - **2025-09-29** — Added further Wazuh articles, including the setup guide.
     - **2025-09-25** — Added the main Wazuh article.
-    - **2025-09-18** — Added the OSquery article.
+    - **2025-09-18** — Added the Osquery article.
     - **2025-09-12** — Added the Sysmon and OpenSCAP articles.
     - **2025-09-03** — Added the Windows Event Logs documentation.
     - **2025-08-29** — Added the Sysinternals documentation.

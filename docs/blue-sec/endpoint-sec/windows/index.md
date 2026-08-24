@@ -43,12 +43,12 @@ The **Sysinternals** tools are a compilation of over 70 Windows-based tools. Eac
 - System Information
 - Miscellaneous
 
-Two very useful tools for endpoint investigation are:
+Two useful tools for endpoint investigation are:
 
-- **TCPVIEW** -> Networking Utility tool
+- **TCPView** -> Networking Utility tool
 - **Process Explorer** -> Process Utility tool
 
-### TCPVIEW
+### TCPView
 
 This tool is a Windows program that provides a detailed listings of all TCP and UDP endpoints on a Windows system, including the local and remote addresses and state of TCP connections. TCPView offers a more informative and conveniently presented subset of the **Netstat** program which is bundled with Windows. The TCPView download also includes **Tcpvcon**, a CLI version with the same functionality.
 
@@ -75,7 +75,7 @@ Windows event logs are not simple text files and therefore can't be viewed using
 
 1. **.evtx**-files are Windows XML event log files. 
 
-There are 3 main way of accessing these event logs within Windows:
+Three main ways of accessing these event logs within Windows are:
 
 1. **EvenViewer**: GUI-based application
 2. **Wevtutil.exe**: CLI-based tool
@@ -89,9 +89,9 @@ Sysmon is a tool to monitor and log events on Windows and commonly used by enter
 
 Sysmon gathers detailed and high-quality logs as well as event tracing that assists in identifying anomalies in a given environment. It is often used with a SIEM or other log parsing solutions that aggregate, filter and visualize events. It includes 27 types of Event IDs, all of which can be used within the required configuration file to specify how the events should be handled and analyzed. You can find an example configuration file [here](https://github.com/SwiftOnSecurity/sysmon-config).
 
-### OSQuery
+### Osquery
 
-OSQuery is an open-source tool created by Facebook. It is used to query one or multiple endpoints using SQL syntax. Besides Windows it also runs on Linux, macOS and FreeBSD. To interact with OSQuery usage of the **CMD** or **PowerShell**.
+Osquery is an open-source tool created by Facebook. It is used to query one or multiple endpoints using SQL syntax. Besides Windows it also runs on Linux, macOS and FreeBSD. To interact with Osquery usage of the **CMD** or **PowerShell**.
 
 ### Wazuh
 

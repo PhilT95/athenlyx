@@ -3,7 +3,7 @@
 
 It can handle two types of data as an input:
 
-- **Packet Capture Files**: Pcap files created with tcpdump, tshark and Wireshark like applications.
+- **Packet Capture Files**: pcap files created with tcpdump, TShark and Wireshark like applications.
 - **Log Files**: Structured log files like Zeek logs.
 
 Brim is built on different open-source platforms:
@@ -27,8 +27,8 @@ Once you open the application, the landing page loads up. The landing page has t
 These timelines provide information when the capture started and ended as well as information fields.
 
 
-### Quieres and History
-Quieres help us to correlate finding and find the event of interest. History stores executed queries as well.
+### Queries and History
+Queries help us to correlate finding and find the event of interest. History stores executed queries as well.
 
 ![Image](Brim_data/brim_queries_history.png) 
 

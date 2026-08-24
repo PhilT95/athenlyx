@@ -29,7 +29,7 @@ tcp
 TCP
 http
 https
-cmdlet
+[Cc]mdlet?s?
 Sysinternals
 SDelete
 [Ww]inlogon
@@ -44,3 +44,22 @@ Lakera
 certbot
 GitHub
 VoxelDash
+[Cc]ybersecurity
+Velociraptor
+superset
+TCPView
+Netstat
+Tcpvcon
+DLL?'?s?
+(?i)\w+[.]dll
+cyberattack?s?
+cyber threat?s?
+hostname?s?
+toolkit?s?
+Nmap
+Hashcat
+Sigcheck
+tcpdump
+ACL?s?
+[Bb]oolean?s?
+subkey

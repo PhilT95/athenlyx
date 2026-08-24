@@ -37,7 +37,7 @@ Since the Task Manager doesn't provide a *parent-child* process view, other tool
 
 ### System
 
-The **System** process, which always gets the PID 4, is a special kind of thread that runs only in *kernel-mode*. System threads have all attributes and contexts of regular *user-mode* threads[^1] but are different in that they run only in kernel-mode executing code loaded in system space like loading device drivers. In addition, system threads don't have a user process address space and hence must allocate any dynamic storage from OS memory heaps, such as a paged or nonpaged pool. If you want to know more about *kernel mode* and *user mode* follow [this](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) link.
+The **System** process, which always gets the PID 4, is a special kind of thread that runs only in *kernel-mode*. System threads have all attributes and contexts of regular *user-mode* threads[^1] but are different in that they run only in kernel-mode executing code loaded in system space like loading device drivers. In addition, system threads don't have a user process address space and hence must allocate any dynamic storage from OS memory heaps, such as a paged or non-paged pool. If you want to know more about *kernel mode* and *user mode* follow [this](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/user-mode-and-kernel-mode) link.
 
 [^1]: Such as a hardware context, priority and more
 
@@ -216,7 +216,7 @@ Information regarding the services is stored within the registry under the path 
 
 This process also leads device drivers marked as *auto-start* into memory.
 
-When a user logs into a machine successfully, it also is responsible for setting the value of the Last Known Good control set (Last Known Good Configuration) to that of the *CurrenControlSet*. Tha value of the Last Known Good control set can be found in the registry key ``HKLM\System\Select\`` within the value **LastKnownGood**.
+When a user logs into a machine successfully, it also is responsible for setting the value of the Last Known Good control set (Last Known Good Configuration) to that of the *CurrenControlSet*. The value of the Last Known Good control set can be found in the registry key ``HKLM\System\Select\`` within the value **LastKnownGood**.
 
 ![Last Known Good Control Set](images/process_services-lastknowngood.png)
 
@@ -257,11 +257,11 @@ The services running in this process are implemented as DLLs. The DLL to impleme
 
 You can also view this information within the Process Hacker tool by right-clicking the svchost.exe process.
 
-![Svchost.exe Service navigation](images/process_svchost-serviceexample.png)
+![svchost.exe Service navigation](images/process_svchost-serviceexample.png)
 
 Within the details of the service you can again find the referenced DLL.
 
-![Svchost Service Example](images/process_svchost-exampledetails.png)
+![svchost Service Example](images/process_svchost-exampledetails.png)
 
 You can also see within the **Binary path** that the svchost.exe is called with the ``-k`` parameter. This parameters is used for grouping similar services to share the same process. This concept was based on the OS design and implemented to reduce resource consumption. Starting with **Windows 10 1703**, services grouped into host processes changed. Machines that have more then 3.5 GB of RAM will use a separate process for each service. You can look [here](https://en.wikipedia.org/wiki/Svchost.exe) for more information. The ``-k`` parameter is the way on how to legitimately call the svchost.exe process.
 
@@ -299,7 +299,7 @@ It uses authentication packages specified in ``HKLM\System\CurrentControlSet\Con
 
 ![LSASS registry](images/process_lsass-registry.png)
 
-LSASS.exe is another prominent targt for malicious activity. Common tools like **mimikatz** are used to dump credentials, or attackers mimic this process to hide in plain sight by renaming their malware or misspelling it slightly.
+LSASS.exe is another prominent target for malicious activity. Common tools like **Mimikatz** are used to dump credentials, or attackers mimic this process to hide in plain sight by renaming their malware or misspelling it slightly.
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
@@ -315,7 +315,7 @@ LSASS.exe is another prominent targt for malicious activity. Common tools like *
 The **winlogon.exe** process is responsible for handling the **Secure Attention Sequence** (SAS). It is the 
 ++ctrl+alt+del++ key combinations users press to enter their username and password. It is also responsible for loading the user profile by loading the user's **NTUSER.DAT** into ``HKCU``. The **userinit.exe** loads the user's shell. You can out more about this process [here](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc939862(v=technet.10)?redirectedfrom=MSDN).
 
-![Winlogon.exe Registry config](images/process_winlogon-registry.png)
+![Winlogon.exe Registry configuration](images/process_winlogon-registry.png)
 
 
 ??? tip "Checking the shell key"

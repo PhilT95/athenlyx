@@ -9,7 +9,7 @@ The **Sysinternals** tool is a compilation of over 70+ Windows-based tools. Thes
 - **System Information**
 - **Miscellaneous**
 
-The tool is very commonly used for managing Windows systems. It is in fact so popular that even Red Teams and adversaries use them.
+The tool is commonly used for managing Windows systems. It is in fact so popular that even Red Teams and adversaries use them.
 
 
 ## Installation
@@ -37,7 +37,7 @@ Following the Download of the Sysinternals [ZIP File](https://download.sysintern
 You can also use **Sysinternals** executables directory from the Web without downloading it beforehand. Simply enter a tool's Sysinternals Live path into Windows Explorer or a CMD session as ``\\live.sysinternals.com\tools\<toolname>``. 
 
 !!! note
-    To access this web path from your system, you usually need to install and start the WebDAV client on the machine. On most modern Windows machines the client will already be installed, but you need to run it manually. You can start the service from a powershell admin session.
+    To access this web path from your system, you usually need to install and start the WebDAV client on the machine. On most modern Windows machines the client will already be installed, but you need to run it manually. You can start the service from a PowerShell admin session.
 
     ```pwsh-session
     PS C:\WINDOWS\system32> Get-Service webclient
@@ -113,7 +113,7 @@ SDelete has been used by attackers and is associated with MITRE techniques [T148
 
 ### Autoruns
 
-**Autoruns** is a utility which has the most comprehensive knowledge of auto-starting locations of any startup monitor. It shows you what programs are configured to run during system boot or login nad when you start various built-in Windows applications like Windows Explorer and media players. These programs and drivers include the ones in the startup folder, *Run*, *RunOnce* and other registry keys. **Autoruns** reports:
+**Autoruns** is a utility which has the most comprehensive knowledge of auto-starting locations of any startup monitor. It shows you what programs are configured to run during system boot or login and when you start various built-in Windows applications like Windows Explorer and media players. These programs and drivers include the ones in the startup folder, *Run*, *RunOnce* and other registry keys. **Autoruns** reports:
 
 - Shell Extensions
 - Toolbars
@@ -167,7 +167,7 @@ It provides features like:
 
 When you launch ProcMon, you must use the filter and must configure it properly.
 
-![ProcMon Filter Config](images/sysinternals/sysinternals_procmon-filter.png)
+![ProcMon Filter Configuration](images/sysinternals/sysinternals_procmon-filter.png)
 
 Here the filter is set to **notepad.exe**
 
@@ -232,7 +232,7 @@ Using this configuration, the displayed information is shown like in the picture
 
 ### RegJump
 
-**RegJump** is a small CLI applet that takes a registry path and opens registry on that path. It accepts rook keys in standard (e.g. ``HKEY_LOCAL_MACHINE``) and abbreviated form (e.g. ``HKLM``).
+**RegJump** is a small CLI applet that takes a registry path and opens registry on that path. It accepts rook keys in standard (for example ``HKEY_LOCAL_MACHINE``) and abbreviated form (for example ``HKLM``).
 
 ```batch
 C:\Users\Administrator\Desktop\SysinternalsSuite>regjump HKLM\System\CurrentControlSet\Services\WebClient

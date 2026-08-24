@@ -1,5 +1,5 @@
 # NetworkMiner - Open Source Traffic Sniffer and more
->NetworkMiner is an open source NFAT for Windows (but also works in Linux / MacOSX / FreeBSD). NetworkMiner can be used as a passive network sniffer/packet capturing tool to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse PCAP files for off-line analysis and to regenerate/reassemble transmitted files and certificates from PCAP files.
+>NetworkMiner is an open source NFAT for Windows (but also works in Linux / MacOSX / FreeBSD). NetworkMiner can be used as a passive network sniffer/packet capturing tool to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse pcap files for off-line analysis and to regenerate/reassemble transmitted files and certificates from pcap files.
 
 
 NetworkMiner is a great tool to get:
@@ -43,10 +43,10 @@ Another important menu is the **Credentials** menu, which shows extracted creden
 
 ![Image](./NetworkMiner_Data/NetworkMinerCredentials.png)
 
-The **Files** menu shows extracted files from investigated pcaps.
+The **Files** menu shows extracted files from investigated pcap files.
 
 ![Image](./NetworkMiner_Data/NetworkMinerFiles.png)
 
-The **Messages** menu shows extracted emails, chats and messages from investigated pcaps.
+The **Messages** menu shows extracted emails, chats and messages from investigated pcap files.
 
 ![Image](NetworkMiner_Data/NetworkMinerMessages.png)

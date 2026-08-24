@@ -4,10 +4,10 @@
 
 - Finding evidence of malicious activity in the network and filtering false alarms from real incidents
 - Robustly removing the attacker so their access to the network is gone
-- Identifying the extent and timeframe of a breach, which assists in communicating with relevant stakeholders
+- Identifying the extent and time frame of a breach, which assists in communicating with relevant stakeholders
 - Finding loopholes that led to the breach, which can give insight into what needs to be changed to avoid further breaches
 - Understanding attacker behavior to preemptively block further attempts
-- Sharing information about attackers with the cyber security community
+- Sharing information about attackers with the cybersecurity community
 
 Since DFIR requires both expertise in **Digital Forensics** and **Incident Response**, the field is divided into its 2 parts:
 
@@ -28,7 +28,7 @@ Artifacts are pieces of evidence that point to an activity performed on a system
 
 ### Evidence Preservation
 
-While DFIR is being performed, the integrity of the evidence that is being collected must be maintained. There are established practices that make the preservation easier.
+While DFIR is being performed, the integrity of the evidence that is being collected must be maintained. Established practices exist that make the preservation easier.
 
 1. Any forensic analysis contaminates the evidence, therefore evidence is first collected and write-protected (read-only)
 2. A copy of the write-protected evidence is used for the analysis. No analysis will be done on the original evidence and also assures investigators that there is always a backup.
@@ -52,7 +52,7 @@ Once all artifacts are collected and their integrity is maintained, they need to
 
 ## DFIR Tools
 
-There are various tools that assist with the DFIR process which enhance different capabilities and can save time.
+Various tools assist with the DFIR process which enhances different capabilities and can save time.
 
 |Tool|Description|
 |:---|:----------|
@@ -61,7 +61,7 @@ There are various tools that assist with the DFIR process which enhance differen
 |**Autopsy**|Autopsy is an open-source forensics platform that helps analyzing data from digital media like mobile devices, hard drives and removable drives. Various plugins for autopsy speed up the forensic process and extract valuable information from raw data sources.|
 |**Volatility**|This tools assists at performing analysis for memory captures from both Windows and Linux systems. It is a powerful tool that can help extract valuable information from the memory of a machine under investigation.|
 |**Redline**|Redline is an incident response tool developed and freely distributed by **FireEye**. This tool can gather forensic data from a system and help with collected forensic information.|
-|**Velociraptor**|Velociraptor is an advanced endpoint-monitoring, forensics and response platform. It is open-source and very powerful.|
+|**Velociraptor**|Velociraptor is an advanced endpoint-monitoring, forensics and response platform. It is open-source and powerful.|
 
 ## Incident Response Process
 
