@@ -2,7 +2,7 @@
 
 > Wireshark is a powerful, open-source network protocol analyzer that allows users to capture and interactively browse the traffic running on a computer network, providing deep inspection of hundreds of protocols. As an open-source tool, Wireshark is freely available for use and distribution, with its source code accessible under the GNU General Public License (GPL).
 
-<p align="right"><a href="https://www.wireshark.org/">wireshark.org</a></p>
+<p align="right"><a href="https://www.wireshark.org/">Wireshark.org</a></p>
 
 
 ## The Basics
@@ -20,7 +20,7 @@ Wireshark is one, if not the most potent traffic analyzer tools available. It is
 
 ### GUI and data
 
-The Wireshark GUI opens with a single all-in-one page, which provides a way for users to investigate traffic. There are 5 important sections at first glance:
+The Wireshark GUI opens with a single all-in-one page, which provides a way for users to investigate traffic. Five important sections stand out at first glance:
 
 <div class="annotate" markdown>
 
@@ -36,7 +36,7 @@ The Wireshark GUI opens with a single all-in-one page, which provides a way for 
 
 ![Image](images/wireshark_general.png)
 
-### Loading PCAP files
+### Loading pcap files
 
 When we load a pcap file, Wireshark shows its potential.
 

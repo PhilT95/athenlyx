@@ -6,7 +6,7 @@ A **SIEM** is a tool that collects data from various endpoints and network devic
 
 ## What is a SIEM
 
-A SIEM is based on working with logs. It can use **Host-Centric** and **Network-Centric** log sources. Devices that generate these logs will generate hundreds of events per second, which can be a very tedious task when, for example, logs need to be investigated after an incident. A SIEM takes logs from all these various sources in real-time and provides the ability to **correlate** between events, **search** through the logs, **investigate** incidents and **respond** promptly to them. Other key features are:
+A SIEM is based on working with logs. It can use **Host-Centric** and **Network-Centric** log sources. Devices that generate these logs will generate hundreds of events per second, which can be a tedious task when, for example, logs need to be investigated after an incident. A SIEM takes logs from all these various sources in real-time and provides the ability to **correlate** between events, **search** through the logs, **investigate** incidents and **respond** promptly to them. Other key features are:
 
 - Real-time log Ingestion
 - Alerting against abnormal activities
@@ -46,7 +46,7 @@ All these logs provide a wealth of information and cen help identifying security
 Once the logs are ingested, a SIEM looks for unwanted or suspicious patterns within the logs with the help of conditions set in rules by analyst and experts. If a condition is met, a rule gets triggered and an incident can be investigated.
 
 !!! info
-    Usually every SIEM provides a **Dashboard** which presents a summary of the data after being normalized and ingested. Each SIEM comes with a default dashboard an an option for custom dashboards.
+    Usually every SIEM provides a **Dashboard** which presents a summary of the data after being normalized and ingested. Each SIEM comes with a default dashboard an option for custom dashboards.
 
 **Correlation rules** are logical expression set to be triggered and play an important role in the timely detection of threats. This can be for example
 

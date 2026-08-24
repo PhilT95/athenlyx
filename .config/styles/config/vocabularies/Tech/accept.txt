@@ -22,13 +22,10 @@ Kerberos
 Kibana
 Syslog
 cron
-pcap
-udp
+pcap?s?
 UDP
-tcp
 TCP
-http
-https
+HTTP?S?
 [Cc]mdlet?s?
 Sysinternals
 SDelete
@@ -36,7 +33,7 @@ SDelete
 Autoruns
 hashcat
 nginx
-url
+(?i)URL
 XPath
 svchost
 Snyk
@@ -52,9 +49,10 @@ Netstat
 Tcpvcon
 DLL?'?s?
 (?i)\w+[.]dll
+(?i)\w+[.]log
 cyberattack?s?
 cyber threat?s?
-hostname?s?
+[Hh]ostname?s?
 toolkit?s?
 Nmap
 Hashcat
@@ -63,3 +61,30 @@ tcpdump
 ACL?s?
 [Bb]oolean?s?
 subkey
+[Rr]uleset?s?
+Meterpreter
+[Bb]ackdoor?s?
+msfvenom
+Xeexe
+pcapng
+SID?s?
+Msg
+Nocase
+[Cc]leartext
+severities
+unencrypted
+Spamhaus
+MITRE Cyber Analytics Repository
+STIG?s?
+exfiltration
+exfiltrate
+subnet
+Logstash
+Lucene
+AlmaLinux
+CVE?s?
+Dev Tools*
+homelab?s?
+routable
+[Uu]ntrusted
+dnscat?2?

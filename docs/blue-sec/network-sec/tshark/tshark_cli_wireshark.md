@@ -26,9 +26,9 @@ Some interesting statistics options are:
 |`-z endpoints,udp`|Providing a summarized view of the endpoints by UDP addresses. Works for IPv4 and IPv6.|
 |`-z endpoints,wlan`|Providing a summarized view of the endpoints by IEEE 802.11 addresses|
 
-A few mre interesting statistics are:
+A few more interesting statistics are:
 
-- `-z conv` : This view provides an overview of the traffic flow between to particual connection points. Similar to the endpoint filtering, conversations can be viewed in multiple formats like `-z conv,ip`
+- `-z conv` : This view provides an overview of the traffic flow between to particular connection points. Similar to the endpoint filtering, conversations can be viewed in multiple formats like `-z conv,ip`
 - `-z expert`: This view helps you to view automatic comments provided by Wireshark. 
 
 !!! tip "Focusing on the statistics"
@@ -403,7 +403,7 @@ ip.src	ip.dst	http.request.method
 
 While investigating it is important to know how to extract hostnames, DNS queries and user agents. 
 
-### Extract Hostnames
+### Extract hostnames
 
 The option to extract hostnames is `-e dhcp.option.hostname`
 

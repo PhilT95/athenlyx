@@ -87,7 +87,7 @@ The main command line parameters are the following:
 ## Zeek Logging
 Zeek generates a lot of log files since they are created according to traffic data. There will be a log for every connection in the wire, including the application level protocols and fields.
 
-In a nutshell, Zeek has the following log files:
+Zeek basically has the following log files:
 
 |Category|Description|Log Files|
 |:-------|:----------|:--------|

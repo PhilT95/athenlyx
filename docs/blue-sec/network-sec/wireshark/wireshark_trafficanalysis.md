@@ -1,16 +1,16 @@
 # Wireshark - Traffic analysis
 
-Using the knowledge from [Wireshark Basics](index.md) and [Wireshark - Advanced Features](wireshark_advanced.md) you can now investigate anmd correlate packet-level information and start seeing the big picture behind in network traffic like detectin anomalies and malicious activities.
+Using the knowledge from [Wireshark Basics](index.md) and [Wireshark - Advanced Features](wireshark_advanced.md) you can now investigate and correlate packet-level information and start seeing the big picture behind in network traffic like detecting anomalies and malicious activities.
 
 ## Detecting Nmap scans
 
-Nmap is a very commonly used tool for mapping networks, identifying live hosts and discovering services. But it also leaves a pattern which can be detected. The most common Nmap scan types are:
+Nmap is a commonly used tool for mapping networks, identifying live hosts and discovering services. But it also leaves a pattern which can be detected. The most common Nmap scan types are:
 
 - TCP connect status
 - SYN scans
 - UPD scans
 
-To be able to detect Nmaps activity, you need to understand its scan behavior on the network.
+To be able to detect Nmap's activity, you need to understand its scan behavior on the network.
 
 ### TCP flags summary
 
@@ -84,7 +84,7 @@ The UDP Scan:
 
 ARP Poisoning, also known as ARP Spoofing or Man in the Middle attack, is a type of attack that involves network jamming/manipulating by sending malicious ARP packets to the default gateway. The goal of this attack is to manipulate the **IP to MAC address table** and sniff the traffic of the target host.
 
-ARP analysis boils down to:
+ARP analysis basically means:
 
 - Work on the local network
 - Enables the communication between MAC addresses
@@ -92,7 +92,6 @@ ARP analysis boils down to:
 - Not a routable protocol
 - It doesn't have an authentication function
 - Common patterns are:
-
     - Request and response
     - Announcement and gratuitous packets
 
@@ -109,7 +108,7 @@ A suspicious situation means having two different ARP responses (conflict) for a
 
 ## Identifying Hosts
 
-When investigating a compromise or malware infection, you should know how to identify the host on the network apart from IP to MAC address match. One way to to di is identifying the host and users on the network to decide the investigation's starting point and list the hosts and users associated with the malicious traffic/activity. These protocols can be used in Host and user identification:
+When investigating a compromise or malware infection, you should know how to identify the host on the network apart from IP to MAC address match. One way to it is identifying the host and users on the network to decide the investigation's starting point and list the hosts and users associated with the malicious traffic/activity. These protocols can be used in Host and user identification:
 
 - DHCP traffic
 - NetBIOS traffic
@@ -125,7 +124,7 @@ DHCP is used to automatically manage OP addresses and their assignments.
 |**DHCP Request** packets contain the hostname information|`dhcp.option.dhcp == 3`|
 |**DHCP ACK** packets represent the accepted requests|`dhcp.option.dhcp == 5`|
 |**DHCP NAK** packets represent denied requests|`dhcp.option.dhcp == 6`|
-|**DHCP Request** can be filteres for the following options <ul><li>**Option 12**: Hostname</li><li>**Option 50**: Requested IP address</li><li>**Option 51**: Requested IP lease time</li><li>**Option 61**: Client's MAC address</li></ul>|`dhcp.option.hostname contains "keyword"`|
+|**DHCP Request** can be filtered for the following options <ul><li>**Option 12**: Hostname</li><li>**Option 50**: Requested IP address</li><li>**Option 51**: Requested IP lease time</li><li>**Option 61**: Client's MAC address</li></ul>|`dhcp.option.hostname contains "keyword"`|
 |**DHCP ACK** options: <ul><li>**Option 15**: Domain name</li><li>**Option 51**: Assigned IP lease time</li></ul>|`dhcp.otion.domain_name contains "keyword"`|
 |**DHCP NAK** options: <ul><li>**Option 56**: Message (rejection details/reason)</li></ul>|Since the message could be unique to the situation, it is suggested to read the message instead of filtering it.|
 
@@ -133,11 +132,11 @@ DHCP is used to automatically manage OP addresses and their assignments.
     Due to the nature of the protocol, only **Option 53** (request type) has predefined static values. You should filter the packet type first and then you can filter the rest of the options by either using **applying as column** or us the advanced filters like **contains** or **matches**.
 
 !!! tip "Accessing Options"
-    The Options are part of the packet details and filtering depends on the protocol. Inspect the specific protocol and you will see the option. Just set a filter using the **Apply Filter** menu and you can modify the query further yourself!
+    The Options are part of the packet details and filtering depends on the protocol. Inspect the specific protocol and you will see the option. Just set a filter using the **Apply Filter** menu and you can modify the query further yourself.
 
 ### NetBIOS Analysis
 
-NetBIOS is responisble for allowing applications on different hosts to communicate with each other.
+NetBIOS is responsible for allowing applications on different hosts to communicate with each other.
 
 |Notes|Wireshark filter|
 |:----|:---------------|
@@ -146,19 +145,20 @@ NetBIOS is responisble for allowing applications on different hosts to communica
 
 ### Kerberos Analysis
 
-Kerberos is the default authentication service within Microsoft Windows domains. It is responsible for authenticating service requests between 2 or more computers over the untrusted network. The goal is to prove identiy securely.
+Kerberos is the default authentication service within Microsoft Windows domains. It is responsible for authenticating service requests between 2 or more computers over the untrusted network. The goal is to prove the identity securely.
 
 |Notes|Wireshark filter|
 |:----|:---------------|
 |Global search|`kerberos`|
 |User account search using **CNameString**, which is the username|<ul><li>`kerberos.CNameString contains "keyword"`</li><li>`kerberos.CNameString and !(kerberos.CNameString contains "$")`</li></ul>|
-|**pvno**: Protocol version|`kerberos.pvno == 5`|
-|**realm**: Domain name for the generated ticket|`kerberos.realm contains ".org"`|
-|**sname**: Service and domain name for the generated ticket|`kerberos.SNameString == "krbtg"`|
-|**addresses**: Client IP address and NetBIOS name|`kerberos.addresses`|
+|`pvno`: Protocol version|`kerberos.pvno == 5`|
+|`realm`: Domain name for the generated ticket|`kerberos.realm contains ".org"`|
+|`sname`: Service and domain name for the generated ticket|`kerberos.SNameString == "krbtg"`|
+|`addresses`: Client IP address and NetBIOS name|`kerberos.addresses`|
+
 
 !!! note 
-    The **addresses* information is only available in request packets.
+    The **addresses** information is only available in request packets.
 
 ??? info "User Account search confusion"
     Some packets could provide hostname information in the **CNameString** field. To avoid this confusion, filter the **\$** value. The values end with **\$** are hostnames, the ones without it are user names.
@@ -166,7 +166,7 @@ Kerberos is the default authentication service within Microsoft Windows domains.
 
 ## Tunneling Traffic
 
-Traffic tunenling, also known as **port forwarding** is a way to transfer data in a secure method to segments and zones. It can be used for *internet to private networks* flows. There is an encapsulation process to hide the data so the transferred data appears natural, but it contains private data packets and transfers them to the final destination securely.  
+Traffic tunneling, also known as **port forwarding** is a way to transfer data in a secure method to segments and zones. It can be used for *internet to private networks* flows. An encapsulation process exists which hides the data so it appears normal white being transferred, but it contains private data packets and transfers them to the final destination securely.  
 Tunneling provides anonymity and security and is therefore used by enterprise networks. However, this level of data encryption also makes it a method for attackers to bypass security perimeters using the standard and trusted protocols used in everyday traffic like ICMP and DNS.
 
 ### ICMP Analysis
@@ -184,7 +184,7 @@ Usually ICMP tunneling attacks are anomalies appearing after a malware execution
 
 ### DNS Analysis
 
-DNS is designed to translate domain names to IP addresses. It is a very crucial part for web services and the Internet in general. It is very commonly used and trusted and therefore often ignored. Like [ICMP](#icmp-analysis), it is also used for data exfiltration and C2 activities.
+DNS is designed to translate domain names to IP addresses. It is a really crucial part for web services and the Internet in general. It is commonly used and trusted and therefore often ignored. Like [ICMP](#icmp-analysis), it is also used for data exfiltration and C2 activities.
 
 Similar to ICMP tunnels, DNS attacks are anomalies that appear after a malware execution or vulnerability exploitation. Domain addresses can be created and configured as a C2 channel. The commands or malware sends DNS queries to the C2 server. However, these queries are longer than default queries and crafted for subdomain addresses. These addresses are not real and used to encode commands like  
 
@@ -197,7 +197,7 @@ When this query is routed to the C2 server, the server sends the actual maliciou
 |Global search|`dns`|
 |Query length|`dns.qry.name.len`|
 |Long DNS addresses with encoded subdomain addresses|`dns.qry.len > 15`|
-|Kown patterns like dnscat and dns2tcp|`dns contains "dnscat"`|
+|Known patterns like dnscat and dns2tcp|`dns contains "dnscat"`|
 |**!mdns**: Disable local link device queries|`dns.qry.name.len > 15 and !mdns`|
 
 
@@ -230,8 +230,8 @@ FTP is designed to transfer files easily. With its simplicity comes a lack of se
 |**FTP option 530**: No login, invalid password|`ftp.response.code == 530`|
 |**USER**: Username|`ftp.request.command == "USER"`|
 |**PASS**: Password|`ftp.request.command == "PASS"`|
-|**Bruteforce signal**: List failed login attempts|`ftp.response.code == 530`|
-|**Bruteforce signal**: List target username|`(ftp.response.code == 530) and (ftp.response.arg contains "username")`|
+|**Brute force signal**: List failed login attempts|`ftp.response.code == 530`|
+|**Brute force signal**: List target username|`(ftp.response.code == 530) and (ftp.response.arg contains "username")`|
 |**Password spray signal**: List targets for a static password|`(ftp.response.command == "PASS") and (ftp.request.arg == "password")`|
 
 !!! tip
@@ -285,7 +285,7 @@ You can access the user agent by filtering for `http.user_agent`. You can look f
 
 ## HTTPS Traffic Decryption
 
-Since HTTP is not a very secure protocol, most of the time the traffic will be encrypted by using HTTPS instead. It uses TLS to encrypt the communication, which makes it impossible to decrypt the traffic and view the transferred data without decrypting it.
+Since HTTP is not a secure protocol, most of the time the traffic will be encrypted by using HTTPS instead. It uses TLS to encrypt the communication, which makes it impossible to decrypt the traffic and view the transferred data without decrypting it.
 
 !!! note
     Wireshark will display encrypted HTTP traffic in different colors. Additional information about the protocol and info details won't be fully visible.
@@ -301,15 +301,15 @@ Since HTTP is not a very secure protocol, most of the time the traffic will be e
 
 [^2]: SSDP is a network protocol that provides advertisement and discovery of network services.
 
-Simiar to the TCP three-way handshake process, the TLS protocol has its own hanshake process. It begins with 2 messages, the **Client Hello** and **Server Hello** message.
+Similar to the TCP three-way handshake process, the TLS protocol has its own handshake process. It begins with 2 messages, the **Client Hello** and **Server Hello** message.
 
 - Client Hello -> `(http.request or tls.handshake.type == 1) and !(ssdp)`
 - Server Hello -> `(http.request or tls.handshake.type == 2) and !(ssdp)`
 
-An encryption key log file is a text file which contains unique key paris to decrypt the encrypted traffic within the session. These pairs are automatically creates for each session when a connection is established by accesing an SSL/TLS-enabled webpage (like this one). These processes are handled by your webbrowser, so if you want to access these values you need to adjust your system.
+An encryption key log file is a text file which contains unique key pairs to decrypt the encrypted traffic within the session. These pairs are automatically creates for each session when a connection is established by accessing an SSL/TLS-enabled webpage (like this one). These processes are handled by your web browser, so if you want to access these values you need to adjust your system.
 
 1. Set up an environment variable and create the **SSLKEYLOGFILE**
-2. Let the browwser dump the keys to this file while browsing the web
+2. Let the browser dump the keys to this file while browsing the web
 
 !!! warning 
     Since SSL/TLS key pars are created per session at the connection time, it is important to dump the keys during the traffic capture.
@@ -325,7 +325,7 @@ Some Wireshark dissectors (FTP, HTTP, IMAP, pop and SMTP) are programmed to extr
 
 ![Image](images/wireshark_traffic-credentials.png)
 
-## WireShark Firewall Rules
+## Wireshark Firewall Rules
 
 Wireshark can also help you to a degree creating firewall rules for packets. Just select a specific package and use the **Tools -> Firewall ACL Rules** menu. It generates the commands to create rules based on that package and the selected firewall tool.
 
