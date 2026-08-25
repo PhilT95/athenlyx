@@ -9,7 +9,9 @@ hide:
 
 # Welcome to Athenlyx.com
 
-This is a collection of documentations, guides and how-to's about general **System Administration**, **App & Service Hosting**, **Cyber Security** and other technical topics built on an **Open-Source Stack**.
+This is a collection of documentations, guides and how-to's about general **System Administration**, **App & Service Hosting**, **cybersecurity** and other technical topics built on an **Open-Source Stack**.
+
+<!-- vale Google.EmDash = NO -->
 
 <div class="grid cards" markdown>
 
@@ -17,15 +19,15 @@ This is a collection of documentations, guides and how-to's about general **Syst
 
     ---
 
-    Step-by-step guides for setting up and securing AlmaLinux systems — from initial OS configuration and basic CLI commands to Firewalld, SELinux, and infrastructure automation with Ansible.
+    Step-by-step guides for setting up and securing AlmaLinux systems from initial OS configuration and basic CLI commands to firewalld, SELinux, and infrastructure automation with Ansible.
 
     [:octicons-arrow-right-24: Explore](linux-admin/rhel-alma/almalinux_setup.md)
 
--   :material-shield-check: __Cyber Security — Blue Teaming__
+-   :material-shield-check: __Cybersecurity — Blue Teaming__
 
     ---
 
-    Defensive security operations including network traffic analysis with Wireshark, Zeek & Snort, endpoint monitoring with Sysmon & OSquery, SIEM operations with Elastic & Splunk, Wazuh EDR deployment, DFIR methodology, and security assessment with OpenSCAP.
+    Defensive security operations including network traffic analysis with Wireshark, Zeek & Snort, endpoint monitoring with Sysmon & Osquery, SIEM operations with Elastic & Splunk, Wazuh EDR deployment, DFIR methodology, and security assessment with OpenSCAP.
 
     [:octicons-arrow-right-24: Explore](blue-sec/index.md)
 
@@ -55,13 +57,15 @@ This is a collection of documentations, guides and how-to's about general **Syst
 
 </div>
 
+<!-- vale Google.EmDash = Yes -->
+
 ## Infrastructure Stack
 
 Athenlyx.com is hosted on an **Open-Source Stack** and serves as a real-world example of how open-source products can be combined to host and publish websites securely without proprietary software or licensing costs. The infrastructure is hosted by Hetzner and consists of:
 
 - **OPNSense** — primary Firewall and Gateway
 - **SafeLine** — Web Application Firewall (WAF)
-- **Nginx** — reverse proxy and web server
+- **nginx** — reverse proxy and web server
 
 ## Project Structure
 

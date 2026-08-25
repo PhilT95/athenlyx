@@ -5,7 +5,7 @@ This guide will help you setup a Zensical project on a AlmaLinux 10 system. This
 
 ## Requirements
 
-The Zensical setup is a very straight-forward process and does not differ a lot between Linux distributions but there are a few things required..
+The Zensical setup is a pretty straight-forward process and does not differ a lot between Linux distributions but there are a few things required..
 
 - [x] A system running AlmaLinux 10 with
     - [X] SSH access
@@ -74,17 +74,17 @@ After executing the `zensical new` command and navigating into the newly created
 
 To understand what the various files and folders are supposed to be used for here a quick overview
 
-- The `docs` directory is the place where all markdown files, that should be transformed into webpages, will be placed 
+- The `docs` directory is the place where all markdown files, that should be transformed into web pages, will be placed 
     - Within the `markdown.md` basic markdown syntax is provided as a cheat sheet
     - Within the `index.md` file you are able to discover the various editing options that Zensical offers which extend basic markdown features
-- The `.github` directory is used by Github for its CI/CD pipeline configuration
-    - The workflow configured within `docs.yml` aims to provide a quick deployment option using Github Pages.
+- The `.github` directory is used by GitHub for its CI/CD pipeline configuration
+    - The workflow configured within `docs.yml` aims to provide a quick deployment option using GitHub Pages.
 - `zensical.toml` is the main configuration file which defines
     - Basic information about the website
     - Which features are enabled and how they will work
     - If you don't use the default navigation it also contains the website navigation setup.
 
-You can already launch this website using the `zensical serve` command which will spin up a local webserver. This is especially useful for debugging and testing. If you want to host your website securely without GitHub pages you'll need to build your project and serve it with a dedicated webserver engine like nginx.
+You can already launch this website using the `zensical serve` command which will spin up a local web server. This is especially useful for debugging and testing. If you want to host your website securely without GitHub pages you'll need to build your project and serve it with a dedicated web server engine like nginx.
 
 
 !!! info "Zensical Build"
@@ -113,7 +113,7 @@ You can already launch this website using the `zensical serve` command which wil
 
 ### Setting up nginx
 
-Nginx is one of the most reliable and lightweight webserver engines. It is an ideal way to easily and securely host Zensical projects.
+The web server engine nginx is one of the most reliable and lightweight ones. It is an ideal way to easily and securely host Zensical projects.
 Before we can host Zensical using nginx we need to install it, set it up correctly and configure it to run as a background service.
 
 ```bash
@@ -121,13 +121,13 @@ sudo su
 dnf install nginx -y
 ```
 
-Once nginx is installed navigate to the nginx directory `/etc/nginx`. There we need to create a dedicated nginx config file for the project. 
+Once nginx is installed navigate to the nginx directory `/etc/nginx`. There we need to create a dedicated nginx configuration file for the project. 
 
 ```bash
 nano yourwebsite.example.com.conf
 ```
 
-Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration will redirect all requests via **http**  to the **https** port. The second `server` block contains the **https** configuration with certain security and logging features as well as caching configured.
+Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration will redirect all requests via **HTTP**  to the **HTTP** protocol. The second `server` block contains the **HTTP** configuration with certain security and logging features as well as caching configured.
 
 ```nginx
 
@@ -181,7 +181,7 @@ server {
 !!! note
     If you don't have a domain name you can also use an IP-Address within the `server_name` directive.
 
-Please note that there is currently no SSL certificate provided for https, which is required for **https** to work. It is recommended to use the `certbot` to get a valid LetsEncrypt certificate. `certbot` also takes care of adapting your nginx configuration once it created a valid SSL certificate.
+Please note that there is currently no SSL certificate provided for HTTPS, which is required for it to work. It is recommended to use the `certbot` to get a valid LetsEncrypt certificate. `certbot` also takes care of adapting your nginx configuration once it created a valid SSL certificate.
 
 Now we just need to register nginx as a system service and start it.
 
@@ -190,7 +190,7 @@ systemctl enable nginx
 systemctl start nginx
 ```
 
-Once the nginx service it setup and running we can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via http/https to reach your webserver.
+Once the nginx service it setup and running we can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via HTTP/HTTPS to reach your web server.
 
 If you want to update the website you only need to update the files within the Zensical project, run `zensical build` and make sure the new files replace the old ones.
 

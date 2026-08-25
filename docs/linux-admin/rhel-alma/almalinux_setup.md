@@ -15,7 +15,7 @@ Follow these steps to create a new user with sudo permissions. You need root per
 2. `passwd username` -> Lets you create a password for the user
 3. `usermod -aG wheel username` -> Assigns the user to the group wheel. This is the sudoer-group within AlmaLinux
 4. Create a file called within the newly created users home directory called **authorized_keys** under `~/.ssh/`. You might need to create the directory first. Copy your public key into this file and save it.
-5. Make sure the Setting **PermitRootLogin** within the ssh config files in the directory `/etc/ssh/` is set to **No**. The file usually is called `sshd_config`
+5. Make sure the Setting **PermitRootLogin** within the ssh configuration files in the directory `/etc/ssh/` is set to **No**. The file usually is called `sshd_config`
 
 !!! tip
     If you need help creating an SSH key, refer to this [guide](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html) for example.
@@ -26,7 +26,7 @@ Follow these steps to create a new user with sudo permissions. You need root per
 
 ### Installing Docker
 
-AlmaLinux comes with podman instead of Docker. If the usage of your server requires Docker instead, you can follow these steps.
+AlmaLinux comes with Podman instead of Docker. If the usage of your server requires Docker instead, you can follow these steps.
 
 #### Update your system
 

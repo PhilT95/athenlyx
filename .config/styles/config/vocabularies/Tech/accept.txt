@@ -25,7 +25,7 @@ cron
 pcap?s?
 UDP
 TCP
-HTTP?S?
+HTTPS?
 [Cc]mdlet?s?
 Sysinternals
 SDelete
@@ -88,3 +88,16 @@ homelab?s?
 routable
 [Uu]ntrusted
 dnscat?2?
+DNF
+ungrouped
+[Cc]rontab
+toolset
+authorized_keys
+Podman
+systemd
+Ethernet
+proxying
+Mojang
+NPC?s
+Modrinth
+Athenlyx

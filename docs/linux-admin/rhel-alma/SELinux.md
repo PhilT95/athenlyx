@@ -1,6 +1,6 @@
 # SELinux 
 
-The SELinux config file is located under /etc/selinux/config
+The SELinux configuration file is located under `/etc/selinux/config`
 
 ## General setup
 

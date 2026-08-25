@@ -1,5 +1,7 @@
+<!-- vale Vale.Terms["Firewalld"] = NO -->
 # Firewalld Service
-Firewalld provides a dynamically managed firewall with support for network/firewall zones that define the trust level of network connections or interfaces. It has support for IPv4, IPv6 firewall settings, ethernet bridges and IP sets. There is a separation of runtime and permanent configuration options. It also provides an interface for services or applications to add firewall rules directly.
+Firewalld provides a dynamically managed firewall with support for network/firewall zones that define the trust level of network connections or interfaces. It has support for IPv4, IPv6 firewall settings, Ethernet bridges and IP sets. Runtime and permanent configuration options are separated. It also provides an interface for services or applications to add firewall rules directly.
+<!-- vale Vale.Terms["Firewalld"] = Yes -->
 
 <p align="right"><a href="https://firewalld.org/">firewalld.org</a></p>
 
@@ -16,7 +18,7 @@ The service can be configured using the `firewall-cmd` binary.
 |`--add-service service`|Adds a predefined or custom service to the ruleset.|`firewall-cmd --add-service=http --zone=public`|
 |`--remove-service service`|Removes a predefined or custom service from the ruleset.|`firewall-cmd --remove-service=http --zone=public`|
 |`--zone=public`|Defines to which zone the rule applies. Default Zone is public.|*|
-|`--permanent`|Adds a rule to the permanent rule set. Otherwise the rule will be lost after the next config reload.|`firewall-cmd --add-service=http --zone=public --internal`|
+|`--permanent`|Adds a rule to the permanent rule set. Otherwise the rule will be lost after the next configuration reload.|`firewall-cmd --add-service=http --zone=public --internal`|
 
 ## Creating a custom service
 It is best practice to define services to create firewall rules. To create a new service you have to:

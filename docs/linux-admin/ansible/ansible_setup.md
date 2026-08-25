@@ -40,7 +40,7 @@ ansible [core 2.16.16]
 
 This command also reveals the location of the ansible configuration files, including the default playbook & inventory files under `/etc/ansible/`.
 
-Finally, using **Ansible Galaxy**, the collection that enables ansible to handle *dnf* packages needs to be installed.
+Finally, using **Ansible Galaxy**, the collection that enables ansible to handle *DNF* packages needs to be installed.
 
 ```bash
 ansible-galaxy collection install community.general
@@ -166,7 +166,7 @@ If you have created your inventory, save the file.
 
 As mentioned [here](index.md), Ansible Playbooks define the actual tasks that should be executed on certain servers. They can combine multiple different steps and also only apply to a subset of servers within one or more given inventory files.
 
-For this guide we will setup the task to update *dnf* packages on a AlmaLinux 10 host that is within the *webserver* group of our inventory. First we need to create the playbook YAML-file. Create a file `update-local.yml` inside the ansible directory and open it with a text editor.
+For this guide we will setup the task to update *DNF* packages on a AlmaLinux 10 host that is within the *web server* group of our inventory. First we need to create the playbook YAML-file. Create a file `update-local.yml` inside the ansible directory and open it with a text editor.
 
 ```bash
 touch update_webservers.yml
@@ -184,7 +184,7 @@ Once you are inside the file, you need to define the basics of the playbook by g
 !!! warning
     Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade` and added the public key we set up earlier to the user on the remote system.
 
-With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in dnf tools. We will add 2 tasks in total, one that verifies that the `dnf` package manager is actually available on the system and another that will update all packages. 
+With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in DNF tools. We will add 2 tasks in total, one that verifies that the DNF package manager is actually available on the system and another that will update all packages. 
 
 ```yaml
 - name: Update local Ansible server

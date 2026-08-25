@@ -1,6 +1,6 @@
 # Semaphore Setup Guide - AlmaLinux 10
 
-Even though [Ansible](index.md) is a very good automation tool it certainly lacks the modern approach of managing it. This is where [Semaphore](https://semaphoreui.com/) comes into play. It builds upon the Ansible toolset and extends it with
+Even though [Ansible](index.md) is a useful automation tool it certainly lacks the modern approach of managing it. This is where [Semaphore](https://semaphoreui.com/) comes into play. It builds upon the Ansible toolset and extends it with
 
 - A web-based GUI to interact with Ansible
 - Easy Inventory, User and Playbook Management
@@ -19,7 +19,7 @@ Before we can start with the installation of Semaphore please make sure the foll
     - [X] Ansible installed and running
     - [X] SSH and root access
     - [X] Internet access
-- [X] Able to access the system using https via port 3309 (Default Semaphore Port)
+- [X] Able to access the system using HTTP via port 3309 (Default Semaphore Port)
 - [X] An functioning Ansible setup including
     - [X] Playbooks
     - [X] Inventories
@@ -92,14 +92,14 @@ sudo dnf install semaphore_2.19.8_linux_amd64.rpm -y
 
 ### Setting up Semaphore
 
-Semaphore provides its own setup creation process which will ask for all required information and creates a configuration file for running the the application. For this purpose we create a new configuration directory for semaphore where the configuration file will be saved to.
+Semaphore provides its own setup creation process which will ask for all required information and creates a configuration file for running the application. For this purpose we create a new configuration directory for semaphore where the configuration file will be saved to.
 
 ```bash
 mkdir /etc/semaphore && cd /etc/semaphore
 semaphore setup
 ```
 
-Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the onces below.
+Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the ones below.
 
 ```console semaphore setup
 Hello! You will now be guided through a setup to:
@@ -192,7 +192,7 @@ Using this configuration file we an start the Semaphore UI application.
 sudo semaphore server --config /etc/semaphore/config.json
 ```
 
-If everything is setup correctly you can now access the web application through **http://localhost:3000/** . You can login using the username and credentials you created and used during the Semaphore setup.
+If everything is setup correctly you can now access the web application through **http://localhost:3000/**. You can login using the username and credentials you created and used during the Semaphore setup.
 
 ## Semaphore Configuration
 
@@ -241,13 +241,13 @@ With everything else set up we can finally create a **Task Template** which will
 
 ![Semaphore Create Task Template](images/sempahore_new-playbook.png)
 
-There are a lot of different options and fields, but we will focus on the basic ones to get the playbook running. Give the Task Template a name, provide the path to the playbook on the system and select the Inventory and Repository we crated earlier. Click on **Create** to create the template.
+You can see a lot of different fields, but we will focus on the basic ones to get the playbook running. Give the Task Template a name, provide the path to the playbook on the system and select the Inventory and Repository we crated earlier. Click on **Create** to create the template.
 
 ## Run and schedule a Task
 
 Now that we have created everything required for a Task to run, navigate to the **Task Templates** menu again. Click on the **Play** Button which will start the Ansible Task. A new window will appear showing you the log for this task.
 
-Once your task runs without issues go into the **Schedule** menu, click on **New Schedule** and use the **Cron** option. Now you can select a Task Template and configure the time and day at which the task should be running automatically.
+Once your task runs without issues go into the **Schedule** menu, click on **New Schedule** and use the **cron** option. Now you can select a Task Template and configure the time and day at which the task should be running automatically.
 
 ![Semaphore Create Task Schedule](images/sempahore_new-schedule.png)
 
