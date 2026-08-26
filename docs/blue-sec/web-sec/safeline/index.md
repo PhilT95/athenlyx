@@ -4,7 +4,7 @@
 
 > SafeLine is a self-hosted WAF to protect your web apps from attacks and exploits.
 >
-> A web application firewall helps protect web apps by filtering and monitoring HTTP traffic between a web application and the Internet. It typically protects web apps from attacks such as SQL injection, XSS, code injection, os command injection, CRLF injection, LDAP injection, XPath injection, RCE, XXE, SSRF, path traversal, backdoor, brute-force, HTTP-flood, bot abused, among others.
+> A web application firewall helps protect web apps by filtering and monitoring HTTP traffic between a web application and the Internet. It typically protects web apps from attacks such as SQL injection, XSS, code injection, OS command injection, CRLF injection, LDAP injection, XPath injection, RCE, XXE, SSRF, path traversal, backdoor, brute-force, HTTP-flood, bot abused, among others.
 
 <p align="right"><a href="https://github.com/chaitin/SafeLine/">GitHub.com/chaitin/SafeLine</a></p>
 
@@ -108,9 +108,9 @@ Now you can log into the Web UI using your new credentials and you should be gre
 
 
 
-## Securing an Application
+## Securing an application
 
-SafeLine defines the websites it protects as *Application*. 
+SafeLine defines the websites it protects as *application*. 
 
 ### SSL Certificate setup
 
@@ -138,7 +138,7 @@ Moving forward to secure your application, you need to go the **Applications** t
 
 ![Image](images/safeline_applications.png)
 
-Click on the **Add Application** button on the top right of this tab. Here you are asked to fill in the following information:
+Click on the **Add application** button on the top right of this tab. Here you are asked to fill in the following information:
 
 - **Domain**: Enter the domains under which the website is hosted/reachable.
 - **Port**: Add the ports your website is using. The standard HTTP and HTTP/S port should be filled in already.
@@ -148,9 +148,9 @@ Click on the **Add Application** button on the top right of this tab. Here you a
     - **Reverse Proxy**: If chosen, SafeLine will use *nginx* to proxy the web traffic to the given web server. The configuration of nginx will be automatically created by SafeLine. You need to provide an **Upstream** target, which is usually the internal IP address or DNS name of your web server.
     - **Static Files**: Instead of proxying the traffic to another web server, SafeLine can target Static files directly using nginx. 
     - **Redirect**: SafeLine redirects the web traffic to another DNS name. You need to provide the redirect address here.
-
-- **Application Name**: Enter the name of your Application. This doesn't affect functionality.
-
+<!-- vale Vale.Terms["Application"] = NO -->
+- **Application Name**: Enter the name of your application. This doesn't affect functionality.
+<!-- vale Vale.Terms["Application"] = YES -->
 ![Image](images/safeline_applications-add.png)
 
 !!! note "SSL tick box"
@@ -165,7 +165,7 @@ Once you created your application, it will appear in the Applications menu. You 
 
 ![Image](images/safeline_application.png)
 
-Enable and configure these settings for this Application to your liking. Depending on your license, some settings can only be set globally. You can access these configurations using the corresponding menus on the left.
+Enable and configure these settings for this application to your liking. Depending on your license, some settings can only be set globally. You can access these configurations using the corresponding menus on the left.
 
 To enable the **Access** and **Error** logs, click on one of the logs and hit the **Enable** check box.
 

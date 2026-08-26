@@ -86,7 +86,7 @@ osquery> .table user
   => users
 ```
 
-### Table Schema
+### Table schema
 
 Just knowing the table names is not enough to understand what information it contains without actually querying it. Therefore knowledge of columns and types, known as **schema**, for each table is also helpful. A table's schema can be listed using the command ``.schema``.
 
@@ -117,7 +117,7 @@ osquery> select gid, uid, description, username, directory from users;
 
 The [Official Documentation](https://osquery.io/schema/5.19.0) provides more detailed information about the schemas used.
 
-### Display Mode
+### Display mode
 
 Osquery comes with multiple display modes. Refer to the ``.help`` function or the example below.
 
@@ -131,16 +131,18 @@ osquery> .help
                    pretty   Pretty printed SQL results (default)
 ```
 
-## SQL Queries
+<!-- vale Google.Headings = NO -->
+## SQL queries
+<!-- vale Google.Headings = YES -->
 
-The SQL language implemented in **Osquery** is not an entire SQL language that is usually used, but rather a superset of SQLite.
+The SQL language implemented in **Osquery** is not an entire SQL language that is regularly used, but rather a superset of SQLite.
 
 Most of the time, the queries start with the **SELECT** statement, because Osquery only queries information on an endpoint. No updating of information or data takes place.
 
 !!! note
     Statements like **UPDATE** and **DELETE** can be used, but only when run-time tables (views) are created or an extensions is used that supports this.
 
-### Exploring Installed Programs
+### Exploring installed programs
 
 To retrieve all information about the installed programs on the endpoint, the schema needs to be known and understood using the ``.schema programs`` or by using the documentation [here](https://osquery.io/schema/5.5.1/#programs).
 
@@ -167,7 +169,7 @@ osquery> SELECT name, version, install_location, install_date from programs limi
 +-------------------+---------+------------------+--------------+
 ```
 
-### Count Function
+### Count function
 
 To see how many programs or entries are in any table that are returned, the ``count()`` function can be used.
 
@@ -179,10 +181,11 @@ osquery> SELECT count(*) from programs;
 | 19       |
 +----------+
 ```
+<!-- vale Google.Headings = NO -->
+### WHERE function
+<!-- vale Google.Headings = YES -->
 
-### WHERE Function
-
-``WHERE`` can be used to narrow down the list of results returned based on a specific criteria. The following example will first get the user table and only display the result for the user *Administrator*.
+``WHERE`` can be used to narrow down the list of results returned based on a specific criteria. The following example gets the user table first only displays the result for the user *Administrator*.
 
 ```pwsh-session
 osquery> SELECT * FROM users WHERE username='Administrator';
@@ -210,10 +213,10 @@ The wildcard rules for folder structures works as follows
 
 <!-- vale Vale.Spelling = NO -->
 
-- ``%``: Match all files and folders for one level
-- ``%%``: Match all files and folders recursively
-- ``%abc``: Match all within-level ending in **abc**
-- ``abc%``: Match all within-level starting with **abc**
+- ``%``: match all files and folders for one level
+- ``%%``: match all files and folders recursively
+- ``%abc``: match all within-level ending in **abc**
+- ``abc%``: match all within-level starting with **abc**
 
 <!-- vale Vale.Spelling = YES -->
 
@@ -227,7 +230,7 @@ The wildcard rules for folder structures works as follows
     Error: constraint failed
     ```
 
-### JOIN Function
+### JOIN function
 
 Osquery can also be used to join 2 tables based on a column that is shared by both.
 

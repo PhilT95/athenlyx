@@ -101,3 +101,9 @@ Mojang
 NPC?s
 Modrinth
 Athenlyx
+[Aa]pplication
+OS
+CLI
+GUI
+AI
+LLM

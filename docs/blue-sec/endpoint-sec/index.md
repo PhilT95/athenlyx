@@ -1,4 +1,4 @@
-# Endpoint Security
+# Endpoint security
 
 Endpoint Security is a fundamental part of Cybersecurity. While it is important to know the applications that provide security for endpoints, it is also important to understand how it works, which logs are used and which essential tools exists to work and analyze log and monitoring data.
 
