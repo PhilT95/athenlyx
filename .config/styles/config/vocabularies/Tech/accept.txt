@@ -107,3 +107,12 @@ CLI
 GUI
 AI
 LLM
+NetworkMiner
+ProcDump
+PsExec
+WinObj
+RegJump
+Windows Event Log?s?
+Windows Event Log elements
+Event Viewer
+Get-WinEvent

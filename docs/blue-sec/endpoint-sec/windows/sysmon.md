@@ -1,6 +1,6 @@
 # Sysmon
 
-**Sysmon** is a Windows system service and device driver that, if its installed, remains resident across system reboots to monitor and log system activity to the Windows event log. It provides detailed information about process creations,  network connections and changes to file creation time.
+**Sysmon** is a Windows system service and device driver that, if its installed, remains resident across system reboots to monitor and log system activity to the Windows Event Log. It provides detailed information about process creations,  network connections and changes to file creation time.
 
 It basically gathers detailed and high-quality logs as well as event tracing that assists in identifying anomalies. This is a reason it is commonly used together with SIEM systems or other log parsing solutions.
 

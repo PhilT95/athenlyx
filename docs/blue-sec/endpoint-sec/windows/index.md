@@ -69,9 +69,9 @@ The Process Explorer enables you to inspect the details of a running process lik
 
 ## Logging and monitoring
 
-### Windows event log
+### Windows Event Log
 
-Windows event logs are not simple text files and therefore can't be viewed using a text editor. The raw data however can be translated into XML using the Windows API. The events in these log files are stored in a proprietary format with the **.evt** or **.evtx** extension. (1) These files are normally located in `C:\Windows\System32\winevt\Logs`.
+Windows Event Logs are not simple text files and therefore can't be viewed using a text editor. The raw data however can be translated into XML using the Windows API. The events in these log files are stored in a proprietary format with the **.evt** or **.evtx** extension. (1) These files are normally located in `C:\Windows\System32\winevt\Logs`.
 { .annotate }
 
 1. **.evtx**-files are Windows XML event log files. 

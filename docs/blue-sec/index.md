@@ -1,3 +1,4 @@
+<!-- vale Google.Headings = NO -->
 # Cybersecurity - Blue Teaming
 
 ![Image](../images/blue-sec/blue_banner.png)
