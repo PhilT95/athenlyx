@@ -15,4 +15,5 @@ jobs:
         with:
           files: docs/
           fail_on_error: true
+          level: error
           vale_flags: --config=.config/.vale.ini
