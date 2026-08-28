@@ -1,17 +1,17 @@
-# Core Windows Processes
+# Core Windows processes
 
 Since Windows, as mentioned [here](../index.md) is the most used desktop OS in the world, it is also one of the biggest targets for malware and attacks. Even the newest tools are not 100% effective, so a deeper understanding of normal Windows OS behavior and how you can detect malicious processes running on an endpoint is important.
 
 ## Task Manager
 
-The **Task Manager** is a built-in GUI-based Windows utility that enables users to see what is currently running on a given Windows system. It also provides information on resource usage like the CPU and memory utilization by each process. It can also be used to terminate processes.
+The **Task Manager** is a built-in GUI-based Windows utility that enables users to see what is currently running on a given Windows system. It also provides information on resource usage like the CPU and memory utilization by each process. It can also be used to stop processes.
 
 You can open the Task Manager by right-clicking the Taskbar and selecting *Task Manager*.
 
 ![Task Manager](images/taskmanager-detailed.png)
 
 ??? tip "Adding more columns"
-    The standard columns are usually **Name**,**Status**,**CPU** and **Memory**. You can add and view more columns by right-clicking on any column header to open more options.
+    The standard columns are normally **Name**,**Status**,**CPU**, and **Memory**. You can add and view more columns by right-clicking on any column header to open more options.
 
     ![Add Columns to Task Manager](images/taskmanager-addcolumn.png)
 
@@ -33,7 +33,7 @@ Since the Task Manager doesn't provide a *parent-child* process view, other tool
 
 1. The tool *System Informer* was known under the name **Process Hacker**.
 
-## Windows Processes
+## Windows processes
 
 ### System
 
@@ -77,7 +77,7 @@ Using this information, unusual behavior for this process would be:
 - A different PID instead of 4
 - Not running in Session 0
 
-### Session Manager Subsystem
+### Session manager subsystem
 
 The process **smss.exe** (Session Manager Subsystem) is also known as the **Windows Session Manager** and responsible for creating new sessions. It is the first user-mode process started by the kernel. It then starts the kernel and user modes of the Windows subsystem.[^2]
 
@@ -109,13 +109,13 @@ Any other subsystem listed in the **Required** value of the Registry Key ``HKLM\
 
 ![Required Subsystems](images/process_smss-required.png)
 
-SMSS is also responsible for creating *environment variables*, virtual memory paging files and starts the winlogon.exe (Windows Logon Manger). 
+SMSS is also responsible for creating *environment variables*, virtual memory paging files, and starts the winlogon.exe (Windows Logon Manger). 
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\smss.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\smss.exe``|A different image path|
 |**Parent Process**|System|A different parent process other than System (4)s|
-|**Number of Instances**|One master instance and child instance per session. Child instances exit after creating the session|More than one running process, since the child processes terminate and exit after each new session|
+|**Number of Instances**|One master instance and child instance per session. Child instances exit after creating the session|More than one running process, since the child processes end and exit after each new session|
 |**User Account**|Local System|Not running as *SYSTEM*|
 |**Start Time**|Within seconds of boot time for the master instance||
 
@@ -138,7 +138,7 @@ The **csrss.exe** (Client Server Runtime Process) is the user-mode side of the W
 - winsrv.dll
 
 !!! warning
-    The termination of this process will result in system failure.
+    The termination of this process is resulting in system failure.
 
 !!! note
     csrss.exe and winlogon.exe are called from the [smss.exe](#session-manager-subsystem) at startup for Session 1
@@ -160,18 +160,18 @@ You can see the different parent process and that they are **non-existent** sinc
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\csrss.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\csrss.exe``|A different image path|
 |**Parent Process**|Created by an instance of smss.exe|An actual parent process, since smss.exe calls this process and self-terminates|
 |**Number of Instances**|Two or more||
 |**User Account**|Local System|Not running as *SYSTEM*|
-|**Start Time**|Within seconds of boot time for the first 2 instances (Session 0 and 1). Start times for additional instances occur as new sessions are created, but usually only Session 0 and 1 exist.||
+|**Start Time**|Within seconds of boot time for the first 2 instances (Session 0 and 1). Start times for additional instances occur as new sessions are created, but normally only Session 0 and 1 exist.||
 
 
-### Windows Initialization Process
+### Windows initialization process
 
-The **wininit.exe** (Windows Initialization Process) is responsible for launching the
+The **wininit.exe** (Windows initialization process) is responsible for launching the
 
-- **services.exe**: Service Control Manger
+- **services.exe**: Service Control Manger (SCM)
 - **lsass.exe**: Local Security Authority
 - **lsaiso.exe**
 
@@ -182,7 +182,7 @@ It is also classified as a critical Windows process that runs in the background,
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\wininit.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\wininit.exe``|A different image path|
 |**Parent Process**|Created by an instance of smss.exe|An actual parent process, since smss.exe calls this process and self-terminates|
 |**Number of Instances**|One|Multiple running instances|
 |**User Account**|Local System|Not running as *SYSTEM*|
@@ -191,7 +191,7 @@ It is also classified as a critical Windows process that runs in the background,
 ![Normal wininit.exe](images/process_wininit-normal.png)
 
 
-### Service Control Manager (SCM)
+### Service Control Manager
 
 The **SCM** or **services.exe** is primarily responsible to handle system services. This includes:
 
@@ -220,12 +220,12 @@ When a user logs into a machine successfully, it also is responsible for setting
 
 ![Last Known Good Control Set](images/process_services-lastknowngood.png)
 
-The process is a parent to several other key processes like:
+The process is a parent to a few other key processes like:
 
-- svchost.exe
-- spoolsv.exe
-- msmpeng.exe
-- dllhost.exe
+- `svchost.exe`
+- `spoolsv.exe`
+- `msmpeng.exe`
+- `dllhost.exe`
 
 You can find more detailed information about this process [here](https://en.wikipedia.org/wiki/Service_Control_Manager).
 
@@ -235,7 +235,7 @@ You can find more detailed information about this process [here](https://en.wiki
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\services.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\services.exe``|A different image path|
 |**Parent Process**|wininit.exe|Another parent process than wininit.exe|
 |**Number of Instances**|One|Multiple running instances|
 |**User Account**|Local System|Not running as *SYSTEM*|
@@ -263,13 +263,13 @@ Within the details of the service you can again find the referenced DLL.
 
 ![svchost Service Example](images/process_svchost-exampledetails.png)
 
-You can also see within the **Binary path** that the svchost.exe is called with the ``-k`` parameter. This parameters is used for grouping similar services to share the same process. This concept was based on the OS design and implemented to reduce resource consumption. Starting with **Windows 10 1703**, services grouped into host processes changed. Machines that have more then 3.5 GB of RAM will use a separate process for each service. You can look [here](https://en.wikipedia.org/wiki/Svchost.exe) for more information. The ``-k`` parameter is the way on how to legitimately call the svchost.exe process.
+You can also see within the **Binary path** that the svchost.exe is called with the ``-k`` parameter. This parameters is used for grouping similar services to share the same process. This concept was based on the OS design and implemented to reduce resource consumption. Starting with **Windows 10 1703**, services grouped into host processes changed. Machines that have more then 3.5 GB of RAM are using a separate process for each service. You can look [here](https://en.wikipedia.org/wiki/Svchost.exe) for more information. The ``-k`` parameter is the way on how to legitimately call the svchost.exe process.
 
-Since svchost.exe will always have multiple running processes on any given Windows system, this process is a prime target for malicious use. It can be used to masquerade malware and hide it among the legitimate svchost.exe process. Renaming the malware to svchost.exe or misspelling it slightly are common tactics, as well as installing or calling malicious DLLs.
+Since svchost.exe is always having multiple running processes on any given Windows system, this process is a prime target for malicious use. It can be used to masquerade malware and hide it among the legitimate svchost.exe process. Renaming the malware to svchost.exe or misspelling it slightly are common tactics, as well as installing, or calling malicious DLLs.
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\svchost.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\svchost.exe``|A different image path|
 |**Parent Process**|services.exe|Another parent process than services.exe|
 |**Number of Instances**|Many||
 |**User Account**|This varies depending on the svchost.exe instance. In Windows 10/11, some instances run as logged-in users. ||
@@ -280,7 +280,7 @@ With this service, it is important to check the spelling of the process (svchost
 ![Normal behavior of svchost.exe](images/process_svchost-normal.png)
 
 
-### Local Security Authority Subsystem Service
+### Local Security Authority Subsystem service
 
 The process **LSASS** in Microsoft Windows OS is responsible for enforcing security policies on the system. It performs the following functions:
 
@@ -303,7 +303,7 @@ LSASS.exe is another prominent target for malicious activity. Common tools like 
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\lsass.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\lsass.exe``|A different image path|
 |**Parent Process**|wininit.exe|Another parent process than wininit.exe|
 |**Number of Instances**|One|Multiple running instances|
 |**User Account**|Local System|Not running as *SYSTEM*|
@@ -329,11 +329,11 @@ The service also locks the screen and runs a users screensaver, among other func
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\System32\winlogon.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\System32\winlogon.exe``|A different image path|
 |**Parent Process**|Created by an instance of smss.exe that self-terminates, so no parent process name is provided|An actual parent process, since smss.exe self-terminates.|
 |**Number of Instances**|One or more||
 |**User Account**|Local System|Not running as *SYSTEM*|
-|**Start Time**|Within seconds of boot time for the first instance (Session 1). Additional instances occur as new sessions are created, typically through RDP or Fast User Switching logons||
+|**Start Time**|Within seconds of boot time for the first instance (Session 1). Additional instances occur as new sessions are created, typically through RDP, or Fast User Switching logons||
 
 ![Normal behavior of winlogon.exe](images/process_winlogon-normal.png)
 
@@ -342,17 +342,17 @@ The service also locks the screen and runs a users screensaver, among other func
 
 ### Windows Explorer
 
-The **explorer.exe** process gives the user access to their folders and files. It also provides functionality for other features, such as the *Start Menu* and *Taskbar*.
+The **explorer.exe** process gives the user access to their folders and files. It also provides capabilities for other features, such as the *Start Menu*, and *Taskbar*.
 
-As mentioned [before](#windows-logon), the Winlogon.exe runs *userinit.exe**, which launches the value in the registry key ``HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell``. The userinit.exe terminates after spawning **explorer.exe**. Therefore, the Windows Explorer's parent process is non-existent.
+As mentioned [before](#windows-logon), the Winlogon.exe runs `userinit.exe`, which launches the value in the registry key ``HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell``. The userinit.exe terminates after spawning **explorer.exe**. Therefore, the Windows Explorer's parent process is non-existent.
 
-The explorer.exe will usually have many child processes.
+The explorer.exe generally has many child processes.
 
-![Windows Explorer Child processes example](images/process_explorer-children.png)
+![Windows Explorer child processes example](images/process_explorer-children.png)
 
 |Service Property|Normal Behavior|Unusual Behavior|
 |:---------------|:--------------|:---------------|
-|**Image Path**|``%SystemRoot%\explorer.exe``|A different image file path|
+|**Image Path**|``%SystemRoot%\explorer.exe``|A different image path|
 |**Parent Process**|Created by userinit.exe, which self-terminates|An actual parent process, since userinit.exe calls the process and exists|
 |**Number of Instances**|One or more per interactively logged-in user||
 |**User Account**|Logged-in users|Not running as unknown user|

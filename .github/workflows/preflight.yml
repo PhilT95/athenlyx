@@ -1,0 +1,42 @@
+name: Pre-Flight Check
+
+on: [pull_request]
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check changelog and nav are updated
+        run: |
+          BASE=${{ github.event.pull_request.base.sha }}
+
+          CHANGED_DOCS=$(git diff --name-only "$BASE" HEAD -- 'docs/**/*.md' | grep -v 'docs/about/changelog.md')
+          CHANGED_CHANGELOG=$(git diff --name-only "$BASE" HEAD -- 'docs/about/changelog.md')
+          CHANGED_NAV=$(git diff --name-only "$BASE" HEAD -- 'zensical.toml')
+
+          FAILED=0
+
+          if [ -n "$CHANGED_DOCS" ] && [ -z "$CHANGED_CHANGELOG" ]; then
+            echo "ERROR: The following docs were changed without updating docs/about/changelog.md:"
+            echo "$CHANGED_DOCS"
+            FAILED=1
+          fi
+
+          if [ -n "$CHANGED_DOCS" ] && [ -z "$CHANGED_NAV" ]; then
+            echo "ERROR: The following docs were changed without updating zensical.toml:"
+            echo "$CHANGED_DOCS"
+            FAILED=1
+          fi
+
+          if [ "$FAILED" -eq 0 ]; then
+            echo "Pre-flight check passed."
+          fi
+
+          exit $FAILED

@@ -112,7 +112,17 @@ ProcDump
 PsExec
 WinObj
 RegJump
+[Ww]indows
 Windows Event Log?s?
 Windows Event Log elements
 Event Viewer
 Get-WinEvent
+Task Manager
+Client Server Runtime Process
+Service Control Manger
+Local Security Authority
+Service Host
+Local Security Authority Subsystem
+Windows Logon
+Windows Explorer
+Service Control Manager

@@ -1,0 +1,18 @@
+name: Vale Linter
+
+on: [push, pull_request]
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: errata-ai/vale-action@v2
+        with:
+          config: .config/.vale.ini
+          files: docs/
+          fail_on_error: true

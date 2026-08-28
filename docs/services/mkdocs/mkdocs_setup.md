@@ -1,8 +1,9 @@
-# Material for MkDocs - Setup Guide
-This guide will show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It will be centered around the **AlmaLinux 10** and **Material for MkDocs**.
+<!-- vale Google.Headings["Material for MkDocs - Setup guide"] = NO -->
+# Material for MkDocs - Setup guide
+This guide is going to show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It is based on **AlmaLinux 10** and **Material for MkDocs**.
 
 !!! warning "Outdated"
-    Material for MkDocs will not be maintained anymore. The developers moved to a new project which is replacing MkDocs itself. See [Zensical](../zensical/index.md) for more information.
+    Material for MkDocs is no longer maintained. The developers moved to a new project which is replacing MkDocs itself. See [Zensical](../zensical/index.md) for more information.
 
 ## Prerequisites
 Before you can install **MkDocs** and its extensions you need to have fulfill these following:
@@ -15,8 +16,8 @@ Before you can install **MkDocs** and its extensions you need to have fulfill th
 
 Using `dnf` you can install Python and pip using these commands:
 
-```console
-[user@machine ~]$ sudo dnf install python3 python3-pip
+```bash
+sudo dnf install python3 python3-pip
 ```
 
 Regarding your documentation, I'd recommend to keep nesting of directories up to maximal 4 levels.
@@ -25,8 +26,8 @@ Regarding your documentation, I'd recommend to keep nesting of directories up to
 ### MkDocs Installation
 The first thing to do is installing **MkDocs** itself using pip. 
 
-```console
-[user@machine ~]$ pip install mkdocs
+```bash
+pip install mkdocs
 ```
 
 Verify the installation and version of MkDocs.
@@ -38,23 +39,23 @@ mkdocs, version 1.6.1 from /home/user/.local/lib/python3.12/site-packages/mkdocs
 
 ### Material for MkDocs
 
-**Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of functionality and customization. We will be using it in this guide since its setup is easy as well.
+**Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of features and customization. Therefore it is going be installed as well.
 
-```console
-[user@machine ~]$ pip install mkdocs-material
+```bash
+pip install mkdocs-material
 ```
 
-#### MkDocs Extension & Plugins
+#### MkDocs extension & plugins
 
 Material for MkDocs uses various plugins and extensions to provide a smoother and more modern website experience. The default installation already comes with a few plugins, but certain functions need to be installed manually.
 
 To provide more efficient image processing, the built-in plugins depend on external libraries that need to be installed. 
 
-```console
-[user@machine ~]$ pip install "mkdocs-material[imaging]"
-[user@machine ~]$ pip install mkdocs-glightbox
-[user@machine ~]$ sudo dnf install cairo-devel
-[user@machine ~]$ sudo dnf install pngquant
+```bash
+pip install "mkdocs-material[imaging]"
+pip install mkdocs-glightbox
+sudo dnf install cairo-devel
+sudo dnf install pngquant
 ```
 
 You can also use an extension to display the creating and last time a site has been updated by linking your website to a git repository. To make use of this functionality, you need to install the extension.
@@ -73,9 +74,9 @@ Now that you have installed MkDocs we can start to get your project ready to com
 
 First navigate to the root of your documentation and create a new MkDocs project.
 
-```console
-[user@machine ~]$ cd /path/to/your/project
-[user@machine project]$ mkdocs new project-name
+```bash
+cd /path/to/your/project
+mkdocs new project-name
 ```
 
 This command will create a new folder `docs` with an `index.md` file and a `mkdocs.yml` file within the root directory of your project.
@@ -97,8 +98,8 @@ Once you have all your files in this directory, we can start preparing the `mkdo
 
 Open the file, for example with the text editor `nano`.
 
-```console
-[user@machine project]$ nano mkdocs.yml
+```bash
+nano mkdocs.yml
 ```
 
 The file should look like this:
@@ -199,9 +200,9 @@ It should not be much different for other Linux distributions.
 
 Now we have to configure nginx. Go the nginx directory as root.
 
-```console
-[user@machine project]$ sudo su
-[root@machine project]$ cd /etc/nginx
+```bash
+sudo su
+cd /etc/nginx
 ```
 
 Verify that the following folders `sites-available` and `sites-enabled` are within this directory and if not, create them.  
@@ -277,8 +278,8 @@ As you can see, the root location of the web server points to the directory ``/w
 
 Once the configuration is done, we need to activate the configuration. To do this, we have to create a symbolic link of this file to the `sites-enabled` directory we created earlier.
 
-```console
-[root@machine nginx]$ ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
+```bash
+ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
 ```
 
 We quickly test the configuration and if there are no errors, reload nginx.
