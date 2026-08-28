@@ -1,16 +1,5 @@
 {
-    "cSpell.words": [
-        "dbservers",
-        "drwxrwsr",
-        "libyaml",
-        "nogroup",
-        "rwxr",
-        "testdb",
-        "usermod",
-        "Velociraptor",
-        "webservers",
-        "Zensical"
-    ],
+    "cSpell.config": "./.config/cspell.json",
     "markdown.validate.enabled": true,
     "markdown.validate.referenceLinks": "warning",
     "files.associations": {

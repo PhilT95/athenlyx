@@ -1,6 +1,6 @@
 ![VoxelDash Banner](./images/voxeldash_logo.png)
 
-# Voxel Dash on Minecraft Server - Forge Version
+# VoxelDash on Minecraft Server - Forge Version
 
 **VoxelDash** adds a modern dashboard to a Minecraft server. It provides an easy way to monitor the performance, player, backups and much more of your Minecraft server. For example, instead of logging into the command shell of the server which is hosting a Minecraft server, now there is an easy way to access the most common settings and even the Minecraft server command line itself.
 
@@ -20,10 +20,10 @@ Besides the server itself, make sure the following requirements are also fulfill
 
 ## VoxelDash Installation & Setup
 
-The installation only consists of downloading the plugin from **modrinth** where VoxelDash provides the `.jar` file that we need to copy to the `plugins` or `mods` directory within your Minecraft server directory.
+The installation only consists of downloading the plugin from **Modrinth** where VoxelDash provides the `.jar` file that we need to copy to the `plugins` or `mods` directory within your Minecraft server directory.
 
-1. First navigate to the [modrinth Voxeldash page](https://modrinth.com/plugin/voxeldash). Click on the **Download** button at the top right of the page.
-2. You'll be asked to either install the the mod with the *Modrinth App* but you can also download it manually by selecting the game version and platform you are running your minecraft server on. In case of the Athenlyx Minecraft Server Installation Guide this would be **Forge**.
+1. First navigate to the [Modrinth VoxelDash page](https://modrinth.com/plugin/voxeldash). Click on the **Download** button at the top right of the page.
+2. You'll be asked to either install the mod with the *Modrinth App* but you can also download it manually by selecting the game version and platform you are running your minecraft server on. In case of the Athenlyx Minecraft Server Installation Guide this would be **Forge**.
 3. Once you selected the version, right-click on the **Download** button and copy the address of the download link. We will need it to paste it into the command shell on our Minecraft server.
 
 Once you have the link, log into your Minecraft server using SSH. Once you're logged in navigate to your server directory and follow the commands below.
@@ -52,6 +52,10 @@ To set the initial dashboard password log into your Minecraft server to access t
 
 Once the password is set you can access the dashboard log in and start managing your minecraft server without accessing the shell of your server directly. 
 
+<!-- vale Vale.Terms = NO -->
+
 !!! warning
-    In this state the dashboard is only accessible with the unsecure http protocol which offers no encryption. It is recommended to use a reverse proxy or WAF in between the anyone accessing VoxelDash since these tools can and should upgrade the communication to an encrypted https to enhance security or your password can be intercepted. It is also recommended to install nginx on the Minecraft server itself and to disable access to http in anyway to the server.
+    In this state the dashboard is only accessible with the unencrypted HTTP protocol. It is recommended to use a reverse proxy or WAF in between the anyone accessing VoxelDash since these tools can and should upgrade the communication to an encrypted HTTPS to enhance security or your password can be intercepted. It is also recommended to install nginx on the Minecraft server itself and to disable access to HTTP in anyway to the server.
+
+<!-- vale Vale.Terms = YES -->
 

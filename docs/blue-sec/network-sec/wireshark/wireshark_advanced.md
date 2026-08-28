@@ -44,7 +44,7 @@ Wireshark also supports resolving MAC addresses into human-readable format using
 
 ![Image](images/wireshark-advanced_endpoints.png)
 
-The name resolution is not limited to only MAC addresses. Wireshark also offers IP and port name resolution options as well, altough these options are not enabled by default. You can access these settings via the **Edit --> Preferences --> Name Resolution** menu.
+The name resolution is not limited to only MAC addresses. Wireshark also offers IP and port name resolution options as well, although these options are not enabled by default. You can access these settings via the **Edit --> Preferences --> Name Resolution** menu.
 
 ![Image](images/wireshark-advanced_nameresolution.png)
 
@@ -60,12 +60,14 @@ Until now, almost all options provided information that contained both IPv4 and 
 
 Wireshark offers an option to break down all DNS packets from the capture file and provides the findings in a tree view based on packet counters and percentages of the DNS protocol. You can use this to view the DNS overall usage, including:
 
+<!-- vale Vale.Spelling = NO -->
 - rcode
 - opcode
 - class
 - query type
 - service
 - query stats
+<!-- vale Vale.Spelling = Yes -->
 
 This option can be accessed via the **Statistics --> DNS** menu.
 
@@ -78,7 +80,7 @@ This function breaks down all HTTP packets from the capture file and helps to vi
 ![Image](images/wireshark-advanced_http.png)
 
 !!! tip
-    Don't forget to scroll sideways within this windows!
+    Don't forget to scroll sideways within this windows.
 
 ## Packet Filtering with queries
 
@@ -93,10 +95,12 @@ The typical use case is to capture everything and filter the captured packets. B
 
 These filters use byte offsets hex values and masks with boolean operators, which makes it harder to understand the filters purpose at first glance. The base syntax is as follows:
 
+<!-- vale Vale.Spelling = NO -->
 - **Scope**: host, net, port and port range
 - **Direction**: src, dst, srtc or dst, src and dest
-- **Protocol**: ether, wlan, ip, ip6, rarp, tcp and udp
+- **Protocol**: ether, wlan, ip, ip6, rarp, TCP and UDP
 - **Sample filter to capture port 80 traffic**: `tcp port 80`
+<!-- vale Vale.Spelling = Yes -->
 
 You can read more about capture filter syntax in the official Wireshark documentation [here](https://www.wireshark.org/docs/man-pages/pcap-filter.html) and [here](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters). A quick reference is available with the **Capture --> Capture Filters** menu.
 
@@ -119,12 +123,12 @@ The primary operators used by display filters are listed in the following table.
 
 |English|C-Like|Description|Example|
 |:------|:-----|:----------|:------|
-|eq|==|Equal|`ip.src == 10.10.10.10`|
-|ne|!=|Not equal|`ip.src != 10.10.10.10`|
-|gt|>|Greater than|`ip.ttl > 250`|
-|lt|<|Less than|`ip.ttl < 10`|
-|ge|>=|Greater than or equal to|`ip.ttl >= 0xFA`|
-|le|<=|Less than or equal to|`ip.ttl <= 0xA`|
+|`eq`|==|Equal|`ip.src == 10.10.10.10`|
+|`ne`|!=|Not equal|`ip.src != 10.10.10.10`|
+|`gt`|>|Greater than|`ip.ttl > 250`|
+|`lt`|<|Less than|`ip.ttl < 10`|
+|`ge`|>=|Greater than or equal to|`ip.ttl >= 0xFA`|
+|`le`|<=|Less than or equal to|`ip.ttl <= 0xA`|
 
 !!! note
     Wireshark supports decimal and hexadecimal values in filtering. You can use any format you want according to the search you will conduct.
@@ -209,7 +213,7 @@ Some example filters are:
 
 ### Application Level Protocol Filters - HTTP and DNS
 
-Similar to TCP and UDP filters, *Application-level* protocol filters are used to filter traffic based on the applicaiton protocol level information. This can be information like the payload and linked data.
+Similar to TCP and UDP filters, *Application-level* protocol filters are used to filter traffic based on the application protocol level information. This can be information like the payload and linked data.
 
 |Filter|Description|
 |:-----|:----------|

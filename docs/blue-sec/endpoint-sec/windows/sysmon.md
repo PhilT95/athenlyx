@@ -1,6 +1,6 @@
 # Sysmon
 
-**Sysmon** is a Windows system service and device driver that, if its installed, remains resident across system reboots to monitor and log system activity to the Windows event log. It provides detailed information about process creations,  network connections and changes to file creation time.
+**Sysmon** is a Windows system service and device driver that, if its installed, remains resident across system reboots to monitor and log system activity to the Windows Event Log. It provides detailed information about process creations,  network connections and changes to file creation time.
 
 It basically gathers detailed and high-quality logs as well as event tracing that assists in identifying anomalies. This is a reason it is commonly used together with SIEM systems or other log parsing solutions.
 
@@ -8,9 +8,9 @@ Event within Sysmon are stored in ``Applications and Services Logs/Microsoft/Win
 
 ## Sysmon Configuration Overview
 
-Sysmon requires a config file in order to tell the binary how to analyze the events that it is receiving. Sysmon files can be created individually or already existing ones can be downloaded. One of these examples is a config file to identify anomalies which is created by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config). Sysmon includes 29 different types of Event IDs, which can all be used within the configuration to specify how events should be handled an analyzed. 
+Sysmon requires a configuration file in order to tell the binary how to analyze the events that it is receiving. Sysmon files can be created individually or already existing ones can be downloaded. One of these examples is a configuration file to identify anomalies which is created by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config). Sysmon includes 29 different types of Event IDs, which can all be used within the configuration to specify how events should be handled an analyzed. 
 
-When creating or modifying configuration files, it can be noticed that a majority of rules in *sysmon-config* will exclude events rather than include events. This helps to filter out normal activity in an environment and decrease the number of events and alerts that would need to be manually audited or searched through within a SIEM. There are also rulesets that take a more proactive approach by using a lot of includes.
+When creating or modifying configuration files, it can be noticed that a majority of rules in *sysmon-config* will exclude events rather than include events. This helps to filter out normal activity in an environment and decrease the number of events and alerts that would need to be manually audited or searched through within a SIEM. Rule sets which take a more proactive approach by using a lot of includes can also be used.
 
 
 ### Event ID 1: Process Creation
@@ -139,7 +139,7 @@ The FileCreateStreamHash event looks for any files created in an alternate data 
 
 ### Event ID 22: DNS Event
 
-This event logs all DNS queries. The most common way to deal with these events is to exclude all trusted domain that are very common within a given environment since it is easier to look for anomalies without the *noise*. It uses the **QueryName** XML tags.
+This event logs all DNS queries. The most common way to deal with these events is to exclude all trusted domain that are common within a given environment since it is easier to look for anomalies without the *noise*. It uses the **QueryName** XML tags.
 
 
 ??? example "Event ID 22 Example"
@@ -157,7 +157,7 @@ This event logs all DNS queries. The most common way to deal with these events i
 
 ## Sysmon Installation
 
-The installation for Sysmon is simple and only requires downloading the binary from Microsoft directly. If the [Sysinternals](sysinternals.md) tools are already downloaded/installed, Sysmon will already be there as well since it is included. The binary is also available via Powershell using the command ``Download-SysInternalsTools C:\Sysinternals``. 
+The installation for Sysmon is simple and only requires downloading the binary from Microsoft directly. If the [Sysinternals](sysinternals.md) tools are already downloaded/installed, Sysmon will already be there as well since it is included. The binary is also available via PowerShell using the command ``Download-SysInternalsTools C:\Sysinternals``. 
 
 To start Sysmon, a PowerShell session or Command prompt, running as the Administrator, is required. 
 
@@ -187,7 +187,7 @@ After Sysmon is installed, events are stored within the Event Viewer under ``App
 
 ## Reducing the noise
 
-Most normal activity or *noise* seen on a network is excluded or filtered out with Sysmon. That leaves the meaningful events that need to be focused on. There are a few ways to optimize this filtration process. The following best practice tips can help reducing this *noise*.
+Most normal activity or *noise* seen on a network is excluded or filtered out with Sysmon. That leaves the meaningful events that need to be focused on. A few ways different ways to optimize this filtration process can be used. The following best practice tips can help reducing this *noise*.
 
 |Best practice|Explanation|
 |:------------|:----------|
@@ -203,7 +203,7 @@ Most normal activity or *noise* seen on a network is excluded or filtered out wi
 
 ### Metasploit
 
-**Metasploit** is a commonly used exploit framework for penetration testing and red team operations. It can be used to easily run exploits on a machine and connect back to a **meterpreter** shell. By default, Metasploit is using port 4444, but port 5555 is also commonly used.
+**Metasploit** is a commonly used exploit framework for penetration testing and red team operations. It can be used to easily run exploits on a machine and connect back to a **Meterpreter** shell. By default, Metasploit is using port 4444, but port 5555 is also commonly used.
 
 The Sysmon configuration to look for Metasploit looks as follows:
 
@@ -217,7 +217,7 @@ The Sysmon configuration to look for Metasploit looks as follows:
 </RuleGroup>
 ```
 
-This uses the Event ID 3 along with the destination port to identify active connections on these ports. But you can also *hunt* for metasploit using the PowerShell cmdlet **Get-WinEvent**.
+This uses the Event ID 3 along with the destination port to identify active connections on these ports. But you can also *hunt* for Metasploit using the PowerShell cmdlet **Get-WinEvent**.
 
 ```pwsh-session
 PS C:\Windows\system32> Get-WinEvent -Path C:\Users\Administrator\log.evtx -FilterXPath '*/System/EventID=3 and */EventData/Data[@Name="DestinationPort"] and */EventData/Data=4444'
@@ -273,7 +273,7 @@ TimeCreated                     Id LevelDisplayName Message
 
 ### Malware - RAT and backdoor
 
-Malware itself has many forms and variations with different end goals. Two important types are RATs and backdoors. RATs are used similar to any other payload to gain access to a machine. They typically come with Anti-Virus or EDR evasion techniques that make them different than other payloads like *MSFVenom*. A RAT typically uses a Client-Server model and comes with an interface for easy user administration. Examples for RATs are **Xeexe** and **Quasar**. 
+Malware itself has many forms and variations with different end goals. Two important types are RATs and backdoors. RATs are used similar to any other payload to gain access to a machine. They typically come with Anti-Virus or EDR evasion techniques that make them different than other payloads like *msfvenom*. A RAT typically uses a Client-Server model and comes with an interface for easy user administration. Examples for RATs are **Xeexe** and **Quasar**. 
 
 The first way to hunt for RATs and C2 Servers is similar to hunting [Metasploit](#metasploit). An example configuration for Sysmon can look like this:
 
@@ -311,7 +311,7 @@ TimeCreated                     Id LevelDisplayName Message
 
 ### Looking for Persistence
 
-**Persistence** is used by attackers to maintain access to a machine once it is compromised. There are a lot of different ways to gain persistence on a machine. For example, startup scripts are commonly used. Using Sysmon, the relevant startup directories can be observed for file creations that can indicate persistence.
+**Persistence** is used by attackers to maintain access to a machine once it is compromised. Many methods exist to gain persistence on a machine. For example, startup scripts are commonly used. Using Sysmon, the relevant startup directories can be observed for file creations that can indicate persistence.
 
 ```xml
 <RuleGroup name="" groupRelation="or">
@@ -336,7 +336,7 @@ Modifications to the registry, where for example a script can be placed inside `
 
 ### Detecting Evasion techniques
 
-There are a number of evasion techniques used by malware authors to evade both Anti-Virus and detections like:
+Multiple techniques exist that can be used by malware authors to evade both Anti-Virus and detections, for example like:
 
 - Alternate Data Streams
 - Injections

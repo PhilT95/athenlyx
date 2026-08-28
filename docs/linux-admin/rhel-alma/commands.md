@@ -1,16 +1,16 @@
-# Practical commands for general linux CLI usage
+# Practical commands for general Linux CLI usage
 
 
 |Category|Command|Purpose and Usage|Examples|
 |:-------|:------|:----------------|:-------|
 |Basic|`history`| Views the command history||
-||`!10`| Execute the 10th command in history||
+||`!10`| Execute the tenth command in history||
 ||`!!`|Execute the previous command||
 |Read File|`cat`|Read a file|`cat sample.txt`|
 ||`head`|Read the first 10 lines of a file|`head sample.txt`|
 ||`tail`|Read the last 10 lines of a file|`tail sample.txt`|
 |Find & Filter|`cut`|Cut a specific field. The example cuts the first field.|`cat sample.txt \| cut -f 1`|
-|||Cut the 1st column.|`cat sample.txt \| cut -c1`|
+|||Cut the first column.|`cat sample.txt \| cut -c1`|
 ||`grep`|Filter specific keywords.|`cat sample.txt \| grep 'keywords'`|
 ||`sort`|Sorts outputs alphabetically.|`cat sample.txt \| sort`|
 |||Sorts output numerically.|`cat sample.txt \| sort -n`|

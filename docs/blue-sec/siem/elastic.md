@@ -19,7 +19,7 @@ The **Elastic Stack** is the collection of different open-source components link
 
 ## Beats
 
-**Beats** is a host-based agent known as *Data-shippers* that is used to *ship* or *transfer* data from endpoints to Elasticsearch. Each beat is a single-purpose agent that sends specific data to the Elasticsearch. You can find alle existing **Beats** by looking at the [official documentation](https://www.elastic.co/guide/en/beats/libbeat/8.19/beats-reference.html).
+**Beats** is a host-based agent known as *Data-shippers* that is used to *ship* or *transfer* data from endpoints to Elasticsearch. Each beat is a single-purpose agent that sends specific data to the Elasticsearch. You can find all existing **Beats** by looking at the [official documentation](https://www.elastic.co/guide/en/beats/libbeat/8.19/beats-reference.html).
 
 
 **Kibana** is a web-based data visualization that works with Elasticsearch to analyze, investigate and visualize the data stream in real-time. It allows users to create multiple visualizations and dashboards for better visibility.
@@ -44,19 +44,19 @@ It contains the logs being ingested manually or in real-time, the time-chart, no
 
 #### Time Filter
 
-The **Time filter** provides a way to apply a log filter based on the time. It has different options on how to select the timeframe.
+The **Time filter** provides a way to apply a log filter based on the time. It has different options on how to select the time frame.
 
 ![Kibana Discovery Time Filter](images/kibana_discovery-timefilter.png)
 
 #### Quick Select
 
-The **Quick Select Tab** is another useful tab within Kibana that offers multiple predefined timeframe options to select from. 
+The **Quick Select Tab** is another useful tab within Kibana that offers multiple predefined time frame options to select from. 
 
 ![Kibana Discovery Quick Select](images/kibana_discovery-quickselect.png)
 
 #### Timeline
 
-The **Timeline** pane provides an overview of the number of the events that occurred for the selected time/data. The bar can be selected to show only the logs of the selected period. The count at the top left displays the number of documents/events that have been found in that timeframe.
+The **Timeline** pane provides an overview of the number of the events that occurred for the selected time/data. The bar can be selected to show only the logs of the selected period. The count at the top left displays the number of documents/events that have been found in that time frame.
 
 ![Kibana Discovery Timeline](images/kibana_discovery-timeline.png)
 

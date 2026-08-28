@@ -1,6 +1,6 @@
 # Semaphore Setup Guide - AlmaLinux 10
 
-Even though [Ansible](index.md) is a very good automation tool it certainly lacks the modern approach of managing it. This is where [Semaphore](https://semaphoreui.com/) comes into play. It builds upon the Ansible toolset and extends it with
+Even though [Ansible](index.md) is a useful automation tool it certainly lacks the modern approach of managing it. This is where [Semaphore](https://semaphoreui.com/) comes into play. It builds upon the Ansible toolset and extends it with
 
 - A web-based GUI to interact with Ansible
 - Easy Inventory, User and Playbook Management
@@ -19,7 +19,7 @@ Before we can start with the installation of Semaphore please make sure the foll
     - [X] Ansible installed and running
     - [X] SSH and root access
     - [X] Internet access
-- [X] Able to access the system using https via port 3309 (Default Semaphore Port)
+- [X] Able to access the system using HTTP via port 3309 (Default Semaphore Port)
 - [X] An functioning Ansible setup including
     - [X] Playbooks
     - [X] Inventories
@@ -75,7 +75,7 @@ Exit the MariaDB CLI with `exit`.
 
 ### Installing Semaphore
 
-With the database set up we can start installing Semaphore itself. Since there is now prepared package provided by the package manager we have to download the package ourselves. Navigate to the [Semaphore Relase page](https://github.com/semaphoreui/semaphore/releases) and copy the link of the most recent `rpm` file.
+With the database set up we can start installing Semaphore itself. Since there is now prepared package provided by the package manager we have to download the package ourselves. Navigate to the [Semaphore Release page](https://github.com/semaphoreui/semaphore/releases) and copy the link of the most recent `rpm` file.
 
 ??? example "Download Link Version 2.19.8"
     Here is the download link for the [Version 2.19.8](https://github.com/semaphoreui/semaphore/releases/download/v2.19.8/semaphore_2.19.8_linux_amd64.rpm)
@@ -92,14 +92,14 @@ sudo dnf install semaphore_2.19.8_linux_amd64.rpm -y
 
 ### Setting up Semaphore
 
-Semaphore provides its own setup creation process which will ask for all required information and creates a configuration file for running the the application. For this purpose we create a new configuration directory for semaphore where the configuration file will be saved to.
+Semaphore provides its own setup creation process which will ask for all required information and creates a configuration file for running the application. For this purpose we create a new configuration directory for semaphore where the configuration file will be saved to.
 
 ```bash
 mkdir /etc/semaphore && cd /etc/semaphore
 semaphore setup
 ```
 
-Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the onces below.
+Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the ones below.
 
 ```console semaphore setup
 Hello! You will now be guided through a setup to:
@@ -192,7 +192,62 @@ Using this configuration file we an start the Semaphore UI application.
 sudo semaphore server --config /etc/semaphore/config.json
 ```
 
-If everything is setup correctly you can now access the web application through **http://localhost:3000/** . You can login using the username and credentials you created and used during the Semaphore setup.
+If everything is setup correctly you can now access the web application through **http://localhost:3000/**. You can login using the username and credentials you created and used during the Semaphore setup.
 
 ## Semaphore Configuration
+
+Now that we can access Semaphore through its WebUI we continue setting up the basics there. Once you're logged in you will be greeted with a prompt to create a *Project*. A project contains the repositories, Task Templates, Credentials and more that need to be used within the same context. Give the project a name and click **Create**. Once this is done you should see the dashboard of this project.
+
+![Semaphore Dashboard](images/sempahore_dashboard.png)
+
+### Key Store
+
+The first step is adding the credentials used/required by Ansible to the key store. Navigate to the **Key Store** menu on the left. There click on **New Key** on the top left. Set the **type** to **SSH Key** and provide the username, private key and optionally the passphrase that goes with it.
+
+![Semaphore Create Credentials](images/sempahore_new-credential.png)
+
+!!! note
+    You can also create users with or without any password at all by switching the type while creating the credentials.
+
+### Repository 
+
+Next we create a repository referencing the local path to the directory where your playbooks and inventories are stored. On the menu list to the left navigate to **Repositories**. There, again in the upper right corner, click on **New repository**.
+
+!!! note
+    If you are already using git for your repository you can also connect to your local or remote git. Please be aware that you need to provide the correct credentials if the connection to a remote git is required.
+
+Give the repository a new, provide the path (or URL) to it as well as credentials if required. If there are no credentials needed, set the Access Key to **None**, then click on **Create**.
+
+![Semaphore Create Repository](images/sempahore_new-repository.png)
+
+
+### Inventory
+
+Before we can integrate the playbooks we have to setup the inventory inside Semaphore. Click on the **Inventory** menu through the lift on the list and use the **New Inventory** menu on the top right corner. Make sure you select **Ansible Inventory**.
+
+This *Creation Menu* offers 3 different ways to create inventories:
+
+- **Static**: Creates a inventory file with the content provided in the menu itself.
+- **Static YAML**: Same at the static option, except that Semaphore now expects a YAML structure.
+- **File**: Provide the path to an inventory file on the system. You can optionally provide the related repository.
+
+In this case we will link to an existing inventory. Give the inventory a name, provide credentials if needed and the path to the Ansible inventory file. Once everything is filled out click on **Create**.
+
+![Semaphore Create Inventory](images/sempahore_new-inventory.png)
+
+### Task Template
+
+With everything else set up we can finally create a **Task Template** which will link and use a Ansible Playbook. Navigate to **Task Templates**, click on **New Template** and then select **Ansible Playbook**. 
+
+![Semaphore Create Task Template](images/sempahore_new-playbook.png)
+
+You can see a lot of different fields, but we will focus on the basic ones to get the playbook running. Give the Task Template a name, provide the path to the playbook on the system and select the Inventory and Repository we crated earlier. Click on **Create** to create the template.
+
+## Run and schedule a Task
+
+Now that we have created everything required for a Task to run, navigate to the **Task Templates** menu again. Click on the **Play** Button which will start the Ansible Task. A new window will appear showing you the log for this task.
+
+Once your task runs without issues go into the **Schedule** menu, click on **New Schedule** and use the **cron** option. Now you can select a Task Template and configure the time and day at which the task should be running automatically.
+
+![Semaphore Create Task Schedule](images/sempahore_new-schedule.png)
 

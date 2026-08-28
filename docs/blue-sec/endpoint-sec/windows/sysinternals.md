@@ -9,7 +9,7 @@ The **Sysinternals** tool is a compilation of over 70+ Windows-based tools. Thes
 - **System Information**
 - **Miscellaneous**
 
-The tool is very commonly used for managing Windows systems. It is in fact so popular that even Red Teams and adversaries use them.
+The tool is commonly used for managing Windows systems. It is in fact so popular that even Red Teams and adversaries use them.
 
 
 ## Installation
@@ -37,7 +37,7 @@ Following the Download of the Sysinternals [ZIP File](https://download.sysintern
 You can also use **Sysinternals** executables directory from the Web without downloading it beforehand. Simply enter a tool's Sysinternals Live path into Windows Explorer or a CMD session as ``\\live.sysinternals.com\tools\<toolname>``. 
 
 !!! note
-    To access this web path from your system, you usually need to install and start the WebDAV client on the machine. On most modern Windows machines the client will already be installed, but you need to run it manually. You can start the service from a powershell admin session.
+    To access this web path from your system, you generally need to install and start the WebDAV client on the machine. On most modern Windows machines the client is already installed, but you need to run it manually. You can start the service from a PowerShell administrator session.
 
     ```pwsh-session
     PS C:\WINDOWS\system32> Get-Service webclient
@@ -57,14 +57,14 @@ You can also use **Sysinternals** executables directory from the Web without dow
     You also need to enable **Network Discovery**. You can find more about this topic [here](https://support.microsoft.com/en-us/windows/file-sharing-over-a-network-in-windows-b58704b2-f53a-4b82-7bc1-80f9994725bf).
 
 
-## File and Disk Utilities
+## File and disk utilities
 
 ### Sigcheck
 
 [**Sigcheck**](https://learn.microsoft.com/en-us/sysinternals/downloads/sigcheck) is a CLI tool that shows file version umber, timestamp information and digital signature details, including certificate chains. It also includes an option to check a file's status on [VirusTotal](https://www.virustotal.com/). You can use Sigcheck to, for example, look for unsigned files within ``C:\Windows\System32`` using these parameters:
 
-- ``-u``: If VirusTotal is enabled, it shows the files that are unknown by VirusTotal or have non-zero detections. Otherwise it shows only unsigned files.
-- ``-e``: Scan executable images only, regardless of their extension
+- ``-u``: if VirusTotal is enabled, it shows the files that are unknown by VirusTotal or have non-zero detections. Otherwise it shows only unsigned files.
+- ``-e``: scan executable images only, regardless of their extension
   
 
 ```batch
@@ -106,14 +106,15 @@ C:\Users\Administrator\Desktop>notepad ./file.txt:ads.txt
 
 [^1]: SDelete also implements the **DOD 5220.22-M** (Department of Defense clearing and sanitizing protocol). This is an algorithm that describes how to safely wipe data.
 
+<!-- vale Google.Colons = NO -->
 SDelete has been used by attackers and is associated with MITRE techniques [T1485 Data Destruction](https://attack.mitre.org/techniques/T1485/) and [T1070.004 Indicator Removal on Host: File Deletion](https://attack.mitre.org/techniques/T1070/004/). It's MITRE ID is [S0195](https://attack.mitre.org/software/S0195/).
+<!-- vale Google.Colons = Yes -->
 
-
-## Process Utilities
+## Process utilities
 
 ### Autoruns
 
-**Autoruns** is a utility which has the most comprehensive knowledge of auto-starting locations of any startup monitor. It shows you what programs are configured to run during system boot or login nad when you start various built-in Windows applications like Windows Explorer and media players. These programs and drivers include the ones in the startup folder, *Run*, *RunOnce* and other registry keys. **Autoruns** reports:
+**Autoruns** is a utility which has the most comprehensive knowledge of auto-starting locations of any startup monitor. It shows you what programs are configured to run during system boot or login and when you start some built-in Windows applications like Windows Explorer and media players. These programs and drivers include the ones in the startup folder, *Run*, *RunOnce* and, other registry keys. **Autoruns** reports:
 
 - Shell Extensions
 - Toolbars
@@ -149,7 +150,7 @@ specified criteria or has an exception.
     You can also use the previously mentioned **Process Explorer** tool.
 
 
-### Process Monitor
+### Process monitor
 
 **Process Monitor** is an advanced monitoring tool for Windows that shoes real-time activity within
 
@@ -167,7 +168,7 @@ It provides features like:
 
 When you launch ProcMon, you must use the filter and must configure it properly.
 
-![ProcMon Filter Config](images/sysinternals/sysinternals_procmon-filter.png)
+![ProcMon Filter Configuration](images/sysinternals/sysinternals_procmon-filter.png)
 
 Here the filter is set to **notepad.exe**
 
@@ -178,14 +179,15 @@ Here the filter is set to **notepad.exe**
 
 [**PsExec**](https://learn.microsoft.com/en-us/sysinternals/downloads/psexec) is a light-weight telnet-replacement that executes processes on other systems, complete with full interactivity for console applications, without having to manually install client software. One of its most powerful uses include launching interactive command-prompts on remote systems and remote-enabling tools like IpConfig that otherwise do not have the ability to show information about remote systems.
 
+<!-- vale Google.WordListCase["Admin"] = NO -->
 The PsExec utility is utilized by adversaries. It is associated with MITRE technique [T1570 Lateral Tool Transfer](https://attack.mitre.org/techniques/T1570/), [T1021.002 Remote Services: SMB/Windows Admin Shares](https://attack.mitre.org/techniques/T1021/002/) and [T1569.002 System Services: Service Execution](https://attack.mitre.org/techniques/T1569/002/). Its MITRE ID is [S0029](https://attack.mitre.org/software/S0029/).
+<!-- vale Google.WordListCase["Admin"] = YES -->
 
-
-## Security Utilities
+## Security utilities
 
 ### Sysmon
 
-**Sysmon** (System Monitor) is a Windows system service and device driver that, once installed on a system, remains resident across system reboots to monitor and log system activity to the Windows event log. It provides detailed information about
+**Sysmon** (System Monitor) is a Windows system service and device driver that, once installed on a system, remains resident across system reboots to monitor and log system activity to the Windows Event Log. It provides detailed information about
 
 - Process creation
 - Network connections
@@ -232,7 +234,7 @@ Using this configuration, the displayed information is shown like in the picture
 
 ### RegJump
 
-**RegJump** is a small CLI applet that takes a registry path and opens registry on that path. It accepts rook keys in standard (e.g. ``HKEY_LOCAL_MACHINE``) and abbreviated form (e.g. ``HKLM``).
+**RegJump** is a small CLI applet that takes a registry path and opens registry on that path. It accepts rook keys in standard (for example ``HKEY_LOCAL_MACHINE``) and abbreviated form (for example ``HKLM``).
 
 ```batch
 C:\Users\Administrator\Desktop\SysinternalsSuite>regjump HKLM\System\CurrentControlSet\Services\WebClient

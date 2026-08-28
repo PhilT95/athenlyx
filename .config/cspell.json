@@ -1,0 +1,27 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "files": ["docs/**/*.md"],
+    "ignorePaths": ["site/**", ".git/**"],
+    "words": [
+        "dbservers",
+        "drwxrwsr",
+        "libyaml",
+        "nogroup",
+        "rwxr",
+        "testdb",
+        "usermod",
+        "Velociraptor",
+        "webservers",
+        "Zensical",
+        "Wazuh",
+        "setfactl",
+        "certbot",
+        "venv",
+        "myproject",
+        "mkdocs",
+        "yourwebsite",
+        "nosniff",
+        "SIEM"
+    ]
+}

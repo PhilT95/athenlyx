@@ -1,5 +1,5 @@
-# NetworkMiner - Open Source Traffic Sniffer and more
->NetworkMiner is an open source NFAT for Windows (but also works in Linux / MacOSX / FreeBSD). NetworkMiner can be used as a passive network sniffer/packet capturing tool to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse PCAP files for off-line analysis and to regenerate/reassemble transmitted files and certificates from PCAP files.
+# NetworkMiner - open source traffic sniffer and more
+>NetworkMiner is an open source NFAT for Windows (but also works in Linux / MacOSX / FreeBSD). NetworkMiner can be used as a passive network sniffer/packet capturing tool to detect operating systems, sessions, hostnames, open ports etc. without putting any traffic on the network. NetworkMiner can also parse pcap files for off-line analysis and to regenerate/reassemble transmitted files and certificates from pcap files.
 
 
 NetworkMiner is a great tool to get:
@@ -14,18 +14,18 @@ It supports the following data types:
 - Traffic Captures
 - Log Files
 
-## The Basics
+## The basics
 
 ![Image](./NetworkMiner_Data/NetworkMinerMainPage.png)
 
 NetworkMiner comes with to operating modes:
 
-- **Sniffer Mode**: Although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommended as a sniffer.
+- **Sniffer Mode**: although it has a sniffing feature, it is not intended to use as a sniffer. The sniffier feature is available only on Windows. However, the rest of the features are available in Windows and Linux OS. Based on this, it is not recommended as a sniffer.
 - **Packet Parsing/Processing**: NetworkMiner can parse traffic captures to have a quick overview and information on the investigated capture. This operation mode is mainly suggested to grab the "low hanging fruit" before diving into a deeper investigation.
   
 It is mainly used to gain an overview of the network since its capabilities are limited but its use is easy.
 
-## The Program
+## The program
 
 You can see the list of the pcap files within the **Case Panel**.
 
@@ -43,10 +43,10 @@ Another important menu is the **Credentials** menu, which shows extracted creden
 
 ![Image](./NetworkMiner_Data/NetworkMinerCredentials.png)
 
-The **Files** menu shows extracted files from investigated pcaps.
+The **Files** menu shows extracted files from investigated pcap files.
 
 ![Image](./NetworkMiner_Data/NetworkMinerFiles.png)
 
-The **Messages** menu shows extracted emails, chats and messages from investigated pcaps.
+The **Messages** menu shows extracted emails, chats, and messages from investigated pcap files.
 
 ![Image](NetworkMiner_Data/NetworkMinerMessages.png)

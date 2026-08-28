@@ -1,4 +1,4 @@
-# Blue Teaming - Network Tools
+# Blue teaming - network tools
 
 ![Image](../../images/blue-sec/network-tools-banner.png)
 

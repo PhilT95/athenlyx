@@ -2,7 +2,7 @@
 
 > **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/index.md) and various other tools.
 
-<p align="right"><a herf="https://www.wireshark.org/docs/man-pages/tshark.html">wireshark.org</a></p>
+<p align="right"><a href="https://www.wireshark.org/docs/man-pages/tshark.html">Wireshark.org</a></p>
 
 
 ## Command-Line Packet Analysis
@@ -74,8 +74,10 @@ Since TShark is a network sniffer and packet analyzer, TShark can also be config
 |`-a filesize`|Define the maximum capture file size and stop after reaching it (in **KB**)|`tshark -w output.pcap -a filesize:10`|
 |`-a files`|Defines the maximum number of output files.|`tshark -w output.pcap -a filesize:10 -a files:3`|
 
+
+
 !!! tip "Define capture conditions for multiple runs/loops"
-    If you replace `-a` with the `-b` parameter using the same syntax, you can run these commands in an **Infinite Loop**. You need to use at least one *autostop* (`-a`) parameter if you want to stop the infinite loop.
+    If you replace `-a` with the `-b` parameter using the same syntax, you can run these commands in an **Infinite Loop**. You need to use at least one *auto stop* (`-a`) parameter if you want to stop the infinite loop.
 
 !!! note
     You can only use these capture condition parameters while TShark is in *capture/sniffing* mode. 
@@ -101,7 +103,7 @@ Capture filters have limited filtering features, and the purpose is to implement
 
 ### Capture Filters
 
-TShark uses Wireshark's capture filter syntax here. Below are a few examples, but if you want to read more, you can visit [Wireshark.org](https://www.wireshark.org/docs/man-pages/pcap-filter.html) or [WireShark GitLab](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters).
+TShark uses Wireshark's capture filter syntax here. Below are a few examples, but if you want to read more, you can visit [Wireshark.org](https://www.wireshark.org/docs/man-pages/pcap-filter.html) or [Wireshark GitLab](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters).
 
 |Qualifier|Details and Available Options|Examples|
 |:--------|:----------------------------|:-------|
@@ -117,7 +119,7 @@ TShark uses Wireshark's capture filter syntax here. Below are a few examples, bu
 
 ### Display Filters
 
-TShark also uses Wireshark's syntax here. You can use the [official documentation](https://www.wireshark.org/docs/dfref/) or use WireShark's built-in **Display Filter Expression** menu. Some common filtering option are below.
+TShark also uses Wireshark's syntax here. You can use the [official documentation](https://www.wireshark.org/docs/dfref/) or use Wireshark's built-in **Display Filter Expression** menu. Some common filtering option are below.
 
 !!! note
     Using single quotes for capture filters is recommended to avoid space and bash expansion problems. You can also refer to the [Wireshark Advanced Features Guide](../wireshark/wireshark_advanced.md).

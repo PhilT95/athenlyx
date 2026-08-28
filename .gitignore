@@ -1,8 +1,13 @@
-# Ignoring the MkDocs build (only needed on the webserver)
+# Ignoring the Zensical Build (only needed on the webserver)
 /site
 
 # Ignoring log files
 *.log
 
-# Ignoring the Material for MkDocs plugin cache which is used to build the website faster, for example by caching pictures.
+# Ignoring the Zeniscal plugin cache which is used to build the website faster, for example by caching pictures.
 .cache/
+
+# Ignoring vale styles
+.config/styles/Google/
+.config/styles/proselint/
+.config/styles/write-good/

@@ -50,7 +50,7 @@ To instruct Sysmon to log events, the Sysmon application needs to be executed wh
     The configuration file can be provided as a parameter like this:  
     ``Sysmon64.exe -accepteula -i configuration.xml``
 
-Once Sysmon starts logging the configuration files, the Wazuh agent needs to be instructed to send these events to the Wazu management server. This can be done by adjusting the Wazu agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf``
+Once Sysmon starts logging the configuration files, the Wazuh agent needs to be instructed to send these events to the Wazuh management server. This can be done by adjusting the Wazuh agent configuration file located at ``C:\Program Files (x86)\ossec-agent\ossec.conf``
 
 ```xml
 <!--
@@ -163,7 +163,7 @@ Not all of these rules are enabled but can be by editing the Wazuh agent configu
 
 ### Auditing Commands
 
-Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat and its derivates. ``auditd`` monitors the system for certain actions and events and will write this to a log file. The log collector then can be used to read this log file and send it to the Wazuh management server for processing. On AlmaLinux (a RedHat derivate) for example, this package is installed by default. If not, the installation is rather simple.
+Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat and its derivatives. ``auditd`` monitors the system for certain actions and events and will write this to a log file. The log collector then can be used to read this log file and send it to the Wazuh management server for processing. On AlmaLinux (a RedHat derivative) for example, this package is installed by default. If not, the installation is rather simple.
 
 
 === "Ubuntu"
@@ -174,7 +174,7 @@ Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat
     $ sudo systemctl start auditd.service
     ```
 
-=== "Almalinux"
+=== "AlmaLinux"
 
     ```console
     [user@server ~] sudo dnf -y install auditd

@@ -1,8 +1,9 @@
-# Material for MkDocs - Setup Guide
-This guide will show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It will be centered around the **AlmaLinux 10** and **Material for MkDocs**.
+<!-- vale Google.Headings["Material for MkDocs - Setup guide"] = NO -->
+# Material for MkDocs - Setup guide
+This guide is going to show you the steps to transform your markdown documentation into a self-hosted web server with navigation and search functions. It is based on **AlmaLinux 10** and **Material for MkDocs**.
 
 !!! warning "Outdated"
-    Material for MkDocs will not be maintained anymore. The developers moved to a new project which is replacing MkDocs itself. See [Zensical](../zensical/index.md) for more information.
+    Material for MkDocs is no longer maintained. The developers moved to a new project which is replacing MkDocs itself. See [Zensical](../zensical/index.md) for more information.
 
 ## Prerequisites
 Before you can install **MkDocs** and its extensions you need to have fulfill these following:
@@ -15,8 +16,8 @@ Before you can install **MkDocs** and its extensions you need to have fulfill th
 
 Using `dnf` you can install Python and pip using these commands:
 
-```console
-[user@machine ~]$ sudo dnf install python3 python3-pip
+```bash
+sudo dnf install python3 python3-pip
 ```
 
 Regarding your documentation, I'd recommend to keep nesting of directories up to maximal 4 levels.
@@ -25,11 +26,11 @@ Regarding your documentation, I'd recommend to keep nesting of directories up to
 ### MkDocs Installation
 The first thing to do is installing **MkDocs** itself using pip. 
 
-```console
-[user@machine ~]$ pip install mkdocs
+```bash
+pip install mkdocs
 ```
 
-Verify the installation and version of mkdocs.
+Verify the installation and version of MkDocs.
 
 ```console
 [user@machine ~]$ mkdocs --version
@@ -38,23 +39,23 @@ mkdocs, version 1.6.1 from /home/user/.local/lib/python3.12/site-packages/mkdocs
 
 ### Material for MkDocs
 
-**Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of functionality and customization. We will be using it in this guide since its setup is very easy as well.
+**Material for MkDocs** is a framework based on top of **MkDocs** which offers an extended range of features and customization. Therefore it is going be installed as well.
 
-```console
-[user@machine ~]$ pip install mkdocs-material
+```bash
+pip install mkdocs-material
 ```
 
-#### MkDocs Extension & Plugins
+#### MkDocs extension & plugins
 
 Material for MkDocs uses various plugins and extensions to provide a smoother and more modern website experience. The default installation already comes with a few plugins, but certain functions need to be installed manually.
 
 To provide more efficient image processing, the built-in plugins depend on external libraries that need to be installed. 
 
-```console
-[user@machine ~]$ pip install "mkdocs-material[imaging]"
-[user@machine ~]$ pip install mkdocs-glightbox
-[user@machine ~]$ sudo dnf install cairo-devel
-[user@machine ~]$ sudo dnf install pngquant
+```bash
+pip install "mkdocs-material[imaging]"
+pip install mkdocs-glightbox
+sudo dnf install cairo-devel
+sudo dnf install pngquant
 ```
 
 You can also use an extension to display the creating and last time a site has been updated by linking your website to a git repository. To make use of this functionality, you need to install the extension.
@@ -73,12 +74,12 @@ Now that you have installed MkDocs we can start to get your project ready to com
 
 First navigate to the root of your documentation and create a new MkDocs project.
 
-```console
-[user@machine ~]$ cd /path/to/your/project
-[user@machine project]$ mkdocs new project-name
+```bash
+cd /path/to/your/project
+mkdocs new project-name
 ```
 
-This command will create a new folder `docs` with an **index.md** file and a **mkdocs.yml** file within the root directory of your project.
+This command will create a new folder `docs` with an `index.md` file and a `mkdocs.yml` file within the root directory of your project.
 You directory structure should look like this now:
 
 ```console
@@ -90,15 +91,15 @@ You directory structure should look like this now:
 ...
 ```
 
-Now you need to move your entire documentation within the `docs` directory. This is needed to compile the webpages accordingly.
+Now you need to move your entire documentation within the `docs` directory. This is needed to compile the web pages accordingly.
 
 ### Configuring your project
-Once you have all your files in this directory, we can start preparing the **mkdocs.yml** file. Here the entire configuration of your documentation website will be set.
+Once you have all your files in this directory, we can start preparing the `mkdocs.yml` file. Here the entire configuration of your documentation website will be set.
 
 Open the file, for example with the text editor `nano`.
 
-```console
-[user@machine project]$ nano mkdocs.yml
+```bash
+nano mkdocs.yml
 ```
 
 The file should look like this:
@@ -114,7 +115,7 @@ site_name: YourProject
 site_url: https://example.com
 ```
 
-Now we can add the navigation, which defines the structure of the pages and how they are ordered. You can make it resemble your actual file structure, but this is not a must. The `nav` parameter works by creating a set of directories and files (webpages), which will be compiled accordingly to the configuration. Here is an example of a simple navigation structure.
+Now we can add the navigation, which defines the structure of the pages and how they are ordered. You can make it resemble your actual file structure, but this is not a must. The `nav` parameter works by creating a set of directories and files (web pages), which will be compiled accordingly to the configuration. Here is an example of a simple navigation structure.
 
 ```yaml
 nav:
@@ -126,7 +127,7 @@ nav:
         - Cooking Tools: path/to/cooking_tools.md
 ```
 
-Adapt this to your needs and add it to your **mkdocs.yml** file.
+Adapt this to your needs and add it to your `mkdocs.yml` file.
 
 To use the **Material** theme and get access to its extended functionality, we need to tell MkDocs to use it. We can do that by adding
 
@@ -186,26 +187,26 @@ INFO    -  Documentation built in 0.54 seconds
 
 The generated files are created and saved to the `site` directory within your project. You can use these files to host your documentation. For hosting you still need a web server, which provides access to these files.
 ## Hosting your documentation using nginx
-To make your files available via http or https, you need to setup a web server. I'll show you how to that using nginx.
+To make your files available via HTTP or HTTPS, you need to setup a web server. I'll show you how to that using nginx.
 
-The installation of nginx is very simple. For AlmaLinux, just use this command.
+The installation of nginx is simple. For AlmaLinux, just use this command: 
 
-```console
-[user@machine project]$ sudo dnf install nginx
+```bash
+sudo dnf install nginx
 ```
 
-It should not be very different for other Linux distributions. 
+It should not be much different for other Linux distributions. 
 
 
-Now we have to configure nginx. Go the the nginx directory as root.
+Now we have to configure nginx. Go the nginx directory as root.
 
-```console
-[user@machine project]$ sudo su
-[root@machine project]$ cd /etc/nginx
+```bash
+sudo su
+cd /etc/nginx
 ```
 
 Verify that the following folders `sites-available` and `sites-enabled` are within this directory and if not, create them.  
-Edit the the file `nginx.conf` and search the line 
+Edit the file `nginx.conf` and search the line 
 ```nginx
 include /etc/nginx/conf.d/*.conf;
 ``` 
@@ -216,9 +217,9 @@ and add the following line:
 include /etc/nginx/sites-enabled/*.conf;
 ```
 
-Now we have to create the configuration file for our website. Create a new configuration file within `sites-available`. It is standard to name the config file after the domain of your website, for example `myproject.example.org.conf`.
+Now we have to create the configuration file for our website. Create a new configuration file within `sites-available`. It is standard to name the file after the domain of your website, for example `myproject.example.org.conf`.
 
-Within the configuration we need to tell nginx when and how it should react on **http** and **https** request. Since we are just hosting a light-weight documentation website, the configuration stays rather simple.
+Within the configuration we need to tell nginx when and how it should react on **HTTP** and **HTTPS** request. Since we are just hosting a light-weight documentation website, the configuration stays rather simple.
 
 ```nginx
 server {
@@ -244,7 +245,7 @@ server {
 }
 ```
 
-This configuration is used to redirect all **http** traffic to **https**. If you want to use **http** you can add delete the *if* part of the first *server* bracket and add the same *location*.
+This configuration is used to redirect all **HTTP** traffic to **HTTP**. If you want to use **HTTP** you can delete the *if* part of the first *server* bracket and add the same *location*.
 
 ```nginx
 server {
@@ -273,12 +274,12 @@ server {
 }
 ```
 
-As you can see, the root location of the webserver points to the directory ``/www`` in this case. This is the directory where you have to copy the contents of the `/site` folder, which was created during the compilation of the project. You can also change the directory of your nginx configuration to point wherever you want the contents of the web page to reside.
+As you can see, the root location of the web server points to the directory ``/www`` in this case. This is the directory where you have to copy the contents of the `/site` folder, which was created during the compilation of the project. You can also change the directory of your nginx configuration to point wherever you want the contents of the web page to reside.
 
 Once the configuration is done, we need to activate the configuration. To do this, we have to create a symbolic link of this file to the `sites-enabled` directory we created earlier.
 
-```console
-[root@machine nginx]$ ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
+```bash
+ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
 ```
 
 We quickly test the configuration and if there are no errors, reload nginx.
@@ -294,4 +295,4 @@ Your website should now be reachable. If you are using SSL, please make sure to 
 
 
 ## Conclusion
-MkDocs is a very easy and simple tool to transform Markdown documentation collections into a simple and easy to navigate web page. With the help of nginx, you can quickly host your own collection. If you want to update and compile your documentation automatically, you can use **git** and a simple **cron job** to set this up. You can read more [here](mkdocs_autoupdate.md).
+MkDocs is an easy and simple tool to transform Markdown documentation collections into a simple and easy to navigate web page. With the help of nginx, you can quickly host your own collection. If you want to update and compile your documentation automatically, you can use **git** and a simple **cron job** to set this up. You can read more [here](mkdocs_autoupdate.md).

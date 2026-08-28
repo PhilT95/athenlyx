@@ -1,4 +1,4 @@
-# Installing Wazuh on Almalinux 10 - Quickstart Guide
+# Installing Wazuh on AlmaLinux 10 - Quickstart Guide
 
 The **Wazuh** server consists of 3 components:
 
@@ -19,7 +19,7 @@ Wazuh itself recommends the following hardware capabilities depending on the amo
 |50-100|8vCPU|8 GiB|200 GB|
 
 !!! note
-    For very small setups (homelab etc.) less RAM can be used.
+    For rather small setups (homelabs etc.) less RAM can be used.
 
 ## Installation Process
 
@@ -42,7 +42,7 @@ INFO: Installation finished.
 
 After successfully logging in Wazuh opens with the *Overview* tab.
 
-![Wazu Overview Tab](images/wazuh_overview.png)
+![Wazuh Overview Tab](images/wazuh_overview.png)
 
 
 ## Wazuh Agents
@@ -125,4 +125,4 @@ The API console can be found by navigating to **Server management** and then cli
 
 The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that will appear to the right of the line.
 
-![Wazu API Console](images/wazuh_api.png)
+![Wazuh API Console](images/wazuh_api.png)

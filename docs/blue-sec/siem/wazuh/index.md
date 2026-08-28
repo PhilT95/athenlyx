@@ -1,4 +1,4 @@
-![Wazu Banner](images/wazuh_banner.jpg)
+![Wazuh Banner](images/wazuh_banner.jpg)
 
 # Wazuh - EDR Software Solution
 
@@ -31,14 +31,14 @@ When everything is configured correctly, each agent will provide an overview of 
 
 ## Compliance & Policy Auditing
 
-Wazuh has the capabilities to audit and monitor an agent's configuration whilst proactively recording event logs. These audits are performed against a variety of frameworks an legislations such as [NIST](https://www.nist.gov/cyberframework), [MITRE](https://evals.mitre.org/) or [CIS](https://www.cisecurity.org/cis-benchmarks).
+Wazuh has the capabilities to audit and monitor an agent's configuration whilst proactively recording event logs. These audits are performed against a variety of frameworks an legislation such as [NIST](https://www.nist.gov/cyberframework), [MITRE](https://evals.mitre.org/) or [CIS](https://www.cisecurity.org/cis-benchmarks).
 
 ![Compliance Audit Based on CIS](images/wazuh_agents-compliance.png)
 
 This Overview shows the percentage on how many checks have been passed by the system, which checks have not and navigating to the **Events** tab gives an insight on events related to settings that were audited.
 
 !!! tip
-    While Wazuhs compliance check is a good way to check your systems configuration and hardening level, it usually gives more insight to run the audit manually using tools like [OpenScap](../../security-assessment/openscap.md).
+    While Wazuh's compliance check is a good way to check your systems configuration and hardening level, it usually gives more insight to run the audit manually using tools like [OpenScap](../../security-assessment/openscap.md).
 
 
 ## Logon Monitoring
@@ -110,7 +110,7 @@ The API console can be found by navigating to **Server management** and then cli
 
 The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that will appear to the right of the line.
 
-![Wazu API Console](images/wazuh_api.png)
+![Wazuh API Console](images/wazuh_api.png)
 
 
 ## Generating Reports
