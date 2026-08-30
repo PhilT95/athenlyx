@@ -211,7 +211,7 @@ kwds = { case = "lower" }
 anchor_linenums = true
 line_spans = "__span"
 use_pygments = true
-auto_title = true
+auto_title = false
 linenums = true
 pygments_lang_class = true
 [project.markdown_extensions.pymdownx.inlinehilite]
