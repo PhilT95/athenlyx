@@ -126,3 +126,6 @@ Local Security Authority Subsystem
 Windows Logon
 Windows Explorer
 Service Control Manager
+Tbp?s
+Akamai
+Cloudflare

@@ -59,3 +59,5 @@
 *[KAPE]: Kroll Artifact Parser and Extractor
 *[IaC]: Infrastructure as Code
 *[WAAP]: Web Application & API Protection
+*[CDN]: Content Delivery Network
+*[PoP]: Point of Presence
