@@ -4,6 +4,7 @@
 
 [![Build Check](https://github.com/PhilT95/athenlyx/actions/workflows/build.yml/badge.svg)](https://github.com/PhilT95/athenlyx/actions/workflows/build.yml)
 [![Security Check](https://github.com/PhilT95/athenlyx/actions/workflows/security.yml/badge.svg)](https://github.com/PhilT95/athenlyx/actions/workflows/security.yml)
+[![Vale Linter](https://github.com/PhilT95/athenlyx/actions/workflows/vale.yml/badge.svg)](https://github.com/PhilT95/athenlyx/actions/workflows/vale.yml)
 
 This is the git repository the website [AthenlyX.com](https://athenlyx.com) is build from using [Zensical](https://zensical.org/). If you want to use this repository as a base for your documentation, please make sure you adapt and change all domain-specific values and don't forget to change the documents with yours!
 
