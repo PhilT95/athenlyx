@@ -10,6 +10,7 @@ Wireshark
 Zensical
 MkDocs
 firewalld
+[Ff]irewall?s
 sudo
 SafeLine
 SELinux
@@ -126,3 +127,7 @@ Local Security Authority Subsystem
 Windows Logon
 Windows Explorer
 Service Control Manager
+Tbp?s
+Akamai
+Cloudflare
+CAPTCHA?s

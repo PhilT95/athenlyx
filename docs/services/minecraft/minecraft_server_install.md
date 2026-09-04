@@ -1,10 +1,10 @@
-# Minecraft Java Server Installation Guide for AlmaLinux 10 - with Mod support
+# Minecraft Java server installation guide for AlmaLinux 10 - with mod support
 
-In this guide we will setup a Minecraft Java server with mod support on an AlmaLinux 10 system and add basic configuration to let the server run automatically as a service on the server.
+With this guide you are going to setup a Minecraft Java server with mod support on an AlmaLinux 10 system and add basic configuration to let the server run automatically as a service on the server.
 
 ## Requirements
 
-Before we need the following requirements before continuing with the setup
+Before you can start with the setup guide please ensure that you fulfill the following requirements:
 
 - [x] An AlmaLinux 10 system
     * [x] with at least 2 cores
@@ -15,37 +15,35 @@ Before we need the following requirements before continuing with the setup
 - [x] SSH access to the system
 
 !!! tip "AlmaLinux 10 Setup"
-    If you don't know how to setup an AlmaLinux 10 system you can refer to [this](../../linux-admin/rhel-alma/almalinux_setup.md) guide which will help you set up a new user with root access.
+    If you don't know how to setup an AlmaLinux 10 system you can refer to [this](../../linux-admin/rhel-alma/almalinux_setup.md) guide which provides more information on how to set up a new user with root access.
 
 
 ## Setup
 
 ### Preparing the system
 
-Before we can start installing and configuring the server we need to install the dependencies to run Minecraft. That includes updating the server and installing the required Java version. Since we need root access, we first ensure that we have the permission. Keep the root / sudo password ready.
+Before you can start installing and configuring the server you need to install the dependencies to run Minecraft. That includes updating the server and installing the required Java version. Since need root access is required, first ensure that you have the permission. Keep the root / sudo password ready.
 
-```console
-[user@minecraftserver ~]$ sudo su
-[sudo] password for user:
-[root@minecraftserver user]# 
+```bash
+sudo su
 ```
 
-Now that we elevated the session into a sudo session we can begin updating and installing all required components.
+Now that you elevated the session into a sudo session begin updating and installing all required components.
 
-```console
-[root@minecraftserver user]# dnf update -y
-[root@minecraftserver user]# dnf install java-21-openjdk-headless wget -y
+```bash
+dnf update -y
+dnf install java-21-openjdk-headless wget -y
 ```
 
 ### Setting up a system user
 
-To separate and isolate the Minecraft server process we will let it run using a different user which will not have root access. 
+To separate and isolate the Minecraft server process you should let it run using a different user which is not going to have root access. 
 
-```console
-[root@minecraftserver user]# useradd -r -s /bin/bash minecraft
+```bash
+useradd -r -s /bin/bash minecraft
 ```
 
-This command will create the user `minecraft`. The `-r` option sets the flag that this will be a system account and the `-s /bin/bash` flag tells it to use `bash` as its login shell.
+This command creates the user `minecraft`. The `-r` option sets the flag that this is a system account and the `-s /bin/bash` flag tells it to use `bash` as its login shell.
 
 !!! note
     You can give the account you create any name you want by changing `minecraft` to the name you want to use.
@@ -55,14 +53,14 @@ This command will create the user `minecraft`. The `-r` option sets the flag tha
 
 ### Downloading and preparing the Minecraft server application
 
-First we will navigate to the home directory of the user we just created to prepare the place where we will keep and run all files related to minecraft.
+First you need to navigate to the home directory of the user that was just created to prepare the location where all files related to minecraft are kept.
 
-```console
-[root@minecraftserver user]# mkdir /home/minecraft/server
-[root@minecraftserver user]# cd /home/minecraft/server
+```bash
+mkdir /home/minecraft/server
+cd /home/minecraft/server
 ```
 
-Now we have to download the server application. Since we want to enable mods, we can't download the installer directly from Microsoft since *Vanilla* Minecraft does not support mods. We can get it for example from **Minecraft Forge**. Follow [this](https://files.minecraftforge.net/net/minecraftforge/forge/) link to all available Minecraft server versions and pick the one you want to install, then download the installer from the website. 
+Now you have to download the server application. Since you want to enable mods, you can't download the installer directly from Microsoft because *Vanilla* Minecraft does not support mods. You can get it for example from **Minecraft Forge**. Follow [this](https://files.minecraftforge.net/net/minecraftforge/forge/) link to all available Minecraft server versions and pick the one you want to install, then download the installer from the website. 
 
 ??? tip "Download the installer directly to your server"
     You can download the installer directly to your server using the `wget` command.
@@ -84,14 +82,14 @@ Now we have to download the server application. Since we want to enable mods, we
 
     Make sure to look at the link if when copying from the website since minecraftforge.net adds an ad redirect to it that needs to be removed before.
 
-Now there should be a JAR-file within the "server" directory. To install it, we will switch into the minecraft user since we won't need sudo permissions for the installation and go by the Least Privilege principle.
+Now there should be a JAR-file within the "server" directory. To install it, you need to switch into a minecraft user session. This works since the installation doesn't require sudo permissions.
 
-```console
-[root@minecraftserver server]# su minecraft
-[minecraft@minecraftserver server]$ java -jar forge-26.1.2-64.0.8-installer.jar --installServer
+```bash
+su minecraft
+java -jar forge-26.1.2-64.0.8-installer.jar --installServer
 ```
 
-Now the installer will setup the `server` directory with all configuration and the server file itself. The directory now should look mostly like this.
+Now the installer is preparing the `server` directory with all configuration and the server file itself. The directory now should look similar to the following one:
 
 ```console
 [minecraft@minecraftserver server]$ tree -L 1
@@ -120,28 +118,28 @@ Now the installer will setup the `server` directory with all configuration and t
 └── world
 ```
 
-Now we are ready to configure the server for its first run.
+Now you are ready to configure the server for its first run.
 
 ---
 
 ### Preparing the server start
 
-To start the server successfully, we need 
+To start the server successfully, you need 
 
 1. To accept the EULA by editing the `eula.txt` file
 2. Prepare the server start script
 3. Configure a few JVM settings
 
-Accepting the EULA is a simple task. We just need to open the file and change `eula=false` to `eula=true`.
+Accepting the EULA is a simple task. You just need to open the text file and change `eula=false` to `eula=true`.
 
-```console
-[minecraft@minecraftserver server]$ nano eula.txt
+```bash
+nano eula.txt
 ```
 
-Now we start preparing the file that will be used to start the server. It is a simple shell script. If it not already exists, create a `run.sh` file.
+Now you need to prepare the shell script file that is going to start the server. If it not already exists, create a `run.sh` file.
 
-```console
-[minecraft@minecraftserver server]$ nano run.sh
+```bash
+nano run.sh
 ```
 
 The file should look like this.
@@ -158,11 +156,11 @@ java @user_jvm_args.txt @libraries/net/minecraftforge/forge/26.1.2-64.0.8/unix_a
 
 Save the file and open `user_jvm_args.txt` and if it doesn't exist, create it.
 
-```console
-[minecraft@minecraftserver server]$ nano user_jvm_args.txt
+```bash
+nano user_jvm_args.txt
 ```
 
-Within this file we set the minimum and maximum amount of RAM the Minecraft server should use. In this example we will set the lower limit to 4 GB and the upper limit to 6750 MB. You can also leave this empty and let the server decide itself how much RAM it should take.
+Within this file you can set the minimum and maximum amount of RAM the Minecraft server should use. In this example the lower limit is set to 4 GB and the upper limit to 6750 MB. You can also leave this empty and let the server decide itself how much RAM it should take.
 
 !!! note
     The upper limit has been set up like this to keep enough RAM for the OS itself on a system with a total of 8 GB of RAM.
@@ -183,27 +181,26 @@ Within this file we set the minimum and maximum amount of RAM the Minecraft serv
 -Xmx6750M
 ```
 
-Now everything is set up to start the server for the first time. Just execute the following command and the server will boot.
+Now everything is set up to start the server for the first time. Just execute the following command and the server is going to boot.
 
-```console
-[minecraft@minecraftserver server]$ ./run.sh
+```bash
+./run.sh
 ```
 
 ---
 
 ### Setup the server as a service
 
-Now that the server is running we can see that it is running directly from the minecraft user session. If something happens to the user session (logoff, shutdown etc.) the Minecraft server will stop and has to be restarted manually. To simplify this we will implement the application as a system service running in the background in the context of the minecraft user without a need to be logged in.
+Now that the server is running you can observe that it is running directly from the minecraft user session. If something happens to the user session (logoff, shutdown etc.) the Minecraft server stops and has to be restarted manually. To simplify this you can implement the application as a system service running in the background in the context of the minecraft user without a need to be logged in.
 
-For this step we will need to go back into the root session that we used to get into the minecraft user session. Then we need to register the Minecraft server service and enable it.
+For this step you need to go back into the root session that you used to get into the minecraft user session. Then register the Minecraft server service and enable it.
 
-```
-[minecraft@minecraftserver server]$ exit
+```bash
 exit
-[root@minecraftserver server]$ nano /etc/systemd/system/minecraft.service
+nano /etc/systemd/system/minecraft.service
 ```
 
-In the file that we are creating now, copy the following
+In the file that you are creating now, copy the following content:
 
 ```systemd
 [Unit]
@@ -221,14 +218,14 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-This tells the system that it the process starter here will be accessible through the network, where the files are located, how to start the system and how to behave in case of a restart. It also states that the process will be started using the minecraft user.
+This tells the system that the process should be accessible through the network, where the files are located, how to start the system and how to behave in case of a restart. It also states that the process is run by the minecraft user.
 
-Once this file is created we need to tell `systemd` to enable and start it.
+Once this file is created you need to tell `systemd` to enable and start it.
 
 
-```console
-[root@minecraftserver server]$ systemctl enable minecraft
-[root@minecraftserver server]$ systemctl start minecraft
+```bash
+systemctl enable minecraft
+systemctl start minecraft
 ```
 
 Now your server should run without any problems and you can start or stop the server in the background by using `systemctl start minecraft` or `systemctl stop minecraft`. 
@@ -237,7 +234,7 @@ Now your server should run without any problems and you can start or stop the se
 
 ### Configuring the local firewall
 
-Since we are exposing a network service from our system it is best practice to lock down the network interface by only allowing connection to relevant ports. Since the Minecraft server application uses the port 25565 as a standard, we will need to keep this port and SSH for management open to the system. AlmaLinux comes with a pre-installed but not enabled local firewall called [firewalld](../../linux-admin/rhel-alma/firewalld.md), which we will use. With AlmaLinux 10, firewalld already comes with a Minecraft service template which you can check by accessing its configuration file under `/usr/lib/firewalld/services/minecraft.xml`. The file should look like this:
+Since you are exposing a network service from your system it is best practice to lock down the network interface by only allowing connection to relevant ports. Since the Minecraft server application uses the port 25565 as a standard, you need to keep this port and SSH for management open to the system. AlmaLinux comes with a pre-installed but not enabled local firewall called [firewalld](../../linux-admin/rhel-alma/firewalld.md), which you can use. With AlmaLinux 10, firewalld is already bundled with a Minecraft service template which you can verify by accessing its configuration file at `/usr/lib/firewalld/services/minecraft.xml`. The file should look like this:
 
 ```xml
 <service>
@@ -249,16 +246,17 @@ Since we are exposing a network service from our system it is best practice to l
   <port protocol="udp" port="25565"/>
 </service>
 ```
-If the file does not exist, create it and add the information from above, then safe the file. Once that is done we will create a firewall rule to allow traffic using the ports required.
 
-Before we can setup `firewalld` we need to enable and start the service for it run along the system permanently.
+If the file does not exist, create it and add the information from XML snippet, then safe the file. Once that is done you have to create a firewall rule that allows incoming traffic using the required ports.
 
-```console
-[root@minecraftserver server]$ systemctl enable firewalld
-[root@minecraftserver server]$ systemctl start firewalld
+Before you can setup `firewalld` you need to enable and start the service so it can permanently run within the system context.
+
+```bash
+systemctl enable firewalld
+systemctl start firewalld
 ```
 
-Once the `firewalld` service is running we can add the minecraft service, reload the ruleset and verify the configuration.
+Once the `firewalld` service is running you can add the minecraft service, reload the ruleset and verify the configuration.
 
 
 ```console
@@ -285,7 +283,7 @@ public (default, active)
   rich rules:
 ```
 
-The configuration should now look mostly like this. It is important that `minecraft` is listed here. At this point your minecraft server should be able to be accessed through the Minecraft client.
+The configuration should now look similar to the preceding output. It is important that `minecraft` is listed here. At this point your minecraft server should be able to be accessed through the Minecraft client.
 
 !!! note "Accessing the server through the internet"
     Please make sure that the server is actually reachable through the internet, especially that the ports are not blocked by any other network device like routers or firewalls. Port-Forwarding may need to be enabled depending on your setup.
@@ -296,9 +294,9 @@ The configuration should now look mostly like this. It is important that `minecr
 
 ### Setting up users
 
-Minecraft servers use the authentication via Minecraft (now Microsoft) Accounts. Using this method, to add allow a player to connect to the server we need to add him to the list of allowed players. While we are doing that, we will also give the player we whitelist in this step *Operator* status, granting him admin commands. 
+Minecraft servers use the authentication via Minecraft (now Microsoft) Accounts. Using this method, to add allow a player to connect to the server you need to add him to the list of allowed players. While doing that, you can also give the player you whitelist the *Operator* status, granting him administrator commands. 
 
-We will need to enter the server command line for this step, so first we stop the minecraft service that we setup earlier before we can continue setting up the Operator for the server.
+For this step you need to enter the server command line. First you have to stop the minecraft service that you setup earlier before you can continue setting up the Operator account for the server.
 
 
 ```console
@@ -335,14 +333,14 @@ INFO: Starting VoxelDash Forge...
 ....
 ```
 
-After starting this server you should see output similar to the one above. Once the server start is done your console should now look like this:
+After starting this server you should see a similar output. Once the server start sequence is done your console should look like this:
 
 ```console
 [13:54:20] [Server thread/INFO] [minecraft/MinecraftServer]: Server empty for 60 seconds, pausing
 >
 ```
 
-The **>** sign indicated that the minecraft server console is now available. Here we can now add user accounts and promote them to Operators.
+The **>** sign indicated that the minecraft server console is now available. Here you can now add user accounts and promote them to Operators.
 
 ```console
 > whitelist add PlayerName
@@ -351,7 +349,7 @@ The **>** sign indicated that the minecraft server console is now available. Her
 [13:59:58] [Server thread/INFO] [minecraft/MinecraftServer]: Player promoted to operator
 ```
 
-Once this is done we can safely shutdown the server by pressing ++crtl+c++ together. Now we can start the server again using `systemctl`.
+Once this is done you can safely shutdown the server by pressing ++crtl+c++ together. Now start the server again using `systemctl`.
 
 !!! warning
     Before you start the service, make sure you are back into the root shell.
@@ -361,8 +359,8 @@ Once this is done we can safely shutdown the server by pressing ++crtl+c++ toget
     [root@minecraft01 server]#
     ```
 
-```console
-[minecraft@minecraft01 server]$ systemctl start minecraft
+```bash
+systemctl start minecraft
 ```
 
 Now the server should be up and running and the user you added can log into the server using your minecraft client.

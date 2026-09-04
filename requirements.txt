@@ -1,0 +1,11 @@
+# Core build dependency
+zensical==0.0.57
+
+# Optional: post-build SEO processing (scripts/ultralytics.py, invoked by scripts/sync.sh)
+# Not required by Zensical or CI — only needed on the production server
+# mkdocs-ultralytics-plugin
+
+# Optional: prose linting (.config/.vale.ini)
+# Vale is not a Python package — install separately:
+#   macOS:  brew install vale
+#   Linux:  https://vale.sh/docs/vale-cli/installation/

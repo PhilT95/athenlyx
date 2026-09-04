@@ -101,7 +101,7 @@ semaphore setup
 
 Once we start the setup configuration we have to provide the details for the setup. Your answers should look similar to the ones below.
 
-```console semaphore setup
+```console title="Semaphore setup"
 Hello! You will now be guided through a setup to:
 
 1. Set up configuration for a MySQL/MariaDB database
@@ -169,7 +169,7 @@ Config output directory (default /tmp): /etc/semaphore
 
 Once you finish the last step the tool will verify database access and create a configuration file with the details. 
 
-```json Example Configuration file
+```json title="Example Configuration file"
 {
         "mysql": {
                 "host": "127.0.0.1:3306",

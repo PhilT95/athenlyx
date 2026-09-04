@@ -1,11 +1,11 @@
-# TShark - Basics
+# TShark - basics
 
-> **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/index.md) and various other tools.
+> **TShark** is a network protocol analyzer. It lets you capture packet data from a live network, or read packets from a previously saved capture file, either printing a decoded form of those packets to the standard output or writing the packets to a file. TShark's native capture file format is pcapng format, which is also the format used by [Wireshark](../wireshark/index.md) and other tools.
 
 <p align="right"><a href="https://www.wireshark.org/docs/man-pages/tshark.html">Wireshark.org</a></p>
 
 
-## Command-Line Packet Analysis
+## Command-line packet analysis
 
 TShark is a text-based tool suitable for data carving, in-depth packet analysis and automation with scripts thanks to being a CLI tool.
 
@@ -43,7 +43,7 @@ TShark is a text-based tool suitable for data carving, in-depth packet analysis 
                         Number of packets = 43
     ```
 
-## TShark Fundamentals
+## TShark fundamentals
 
 ### Basic parameters
 
@@ -64,7 +64,7 @@ Some of the most common parameters are:
 |`-q`|Suppress the packet output on the terminal (silent mode)|`tshark -q`|
 |`-x`|Show packet details in Hex and ASCII dump for each packet|`tshark -x`|
 
-### Capture Condition parameters
+### Capture condition parameters
 
 Since TShark is a network sniffer and packet analyzer, TShark can also be configured to count packets and stop at a specific point or return in a loop structure. The most common parameters for this purpose are:
 
@@ -82,42 +82,42 @@ Since TShark is a network sniffer and packet analyzer, TShark can also be config
 !!! note
     You can only use these capture condition parameters while TShark is in *capture/sniffing* mode. 
 
-## Capture & Display filters
+## Capture & display filters
 
 TShark, like other tools, can be used to filter **live (capture)** and **display (post-capture)** data. These 2 dimensions can be filtered with 2 different approaches:
 
 - Predefined Syntax
 - BPF
 
-TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture** and **Display Filters**.(1)
+TShark supports both, so you can use Wireshark filters and BPF to filter traffic. TShark, being the CLI version of Wireshark, also uses **Capture**, and **Display Filters**.(1)
 { .annotate }
 
 1. You can read more about these filters in [Wireshark](../wireshark/index.md#package-filtering).
 
-Capture filters have limited filtering features, and the purpose is to implement a scope by range, protocol and direction filtering. They can be used to limit file size and focus on important traffic. Display filters investigate the capture files in-depth without modifying the packet.
+Capture filters have limited filtering features, and the purpose is to implement a scope by range, protocol, and direction filtering. They can be used to limit file size and focus on important traffic. Display filters investigate the capture files in-depth without modifying the packet.
 
 |Parameter|Description|
 |:--------|:----------|
 |`-f`|Capture filters using the syntax as BPF and Wireshark's capture filter|
 |`-Y`|Display filters using the same syntax as Wireshark's display filters|
 
-### Capture Filters
+### Capture filters
 
 TShark uses Wireshark's capture filter syntax here. Below are a few examples, but if you want to read more, you can visit [Wireshark.org](https://www.wireshark.org/docs/man-pages/pcap-filter.html) or [Wireshark GitLab](https://gitlab.com/wireshark/wireshark/-/wikis/CaptureFilters#useful-filters).
 
 |Qualifier|Details and Available Options|Examples|
 |:--------|:----------------------------|:-------|
-|**Type**|You can filter IP addresses, host names, IP ranges  and port numbers. If you don't set a qualifier, the *host* qualifier will be used by default.|Filtering a host<br>`tshark -f "host 10.0.0.10"`|
+|**Type**|You can filter IP addresses, host names, IP ranges  and port numbers. If you don't set a qualifier, the *host* qualifier is used by default.|Filtering a host<br>`tshark -f "host 10.0.0.10"`|
 |||Filtering a network range<br>`tshark -f "net 10.0.10.0/24"`|
 |||Filtering a port<br>`tshark -f "port 80"`|
 |||Filtering a port range<br>`tshark -f "portrange 80-100"`|
-|**Direction**|Filter for the target direction/flow. If you don't use the direction operator, it will be equal to *either* and cover both directions.|Filtering source address<br>`tshark -f "src host 10.10.0.10"`|
+|**Direction**|Filter for the target direction/flow. If you don't use the direction operator, it is equal to *either* and cover both directions.|Filtering source address<br>`tshark -f "src host 10.10.0.10"`|
 |||Filtering destination address<br>`tshark -f "dst host 10.10.0.10"`|
 |**Protocol**|Filter for the protocol.|Filtering TCP<br>`tshark -f "tcp"`|
 |||Filtering MAC address<br>`tshark -f "ether host F8:D8:C6:A3:5D:81"`|
 |||You can also filter protocols with IP protocol number assigned by IANA<br>`tshark -f "ip proto 1"`|
 
-### Display Filters
+### Display filters
 
 TShark also uses Wireshark's syntax here. You can use the [official documentation](https://www.wireshark.org/docs/dfref/) or use Wireshark's built-in **Display Filter Expression** menu. Some common filtering option are below.
 
