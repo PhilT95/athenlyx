@@ -57,6 +57,9 @@ nav = [
         {"Web Security" = [
             {"SafeLine WAF" = [
                 "blue-sec/web-sec/safeline/index.md"
+            ]},
+            {"Cloudflare" = [
+                "blue-sec/web-sec/cloudflare/index.md"
             ]}
         ]},
         {"SIEM" = [
@@ -184,6 +187,9 @@ link = "mailto:docs@s-guard.simplelogin.com"
 [project.markdown_extensions.abbr]
 [project.markdown_extensions.pymdownx.details]
 [project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
 [project.markdown_extensions.pymdownx.tabbed]
 alternate_style = true
 

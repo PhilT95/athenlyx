@@ -61,3 +61,4 @@
 *[WAAP]: Web Application & API Protection
 *[CDN]: Content Delivery Network
 *[PoP]: Point of Presence
+*[GDPR]: General Data Protection Regulation 
