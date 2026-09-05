@@ -1,15 +1,15 @@
 ![VoxelDash Banner](./images/voxeldash_logo.png)
 
-# VoxelDash on Minecraft Server - Forge Version
+# VoxelDash on Minecraft server - Forge version
 
 **VoxelDash** adds a modern dashboard to a Minecraft server. It provides an easy way to monitor the performance, player, backups and much more of your Minecraft server. For example, instead of logging into the command shell of the server which is hosting a Minecraft server, now there is an easy way to access the most common settings and even the Minecraft server command line itself.
 
 ## Requirements
 
-Even though VoxelDash also supports the installation on a *Vanilla* Minecraft server, it is way easier to install it as a mod to a Forge Minecraft server. Therefore this is the preferred way, even when you don't want to use other modding capabilities of your server. Your Minecraft server should already have an `plugins` or `mods` directory in the server folder. If not, verify that you have a Mod loader setup like Forge, Fabric or NeoForge in use.
+Even though VoxelDash also supports the installation on a *Vanilla* Minecraft server, it is way easier to install it as a mod to a Forge Minecraft server. Therefore this is the preferred way, even when you don't want to use other modding capabilities of your server. Your Minecraft server should already have an `plugins` or `mods` directory in the server folder. If not, verify that you have a Mod loader setup like Forge, Fabric, or NeoForge in use.
 
 !!! tip
-    If you don't have a Minecraft server with a mod loader setup you can refer to [this](minecraft_server_install.md) guide which will help you with the setup.
+    If you don't have a Minecraft server with a mod loader setup you can refer to [this](minecraft_server_install.md) guide which helps you with the setup.
 
 Besides the server itself, make sure the following requirements are also fulfilled:
 
@@ -18,13 +18,13 @@ Besides the server itself, make sure the following requirements are also fulfill
 - [x] Access to the internet from the server
 
 
-## VoxelDash Installation & Setup
+## VoxelDash installation & setup
 
-The installation only consists of downloading the plugin from **Modrinth** where VoxelDash provides the `.jar` file that we need to copy to the `plugins` or `mods` directory within your Minecraft server directory.
+The installation only consists of downloading the plugin from **Modrinth** where VoxelDash provides the `.jar` file that you need to copy to the `plugins` or `mods` directory within your Minecraft server directory.
 
-1. First navigate to the [Modrinth VoxelDash page](https://modrinth.com/plugin/voxeldash). Click on the **Download** button at the top right of the page.
+1. First navigate to the [Modrinth VoxelDash page](https://modrinth.com/plugin/voxeldash). Click the **Download** button at the top right of the page.
 2. You'll be asked to either install the mod with the *Modrinth App* but you can also download it manually by selecting the game version and platform you are running your minecraft server on. In case of the Athenlyx Minecraft Server Installation Guide this would be **Forge**.
-3. Once you selected the version, right-click on the **Download** button and copy the address of the download link. We will need it to paste it into the command shell on our Minecraft server.
+3. Once you selected the version, right-click the **Download** button and copy the address of the download link. You need it to paste it into the command shell on the Minecraft server.
 
 Once you have the link, log into your Minecraft server using SSH. Once you're logged in navigate to your server directory and follow the commands below.
 
@@ -45,10 +45,10 @@ voxeldash_forge26-1.2.1.jar                                             100%[===
 2026-08-11 16:29:11 (65.2 MB/s) - ‘voxeldash_forge26-1.2.1.jar’ saved [31336251/31336251]
 ```
 
-This will download the mod file directly to the download folder. Now the Minecraft server needs to be restarted. With the next start the mod will be initialized and loaded. 
+This command downloads the mod directly to the download folder. Now the Minecraft server needs to be restarted. With the next start the mod is going to be initialized and loaded. 
 You can now access the dashboard through `http://<your-ip>:7867` or any DNS name that resolves to this system. 
 
-To set the initial dashboard password log into your Minecraft server to access the Minecraft console with operator/server admin permissions. Once there type in the command `\voxeldash password <password>`.
+To set the initial dashboard password log into your Minecraft server to access the Minecraft console with operator/server administrator permissions. Once there type in the command `\voxeldash password <password>`.
 
 Once the password is set you can access the dashboard log in and start managing your minecraft server without accessing the shell of your server directly. 
 

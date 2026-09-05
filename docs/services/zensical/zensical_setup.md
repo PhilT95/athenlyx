@@ -1,6 +1,6 @@
 # Zensical Setup on AlmaLinux 10
 
-This guide will help you setup a Zensical project on a AlmaLinux 10 system. This includes the installation and secure configuration ob Zensical and nginx using the `certbot` to easily integrate SSL and create the necessary **LetsEncrypt** certificate.
+This guide aims to help you setup a Zensical project on a AlmaLinux 10 system. This includes the installation and secure configuration ob Zensical and nginx using the `certbot` to easily integrate SSL and create the necessary **LetsEncrypt** certificate.
 
 
 ## Requirements
@@ -16,28 +16,28 @@ The Zensical setup is a pretty straight-forward process and does not differ a lo
 
 ## Setup
 
-### Login & Update
+### Login & update
 
-To begin with the Zensical setup, connect to your system using SSH. Once logged in we will make sure the it is fully updated. Since we need root permissions to update the system and will be needing these permissions to install all required components as well we switch into the root session using the ``su`` command.
+To begin with the Zensical setup, connect to your system using SSH. Once logged in you need to verify that the system is fully updated. Since you need root permissions to update the system and you are going to need these permissions to install all required components as well you can switch into the root session using the ``su`` command.
 
 ```bash
 sudo su
 dnf update -y
 ```
 
-### Installing Dependencies & Zensical
+### Installing dependencies & Zensical
 
-Once all updates are installed we can continue installing of all Zensical dependencies and Zensical itself.
-The only dependency required to install Zensical is `Python3`. It is required to install Zensical and various Python libraries required by the different Zensical extensions.
+Once all updates are installed you can continue installing of all Zensical dependencies and Zensical itself.
+The only dependency required to install Zensical is `Python3`. It is required to install Zensical and the different Python libraries used by some Zensical extensions.
 
-We will use the built-in package manger to install python and verify its installation.
+Use the built-in package manger to install python and verify its installation.
 
 ```bash
 dnf install python3
 python3 --version
 ```
 
-Once python is installed we can install all required python components ideally within a separate virtual  Python environment. Since we want to run Zensical without root permission and it is recommended to use the virtual environment without them as well we will continue inside the normal user context.
+Once python is installed you can install all required python components ideally within a separate virtual Python environment. Since you should run Zensical without root permission and it is also recommended to use the virtual environment without them as well continue inside the normal user context.
 
 ```bash
 exit
@@ -52,14 +52,14 @@ zensical --version
 
 ### Initialize a basic Zensical project
 
-Zensical offers a quick way to setup a new project with a single command. This will create the necessary files and folders for a basic Zensical website to work.
+Zensical offers a quick way to setup a new project with a single command. This creates the necessary files and folders for a basic Zensical website to work.
 
 ```bash
 zensical new myproject
 cd myproject
 ```
 
-After executing the `zensical new` command and navigating into the newly created directory we can verify it by checking if the project structure resembles the structure below.
+After executing the `zensical new` command and navigating into the newly created directory you can verify it by checking if the project structure resembles the structure below.
 
 ```console
 .
@@ -72,23 +72,23 @@ After executing the `zensical new` command and navigating into the newly created
 └── zensical.toml
 ```
 
-To understand what the various files and folders are supposed to be used for here a quick overview
+To understand what the files and folders are supposed to be used for here a quick overview:
 
-- The `docs` directory is the place where all markdown files, that should be transformed into web pages, will be placed 
+- The `docs` directory is the place where all markdown files, that should be transformed into web pages, are placed 
     - Within the `markdown.md` basic markdown syntax is provided as a cheat sheet
-    - Within the `index.md` file you are able to discover the various editing options that Zensical offers which extend basic markdown features
+    - Within the `index.md` file you are able to discover the some editing options that Zensical offers which extend basic markdown features
 - The `.github` directory is used by GitHub for its CI/CD pipeline configuration
     - The workflow configured within `docs.yml` aims to provide a quick deployment option using GitHub Pages.
 - `zensical.toml` is the main configuration file which defines
     - Basic information about the website
-    - Which features are enabled and how they will work
+    - Which features are enabled and how they work
     - If you don't use the default navigation it also contains the website navigation setup.
 
-You can already launch this website using the `zensical serve` command which will spin up a local web server. This is especially useful for debugging and testing. If you want to host your website securely without GitHub pages you'll need to build your project and serve it with a dedicated web server engine like nginx.
+You can already launch this website using the `zensical serve` command which spins up a local web server. This is especially useful for debugging and testing. If you want to host your website securely without GitHub pages you need to build your project and serve it with a dedicated web server engine like nginx.
 
 
 !!! info "Zensical Build"
-    You can use `zensical build` to generate all files necessary to host the website using nginx. Per default website will the saved to the `site` directory inside the folder where you execute `zensical build`. The directory for this website looks like this:
+    You can use `zensical build` to generate all files necessary to host the website using nginx. Per default the website content is saved to the `site` directory inside the folder where you execute `zensical build`. The directory for this website looks like this:
 
     ```console
     .
@@ -114,20 +114,20 @@ You can already launch this website using the `zensical serve` command which wil
 ### Setting up nginx
 
 The web server engine nginx is one of the most reliable and lightweight ones. It is an ideal way to easily and securely host Zensical projects.
-Before we can host Zensical using nginx we need to install it, set it up correctly and configure it to run as a background service.
+Before you can host Zensical using nginx you need to install it, set it up correctly and configure it to run as a background service.
 
 ```bash
 sudo su
 dnf install nginx -y
 ```
 
-Once nginx is installed navigate to the nginx directory `/etc/nginx`. There we need to create a dedicated nginx configuration file for the project. 
+Once nginx is installed navigate to the nginx directory `/etc/nginx`. There you need to create a dedicated nginx configuration file for the project. 
 
 ```bash
 nano yourwebsite.example.com.conf
 ```
 
-Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration will redirect all requests via **HTTP**  to the **HTTP** protocol. The second `server` block contains the **HTTP** configuration with certain security and logging features as well as caching configured.
+Copy the following content and edit the domain and the `root` directive inside the second server block. This needs to point towards the Zensical Website directory. The following configuration redirects all requests via **HTTP**  to the **HTTP** protocol. The second `server` block contains the **HTTP** configuration with certain security and logging features as well as caching configured.
 
 ```nginx
 
@@ -183,23 +183,23 @@ server {
 
 Please note that there is currently no SSL certificate provided for HTTPS, which is required for it to work. It is recommended to use the `certbot` to get a valid LetsEncrypt certificate. `certbot` also takes care of adapting your nginx configuration once it created a valid SSL certificate.
 
-Now we just need to register nginx as a system service and start it.
+Now you just need to register nginx as a system service and start it.
 
 ```bash
 systemctl enable nginx
 systemctl start nginx
 ```
 
-Once the nginx service it setup and running we can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via HTTP/HTTPS to reach your web server.
+Once the nginx service it setup and running you can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via HTTP/HTTPS to reach your web server.
 
 If you want to update the website you only need to update the files within the Zensical project, run `zensical build` and make sure the new files replace the old ones.
 
 
-## Extensions & Plugins
+## Extensions & plugins
 
-Most extensions that Zensical is using are provided by the [Python Markdown Extension](https://zensical.org/docs/setup/extensions/python-markdown/) that is usually installed by default with Python itself.
+Most extensions that Zensical is using are provided by the [Python Markdown Extension](https://zensical.org/docs/setup/extensions/python-markdown/) that is normally installed by default with Python itself.
 
-If you want to enable the various features that are provided using this extension please refer to the Zensical documentation itself. To enable and configure these extensions the `zensical.toml` file needs to be edited. You can refer to the toml-file for [this project](https://github.com/PhilT95/athenlyx/blob/main/zensical.toml).
+If you want to enable features that are provided using this extension please refer to the Zensical documentation itself. To enable and configure these extensions the `zensical.toml` file needs to be edited. You can refer to the toml-file for [this project](https://github.com/PhilT95/athenlyx/blob/main/zensical.toml).
 
 
 

@@ -131,3 +131,5 @@ Tbp?s
 Akamai
 Cloudflare
 CAPTCHA?s
+Forge
+[Dd]isable

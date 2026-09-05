@@ -58,7 +58,7 @@ Cloudflare's licensing model has multiple tiers. I'd generally separate the tier
 !!! note
     If certain compliance requirements like data localization (for example GDPR) are a concern the Enterprise tier is the only one where these features can be included.
 
-See the following license comparison with key details. IF you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/)
+See the following license comparison with key details. If you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/)
 
 |Feature|Free|Pro|Business|Enterprise|
 |:------|:---|:--|:-------|:---------|

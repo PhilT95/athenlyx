@@ -5,7 +5,7 @@
 This page keeps track of recently published files and guides.
 
 !!! info "Latest addition"
-    The most recent addition is the [**Cloudflare doc*](../blue-sec/web-sec/cloudflare/index.md) (2026-09-04).
+    The most recent addition is the [**Cloudflare doc**](../blue-sec/web-sec/cloudflare/index.md) (2026-09-04).
 
 <div class="grid cards" markdown>
 
