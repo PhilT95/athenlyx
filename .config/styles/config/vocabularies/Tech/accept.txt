@@ -133,3 +133,5 @@ Cloudflare
 CAPTCHA?s
 Forge
 [Dd]isable
+MariaDB
+Semaphore

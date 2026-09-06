@@ -1,5 +1,5 @@
-# Auto-Update using git
-Once you set up your server, you usually have to manually update your documentation and build the web pages again on the web server itself, as well as copying the newly generated files into the web directory. Using **crontab** we can automate this process and you don't have to touch your server again to update your website.
+# Auto-update using git
+Once you set up your server, you have to manually update your documentation and build the web pages again on the web server itself, as well as copying the newly generated files into the web directory. Using **crontab** you can automate this process so you don't have to worry about updating your website anymore.
 
 Just create a scripts directory within the git repository and create a new bash file.
 
@@ -8,7 +8,7 @@ Just create a scripts directory within the git repository and create a new bash 
 [root@machine project]$ touch scripts/sync.sh
 ```
 
-Edit the synch.sh file and add the following lines:
+Edit the `sync.sh` file and add the following lines:
 
 ```bash
 #!/bin/bash

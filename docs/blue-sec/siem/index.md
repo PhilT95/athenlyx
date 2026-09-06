@@ -2,7 +2,7 @@
 
 # Security information and event management system
 
-A **SIEM** is a tool that collects data from several endpoints and network devices across an network, stores them at a centralized place and performs correlation on them.
+A **SIEM** is a tool that collects data from multiple endpoints and network devices across an network, stores them at a centralized place and performs correlation on them.
 
 ## What is a SIEM
 
