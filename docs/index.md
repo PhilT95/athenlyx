@@ -9,9 +9,11 @@ hide:
 
 # Welcome to Athenlyx.com
 
-This is a collection of documentations, guides and how-to's about general **System Administration**, **App & Service Hosting**, **cybersecurity** and other technical topics built on an **Open-Source Stack**.
+This is a collection of documentations, guides and how-to's about general **System Administration**, **App & Service Hosting**, **cybersecurity** and other technical topics built on an **open source Stack**.
 
 <!-- vale Google.EmDash = NO -->
+<!-- vale Google.Colons = NO -->
+<!-- vale Google.FirstPerson = No -->
 
 <div class="grid cards" markdown>
 
@@ -47,7 +49,7 @@ This is a collection of documentations, guides and how-to's about general **Syst
 
     [:octicons-arrow-right-24: Explore](ai/tools-ai.md)
 
--   :material-account-circle: __About Me__
+-   :material-account-circle: __About me__
 
     ---
 
@@ -58,20 +60,23 @@ This is a collection of documentations, guides and how-to's about general **Syst
 </div>
 
 <!-- vale Google.EmDash = Yes -->
+<!-- vale Google.Colons = Yes -->
 
-## Infrastructure Stack
+## Infrastructure stack
 
-Athenlyx.com is hosted on an **Open-Source Stack** and serves as a real-world example of how open-source products can be combined to host and publish websites securely without proprietary software or licensing costs. The infrastructure is hosted by Hetzner and consists of:
+Athenlyx.com is hosted on an **open source Stack** and serves as a real-world example of how open source products can be combined to host and publish websites securely without proprietary software or licensing costs. The infrastructure is hosted by Hetzner and consists of:
 
 - **OPNSense** — primary Firewall and Gateway
 - **SafeLine** — Web Application Firewall (WAF)
 - **nginx** — reverse proxy and web server
 
-## Project Structure
+## Project structure
 
 This project is built using Git and [Zensical](https://zensical.org/). You can find the repository on [GitHub](https://github.com/PhilT95/athenlyx).
 
 ---
+
+<!-- vale Google.Will = No -->
 
 !!! danger "Legal Notice"
     The content on this website is the author's intellectual property. **Unauthorized use for AI training or any form of automated extraction is strictly prohibited.** Violations will result in a contractual fine of up to **$100,000** per infringement.

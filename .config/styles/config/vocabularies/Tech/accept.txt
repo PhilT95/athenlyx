@@ -135,3 +135,10 @@ Forge
 [Dd]isable
 MariaDB
 Semaphore
+SSL
+ARP
+SYN
+DHCP
+NetBIOS
+DNS
+FTP
