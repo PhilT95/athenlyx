@@ -6,16 +6,18 @@ It basically gathers detailed and high-quality logs as well as event tracing tha
 
 Event within Sysmon are stored in ``Applications and Services Logs/Microsoft/Windows/Sysmon/Operation``.
 
-## Sysmon Configuration Overview
+## Sysmon configuration overview
 
-Sysmon requires a configuration file in order to tell the binary how to analyze the events that it is receiving. Sysmon files can be created individually or already existing ones can be downloaded. One of these examples is a configuration file to identify anomalies which is created by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config). Sysmon includes 29 different types of Event IDs, which can all be used within the configuration to specify how events should be handled an analyzed. 
+Sysmon requires a configuration file to tell the binary how to analyze the events that it is receiving. Sysmon files can be created individually or already existing ones can be downloaded. One of these examples is a configuration file to identify anomalies which is created by [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config). Sysmon includes 29 different types of Event IDs, which can all be used within the configuration to specify how events should be handled an analyzed. 
 
-When creating or modifying configuration files, it can be noticed that a majority of rules in *sysmon-config* will exclude events rather than include events. This helps to filter out normal activity in an environment and decrease the number of events and alerts that would need to be manually audited or searched through within a SIEM. Rule sets which take a more proactive approach by using a lot of includes can also be used.
+When creating or modifying configuration files, it can be noticed that a majority of rules in *sysmon-config* exclude events rather than include events. This helps to filter out normal activity in an environment and decrease the number of events and alerts that would need to be manually audited or searched through within a SIEM. Rule sets which take a more proactive approach by using a lot of includes can also be used.
 
+<!-- vale Google.Headings = NO -->
+<!-- vale Google.Colons = NO -->
 
 ### Event ID 1: Process Creation
 
-This event will look for any processes that have been created. It can be used to look for known suspicious processes or processes with typos that would be considered an anomaly. It uses the **CommandLine** and **Image** XML tags.
+This event looks for any processes that have been created. It can be used to look for known suspicious processes or processes with typos that would be considered an anomaly. It uses the **CommandLine** and **Image** XML tags.
 
 
 ??? example "Event ID  1 Example"
@@ -32,7 +34,7 @@ This event will look for any processes that have been created. It can be used to
 
 ### Event ID 3: Network Connection
 
-The network connection event will look for events that occur remotely. This includes files and sources of suspicious binaries as well as opened ports. It uses **Image** and **DestinationPort** tags.
+The network connection event looks for events that occur remotely. This includes files and sources of suspicious binaries as well as opened ports. It uses **Image** and **DestinationPort** tags.
 
 ??? example "Event ID 3 Example"
 
@@ -45,12 +47,12 @@ The network connection event will look for events that occur remotely. This incl
     </RuleGroup>
     ```
 
-    This code will identify files transmitted over open ports, specifically looking for nmap.exe. It also will identify open ports, specifically port 4444. If the condition is met an event will be created.
+    This code identifies files transmitted over open ports, specifically looking for nmap.exe. It also identifies open ports, specifically port 4444. If the condition is met an event is created.
 
 
 ### Event ID 7: Image Loaded
 
-This event will look for DLLs loaded by processes, which is useful when hunting for DLL Injection and DLL Hijacking attacks. It is recommended to exercise caution when using this Event ID as it causes a high system load. It uses the **Image**, **Signed**, **ImageLoaded** and **Signature** XML tags.
+This event looks for DLLs loaded by processes, which is useful when hunting for DLL Injection and DLL Hijacking attacks. It is recommended to exercise caution when using this Event ID as it causes a high system load. It uses the **Image**, **Signed**, **ImageLoaded**, and **Signature** XML tags.
 
 
 ??? example "Event ID 7 Example"
@@ -66,7 +68,7 @@ This event will look for DLLs loaded by processes, which is useful when hunting 
 
 ### Event ID 8: CreateRemoteThread
 
-The CreateRemoteThread Event ID monitors for processes injecting code into other processes. It is used for legitimate tasks and applications, however it can be used by malware to hide malicious activity. The event uses the **SourceImage**, **TargetImage**, **StartAddress** and **StartFunction** XML tags
+The CreateRemoteThread Event ID monitors for processes injecting code into other processes. It is used for legitimate tasks and applications, however it can be used by malware to hide malicious activity. The event uses the **SourceImage**, **TargetImage**, **StartAddress**, and **StartFunction** XML tags
 
 ??? example "Event ID 8 Example"
 
@@ -79,7 +81,7 @@ The CreateRemoteThread Event ID monitors for processes injecting code into other
     </RuleGroup> 
     ```
 
-    This will monitor by
+    This monitors by
 
     1. Looking at the memory address for a specific ending condition which could be an indicator of a Cobalt Strike beacon
     2. Looking for injected processes that do not have a parent process, which can be considered an anomaly.
@@ -134,7 +136,7 @@ The FileCreateStreamHash event looks for any files created in an alternate data 
     </RuleGroup>
     ```
 
-    This will look for files with the **.hta** extension that have been placed within alternate data streams.
+    This looks for files with the **.hta** extension that have been placed within alternate data streams.
 
 
 ### Event ID 22: DNS Event
@@ -152,12 +154,12 @@ This event logs all DNS queries. The most common way to deal with these events i
     </RuleGroup>
     ```
 
-    This will exclude any DNS events with the **.microsoft.com** query.
+    This excludes any DNS events with the **.microsoft.com** query.
 
 
 ## Sysmon Installation
 
-The installation for Sysmon is simple and only requires downloading the binary from Microsoft directly. If the [Sysinternals](sysinternals.md) tools are already downloaded/installed, Sysmon will already be there as well since it is included. The binary is also available via PowerShell using the command ``Download-SysInternalsTools C:\Sysinternals``. 
+The installation for Sysmon is simple and only requires downloading the binary from Microsoft directly. If the [Sysinternals](sysinternals.md) tools are already downloaded/installed, Sysmon is already there as well since it is included. The binary is also available via PowerShell using the command ``Download-SysInternalsTools C:\Sysinternals``. 
 
 To start Sysmon, a PowerShell session or Command prompt, running as the Administrator, is required. 
 
@@ -346,7 +348,7 @@ Multiple techniques exist that can be used by malware authors to evade both Anti
 - Obfuscation
 - Anti-Reversing Techniques
 
-For example, to detect alternate data streams, [Event ID 15](#event-id-15-filecreatestreamhash) can be monitored. This Event ID will hash and log any NTFS Streams that are included within the Sysmon configuration file. That makes it possible to hunt for malware that evades detections using Alternate Data Streams. An example that hunts for files in the ``Temp`` and ``Download`` folder as well as looking for ``.hta`` and ``.bat`` extensions can look like the following example.
+For example, to detect alternate data streams, [Event ID 15](#event-id-15-filecreatestreamhash) can be monitored. This Event ID hashes and logs any NTFS Streams that are included within the Sysmon configuration file. That makes it possible to hunt for malware that evades detections using Alternate Data Streams. An example that hunts for files in the ``Temp`` and ``Download`` folder as well as looking for ``.hta`` and ``.bat`` extensions can look like the following example.
 
 ```xml
 <RuleGroup name="" groupRelation="or">
@@ -365,7 +367,7 @@ Adversaries also commonly use remote threads to evade detections in combination 
 - Thread Hijacking
 - Process Hollowing
 
-The Sysmon [Event ID 8](#event-id-8-createremotethread) can be used. A configuration that will exclude common remote threads withing including any specific attributes can look like the snippet below.
+The Sysmon [Event ID 8](#event-id-8-createremotethread) can be used. A configuration that excludes common remote threads withing including any specific attributes can look like the snippet below.
 
 ```xml
 <RuleGroup name="" groupRelation="or">
