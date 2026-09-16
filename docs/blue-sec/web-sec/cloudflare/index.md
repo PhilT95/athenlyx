@@ -64,8 +64,8 @@ Cloudflare recommends this setup since it is the easiest and most error prone wa
 title: Full setup flow
 ---
 graph LR
-A([Request to sub1.example.com]) --> B[CNAME record points to Cloudflare domain];
-B --> C[Cloudflare resolves domain and returns Cloudflare IP];
+A([Request to sub1.example.com]) --> B[Recursive resolver queries Cloudflare authoritative DNS];
+B --> C[Cloudflare DNS returns Cloudflare proxy IP];
 C --> D[User sends request to Cloudflare IP];
 D --> E([Cloudflare handles and proxies request]);
 ```
@@ -102,7 +102,19 @@ This setup involves zone transfers which allows the usage of multiple DNS provid
 1. **Authoritative zone transfer (AXFR)**: copies the entire zone from an primary to an secondary provider
 2. **Incremental zone transfer (IXFR)**: copies only the changes since the last transfer
 
-Cloudflare can be used as a primary or secondary DNS provider. For more information refer to the official [Cloudflare documentation](https://developers.cloudflare.com/dns/zone-setups/zone-transfers/). 
+Cloudflare can be used as a primary or secondary DNS provider. For more information refer to the official [Cloudflare documentation](https://developers.cloudflare.com/dns/zone-setups/zone-transfers/).
+
+```mermaid
+---
+title: Primary/secondary setup flow
+---
+graph LR
+A[Primary DNS\nholds master zone] -->|AXFR/IXFR zone transfer| B[Secondary DNS\nsyncs zone];
+C([DNS query]) --> A;
+C --> B;
+A --> D([DNS response]);
+B --> D;
+```
 
 
 ## Licensing
