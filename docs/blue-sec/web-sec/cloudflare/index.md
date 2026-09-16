@@ -14,7 +14,9 @@ This makes Cloudflare an ideal solution for websites suffering DDoS Attacks. But
     Please be aware that, depending on your Cloudflare license, certain features are only available in a limited capacity or not included at all. Especially the WAF component lacks configurable managed ruleset and the OWASP rules are not available inside the Free plan. Therefore the Free plan only offers a basic security against attacks and malicious requests.
 
 
-## Basic traffic concept
+## Cloudflare basics
+
+### Traffic concept
 
 Cloudflare and most other cloud-based CDN provider uses DNS records for directing the traffic to themselves instead of directly routing it to the so called **origin[^1]** server. Once a requests hits their networks they open the TLS connection, working like a *man-in-the-middle"*. Terminating the TLS connection is required to
 
@@ -47,6 +49,62 @@ Once Cloudflare checked the traffic and, based on the rules and enabled features
 
 <!-- vale Google.FirstPerson = Yes -->
 
+### DNS setup
+
+Since Cloudflares capabilities rely heavily on DNS it is essential to understand the 3 different ways the setup can be configured.
+
+#### Full setup
+
+This setup model works by making Cloudflare the primary public DNS for a domain by either pointing the domain towards the Cloudflare DNS servers or moving the domain including its registration in its entirety to Cloudflare. In this scenario it is very important that all DNS records that are currently configured need to be imported to Cloudflare. Depending on the existing setup the effort needed can vary greatly. Therefore it is important to consider the existing DNS infrastructure and how the Zone migration to Cloudflare could affect the business.
+
+Cloudflare recommends this setup since it is the easiest and most error prone way. If you need more information for your decision please refer to the [Cloudflare DNS feature set](https://developers.cloudflare.com/dns/).
+
+```mermaid
+---
+title: Full setup flow
+---
+graph LR
+A([Request to sub1.example.com]) --> B[CNAME record points to Cloudflare domain];
+B --> C[Cloudflare resolves domain and returns Cloudflare IP];
+C --> D[User sends request to Cloudflare IP];
+D --> E([Cloudflare handles and proxies request]);
+```
+
+
+!!! warning
+    Migrating a DNS zone comes with the risk of records not being available for a time, or if errors occur even longer. This can greatly impact services relying on public DNS, which nowadays affects all services. DNS resolution for internal services using internal DNS servers should not be affected by this. 
+
+#### Partial setup
+
+Since it is not always possible to move entire public zones to another DNS provider Cloudflare offers the so called *partial setup*. This setup relies on CNAME redirection to Cloudflare domains. Although the zone still needs to be created within Cloudflare, DNS requests are still resolved by the current authoritative DNS servers. To proxy a record with this setup, the following steps need to be completed:
+
+1. Create an A/AAAA record in Cloudflare for the web server that should be proxied
+2. Copy the the domain name provided by Cloudflare for this record
+3. Create a CNAME record inside the authoritative DNS server
+
+This setup has a few limitations depending on the authoritative DNS server. If the [CNAME flattening](https://developers.cloudflare.com/dns/cname-flattening/) feature is not provided by the current DNS hosting provider, the apex (root) of the domain can't be proxied by Cloudflare since this is a technical limitation of CNAME records.
+
+```mermaid
+---
+title: Partial setup flow
+---
+graph LR
+A([Request to sub1.example.com]) --> B[CNAME record points to Cloudflare domain];
+B --> C[Cloudflare resolves domain and returns Cloudflare IP];
+C --> D[User sends request to Cloudflare IP];
+D --> E([Cloudflare handles and proxies request]);
+```
+
+#### Primary/secondary setup
+
+This setup involves zone transfers which allows the usage of multiple DNS providers for the same domain while increasing availability and fault tolerance. Zone transfers allow providers to synchronize DNS records between DNS servers using one of the 2 following protocols:
+
+1. **Authoritative zone transfer (AXFR)**: copies the entire zone from an primary to an secondary provider
+2. **Incremental zone transfer (IXFR)**: copies only the changes since the last transfer
+
+Cloudflare can be used as a primary or secondary DNS provider. For more information refer to the official [Cloudflare documentation](https://developers.cloudflare.com/dns/zone-setups/zone-transfers/). 
+
+
 ## Licensing
 
 Cloudflare's licensing model has multiple tiers. I'd generally separate the tiers into 3 different categories
@@ -58,16 +116,24 @@ Cloudflare's licensing model has multiple tiers. I'd generally separate the tier
 !!! note
     If certain compliance requirements like data localization (for example GDPR) are a concern the Enterprise tier is the only one where these features can be included.
 
-See the following license comparison with key details. If you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/)
+
+### License comparison
+
+See the following license comparison which shows the most important features and to which degree the different tiers provide them. If you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/)
 
 |Feature|Free|Pro|Business|Enterprise|
 |:------|:---|:--|:-------|:---------|
 |**Full feature DNS**|Yes|Yes|Yes|Yes|
+|**DNS Setup options**|Full setup only|Full setup only|Full and partial setup|Full, partial, and primary/secondary DNS server setup|
 |**Layer 7 DDoS protection**|Yes|Yes|Yes|Yes|
 |**CDN**|Yes|Yes|Yes|Yes|
 |**Bot mitigation**|Simple bots|Easy-to-detect bots|Sophisticated bots with *Super Bot Fight Mode*|All bots, anomaly detection, custom CAPTCHAs|
 |**Bot analytics**|No|No|Basic bot analytics|Advanced bot analytics|
+|**Security event log retention**|3 days[^2]|3 days[^2]|3 days[^2]|30 days|
+
+
 
 
 
 [^1]: The origin the server that hosts the application itself. These are web servers within the Cloudflare context since most of its features are based around web applications.
+[^2]: The log retention in this tier can be extended using the [Log explorer addon](https://developers.cloudflare.com/log-explorer/). For more information refer to the [Cloudflare docs](https://developers.cloudflare.com/waf/analytics/security-events/).

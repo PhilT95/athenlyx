@@ -49,7 +49,7 @@ This is a collection of documentations, guides and how-to's about general **Syst
 
     [:octicons-arrow-right-24: Explore](ai/tools-ai.md)
 
--   :material-account-circle: __About me__
+-   :material-account-circle: __About__
 
     ---
 
@@ -79,4 +79,4 @@ This project is built using Git and [Zensical](https://zensical.org/). You can f
 <!-- vale Google.Will = No -->
 
 !!! danger "Legal Notice"
-    The content on this website is the author's intellectual property. **Unauthorized use for AI training or any form of automated extraction is strictly prohibited.** Violations will result in a contractual fine of up to **$100,000** per infringement.
+    The content on this website is the author's intellectual property. **Unauthorized use for AI training or any form of automated extraction is strictly prohibited.** Violations results in a contractual fine of up to **$100,000** per infringement.

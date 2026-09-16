@@ -1,17 +1,17 @@
 ![Wazuh Banner](images/wazuh_banner.jpg)
 
-# Wazuh - EDR Software Solution
+# Wazuh - EDR software solution
 
-**Wazuh**, created in 2015, is an open-source, freely available and extensive EDR solution. It can be used in all scales of environments. Wazuh operators on a management and agent module. To put it simply, a device is dedicated to running Wazuh called the *manager*. The *agents* are installed on the devices that need to be monitored. 
+**Wazuh**, created in 2015, is an open source, freely available, and extensive EDR solution. It can be used in all scales of environments. Wazuh operators on a management and agent module. To put it simply, a device is dedicated to running Wazuh called the *manager*. The *agents* are installed on the devices that need to be monitored. 
 
 If you want to install Wazuh and how to configure it have a look at this [Setup Guide](wazuh_setup.md).
 
 
-## Vulnerability Assessment
+## Vulnerability assessment
 
 Wazuh's vulnerability assessment module is a powerful tool that can be used to periodically scan an agent's operating system for installed applications and their corresponding versions.
 
-Wazuh can use this information, retrieved by the agent, to compare it against a database of CVEs to discover potential vulnerabilities. The vulnerability scanner module will perform a full scan when the Wazuh agent is first [installed](wazuh_setup.md#wazuh-agents) on a device and **must** be configured to run at a set interval afterwards. 
+Wazuh can use this information, retrieved by the agent, to compare it against a database of CVEs to discover potential vulnerabilities. The vulnerability scanner module performs a full scan when the Wazuh agent is first [installed](wazuh_setup.md#wazuh-agents) on a device and **must** be configured to run at a set interval afterwards. 
 
 !!! note
     By default it is set to 5 minute intervals using the following configuration
@@ -24,30 +24,30 @@ Wazuh can use this information, retrieved by the agent, to compare it against a 
         <run_on_start>yes</run_on_start>
     ```
 
-When everything is configured correctly, each agent will provide an overview of the detected vulnerabilities.
+When everything is configured correctly, each agent provides an overview of the detected vulnerabilities.
 
 ![Agent Vulnerability Dashboard](images/wazuh_agents-vulnerabilities.png)
 
 
-## Compliance & Policy Auditing
+## Compliance & policy auditing
 
-Wazuh has the capabilities to audit and monitor an agent's configuration whilst proactively recording event logs. These audits are performed against a variety of frameworks an legislation such as [NIST](https://www.nist.gov/cyberframework), [MITRE](https://evals.mitre.org/) or [CIS](https://www.cisecurity.org/cis-benchmarks).
+Wazuh has the capabilities to audit and monitor an agent's configuration whilst proactively recording event logs. These audits are performed against a variety of frameworks an legislation such as [NIST](https://www.nist.gov/cyberframework), [MITRE](https://evals.mitre.org/), or [CIS](https://www.cisecurity.org/cis-benchmarks).
 
 ![Compliance Audit Based on CIS](images/wazuh_agents-compliance.png)
 
 This Overview shows the percentage on how many checks have been passed by the system, which checks have not and navigating to the **Events** tab gives an insight on events related to settings that were audited.
 
 !!! tip
-    While Wazuh's compliance check is a good way to check your systems configuration and hardening level, it usually gives more insight to run the audit manually using tools like [OpenScap](../../security-assessment/openscap.md).
+    While Wazuh's compliance check is a good way to check your systems configuration and hardening level, it gives more insight to run the audit manually using tools like [OpenScap](../../security-assessment/openscap.md).
 
 
-## Logon Monitoring
+## Logon monitoring
 
 Wazuh's security event monitor can also actively record both successful and unsuccessful authentication attempts. You can find these logs by navigating to an agent and go into the **Threat Hunting** menu.
 
 ![Threat Hunting Dashboard](images/wazuh_agents-threathunting.png)
 
-Clicking on one of these events using the icon on the left will provide more detail to the event.
+Clicking on one of these events using the icon on the left provides more detail to the event.
 
 ![Threat Hunting Login Example](images/wazuh_agents-threat.png)
 
@@ -100,7 +100,7 @@ can be used by providing relevant parameters, for example ``-X GET``.
     curl -k -X GET "https://MACHINE_IP:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
     ```
 
-### Wazuh API Console
+### Wazuh API console
 
 Wazuh also offers a powerful, integrated API console within the Wazuh website to query management servers and agents. This is not as extensive as using CLI-Tools where scripts and programs can be used to construct more complex queries, but more convenient.
 
@@ -108,19 +108,19 @@ The API console can be found by navigating to **Server management** and then cli
 
 ![Wazuh API Console Navigation](images/wazuh_api-navigation.png)
 
-The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that will appear to the right of the line.
+The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that appears to the right of the line.
 
 ![Wazuh API Console](images/wazuh_api.png)
 
 
-## Generating Reports
+## Generating reports
 
 Wazuh provides a reporting module that allows a summarized breakdown of events that have occurred on an agent. Navigating to the **Threat Hunting** menu of an agent exposed the **Generate report** option.(1)
 { .annoate }
 
-1. Navigate to an agent and click on the **Threat Hunting** menu on the tab menu on the top.
+1. Navigate to an agent and click the **Threat Hunting** menu on the tab menu on the top.
 
 
 ![Wazuh Agent Report Navigation](images/wazuh_agents-report.png)
 
-Clicking on it will generate a PDF report that can be downloaded. All generated report can be found within the Report menu which can be found using the left navigation bar.
+Clicking it generates a PDF report that can be downloaded. All generated report can be found within the Report menu which can be found using the left navigation bar.

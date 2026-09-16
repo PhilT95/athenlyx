@@ -1,8 +1,8 @@
-# Collecting Logs with Wazuh
+# Collecting logs with Wazuh
 
-## Collecting Windows Logs with Wazuh
+## Collecting Windows logs with Wazuh
 
-All sorts of actions and events are captured on a Windows OS. This includes authentication attempts, networking connections and many more. This information is stored in the [Windows Event Logs](../../endpoint-sec/windows/windows_event_logs.md) using the [Sysmon](../../endpoint-sec/windows/sysmon.md) tool.
+All sorts of actions and events are captured on a Windows OS. This includes authentication attempts, networking connections, and many more. This information is stored in the [Windows Event Logs](../../endpoint-sec/windows/windows_event_logs.md) using the [Sysmon](../../endpoint-sec/windows/sysmon.md) tool.
 
 Wazuh can be used to aggregate these events recorded by *Sysmon* for processing to the Wazuh manager. This requires configuration changes to both the Wazuh agent and the Sysmon application. 
 
@@ -127,7 +127,7 @@ This can be added below the already existing ``localfile`` snippets. After this,
 </group>
 ```
 
-## Collecting Linux Logs
+## Collecting Linux logs
 
 Capturing logs from a Linux agent is a more simple process similar to capturing events from a Windows agent. Wazuh already has many *out of the box* rules to analyze log files which can be found here ``/var/ossec/ruleset/rules`` on the Wazuh server.
 
@@ -161,9 +161,9 @@ Not all of these rules are enabled but can be by editing the Wazuh agent configu
 
     Please adjust the config to the configuration file(s) you want to monitor.
 
-### Auditing Commands
+### Auditing commands
 
-Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat and its derivatives. ``auditd`` monitors the system for certain actions and events and will write this to a log file. The log collector then can be used to read this log file and send it to the Wazuh management server for processing. On AlmaLinux (a RedHat derivative) for example, this package is installed by default. If not, the installation is rather simple.
+Wazuh used the ``auditd`` package that can be installed on Debian/Ubuntu, RedHat, and its derivatives. ``auditd`` monitors the system for certain actions and events and writes this to a log file. The log collector then can be used to read this log file and send it to the Wazuh management server for processing. On AlmaLinux (a RedHat derivative) for example, this package is installed by default. If not, the installation is rather simple.
 
 
 === "Ubuntu"
