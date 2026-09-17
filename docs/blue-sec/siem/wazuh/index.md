@@ -38,7 +38,7 @@ Wazuh has the capabilities to audit and monitor an agent's configuration whilst 
 This Overview shows the percentage on how many checks have been passed by the system, which checks have not and navigating to the **Events** tab gives an insight on events related to settings that were audited.
 
 !!! tip
-    While Wazuh's compliance check is a good way to check your systems configuration and hardening level, it gives more insight to run the audit manually using tools like [OpenScap](../../security-assessment/openscap.md).
+    While Wazuh's compliance check is a good way to check your systems configuration and hardening level, it gives more insight to run the audit manually using tools like [OpenSCAP](../../security-assessment/openscap.md).
 
 
 ## Logon monitoring

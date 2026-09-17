@@ -149,3 +149,6 @@ MITRE
 EDR
 Kibana
 KQL
+OpenSCAP
+US
+proxied

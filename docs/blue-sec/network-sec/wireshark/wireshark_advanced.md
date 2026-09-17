@@ -1,10 +1,10 @@
-# Wireshark - Advanced Features
+# Wireshark - advanced features
 
 ## Statistics
 
-The statistics menu provides multiple statistics options to investigate and help users see the big picture regarding the scope of the traffic, available protocols, endpoints and conversations as well as some protocol-specific details like DHCP, DNS and HTTP. 
+The statistics menu provides multiple statistics options to investigate and help users see the big picture regarding the scope of the traffic, available protocols, endpoints and conversations as well as some protocol-specific details like DHCP, DNS, and HTTP. 
 
-### Resolve Addresses
+### Resolve addresses
 
 Resolving addresses helps to identify addresses and DNS names available in the capture files by providing the list of the resolved addresses and their hostnames. You can quickly identify accessed resources by using this menu and evaluate these resources according to the event. This option is available through the **Statistics --> Resolved Addresses** menu.
 
@@ -12,9 +12,9 @@ Resolving addresses helps to identify addresses and DNS names available in the c
 
 
 !!! tip
-    Select *Hosts* like in the picture above to filter correctly.
+    Select *Hosts* like in the preceding picture to filter correctly.
 
-### Protocol Hierarchy
+### Protocol hierarchy
 
 This can be used to break down all available protocols from the capture file and provided a tree view based look into the protocols regarding packet counters and percentages. 
 
@@ -82,7 +82,7 @@ This function breaks down all HTTP packets from the capture file and helps to vi
 !!! tip
     Don't forget to scroll sideways within this windows.
 
-## Packet Filtering with queries
+## Packet filtering with queries
 
 If you don't remember the basics about filtering, check the [Wireshark Basics for filtering](index.md#package-filtering).
 
@@ -91,14 +91,14 @@ The typical use case is to capture everything and filter the captured packets. B
 !!! info
     You cannot use the display filter expressions for capturing traffic and vice versa.
 
-### Capture Filter Syntax
+### Capture filter syntax
 
 These filters use byte offsets hex values and masks with boolean operators, which makes it harder to understand the filters purpose at first glance. The base syntax is as follows:
 
 <!-- vale Vale.Spelling = NO -->
-- **Scope**: host, net, port and port range
-- **Direction**: src, dst, srtc or dst, src and dest
-- **Protocol**: ether, wlan, ip, ip6, rarp, TCP and UDP
+- **Scope**: host, net, port, and port range
+- **Direction**: src, dst, srtc or dst, src, and dest
+- **Protocol**: ether, wlan, ip, ip6, rarp, TCP, and UDP
 - **Sample filter to capture port 80 traffic**: `tcp port 80`
 <!-- vale Vale.Spelling = Yes -->
 
@@ -106,7 +106,7 @@ You can read more about capture filter syntax in the official Wireshark document
 
 ![Image](images/wireshark-advanced_capturefilter.png)
 
-#### Display Filter Syntax
+#### Display filter syntax
 
 This feature supports 3000 protocols and allows conducting packet-level searches under the protocol breakdown. The official [Display Filter Reference](https://www.wireshark.org/docs/dfref/) provides all supported protocols for filtering. 
 
@@ -117,7 +117,7 @@ Wireshark offers a built-in option that stores all supported protocol structures
 
 ![Image](images/wireshark-advanced_displayfilter.png)
 
-#### Comparison Operators
+#### Comparison operators
 
 The primary operators used by display filters are listed in the following table.
 
@@ -131,9 +131,9 @@ The primary operators used by display filters are listed in the following table.
 |`le`|<=|Less than or equal to|`ip.ttl <= 0xA`|
 
 !!! note
-    Wireshark supports decimal and hexadecimal values in filtering. You can use any format you want according to the search you will conduct.
+    Wireshark supports decimal and hexadecimal values in filtering. You can use any format you want according to the search you are conducting.
 
-#### Logical Expressions
+#### Logical expressions
 
 Wireshark also supports boolean syntax by using logical operators while creating and using display filters.
 
@@ -146,7 +146,7 @@ Wireshark also supports boolean syntax by using logical operators while creating
 !!! info
     The usage of `!value` is deprecated and using it could provide inconsistent results. Using the `!(value)` style is suggested for more consistent results.
 
-### Packet Filter Toolbar
+### Packet filter toolbar
 
 The filter toolbar is the place where you create and apply your display filters. It is a smart toolbar that helps create valid display filters. Be aware of the following:
 
@@ -162,7 +162,7 @@ The filter toolbar is the place where you create and apply your display filters.
 
 ![Image](images/wireshark-advanced_displayfilter-toolbar.png)
 
-### IP Filters
+### IP filters
 
 IP filters help you to filter traffic according to the IP level information from packets (in regards to the OSI model). This filter is one of the more commonly used filters that Wireshark provides. It can filter based on network-level information like
 
@@ -211,7 +211,7 @@ Some example filters are:
 
 [^1]: UDP can be used analog to TCP
 
-### Application Level Protocol Filters - HTTP and DNS
+### Application level protocol filters - HTTP and DNS
 
 Similar to TCP and UDP filters, *Application-level* protocol filters are used to filter traffic based on the application protocol level information. This can be information like the payload and linked data.
 
@@ -227,25 +227,25 @@ Similar to TCP and UDP filters, *Application-level* protocol filters are used to
 |`dns.qry.type == 1`|Shows all DNS **A** records|
  
 
-### Display Filters Expression
+### Display filters expression
 
 Wireshark provided a built-in option that stores all supported protocol structures to assist in creating display filters. If you don't recall the required filter or you are unsure, you can access this menu using **Analyze --> Display Filter Expressions**.
 
 ![Image](images/wireshark-advanced_filterexpressions.png)
 
-## Advanced Filtering
+## Advanced filtering
 
-### Filter - Contains
+### Filter - contains
 
 |Filter|contains|
 |:-----|:-------|
 |**Type**|Comparison Operator|
-|**Description**|Search a value inside packets. It is case-sensitive and provides similar functionality to the "Find" option by focusing on a specific field|
+|**Description**|Search a value inside packets. It is case-sensitive and provides similar capability to the "Find" option by focusing on a specific field|
 |**Example**|Find all *Apache* servers|
 |**Workflow**|List all HTTP packets where the *server* field contains the *Apache* keyword|
 |**Usage**|`http.server contains "Apache`|
 
-### Filter - Matches
+### Filter - matches
 
 |Filter|contains|
 |:-----|:-------|
@@ -261,14 +261,14 @@ Wireshark provided a built-in option that stores all supported protocol structur
 |:-----|:-------|
 |**Type**|Set Membership|
 |**Description**|Search a value or field inside of a specific scope/range|
-|**Example**|Find all packets that use ports 80, 443 or 8080.|
-|**Workflow**|List all TCP packets where the *port* fields have values of 80, 443 or 8080|
+|**Example**|Find all packets that use ports 80, 443, or 8080.|
+|**Workflow**|List all TCP packets where the *port* fields have values of 80, 443, or 8080|
 |**Usage**|`tcp.port in {80 443 8080}`|
 
 ??? tip "How to filter a port range"
     `udp.port in {55..70}`
 
-### Filter - Upper
+### Filter - upper
 
 |Filter|contains|
 |:-----|:-------|
@@ -278,7 +278,7 @@ Wireshark provided a built-in option that stores all supported protocol structur
 |**Workflow**|Convert the *server* fields of all HTTP packets to uppercase and lists packets that contain the *APACHE* keyword|
 |**Usage**|`upper(http.server) contains "APACHE"`|
 
-### Filter - Lower
+### Filter - lower
 
 |Filter|contains|
 |:-----|:-------|
@@ -288,7 +288,7 @@ Wireshark provided a built-in option that stores all supported protocol structur
 |**Workflow**|Convert the *server* fields of all HTTP packets to lowercase and lists packets that contain the *apache* keyword|
 |**Usage**|`lower(http.server) contains "apache"`|
 
-### Filter - String
+### Filter - string
 
 |Filter|contains|
 |:-----|:-------|

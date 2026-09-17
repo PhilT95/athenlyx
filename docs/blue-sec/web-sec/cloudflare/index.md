@@ -51,11 +51,11 @@ Once Cloudflare checked the traffic and, based on the rules and enabled features
 
 ### DNS setup
 
-Since Cloudflares capabilities rely heavily on DNS it is essential to understand the 3 different ways the setup can be configured.
+Since Cloudflare's capabilities rely heavily on DNS it is essential to understand the 3 different ways the setup can be configured.
 
 #### Full setup
 
-This setup model works by making Cloudflare the primary public DNS for a domain by either pointing the domain towards the Cloudflare DNS servers or moving the domain including its registration in its entirety to Cloudflare. In this scenario it is very important that all DNS records that are currently configured need to be imported to Cloudflare. Depending on the existing setup the effort needed can vary greatly. Therefore it is important to consider the existing DNS infrastructure and how the Zone migration to Cloudflare could affect the business.
+This setup model works by making Cloudflare the primary public DNS for a domain by either pointing the domain towards the Cloudflare DNS servers or moving the domain including its registration in its entirety to Cloudflare. In this scenario it is important that all DNS records that are currently configured need to be imported to Cloudflare. Depending on the existing setup the effort needed can vary greatly. Therefore it is important to consider the existing DNS infrastructure and how the Zone migration to Cloudflare could affect the business.
 
 Cloudflare recommends this setup since it is the easiest and most error prone way. If you need more information for your decision please refer to the [Cloudflare DNS feature set](https://developers.cloudflare.com/dns/).
 
@@ -79,7 +79,7 @@ D --> E([Cloudflare handles and proxies request]);
 Since it is not always possible to move entire public zones to another DNS provider Cloudflare offers the so called *partial setup*. This setup relies on CNAME redirection to Cloudflare domains. Although the zone still needs to be created within Cloudflare, DNS requests are still resolved by the current authoritative DNS servers. To proxy a record with this setup, the following steps need to be completed:
 
 1. Create an A/AAAA record in Cloudflare for the web server that should be proxied
-2. Copy the the domain name provided by Cloudflare for this record
+2. Copy the domain name provided by Cloudflare for this record
 3. Create a CNAME record inside the authoritative DNS server
 
 This setup has a few limitations depending on the authoritative DNS server. If the [CNAME flattening](https://developers.cloudflare.com/dns/cname-flattening/) feature is not provided by the current DNS hosting provider, the apex (root) of the domain can't be proxied by Cloudflare since this is a technical limitation of CNAME records.
@@ -148,4 +148,4 @@ See the following license comparison which shows the most important features and
 
 
 [^1]: The origin the server that hosts the application itself. These are web servers within the Cloudflare context since most of its features are based around web applications.
-[^2]: The log retention in this tier can be extended using the [Log explorer addon](https://developers.cloudflare.com/log-explorer/). For more information refer to the [Cloudflare docs](https://developers.cloudflare.com/waf/analytics/security-events/).
+[^2]: The log retention in this tier can be extended using the [Log explorer add-on](https://developers.cloudflare.com/log-explorer/). For more information refer to the [Cloudflare docs](https://developers.cloudflare.com/waf/analytics/security-events/).
