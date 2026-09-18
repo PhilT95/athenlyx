@@ -17,7 +17,8 @@ jobs:
         run: |
           BASE=${{ github.event.pull_request.base.sha }}
 
-          CHANGED_DOCS=$(git diff --name-only "$BASE" HEAD -- 'docs/**/*.md' | grep -v 'docs/about/changelog.md')
+          CHANGED_DOCS=$(git diff --name-only "$BASE" HEAD -- 'docs/**/*.md' | grep -v 'docs/about/changelog.md' || true)
+          NEW_DOCS=$(git diff --name-only --diff-filter=A "$BASE" HEAD -- 'docs/**/*.md' | grep -v 'docs/about/changelog.md' || true)
           CHANGED_CHANGELOG=$(git diff --name-only "$BASE" HEAD -- 'docs/about/changelog.md')
           CHANGED_NAV=$(git diff --name-only "$BASE" HEAD -- 'zensical.toml')
 
@@ -29,9 +30,9 @@ jobs:
             FAILED=1
           fi
 
-          if [ -n "$CHANGED_DOCS" ] && [ -z "$CHANGED_NAV" ]; then
-            echo "ERROR: The following docs were changed without updating zensical.toml:"
-            echo "$CHANGED_DOCS"
+          if [ -n "$NEW_DOCS" ] && [ -z "$CHANGED_NAV" ]; then
+            echo "ERROR: The following new docs were added without updating zensical.toml:"
+            echo "$NEW_DOCS"
             FAILED=1
           fi
 

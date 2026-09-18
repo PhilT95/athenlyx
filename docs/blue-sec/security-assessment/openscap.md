@@ -6,9 +6,9 @@
 
 The installation of **OpenSCAP** on AlmaLinux systems is rather easy. You need to install the tool to scan and evaluate your system and the guidelines and profiles that are used for this evaluation.
 
-```bash-session
-[root@system user]# dnf install openscap-scanner
-[root@system user]# dnf install scap-security-guide
+```bash
+sudo dnf install openscap-scanner
+sudo dnf install scap-security-guide
 ```
 
 The first command installs the scanner and the second one the profiles that are relevant to the current system. The installation of both can be verified by confirming that the right profiles are installed. The XML that defines these can be found within the ``/usr/share/xml/scap/ssg/content/`` directory.
@@ -73,9 +73,9 @@ Checklists:
 
 OpenSCAP provides a easy to read and handy **HTML** bases report. You can create a report based on the selected profile.
 
-```bash-session
-[root@system user]# oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis --results-arf arf.xml --report system-cis2.html /usr/share/xml/scap/ssg/content/ssg-almalinux10-ds.xml
+```bash
+sudo oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis --results-arf arf.xml --report system-cis2.html /usr/share/xml/scap/ssg/content/ssg-almalinux10-ds.xml
 ```
 
-This will generate a report based on the **CIS Level 2 Benchmark** profile. Any other profile can be selected depending on the compliance requirements for the system.
+This command generates a report based on the **CIS Level 2 Benchmark** profile. Any other profile can be selected depending on the compliance requirements for the system.
 

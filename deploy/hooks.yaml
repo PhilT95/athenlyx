@@ -1,0 +1,11 @@
+- id: deploy
+  execute-command: /usr/athenlyx/scripts/sync.sh
+  command-working-directory: /usr/athenlyx
+  response-message: Deploy triggered.
+  trigger-rule:
+    match:
+      type: value
+      value: "REPLACE_WITH_YOUR_SECRET_TOKEN"
+      parameter:
+        source: header
+        name: X-Deploy-Token

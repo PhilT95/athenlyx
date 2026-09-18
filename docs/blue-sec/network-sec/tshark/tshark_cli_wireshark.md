@@ -1,8 +1,8 @@
-# TShark CLI Wireshark Features
+# TShark CLI Wireshark features
 
 ## Statistics
 
-As explained in [TShark Basics](./index.md), it is considered the CLI version of Wireshark. That means that TShark can accomplish several features of Wireshark.
+As explained in [TShark Basics](./index.md), it is considered the CLI version of Wireshark. That means that TShark provides many of the Wireshark features.
 
 !!! note
     The following options apply to all packets in scope unless a *Display Filter* is provided. 
@@ -28,8 +28,8 @@ Some interesting statistics options are:
 
 A few more interesting statistics are:
 
-- `-z conv` : This view provides an overview of the traffic flow between to particular connection points. Similar to the endpoint filtering, conversations can be viewed in multiple formats like `-z conv,ip`
-- `-z expert`: This view helps you to view automatic comments provided by Wireshark. 
+- `-z conv` : this view provides an overview of the traffic flow between to particular connection points. Similar to the endpoint filtering, conversations can be viewed in multiple formats like `-z conv,ip`
+- `-z expert`: this view helps you to view automatic comments provided by Wireshark. 
 
 !!! tip "Focusing on the statistics"
     Don't forget to use the `-q` parameter to suppress the packets themselves and focus on the statistics you want to see like `tshark -r test.pcap -z expert -q`
@@ -49,7 +49,7 @@ Filter:<No Filter>
 ================================================================================
 ```
 
-### IPv4 and IPv6 Statistics
+### IPv4 and IPv6 statistics
 
 This option provides statistics on IPv4 and IPv6 packets. Having these protocol statistics helps you to overview distribution according to the protocol type. You can filter available protocol types and view the details using `-z ptype,tree -q`
 
@@ -114,7 +114,7 @@ Destination IPv4 Addresses       43                                             
 ------------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
-In some cases you will need to focus on the outgoing traffic to spot used services and ports. This can be achieved using these parameters:
+In some cases you need to focus on the outgoing traffic to spot used services and ports. This can be achieved using these parameters:
 
 - **IPv4**: `-z dests,tree -q`
 - **IPv6**: `-z ipv6_dests,tree -q`
@@ -146,7 +146,7 @@ Destinations and Ports  43                                                      
 ---------------------------------------------------------------------------------------------------------------------------------------
 ```
 
-### DNS Statistics
+### DNS statistics
 
 This option provides statistics on DNS packets by summarizing available information. You can filter the packets and view the details using the `-z dns,tree -q` parameters.
 
@@ -190,9 +190,9 @@ Service Stats                  0                                                
 ----------------------------------------------------------------------------------------------------------------------------------------------
 ```
 
-### HTTP Statistics
+### HTTP statistics
 
-This option provides statistics on HTTP packets by summarizing load distribution, requests, packets and status info. You can filter the packets with the following parameters:
+This option provides statistics on HTTP packets by summarizing load distribution, requests, packets, and status info. You can filter the packets with the following parameters:
 
 - **Packet and status counter for HTTP**: `-z http,tree -q`
 - **Packet and status counter for HTTP2**: `-z http2,tree -q`
@@ -223,20 +223,20 @@ Total HTTP Packets      4                                                       
 ---------------------------------------------------------------------------------------------------------------------------------------
 ```
 
-## Streams, Objects and Credentials
+## Streams, objects, and credentials
 
 A lot of filters are designed for multiple purposes. The most common filtering operations are described below.
 
 !!! note
     Most of these commands are CLI versions of the corresponding Wireshark features.
 
-### Follow Stream
+### Follow stream
 
 **Follow Stream** helps to follow traffic streams similar to [Wireshark](../wireshark/wireshark_trafficanalysis.md). The query structure words with the following parameters
 
 - **Main Parameter and protocol**: `-z follow,tcp`
-- **View Mode**: Can be set to *ASCII* or *HEX*
-- **Stream Number**: Stream starts from *0*.
+- **View Mode**: can be set to *ASCII* or *HEX*
+- **Stream Number**: stream starts from *0*.
 
 To filter the packets and follow a TCP stream, you use the query `-z follow,tcp,ascii,0 -q`
 
@@ -284,17 +284,17 @@ Date: Thu, 13 May 2004 10:17:14 GMT
 ===================================================================
 ```
 
-### Export Objects
+### Export objects
 
-This option is used to extract files from DICOM, HTTP, SMB and TFTP. The query consists of:
+This option is used to extract files from DICOM, HTTP, SMB, and TFTP. The query consists of:
 
 - **Main parameter and Protocol**: `--export-objects http`
-- **Target folder**: Target folder to save the files
+- **Target folder**: target folder to save the files
 
 To filter the packets and extract the files within the HTTP protocol you can use a query like `--export-objects http,/path/to/your/folder -q`
 
 !!! tip
-    Like with [Streams](#follow-stream), you can switch the HTTP protocol with DICOM, IMF, SMB and TFTP.
+    Like with [Streams](#follow-stream), you can switch the HTTP protocol with DICOM, IMF, SMB, and TFTP.
 
 ```console
 user@host:~$ tshark -r demo.pcapng --export-objects http,/home/ubuntu/Desktop/extracted -q
@@ -306,7 +306,7 @@ total 24
 
 ### Credentials
 
-The *Credentials* option can be used to detect and collect cleartext credentials from FTP, HTTP, IMAP, POP and SMTP. You can filter and find credentials using the parameter like `-z credentials -q`
+The *Credentials* option can be used to detect and collect cleartext credentials from FTP, HTTP, IMAP, POP, and SMTP. You can filter and find credentials using the parameter like `-z credentials -q`
 
 ```console
 user@host:~$ tshark -r credentials.pcap -z credentials -q
@@ -340,7 +340,7 @@ Packet     Protocol         Username         Info
 ===================================================================
 ```
 
-## Advanced Filtering Options
+## Advanced filtering options
 
 Sometimes, in-depth packet analysis requires special filtering that is not covered by default filters. TShark supports Wireshark's **contains** and **matches** operators, which are the key to advanced filtering options. You can find more about these operators in the [Wireshark Advanced Guide](../wireshark/wireshark_advanced.md#advanced-filtering).
 
@@ -348,11 +348,11 @@ Sometimes, in-depth packet analysis requires special filtering that is not cover
     **contains** and **matches** cannot be used with fields consisting of *integer* values.
 
 !!! tip
-    Using HEX and regex values instead of ASCII always has a better chance of a match.
+    Using HEX and regular expressions instead of ASCII always has a better chance of a match.
 
 ### Extract fields
 
-This option is used to extract specific parts of the data from packets. It enables you to collect and correlate various fields from packets. It also helps to manage the query output from the terminal. The query structure requires:
+This option is used to extract specific parts of the data from packets. It enables you to collect and correlate different fields from packets. It also helps to manage the query output from the terminal. The query structure requires:
 
 - **Main Filter**: `-T fields`
 - **Target Field**: `-e <field name>`
@@ -373,9 +373,9 @@ ip.src	ip.dst
 65.208.228.223	145.254.160.237
 ```
 
-### Contains Filter
+### Contains filter
 
-This filter searches for a value inside packets. It is case-sensitive and provides a similar functionality to the *Find* option by focusing on a specific field.
+This filter searches for a value inside packets. It is case-sensitive and provides similar capabilities to the *Find* option by focusing on a specific field.
 
 ```console
 user@host:~$ tshark -r demo.pcapng -Y 'http.server contains "Apache"'
@@ -385,7 +385,7 @@ ip.src	ip.dst	http.server
 65.208.228.223	145.254.160.237	Apache
 ```
 
-### Matches Filter
+### Matches filter
 
 This filter searches for a pattern of a regular expression. It is also case-sensitive and complex queries have a margin of error.
 
@@ -449,7 +449,7 @@ user@host:~$ tshark -r hostnames.pcapng -T fields -e dhcp.option.hostname  | awk
     You can find more about these Linux utilities [here](../../../linux-admin/rhel-alma/commands.md)
 
 
-### Extract DNS Queries
+### Extract DNS queries
 
 ```console
 user@host:~$ tshark -r dns-queries.pcap -T fields -e dns.qry.name | awk NF | sort -r | uniq -c | sort -r
@@ -470,7 +470,7 @@ user@host:~$ tshark -r dns-queries.pcap -T fields -e dns.qry.name | awk NF | sor
       2 21.2.10.10.in-addr.arpa
 ```
 
-### Extract User Agents
+### Extract user agents
 
 ```console
 user@host:~$ tshark -r user-agents.pcap -T fields -e http.user_agent | awk NF | sort -r | uniq -c | sort -r

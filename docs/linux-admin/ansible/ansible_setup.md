@@ -1,6 +1,6 @@
-# Ansible Setup Guide for AlmaLinux 10
+# Ansible setup guide for AlmaLinux 10
 
-This guide will provide step-by-step instructions and necessary commands to install Ansible and get a basic configuration ready on AlmaLinux 10.
+This guide provides step-by-step instructions to install Ansible and get a basic configuration up and running on AlmaLinux 10.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ To continue with the following guide please make sure that your setup meets the 
 
 ### Installing Ansible
 
-This part of the setup is pretty straight-forward. Connect to your AlmaLinux 10 instance where you want to install Ansible using SSH. Once you are connected you will need root access so we can update and install ansible.
+This part of the setup is pretty straight-forward. Connect to your AlmaLinux 10 instance where you want to install Ansible using SSH. Once you are connected you need root access so you can update and install Ansible.
 
 ```bash
 sudo su
@@ -48,30 +48,30 @@ ansible-galaxy collection install community.general
 
 ### Ansible user setup
 
-Since Ansible usually connects to different systems and therefore is a bigger security risk within a network, extra steps need to be taken to make malicious actions more difficult. One important step to reduce the risk is using a separate and dedicated Ansible user, which on the Ansible system itself has as few permissions as possible. 
+Since Ansible is capable of connecting to different systems and is therefore a bigger security risk within a network, extra steps need to be taken to make malicious actions more difficult. One important step to reduce the risk is using a separate and dedicated Ansible user, which on the Ansible system itself has as few permissions as possible. 
 
-To start, the user needs to be created and a password should be set. You will be asked to enter and confirm the password for the new user *ansible*.
+To start, the user needs to be created and a password should be set. You are going to be asked to enter and confirm the password for the new user *ansible*.
 
 ```bash
 useradd ansible
 passwd ansible
 ```
 
-We also create a new group to make the management of permission independent of the user and add the user to the group.
+You also create a new group to make the management of permission independent of the user and add the user to the group.
 
 ```bash
 groupadd g-ansible
 usermod -aG g-ansible ansible
 ```
 
-Once the user and the group is created we need to give the members of the group necessary permissions to edit the ansible configuration files. The easiest way to do this is using the tool `setfacl`, which based on group memberships allows you to assign file and directory permission to a user.
+Once the user and the group is created you need to give the members of the group necessary permissions to edit the ansible configuration files. The easiest way to do this is using the tool `setfacl`, which based on group memberships allows you to assign file and directory permission to a user.
 
 ```bash
 dnf install acl
 setfacl -R -m g:ansible:rwx /etc/ansible/
 ```
 
-We can confirm with `ls -l` if the group permissions are assigned correctly.
+You can confirm with `ls -l` if the group permissions are assigned correctly.
 
 ```console
 [root@ansible]# ls -l
@@ -85,7 +85,7 @@ drwxrwsr-x+ 2 root g-ansible 4096 Jun  2 17:46 roles
 
 ```
 
-The final step is setting up the SSH key the ansible user will use to connect safely to the other systems. To do that, use the `su` command to log into the ansible user out of the root user session. Use the default values and a passphrase if needed.
+The final step is setting up the SSH key the ansible user uses to connect safely to other systems. To do that, use the `su` command to log into the ansible user out of the root user session. Use the default values and a passphrase if needed.
 
 
 
@@ -94,13 +94,13 @@ su ansible
 ssh-keygen
 ```
 
-Once the key is installed you will need to create an ansible user on the relevant target systems and deploy the public key to its authorized keys for SSH authentication. Once done, verify the connection by connection to the target systems using SSH from the Ansible host. 
+Once the key is installed you need to create an ansible user on the relevant target systems and deploy the public key to its authorized keys for SSH authentication. Once done, verify the connection by connection to the target systems using SSH from the Ansible host. 
 
 !!! note
     Please make sure the Ansible user on the target systems has the required sudo privileges **AND** that the user does not need a password to escalate its privileges. For the beginning you can give the Ansible user root access, but it is safer to reduce the granted permissions only to the necessary once.
 
 
-### Inventory Setup
+### Inventory setup
 
 As explained [here](index.md), the Ansible inventory contains all necessary information about the hosts that Ansible should work on. To create a new Ansible inventory file, navigate to the Ansible directory `\etc\ansible\` and create a YAML-file there.
 
@@ -111,7 +111,7 @@ touch hosts.yml
 
 
 
-Once the file is created we can edit it and start adding our systems. You can group hosts into different topics or just leave them as *ungrouped*.
+Once the file is created you can edit it and start adding systems. You can group hosts into different topics or just leave them as *ungrouped*.
 
 !!! tip
     Ansible supports both YAML and INI files for its inventory. It comes down to what you prefer. 
@@ -162,11 +162,11 @@ You can also modify certain aspects of a host by adding or editing variables. Fo
 
 If you have created your inventory, save the file.
 
-### Playbook Setup
+### Playbook setup
 
 As mentioned [here](index.md), Ansible Playbooks define the actual tasks that should be executed on certain servers. They can combine multiple different steps and also only apply to a subset of servers within one or more given inventory files.
 
-For this guide we will setup the task to update *DNF* packages on a AlmaLinux 10 host that is within the *web server* group of our inventory. First we need to create the playbook YAML-file. Create a file `update-local.yml` inside the ansible directory and open it with a text editor.
+As an example you can to create the task to update *DNF* packages on a AlmaLinux 10 host that is within the *web server* group of the inventory. First you need to create the playbook YAML-file by creating the file `update-local.yml` inside the ansible directory. Then you can use your favorite text editor to open the file.
 
 ```bash
 touch update_webservers.yml
@@ -182,9 +182,9 @@ Once you are inside the file, you need to define the basics of the playbook by g
 ```
 
 !!! warning
-    Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade` and added the public key we set up earlier to the user on the remote system.
+    Please make sure that you've set up the ansible user on the remote system, gave it permissions to execute the command `dnf upgrade`, and that you added the public key, which you created earlier to the user on the remote system.
 
-With the basics now defined we can start adding tasks to the playbook. The tasks define what will actually be executed on the hosts. We will use the built-in DNF tools. We will add 2 tasks in total, one that verifies that the DNF package manager is actually available on the system and another that will update all packages. 
+With the basics now defined you can start adding tasks to the playbook. The tasks define what is actually executed on the hosts. Lets use the built-in DNF tools. Add 2 tasks, one that verifies that the DNF package manager is actually available on the system and another that updates all packages. 
 
 ```yaml
 - name: Update local Ansible server
@@ -203,9 +203,9 @@ With the basics now defined we can start adding tasks to the playbook. The tasks
       update_cache: true
 ```
 
-The first tasks is gathering the [facts](index.md#important-terms-and-topics) about the installed package manager to ensure the update of all packages using `dnf` will actually work.
+The first tasks is gathering the [facts](index.md#important-terms-and-topics) about the installed package manager to ensure the update of all packages using `dnf` is actually working.
 
-Finally we add one more line disabling the default gathering of facts which, for this playbook, is not required and another which will indicate that for this task the user needs to elevate its permissions with `sudo`
+Finally add one more line disabling the default gathering of facts which, for this playbook, is not required and another which indicates that for this task the user needs elevated permissions using `sudo`.
 
 ```yaml
 - name: Update local Ansible server
@@ -247,7 +247,7 @@ web02.example.com              : ok=2    changed=0    unreachable=0    failed=0 
 ```
 
 !!! note
-    The task status *changed* means that updates were found and installed and is no reason to be worried. *Ok* means no updates have been found.
+    The task status *changed* means that updates were found and installed and is no reason to be worried. *OK* means no updates have been found.
 
 ## Summary
 

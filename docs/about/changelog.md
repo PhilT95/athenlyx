@@ -5,13 +5,14 @@
 This page keeps track of recently published files and guides.
 
 !!! info "Latest addition"
-    The most recent addition is the [**Cloudflare doc*](../blue-sec/web-sec/cloudflare/index.md) (2026-09-04).
+    The most recent addition is the [**Cloudflare doc**](../blue-sec/web-sec/cloudflare/index.md) (2026-09-04).
 
 <div class="grid cards" markdown>
 
 -   :material-calendar-month: __2026__
 
     ---
+    - **2026-09-17** - Streamlined docs using Vale and expanded Cloudflare doc
     - **2026-09-04** - Added base Cloudflare doc
     - **2026-08-28** - Added Semaphore Setup Guide
     - **2026-08-15** - Added Zensical and a Zensical setup guide.

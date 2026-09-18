@@ -1,19 +1,19 @@
 # Wireshark
 
-> Wireshark is a powerful, open-source network protocol analyzer that allows users to capture and interactively browse the traffic running on a computer network, providing deep inspection of hundreds of protocols. As an open-source tool, Wireshark is freely available for use and distribution, with its source code accessible under the GNU General Public License (GPL).
+> Wireshark is a powerful, open source network protocol analyzer that allows users to capture and interactively browse the traffic running on a computer network, providing deep inspection of hundreds of protocols. As an open source tool, Wireshark is freely available for use and distribution, with its source code accessible under the GNU General Public License (GPL).
 
 <p align="right"><a href="https://www.wireshark.org/">Wireshark.org</a></p>
 
 
-## The Basics
+## The basics
 
-### Use Cases
+### Use cases
 
 Wireshark is one, if not the most potent traffic analyzer tools available. It is often used for
 
 - Detecting and troubleshooting network problems, such as network load failure points and congestion.
 - Detecting security anomalies, such as rogue hosts, abnormal port usage, and suspicious traffic.
-- Investigating and learning protocol details, such as response codes and payload data. 
+- Investigating and learning protocol details, such as response codes, and payload data. 
 
 !!! note
     Wireshark is not an Intrusion Detection System (IDS). It only allows analysts to discover and investigate the packets in depth. It also doesn't modify packets; it reads them. Hence, detecting any anomaly or network problem highly relies on the analyst's knowledge and investigation skills.
@@ -24,11 +24,11 @@ The Wireshark GUI opens with a single all-in-one page, which provides a way for 
 
 <div class="annotate" markdown>
 
-- **Toolbar**: The main toolbar contains menus and shortcuts for packet sniffing and processing, including filtering, sorting summarizing, exporting and merging.
-- **Display Filter Bar**: This bar is the main query and filtering section.
-- **Recent Files**: This is a list of recently investigated files. (1)
-- **Capture Filter and Interfaces**: Here you can find capture filters and available sniffing points (network interfaces). The interface is a connection between a system and a network.
-- **Status Bar**: Provides the Tool status, profile and numeric packet information.
+- **Toolbar**: the main toolbar contains menus and shortcuts for packet sniffing and processing, including filtering, sorting summarizing, exporting, and merging.
+- **Display Filter Bar**: this bar is the main query and filtering section.
+- **Recent Files**: this is a list of recently investigated files. (1)
+- **Capture Filter and Interfaces**: here you can find capture filters and available sniffing points (network interfaces). the interface is a connection between a system and a network.
+- **Status Bar**: provides the Tool status, profile, and numeric packet information.
 
 </div>
 
@@ -38,17 +38,17 @@ The Wireshark GUI opens with a single all-in-one page, which provides a way for 
 
 ### Loading pcap files
 
-When we load a pcap file, Wireshark shows its potential.
+When loading a pcap file, Wireshark shows its potential.
 
 ![Image](images/wireshark_pcap.png)
 
-Here you can see the processed filename, detailed number of packets and the packet details. These are separated into 3 different panes.
+Here you can see the processed filename, detailed number of packets, and the packet details. These are separated into 3 different panes.
 
-- **Packet list Pane**: Provides a summary of each packet. You can click on the list to choose a packet for further investigation. Selecting a packet here will show its information in the other panes.
-- **Packet details Pane**: Shows a detailed protocol breakdown for the selected packet.
-- **Packet Bytes Pane**: Shows Hex and decoded ASCII representation of the packet. It also highlights the packet field depending on the clicked section in the details pane.
+- **Packet list Pane**: provides a summary of each packet. You can click the list to choose a packet for further investigation. Selecting a packet here shows its information in the other panes.
+- **Packet details Pane**: shows a detailed protocol breakdown for the selected packet.
+- **Packet Bytes Pane**: shows Hex and decoded ASCII representation of the packet. It also highlights the packet field depending on the clicked section in the details pane.
 
-### Coloring Packets
+### Coloring packets
 
 Wireshark colors packets in order of different conditions and the used protocol to make it easier for spotting anomalies and protocols within the capture. Wireshark uses 2 types of packet coloring methods:
 
@@ -57,12 +57,12 @@ Wireshark colors packets in order of different conditions and the used protocol 
 
 You can get to the Coloring Rules Menu by opening the **right-click menu** or via **View--> Coloring Rules** to create permanent rules. Temporary rules can also be created within the right-click menu or **View-->Conversation Filter**.
 
-### Traffic Sniffing
-Using the **shark button**, Wireshark can start a network sniffer to capture traffic. Pressing the red button will stop the capture process and the green one restarts it.
+### Traffic sniffing
+Using the **shark button**, Wireshark can start a network sniffer to capture traffic. Pressing the red button stops the capture process and the green one restarts it.
 
 ![Image](images/wireshark_capture.png)
 
-### Merging and File Details
+### Merging and file details
 Wireshark can also be used to merge two pcap files into a single one as well as displaying file details. This is especially helpful when working with multiple pcap files.
 
 - To merge to files, you can use **File-->Merge**
@@ -75,7 +75,7 @@ Wireshark can also be used to merge two pcap files into a single one as well as 
 ### Dissect packages
 Packet dissection, also called **protocol dissection**, is the process of investigating packet details by decoding available protocols and fields. You can find more details on dissection [here](https://github.com/boundary/wireshark/blob/master/doc/README.dissector).
 
-You can double-click on a packet in the packet. list pane to open its details. Packets consists of 5 to 7 layers based on the OSI model. You can see the seven distinct layers:
+You can double-click a packet in the packet. list pane to open its details. Packets consists of 5 to 7 layers based on the OSI model. You can see the seven distinct layers:
 
 ![Image](images/wireshark_details.png)
 
@@ -88,14 +88,14 @@ Wireshark assigns all investigated packets a unique number. This makes analyzing
 Using this function, you can also find the next packet in that particular part of the conversation.  
 To find packets by content, you can use the **Edit --> Find packet** menu to start a search inside packets for specific events. Searching packets comes with 2 important points:
 
-1. **Input Type**: This functionality accepts four types of inputs
+1. **Input Type**: this feature accepts four types of inputs
 
    1. Display Filter
    2. Hex
    3. String
-   4. Regex
+   4. Regular expressions
    
-2. **Search field**: You can conduct searches in the three panes.
+2. **Search field**: you can conduct searches in the three panes.
 
    1. Packet list
    2. Packet details
@@ -135,18 +135,18 @@ You can use the **lower left bottom section** in the status bar or **Analyze -->
 
 Wireshark has a powerful filter engine that assists analyst to narrow down the traffic and focus on specific events. It uses 2 types of filtering:
 
-1. **Capture filter**: These are used for *capturing* only valid packets in regard to the filter.
-2. **Display filter**: These are used to *view* only the valid packets in regard to the filter.
+1. **Capture filter**: these are used for *capturing* only valid packets in regard to the filter.
+2. **Display filter**: these are used to *view* only the valid packets in regard to the filter.
 
 You can filter using queries or the right-click menu. Wireshark uses the approach **If you can click it, you can filter and copy it."**
 
 ### Apply as filter
 
-The most basic way of filtering is to click on the field you want to filter and use the **right-click** menu or **Analyze --> Apply as Filter** to filter for the specific value. Based on your selection Wireshark starts to generate your filter as query, applies it and shows you the relevant packages.
+The most basic way of filtering is to click the field you want to filter and use the **right-click** menu or **Analyze --> Apply as Filter** to filter for the specific value. Based on your selection Wireshark starts to generate your filter as query, applies it, and shows you the relevant packages.
 
 ![Image](images/wireshark_applyfilter.png)
 
-### Conversation Filter
+### Conversation filter
 Using the *Apply as a Filter* function only filters for a single entity of the packet. This option is good for investigating particular values in packets. To investigate a specific packet number and its linked packages by focusing on IP addresses and port numbers you can use **Conversation Filters**. These filters can be access via the **right-click** menu or using **Analyse --> Conversation Filter**.
 
 ![Image](images/wireshark_conversationfilter.png)
@@ -157,15 +157,15 @@ You can also highlight linked packets without applying a display filter and decr
 
 This is similar to the [Apply as Filter](#apply-as-filter). The difference between both filters is that the *apply as filter* doesn't apply the filters after the choice. It adds the query to the pane and waits for execution. You can add more filters using the **and/or** from the right-click menu.
 
-### Apply as Column
+### Apply as column
  
  By default, the packet list pane provides basic information about each packet. You can use the **right-click** menu or **Analyze --> Apply as Column** to add columns to the packet list pane.
 
  ![image](images/wireshark_applyascolumn.png)
 
-### Follow Stream
+### Follow stream
 
- Wireshark displays everything in packet portion sizes. It is possible to reconstruct the streams and view raw traffic as it is presented the application level. Following the protocol, streams are used to recreate application-level data and understand specific events. It is also possible to view the unencrypted protocol data like usernames, passwords and other data.
+ Wireshark displays everything in packet portion sizes. It is possible to reconstruct the streams and view raw traffic as it is presented the application level. Following the protocol, streams are used to recreate application-level data and understand specific events. It is also possible to view the unencrypted protocol data like usernames, passwords, and other data.
 
  You can access this using the **right-click** menu or **Analyze --> Follow TCP/UDP/HTTP Stream**. Streams are shown in a separate dialogue box.
 

@@ -1,20 +1,20 @@
 ![Elastic Banner](images/elastic_banner.png)
 
-# Elastic Stack
+# Elastic stack
 
-The **Elastic Stack** is the collection of different open-source components linked together to help users take the data from any source and in any format, perform searches, analyze and visualize the data in real-time. 
+The **Elastic Stack** is the collection of different open source components linked together to help users take the data from any source and in any format, perform searches, analyze, and visualize the data in real-time. 
 
 ## Elasticsearch
 
-**Elasticsearch** is a full-text search and analytics engine used to store JSON-formatted documents. It is an important component used to store, analyze and perform correlation on data. Elasticsearch supports RESTful API to interact with the data.
+**Elasticsearch** is a full-text search and analytics engine used to store JSON-formatted documents. It is an important component used to store, analyze, and perform correlation on data. Elasticsearch supports RESTful API to interact with the data.
 
 ## Logstash
 
 **Logstash** is a data processing engine used to take the data form different sources, apply the filter on it or normalize it, then send it to the destination which could be [**Kibana**](#kibana-discovery-tab) or a listening port. A **Logstash** configuration file is divided into three parts.
 
-- [**Input**](https://www.elastic.co/guide/en/logstash/8.19/input-plugins.html): This part is where the source from which the data is being ingested is defined.
-- [**Filter**](https://www.elastic.co/guide/en/logstash/8.19/filter-plugins.html): This part is where filter options to normalize the ingested logs is specified.
-- [**Output**](https://www.elastic.co/guide/en/logstash/8.19/output-plugins.html): This part describes where the filtered data is being send to. It can be a listening port, Kibana Interface, Elasticsearch database, a file etc. Logstash supports many output plugins.
+- [**Input**](https://www.elastic.co/guide/en/logstash/8.19/input-plugins.html): this part is where the source from which the data is being ingested is defined.
+- [**Filter**](https://www.elastic.co/guide/en/logstash/8.19/filter-plugins.html): this part is where filter options to normalize the ingested logs is specified.
+- [**Output**](https://www.elastic.co/guide/en/logstash/8.19/output-plugins.html): this part describes where the filtered data is being send to. It can be a listening port, Kibana Interface, Elasticsearch database, a file etc. Logstash supports many output plugins.
 
 
 ## Beats
@@ -24,7 +24,7 @@ The **Elastic Stack** is the collection of different open-source components link
 
 **Kibana** is a web-based data visualization that works with Elasticsearch to analyze, investigate and visualize the data stream in real-time. It allows users to create multiple visualizations and dashboards for better visibility.
 
-### Kibana Discovery Tab
+### Kibana discovery tab
 
 
 The **Kibana** Discovery tab is a place where the ingested logs, the search bar, normalized fields etc can be found.(1) The following tasks can be performed here:
@@ -38,17 +38,17 @@ The **Kibana** Discovery tab is a place where the ingested logs, the search bar,
   - Search terms
   - Time periods
 
-It contains the logs being ingested manually or in real-time, the time-chart, normalized fields and more. 
+It contains the logs being ingested manually or in real-time, the time-chart, normalized fields, and more. 
 
 ![Kibana Discovery Tab](images/kibana_discovery.png)
 
-#### Time Filter
+#### Time filter
 
 The **Time filter** provides a way to apply a log filter based on the time. It has different options on how to select the time frame.
 
 ![Kibana Discovery Time Filter](images/kibana_discovery-timefilter.png)
 
-#### Quick Select
+#### Quick select
 
 The **Quick Select Tab** is another useful tab within Kibana that offers multiple predefined time frame options to select from. 
 
@@ -60,7 +60,7 @@ The **Timeline** pane provides an overview of the number of the events that occu
 
 ![Kibana Discovery Timeline](images/kibana_discovery-timeline.png)
 
-#### Index Pattern
+#### Index pattern
 
 Kibana, by default, requires an index pattern to access the data stored or being ingested in the Elasticsearch. **Index Patterns** tell Kibana which Elasticsearch data should be explored. Each pattern corresponds to certain defined properties of the fields. A single pattern can point to multiple indices.
 
@@ -69,9 +69,9 @@ Each log source has a different log structure, therefore, when logs are ingested
 ![Kibana Index Patterns](images/kibana_discovery-indexpatterns.png)
 
 
-#### Left Panel - Fields
+#### Left panel - fields
 
-The left panel of the Kibana Discovery interface shows the list of the normalized fields it finds in the available document/logs. Select any field, and the Top 5 values and the percentages of the occurrences will be shown.
+The left panel of the Kibana Discovery interface shows the list of the normalized fields it finds in the available document/logs. Select any field, and the Top 5 values and the percentages of the occurrences are shown.
 
 !!! tip
     These values can be used to apply filters to them by clicking on the **+** button to show logs containing this value.
@@ -80,7 +80,7 @@ The left panel of the Kibana Discovery interface shows the list of the normalize
 ![Kibana Fields Panel](images/kibana_discovery-fields.png)
 
 
-### KQL - Kibana Query Language
+### KQL - Kibana query language
 
 The **KQL** is a search query language used to search the ingested documents in Elasticsearch. Apart from the KQL language, Kibana also supports **Lucene Query Language**. 
 
@@ -94,12 +94,12 @@ The **KQL** is a search query language used to search the ingested documents in 
 |**Wild Card**|KQL allows the wild card ``*`` to match parts of the term/word.|``Nginx*``|
 |**OR**|The ``OR`` operator shows logs that contain one or another search term.|``"Nginx" OR "httpd"``|
 |**AND**|The ``AND`` operator shows logs that contain one and another search term.|``"Nginx" AND "httpd"``|
-|**NOT**|THe ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
+|**NOT**|The ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
 
 
 #### Free text search
 
-Free text search provides a way to search for the logs based on the **text-only**. That means the search will return all documents that contains the search term, irrespective of the field.
+Free text search provides a way to search for the logs based on the **text-only**. That means the search returns all documents that contains the search term, irrespective of the field.
 
 #### Field-based search
 

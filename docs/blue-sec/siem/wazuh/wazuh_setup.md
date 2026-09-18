@@ -1,4 +1,4 @@
-# Installing Wazuh on AlmaLinux 10 - Quickstart Guide
+# Installing Wazuh on AlmaLinux 10 - Quickstart guide
 
 The **Wazuh** server consists of 3 components:
 
@@ -21,16 +21,16 @@ Wazuh itself recommends the following hardware capabilities depending on the amo
 !!! note
     For rather small setups (homelabs etc.) less RAM can be used.
 
-## Installation Process
+## Installation process
 
-Wazuh offers an *Installation assistant* that completely deploys all requirements and installs the essentials components of Wazuh.
+Wazuh offers an *Installation assistant* that fully deploys all requirements and installs the essentials components of Wazuh.
 
 
 ```console
 [root@wazuh user]# curl -sO https://packages.wazuh.com/4.12/wazuh-install.sh && sudo bash ./wazuh-install.sh -a
 ```
 
-Once the installation assistant finishes the installation, the console will display the web interface as well as the default user and password.
+Once the installation assistant finishes the installation, the console displays the web interface as well as the default user and password.
 
 ```console
 INFO: --- Summary ---
@@ -45,9 +45,9 @@ After successfully logging in Wazuh opens with the *Overview* tab.
 ![Wazuh Overview Tab](images/wazuh_overview.png)
 
 
-## Wazuh Agents
+## Wazuh agents
 
-Devices that record the events and processes of a system are called **agents**. They monitor the processes and events that take place on the device they are installed on, such as authentication and user management. Agents will offload these logs to designated collectors for processing like Wazuh.
+Devices that record the events and processes of a system are called **agents**. They monitor the processes and events that take place on the device they are installed on, such as authentication, and user management. Agents are offloading these logs to designated collectors for processing like Wazuh.
 
 In Order for Wazuh to be populated, agents need to be installed on devices that need to be monitored. 
 
@@ -55,7 +55,7 @@ Wazuh offers a configuration tool to deploy new agents which asks for some eleme
 
 - What OS is being used?
 - The address of the Wazuh Server that the agent should send logs to (can be a DNS entry or IP address)
-- What group the agent will be under (1)
+- What group the agent is under (1)
 { .annotate }
 
 1.  Agents can be sorted into groups within Wazuh for easier management and reporting.
@@ -65,11 +65,11 @@ To add new agents, the relevant menu can be found by going to the navigation men
 
 ![Agents management within the Navigation menu](images/wazuh_navigation-agents.png)
 
-Within the **Summary** View of the Agents Management menu, there is an option to **Deploy new agents**. Clicking on it will open the agent configuration menu.
+Within the **Summary** View of the Agents Management menu, there is an option to **Deploy new agents**. Clicking it opens the agent configuration menu.
 
 ![Deploy new Agents Option](images/wazuh_agents-deploy.png)
 
-This menu guides through the OS selection as well as other key information required to install the agent correctly on the target system. Wazuh will even provide a simple installation command which installs and registers the agent with Wazuh.
+This menu guides through the OS selection as well as other key information required to install the agent correctly on the target system. Wazuh even provides a simple installation command which installs and registers the agent with Wazuh.
 
 ![Deploy Agent Menu](images/wazuh_agents-deploymenu.png)
 
@@ -115,7 +115,7 @@ can be used by providing relevant parameters, for example ``-X GET``.
     curl -k -X GET "https://MACHINE_IP:55000/agents?pretty=true&offset=1&limit=2&select=status%2Cid%2Cmanager%2Cname%2Cnode_name%2Cversion&status=active" -H "Authorization: Bearer $TOKEN"
     ```
 
-### Wazuh API Console
+### Wazuh API console
 
 Wazuh also offers a powerful, integrated API console within the Wazuh website to query management servers and agents. This is not as extensive as using CLI-Tools where scripts and programs can be used to construct more complex queries, but more convenient.
 
@@ -123,6 +123,6 @@ The API console can be found by navigating to **Server management** and then cli
 
 ![Wazuh API Console Navigation](images/wazuh_api-navigation.png)
 
-The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that will appear to the right of the line.
+The API console defaults to a few sample queries that can be run. Simply select the line and press the green arrow that appears to the right of the line.
 
 ![Wazuh API Console](images/wazuh_api.png)

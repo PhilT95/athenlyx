@@ -1,7 +1,7 @@
-# AlmaLinux Setup Guide
+# AlmaLinux setup guide
 This guide provided a few easy steps get a rather secure baseline AlmaLinux installation. The installation of AlmaLinux itself can be found at the [AlmaLinux Wiki](https://wiki.almalinux.org/documentation/installation-guide.html).
 
-## The Basics 
+## The basics 
 Before you start installing applications or anything else, make sure you do the following few tasks:
 
 1. Create a separate user with sudo permissions
@@ -15,14 +15,14 @@ Follow these steps to create a new user with sudo permissions. You need root per
 2. `passwd username` -> Lets you create a password for the user
 3. `usermod -aG wheel username` -> Assigns the user to the group wheel. This is the sudoer-group within AlmaLinux
 4. Create a file called within the newly created users home directory called **authorized_keys** under `~/.ssh/`. You might need to create the directory first. Copy your public key into this file and save it.
-5. Make sure the Setting **PermitRootLogin** within the ssh configuration files in the directory `/etc/ssh/` is set to **No**. The file usually is called `sshd_config`
+5. Make sure the Setting **PermitRootLogin** within the ssh configuration files in the directory `/etc/ssh/` is set to **No**. The file is called `sshd_config` per default
 
 !!! tip
     If you need help creating an SSH key, refer to this [guide](https://docs.oracle.com/en/cloud/cloud-at-customer/occ-get-started/generate-ssh-key-pair.html) for example.
 
 
 
-## Installing Tools and Applications
+## Installing tools and applications
 
 ### Installing Docker
 
@@ -37,7 +37,7 @@ sudo dnf --refresh update
 sudo dnf upgrade
 ```
 
-#### Enable Docker Repository
+#### Enable Docker repository
 
 To install docker, you need to add the official docker repository to your package manager. You need the `yum-utils` package to configure the package manager.
 

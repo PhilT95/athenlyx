@@ -47,7 +47,7 @@ pip install mkdocs-material
 
 #### MkDocs extension & plugins
 
-Material for MkDocs uses various plugins and extensions to provide a smoother and more modern website experience. The default installation already comes with a few plugins, but certain functions need to be installed manually.
+Material for MkDocs uses plugins and extensions to provide a smoother and more modern website experience. The default installation already comes with a few plugins, but certain functions need to be installed manually.
 
 To provide more efficient image processing, the built-in plugins depend on external libraries that need to be installed. 
 
@@ -58,19 +58,19 @@ sudo dnf install cairo-devel
 sudo dnf install pngquant
 ```
 
-You can also use an extension to display the creating and last time a site has been updated by linking your website to a git repository. To make use of this functionality, you need to install the extension.
+You can also use an extension to display the creating and last time a site has been updated by linking your website to a git repository. To make use of this feature, you need to install the extension.
 
-```console
-[user@machine ~]$ pip install mkdocs-git-revision-date-localized-plugin
+```bash
+pip install mkdocs-git-revision-date-localized-plugin
 ```
 
 You can find out more about these plugins [here](https://squidfunk.github.io/mkdocs-material/plugins/requirements/image-processing/) and [here](https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#revisioning).
 
 
-If this installation is completed, we can begin to prepare the project.
+If this installation is completed, you can begin to prepare the project.
 
 ### Setting up your project
-Now that you have installed MkDocs we can start to get your project ready to compile the webpage.
+Now that you have installed MkDocs you can start to get your project ready to compile the webpage.
 
 First navigate to the root of your documentation and create a new MkDocs project.
 
@@ -79,7 +79,7 @@ cd /path/to/your/project
 mkdocs new project-name
 ```
 
-This command will create a new folder `docs` with an `index.md` file and a `mkdocs.yml` file within the root directory of your project.
+This command creates a new folder `docs` with an `index.md` file and a `mkdocs.yml` file within the root directory of your project.
 You directory structure should look like this now:
 
 ```console
@@ -94,7 +94,7 @@ You directory structure should look like this now:
 Now you need to move your entire documentation within the `docs` directory. This is needed to compile the web pages accordingly.
 
 ### Configuring your project
-Once you have all your files in this directory, we can start preparing the `mkdocs.yml` file. Here the entire configuration of your documentation website will be set.
+Once you have all your files in this directory, you can start preparing the `mkdocs.yml` file. Here the entire configuration of your documentation website is saved.
 
 Open the file, for example with the text editor `nano`.
 
@@ -108,14 +108,14 @@ The file should look like this:
 site_name: My Docs
 ```
 
-First we will adjust the name and url of the website. Change `My Docs` to the name you want to be displayed and add a new line for the URL of the website.
+First you need to adjust the name and url of the website. Change `My Docs` to the name you want to be displayed and add a new line for the URL of the website.
 
 ```yaml
 site_name: YourProject
 site_url: https://example.com
 ```
 
-Now we can add the navigation, which defines the structure of the pages and how they are ordered. You can make it resemble your actual file structure, but this is not a must. The `nav` parameter works by creating a set of directories and files (web pages), which will be compiled accordingly to the configuration. Here is an example of a simple navigation structure.
+Now you can add the navigation, which defines the structure of the pages and how they are ordered. You can make it resemble your actual file structure, but this is not a must. The `nav` parameter works by creating a set of directories and files (web pages), which is compiled accordingly to the configuration. Here is an example of a simple navigation structure.
 
 ```yaml
 nav:
@@ -129,7 +129,7 @@ nav:
 
 Adapt this to your needs and add it to your `mkdocs.yml` file.
 
-To use the **Material** theme and get access to its extended functionality, we need to tell MkDocs to use it. We can do that by adding
+To use the **Material** theme and get access to its extended capabilities, you need to tell MkDocs to use it. This can be achieved by adding
 
 ```yaml
 theme:
@@ -143,7 +143,7 @@ theme:
 
 to the configuration file. This tell MkDocs to use the **Material** theme and activates the listed features. For more information regarding the **Material Configuration**, please refer to [the Material Documentation](https://squidfunk.github.io/mkdocs-material/setup/).
 
-As a final touch, to enable a powerful search function, add 
+And finally enable the powerful search function. Add the following YAML configuration:
 
 ```yaml
 plugins:
@@ -198,7 +198,7 @@ sudo dnf install nginx
 It should not be much different for other Linux distributions. 
 
 
-Now we have to configure nginx. Go the nginx directory as root.
+Now you need to configure nginx. Go the nginx directory as root.
 
 ```bash
 sudo su
@@ -217,9 +217,9 @@ and add the following line:
 include /etc/nginx/sites-enabled/*.conf;
 ```
 
-Now we have to create the configuration file for our website. Create a new configuration file within `sites-available`. It is standard to name the file after the domain of your website, for example `myproject.example.org.conf`.
+Now you have to create the configuration file for the website. Create a new configuration file within `sites-available`. It is standard to name the file after the domain of your website, for example `myproject.example.org.conf`.
 
-Within the configuration we need to tell nginx when and how it should react on **HTTP** and **HTTPS** request. Since we are just hosting a light-weight documentation website, the configuration stays rather simple.
+Within the configuration you need to tell nginx when and how it should react on **HTTP** and **HTTPS** request. Since you are just hosting a light-weight documentation website for now, the configuration stays simple.
 
 ```nginx
 server {
@@ -276,13 +276,13 @@ server {
 
 As you can see, the root location of the web server points to the directory ``/www`` in this case. This is the directory where you have to copy the contents of the `/site` folder, which was created during the compilation of the project. You can also change the directory of your nginx configuration to point wherever you want the contents of the web page to reside.
 
-Once the configuration is done, we need to activate the configuration. To do this, we have to create a symbolic link of this file to the `sites-enabled` directory we created earlier.
+Once the configuration is done, you need to activate the configuration. To do this, you have to create a symbolic link of this file to the `sites-enabled` directory created earlier.
 
 ```bash
 ln -s /etc/nginx/sites-available/myproject.example.org.conf /etc/nginx/sites-enabled/
 ```
 
-We quickly test the configuration and if there are no errors, reload nginx.
+Quickly test the configuration and if there are no errors, reload nginx.
 
 ```console
 [root@machine nginx]$ nginx -t
@@ -291,7 +291,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 [root@machine nginx]$ systemctl reload nginx
 ```
 
-Your website should now be reachable. If you are using SSL, please make sure to setup a certificate or you will run into SSL errors. You can use **certbot** by **LetsEncrypt** to quickly get a valid certificate. The certbot will also edit your nginx configuration to insert your certificate.
+Your website should now be reachable. If you are using SSL, please make sure to setup a certificate or SSL errors appear. You can use **certbot** by **LetsEncrypt** to quickly get a valid certificate. The certbot also edits your nginx configuration to insert your certificate.
 
 
 ## Conclusion

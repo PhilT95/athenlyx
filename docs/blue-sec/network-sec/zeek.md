@@ -1,24 +1,24 @@
-# Zeek - Traffic Analyzer
->Zeek (formerly Bro) is the world's leading platform for network security monitoring. Flexible, open-source, and powered by defenders. Zeek is a passive, open-source network traffic analyzer. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement and troubleshooting.
+# Zeek - traffic analyzer
+>Zeek (formerly Bro) is the world's leading platform for network security monitoring. Zeek is a passive, open source network traffic analyzer. Many operators use Zeek as a network security monitor (NSM) to support suspicious or malicious activity investigations. Zeek also supports a wide range of traffic analysis tasks beyond the security domain, including performance measurement, and troubleshooting.
 
-## Zeek Basics
+## Zeek basics
 **Zeek** differs from known monitoring and IDS/IPS (like [Snort](./snort.md)) tools by providing a wide range of detailed logs ready to investigate both forensic and data analysis actions.
 
 Compared to <ins>Snort</ins>, Zeek is harder to use, but offers in-depth traffic visibility and is more useful for threat hunting. It can detect complex threats and has a scripting language. It supports event correlation and the logs are easier to read. 
 
-### Zeek Architecture
+### Zeek architecture
 
 Zeek has to primary layers:
 
-1. **Event Engine**: This layer is where the packets are processed. It is called the event core and is responsible for describing the event without focusing on the event details. It divides the packages into parts such as
+1. **Event Engine**: this layer is where the packets are processed. It is called the event core and is responsible for describing the event without focusing on the event details. It divides the packages into parts such as
    - Source & Destination address
    - protocol identification
    - session analysis
    - file extraction
-2. **Policy Script Interpreter**: This layer conducts the semantic analysis . It is responsible for describing the event correlations by using **Zeek Scripts**.
+2. **Policy Script Interpreter**: this layer conducts the semantic analysis . It is responsible for describing the event correlations by using **Zeek Scripts**.
 
-### Zeek Frameworks
-Zeek has several frameworks to provide extended functionality in the scripting layer. These frameworks enhance Zeek's flexibility and compatibility with other network components. Each framework focuses on the specific use case and easily runs with Zeek installation.
+### Zeek frameworks
+Zeek has some frameworks to provide extended capabilities in the scripting layer. These frameworks enhance Zeek's flexibility and compatibility with other network components. Each framework focuses on the specific use case and easily runs with Zeek installation.
 
 **Available Frameworks**
 
@@ -30,8 +30,8 @@ Zeek has several frameworks to provide extended functionality in the scripting l
 You can find more about frameworks [here](https://docs.zeek.org/en/master/frameworks/index.html)
 
 
-### Basic Commands
-Once you start Zeek, it will automatically start investigation the traffic or any given pcap file and generate logs. If you process a pcap file, the logs will be generated in the working directory. If Zeek runs as a service, the default directory is ``/opt/zeek/logs`` 
+### Basic commands
+Once you start Zeek, it automatically starts investigating the traffic or any given pcap file and generate logs. If you process a pcap file, the logs are generated in the working directory. If Zeek runs as a service, the default directory is ``/opt/zeek/logs`` 
 
 !!! note
     Zeek always needs to be started with superuser permissions.
@@ -48,7 +48,7 @@ Type "help" for help.
 [ZeekControl] >
 ```
 
-You can run commands like **status**,**start** and **stop** within this console
+You can run commands like **status**,**start**, and **stop** within this console
 
 ```console
 [ZeekControl] > status
@@ -84,8 +84,8 @@ The main command line parameters are the following:
 |`-v`|Version information|
 |`zeekctl`|Starts the ZeekControl module|
 
-## Zeek Logging
-Zeek generates a lot of log files since they are created according to traffic data. There will be a log for every connection in the wire, including the application level protocols and fields.
+## Zeek logging
+Zeek generates a lot of log files since they are created according to traffic data. For every connection in the wire a log exists, including the application level protocols, and fields.
 
 Zeek basically has the following log files:
 
@@ -96,8 +96,8 @@ Zeek basically has the following log files:
 |NetControl|Network control and flow logs|netcontrol.log, netcontrol_drop.log, netcontrol_shunt.log, netcontrol_catch_release.log, openflow.log.|
 |Detection|Detection and possible indicator logs.|netcontrol.log, netcontrol_drop.log, netcontrol_shunt.log, netcontrol_catch_release.log, openflow.log.|
 |Network Observations|Network flow logs.|netcontrol.log, netcontrol_drop.log, netcontrol_shunt.log, netcontrol_catch_release.log, openflow.log.|
-|Miscellaneous|Additional logs cover external alerts, inputs and failures.|barnyard2.log, dpd.log, unified2.log, unknown_protocols.log, weird.log, weird_stats.log.|
-|Zeek Diagnostics| Zeek diagnostic logs cover system messages, actions and some statistics.| broker.log, capture_loss.log, cluster.log, config.log, loaded_scripts.log, packet_filter.log, print.log, prof.log, reporter.log, stats.log, stderr.log, stdout.log.|
+|Miscellaneous|Additional logs cover external alerts, inputs, and failures.|barnyard2.log, dpd.log, unified2.log, unknown_protocols.log, weird.log, weird_stats.log.|
+|Zeek Diagnostics| Zeek diagnostic logs cover system messages, actions, and some statistics.| broker.log, capture_loss.log, cluster.log, config.log, loaded_scripts.log, packet_filter.log, print.log, prof.log, reporter.log, stats.log, stderr.log, stdout.log.|
 
 Those are a lot of logs, but the most commonly used logs are these:
 
@@ -136,22 +136,23 @@ You can add and remove fields as you like or need. Bases on the output you can u
 root@machine$ cat conn.log | zeek-cut proto duration | sort
 ```
 
-## Zeek Signatures
-Zeek supports signatures to have rules and event correlations to find noteworthy activities on the network. Zeek signatures use low-level pattern matching and cover conditions similar to Snort rules. Unlike Snort rules, Zeek rules are not the primary event detection point. Zeek has a scripting language and can chain multiple events to find an event of interest. We focus on the signatures in this task, and then we will focus on Zeek scripting in the following tasks.
+## Zeek signatures
+Zeek supports signatures to have rules and event correlations to find noteworthy activities on the network. Zeek signatures use low-level pattern matching and cover conditions similar to Snort rules. Unlike Snort rules, Zeek rules are not the primary event detection point. Zeek has a scripting language and can chain multiple events to find an event of interest.
 
 Zeek signatures consist of three logical paths:
 
 - **Signature ID**: unique signature name
-- **Conditions**: Filtering the packet headers or the content for source/destination addresses, protocols, port numbers or a specific value/pattern
+- **Conditions**: filtering the packet headers or the content for source/destination addresses, protocols, port numbers or a specific value/pattern
 - **Action**
-  - *Default action*: Create the signatures.log file in case of a signature match
-  - *Additional action*: Trigger a zeek script
+  - *Default action*: create the signatures.log file in case of a signature match
+  - *Additional action*: trigger a zeek script
 
 You can run zeek with a signature file this way:
 ```console
 root@machine$ zeek -C -r sample.pcap -s sample.sig
 ```
 
+<!-- vale Google.Headings = NO -->
 
 ### Signature Example 01 - HTTP Cleartext Passwords
 ```bash
@@ -168,7 +169,7 @@ signature http-password {
 # payload: Filtering the "password" phrase.
 # event: Signature match message.
 ```
-### Signature Example 02 - FTP Admin Login attempts
+### Signature Example 02 - FTP Administrator Login attempts
 
 ```bash
 signature ftp-admin {
@@ -204,9 +205,10 @@ signature ftp-brute {
      event "FTP Brute-force Attempt"
 }
 ```
+<!-- vale Google.Headings = YES -->
 
-## Zeek Scripts
-Zeek has its own event-driven scripting language, which is as powerful as high-level languages and allows us to investigate and correlate the detected events.
+## Zeek scripts
+Zeek has its own event-driven scripting language, which is as powerful as high-level languages and makes it possible to investigate and correlate the detected events.
 
 - **Zeek base scripts** are installed by default and not intended to be modified. They are located in `/opt/zeek/share/zeek/base`
 - **User generated or modified scripts** should be located in a specific path `/opt/zeek/share/zeek/site`
@@ -222,7 +224,7 @@ print options$host_name;
 }
 ```
 
-Some scripts contain operators, types, attributes, declarations, statements and directives.
+Some scripts contain operators, types, attributes, declarations, statements, and directives.
 
 ```zeek
 event zeek_init()
@@ -272,7 +274,7 @@ event new_connection(c: connection)
 # c$id: Source reference field for the identifier.
 ```
 
-A script to detect if the rule for **ftp-admin** got triggered ([see FTP Admin](#signature-example-02-ftp-admin-login-attempts)).
+A script to detect if the rule for `ftp-admin` got triggered ([see FTP administrator](#signature-example-02-ftp-administrator-login-attempts)).
 
 ```zeek
 event signature_match (state: signature_state, msg: string, data: string)
@@ -300,8 +302,8 @@ root@machine$ zeek -C -r sample.pcap local # (1)
 
 
 
-## Zeek Package Manager
-The Zeek Package Manager provides an easy way to install third-party scripts and plugins to extend the functionality of Zeek. The package manager is bundled with zeek and available with the `zkg` command.
+## Zeek package manager
+The Zeek Package Manager provides an easy way to install third-party scripts and plugins to extend the capabilities of Zeek. The package manager is bundled with zeek and available with the `zkg` command.
 
 |Command|Description|
 |:------|:----------|

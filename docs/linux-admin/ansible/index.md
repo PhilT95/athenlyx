@@ -1,6 +1,6 @@
 ![Ansible Banner](images/ansible_logo.png){ width=40% }
 
-# Ansible - Automation and Infrastructure as Code
+# Ansible - automation and infrastructure as code
 
 Ansible is a collection of software tools used to automate infrastructure management. Generally know as IaC, it can cover:
 
@@ -8,25 +8,25 @@ Ansible is a collection of software tools used to automate infrastructure manage
 2. Configuration management
 3. Application deployment
 
-It can be used to do various tasks on various hosts and, in combination with **Terraform** also enable the deployment and configuration of entire infrastructures.
+It can be used to do a wide range of different tasks on multiple hosts and, in combination with **Terraform** also enables the deployment and configuration of entire infrastructure setups.
 
 ## Basics of Ansible
 
-The ansible software connects to different hosts, which can be other servers, network devices or even clients, to deploy and execute small programs. These programs are then used to automate tasks on the targeted hosts to transform the target into a desired state. Once Ansible executed these programs they are removed. Enabling Ansible requires at least the following components:
+The ansible software connects to different hosts, which can be other servers, network devices or even clients, to deploy, and execute small programs. These programs are then used to automate tasks on the targeted hosts to transform the target into a desired state. Once Ansible executed these programs they are removed. Enabling Ansible requires at least the following components:
 
 |Component|Description|
 |:--------|:----------|
 |**Inventory**|The ansible inventory resembles the infrastructure inventory and contains all servers that should be managed by Ansible. These are ansible-specific text files which contain their host names or IP-Addresses.|
 |**Playbook**|An Ansible Playbook is an ordered list of instructions and programs that are executed on the targeted hosts. The playbooks are .yml files.|
-|**Authentication**|Ansible requires a way to authenticate with the hosts. This usually can be done using **SSH** and a dedicated ansible user that needs to be provided on the targets.|
+|**Authentication**|Ansible requires a way to authenticate with the hosts. The most common way is **SSH** and a dedicated ansible user that needs to be provided on the targets.|
 
 Once all these components are setup Ansible can connect to the machines that are named inside the inventory files and using the playbook and the ansible binary, the programs that are listed inside the playbook can be executed on the targets.
 
 !!! info
-    Ansible usually connects using the user that is currently executing the command. Therefore, the dedicated Ansible user should also exist on the Ansible server and execute the command itself. This user should exist on all managed devices that are to be managed by Ansible.
+    Ansible normally connects using the user that is currently executing the command. Therefore, the dedicated Ansible user should also exist on the Ansible server and execute the command itself. This user should exist on all managed devices that are to be managed by Ansible.
 
-## Important Terms and Topics
+## Important terms and topics
 
 |Term|Description|
 |:-------|:-------|
-|**Ansible facts**|Ansible can retrieve or discover information about remote systems or about Ansible itself and store these information in variables. These are called **facts** and can for example contain information about IP addresses, file systems, system and service states and much more.|
+|**Ansible facts**|Ansible can retrieve or discover information about remote systems or about Ansible itself and store these information in variables. These are called **facts** and can for example contain information about IP addresses, file systems, system, and service states and much more.|
