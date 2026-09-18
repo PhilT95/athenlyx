@@ -205,7 +205,7 @@ When this query is routed to the C2 server, the server sends the actual maliciou
 
 ### FTP analysis
 
-FTP is designed to transfer files easily. With its simplicity comes a lack of security. THis protocol should not be used in unsecured environments because it creates risks like:
+FTP is designed to transfer files easily. With its simplicity comes a lack of security. This protocol should not be used in unsecured environments because it creates risks like:
 
 - Man-in-the-middle attacks
 - Credential stealing and unauthorized access

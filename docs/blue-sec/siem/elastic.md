@@ -94,7 +94,7 @@ The **KQL** is a search query language used to search the ingested documents in 
 |**Wild Card**|KQL allows the wild card ``*`` to match parts of the term/word.|``Nginx*``|
 |**OR**|The ``OR`` operator shows logs that contain one or another search term.|``"Nginx" OR "httpd"``|
 |**AND**|The ``AND`` operator shows logs that contain one and another search term.|``"Nginx" AND "httpd"``|
-|**NOT**|THe ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
+|**NOT**|The ``NOT`` operator removes a term from the search results.|``"Nginx" AND NOT("httpd")``|
 
 
 #### Free text search
