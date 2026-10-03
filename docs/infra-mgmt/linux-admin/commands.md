@@ -17,6 +17,8 @@
 ||`uniq`|Eliminates duplicate lines.|`cat sample.txt \| uniq`|
 ||`wc -l`|Count line numbers.|`cat sample.txt \| wc -l`|
 ||`n1`|Show line numbers.|`cat sample.txt \| n1`|
+|Web|`curl`|Sends a web request.|`curl https://athenlyx.com`|
+|||Send a web request and only get response header|`curl -I -s https://athenlyx.com`|
 |Advanced|`sed`|Prints specific lines. For example line 11.|`cat sample.txt \| sed -n '11p'`|
 |||Print lines 10-15.|`cat sample.txt \| sed -n '10,15p'`|
 ||`awk`|Print lines below 11.|`cat sample.txt \| awk 'NR < 11 {print $0}'`|

@@ -17,14 +17,6 @@ This is a collection of documentations, guides and how-to's about general **Syst
 
 <div class="grid cards" markdown>
 
--   :fontawesome-brands-linux: __Linux Administration__
-
-    ---
-
-    Step-by-step guides for setting up and securing AlmaLinux systems from initial OS configuration and basic CLI commands to firewalld, SELinux, and infrastructure automation with Ansible.
-
-    [:octicons-arrow-right-24: Explore](linux-admin/rhel-alma/almalinux_setup.md)
-
 -   :material-shield-check: __Cybersecurity — Blue Teaming__
 
     ---
@@ -32,6 +24,14 @@ This is a collection of documentations, guides and how-to's about general **Syst
     Defensive security operations including network traffic analysis with Wireshark, Zeek & Snort, endpoint monitoring with Sysmon & Osquery, SIEM operations with Elastic & Splunk, Wazuh EDR deployment, DFIR methodology, and security assessment with OpenSCAP.
 
     [:octicons-arrow-right-24: Explore](blue-sec/index.md)
+
+-   :fontawesome-brands-linux: __Linux Administration__
+
+    ---
+
+    Step-by-step guides for setting up and securing AlmaLinux systems from initial OS configuration and basic CLI commands to firewalld, SELinux, and infrastructure automation with Ansible.
+
+    [:octicons-arrow-right-24: Explore](infra-mgmt/linux-admin/rhel-alma/almalinux_setup.md)
 
 -   :material-server: __Self-Hosted Apps & Services__
 
