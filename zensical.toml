@@ -103,6 +103,16 @@ nav = [
         ]}
     ]},
     {"AI" = [
+        "ai/index.md",
+        {"Claude" = [
+            "ai/tools/claude/index.md"
+        ]},
+        {"OpenCode" = [
+            "ai/tools/opencode/index.md"
+        ]},
+        {"MCP" = [
+            "ai/tools/mcp/index.md"
+        ]},
         {"AI Tools Cheat Sheet" = "ai/tools-ai.md"}
     ]},
     {"About me" = [

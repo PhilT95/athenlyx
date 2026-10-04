@@ -131,7 +131,7 @@ Cloudflare's licensing model has multiple tiers. I'd generally separate the tier
 
 ### License comparison
 
-See the following license comparison which shows the most important features and to which degree the different tiers provide them. If you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/)
+See the following license comparison which shows the most important features and to which degree the different tiers provide them. If you need more information please refer to the [Cloudflare website](https://www.cloudflare.com/plans/).
 
 |Feature|Free|Pro|Business|Enterprise|
 |:------|:---|:--|:-------|:---------|
@@ -139,6 +139,7 @@ See the following license comparison which shows the most important features and
 |**DNS Setup options**|Full setup only|Full setup only|Full and partial setup|Full, partial, and primary/secondary DNS server setup|
 |**Layer 7 DDoS protection**|Yes|Yes|Yes|Yes|
 |**CDN**|Yes|Yes|Yes|Yes|
+|**Managed WAF rules**|Free managed ruleset|Cloudflare managed ruleset|Cloudflare managed ruleset|Cloudflare managed ruleset|
 |**Bot mitigation**|Simple bots|Easy-to-detect bots|Sophisticated bots with *Super Bot Fight Mode*|All bots, anomaly detection, custom CAPTCHAs|
 |**Bot analytics**|No|No|Basic bot analytics|Advanced bot analytics|
 |**Security event log retention**|3 days[^2]|3 days[^2]|3 days[^2]|30 days|
