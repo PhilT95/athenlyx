@@ -4,3 +4,5 @@ Managing an infrastructure becomes an increasingly complex task with the rapid a
 
 
 ## Linux administration
+
+Since Linux is the most common server OS it is crucial to understand how it can be managed, configured, and maintained in a scalable way. Please refer to the [Linux administration docs](linux-admin/index.md) for detailed information and guides.

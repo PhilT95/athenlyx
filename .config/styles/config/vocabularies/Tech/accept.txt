@@ -155,3 +155,7 @@ proxied
 RESTful
 RATs
 [Cc]loud
+[Cc]hatbot?s
+OpenCode
+Anthropic
+MCP

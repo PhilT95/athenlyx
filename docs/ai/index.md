@@ -4,16 +4,14 @@ LLM-based AI has changed a lot in IT and cybersecurity. Tools and applications g
 
 AI isn't only a development helper either. It also talks to people and takes over workloads, chatbots being the most common example. These come with their own set of risks.
 
-So it's worth understanding how AI works and how to use it in a safe and productive way. That's what this section is about.
+It is therefore worth understanding how AI works and how to use it in a safe and productive way. That's what this section is about.
 
 ## Working with AI
 
-Guides on using specific AI tools and setups in practice. Some of these are still being written.
+Guides on using specific AI tools and setups in practice. 
 
 - [Claude](tools/claude/index.md)
-- [OpenCode](tools/opencode/index.md)
-- [MCP - Model Context Protocol](tools/mcp/index.md)
 
-## AI Tools
+## AI tools
 
 You can find a collection of AI tools [here](tools-ai.md).
