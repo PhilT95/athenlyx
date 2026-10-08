@@ -1,0 +1,69 @@
+name: Docker Check
+
+# Verifies that the images build and start, and that the updater tests pass,
+# before a change can be merged.
+
+on: [push, pull_request]
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # the site build reads page dates from git history
+
+      # The updater builds through the Docker API, which uses the classic
+      # builder. DOCKER_BUILDKIT=0 tests the same build path as production.
+      - name: Build api image
+        run: DOCKER_BUILDKIT=0 docker build --target api -t athenlyx-api:ci .
+
+      - name: Build web image
+        run: DOCKER_BUILDKIT=0 docker build --target web -t athenlyx-web:ci .
+
+      - name: Smoke test api
+        run: |
+          docker run -d --name api -p 8000:8000 athenlyx-api:ci
+          for i in $(seq 1 20); do
+            curl -fsS http://127.0.0.1:8000/api/v1/health && break
+            sleep 2
+          done
+          curl -fsS 'http://127.0.0.1:8000/api/v1/search?q=docker&limit=1' | grep -q '"count": *1\|"count":1'
+
+      - name: Smoke test web
+        run: |
+          docker run -d --name web -p 8080:80 athenlyx-web:ci
+          for i in $(seq 1 20); do
+            curl -fsS -o /dev/null http://127.0.0.1:8080/index.html && break
+            sleep 1
+          done
+          curl -fsS -o /dev/null http://127.0.0.1:8080/index.html
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/does-not-exist.html)" = "404"
+
+      - name: Show container logs on failure
+        if: failure()
+        run: |
+          docker logs api || true
+          docker logs web || true
+
+  updater-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r updater/requirements-dev.txt
+
+      - name: Run tests
+        working-directory: updater
+        run: python -m pytest -q

@@ -59,9 +59,14 @@ Key properties:
 | `requirements-dev.txt` | Adds `pytest` and `httpx` for the tests. |
 | `tests/` | Automated tests (`conftest.py`, `test_auth.py`, `test_api.py`, `test_runner.py`). |
 
-Related files outside this directory: `compose.yaml` (the `updater` and
-`docker-proxy` services), `.env.example` (settings), and
-`scripts/update-request.sh` (send a signed request by hand).
+Related files outside this directory:
+
+- `compose.yaml`: the `updater` and `docker-proxy` services.
+- `.env.example`: the settings.
+- `scripts/update-request.sh`: sends one signed request (manual trigger or status check).
+- `scripts/wait-for-update.sh`: waits until an update has finished and reports the result.
+- `.github/workflows/deploy.yml`: the GitHub workflow that triggers the updater after a merge.
+  See [`.github/workflows/README.md`](../.github/workflows/README.md).
 
 ## Architecture and security model
 
@@ -524,12 +529,14 @@ pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-25 tests, none of which need Docker or network access:
+33 tests. None need Docker or internet access. The script tests need `bash`,
+`curl`, `openssl` and `jq`, and are skipped if one is missing:
 
 | File | Covers |
 |---|---|
 | `tests/test_auth.py` | Valid signature; missing headers; wrong secret; changed body; old or future timestamp; non-numeric timestamp; replay. |
 | `tests/test_api.py` | Public health endpoint; `401` without or with a wrong signature; successful trigger; other branch ignored; invalid JSON; payload cannot select the source; status endpoint. Uses FastAPI's `TestClient` and replaces `runner.trigger`. |
+| `tests/test_scripts.py` | `scripts/update-request.sh` and `scripts/wait-for-update.sh` against a real in-process updater server: signed request accepted, wrong secret rejected, status request, wait script returns success / up-to-date / failure / timeout, ignores results older than the trigger, keeps waiting while an update is running. |
 | `tests/test_runner.py` | First deploy; same SHA is a no-op; update keeps the previous tag; failed start rolls back; failed build leaves the old version; state survives a restart; concurrent triggers are coalesced. The Docker steps are replaced by fakes. |
 
 **Not covered by tests:** the real `_build()`, `_compose_up()` and `_prune()`
@@ -538,6 +545,7 @@ repository. A real end-to-end run on the server is the verification for these.
 
 ## Limitations and design decisions
 
+- **Classic builder (deprecated by Docker).** `_build()` uses the Docker SDK for Python, which talks to the engine's classic build endpoint. Docker has deprecated this builder ("will be removed in a future release"). It still works in Docker Engine 29.x. The `Docker Check` workflow builds with the classic builder so a future incompatibility is found in CI. If it is removed, `_build()` must switch to BuildKit (`docker buildx build`). This needs the `SESSION` and `GRPC` sections to be allowed in `docker-proxy`, and a builder that works over a TCP endpoint. Keep the `Dockerfile` free of BuildKit-only features until then.
 - **Builds happen on the server.** CPU and memory are used while a build runs. The live site keeps serving, but a very small server can slow down.
 - **Full history fetch.** Needed for the SEO plugin's page dates. It is small for this repository but grows with it.
 - **Not self-updating.** Deliberate, to avoid an updater that kills itself half-way. Update it by hand.

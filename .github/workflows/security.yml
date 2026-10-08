@@ -1,6 +1,6 @@
 name: Security Check
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   secrets:
