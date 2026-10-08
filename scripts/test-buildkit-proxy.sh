@@ -11,6 +11,8 @@
 #        A: SESSION=0 GRPC=0   (expected to fail: shows why the settings are needed)
 #        B: SESSION=1 GRPC=0
 #        C: SESSION=1 GRPC=1
+#        D: SESSION=1 GRPC=1 and the plain "docker" buildx driver forced
+#      On a failure the script prints which requests the proxy denied.
 #   2. docker image ls / image rm          (used for pruning old images)
 #   3. docker compose up --wait            (start a container, wait until healthy)
 #   4. docker compose up with a new tag    (the version switch of an update)
@@ -46,10 +48,11 @@ bad()  { printf '  \033[31mFAIL\033[0m  %s\n' "$*"; }
 tail_of() { sed 's/^/        | /' | tail -n "${1:-12}"; }
 
 # Run a command in a client container that talks to the proxy only.
+EXTRA_ENV=()
 cli() {
     docker run --rm --network "$NET" --security-opt label=disable \
         -e DOCKER_HOST="tcp://${PROXY}:2375" \
-        -e DOCKER_BUILDKIT=1 -e BUILDKIT_PROGRESS=plain \
+        -e DOCKER_BUILDKIT=1 -e BUILDKIT_PROGRESS=plain "${EXTRA_ENV[@]}" \
         -v "$CTX:/ctx:ro" -v "$REPO:/repo:ro" \
         "$CLI_IMAGE" "$@"
 }
@@ -74,7 +77,7 @@ cleanup() {
     docker rm -f "$PROXY" >/dev/null 2>&1
     docker network rm "${PREFIX}_default" "$NET" >/dev/null 2>&1
     docker images --format '{{.Repository}}:{{.Tag}}' | grep "^${PREFIX}-" | xargs -r docker rmi -f >/dev/null 2>&1
-    rm -rf "$CTX"
+    rm -rf "$CTX" "$CTX.out"
     echo "  done"
 }
 trap cleanup EXIT
@@ -117,26 +120,35 @@ EOF
 # ---------------------------------------------------------------------------
 
 say "1. BuildKit build through the proxy"
-for cfg in "A 0 0" "B 1 0" "C 1 1"; do
-    set -- $cfg; name="$1"; session="$2"; grpc="$3"
-    label="config $name (SESSION=$session GRPC=$grpc)"
+for cfg in "A 0 0 -" "B 1 0 -" "C 1 1 -" "D 1 1 default"; do
+    set -- $cfg; name="$1"; session="$2"; grpc="$3"; builder="$4"
+    label="config $name (SESSION=$session GRPC=$grpc${builder:+ builder=$builder})"
+    EXTRA_ENV=()
+    [ "$builder" != "-" ] && EXTRA_ENV=(-e "BUILDX_BUILDER=$builder")
 
     if ! start_proxy "$session" "$grpc"; then
         bad "$label: proxy did not start"; RESULTS+=("$label: proxy did not start"); continue
     fi
 
     docker rmi -f "${PREFIX}-web:test" >/dev/null 2>&1
-    out="$(cli docker build --no-cache --target web -t "${PREFIX}-web:test" /ctx 2>&1)"; rc=$?
+    cli docker build --no-cache --target web -t "${PREFIX}-web:test" /ctx 2>&1 | tr -d '\0' > "$CTX.out"; rc=${PIPESTATUS[0]}
     if [ $rc -eq 0 ] && docker image inspect "${PREFIX}-web:test" >/dev/null 2>&1; then
         ok "$label: build works"
-        if [ -z "$BEST" ]; then BEST="$name"; BEST_SESSION="$session"; BEST_GRPC="$grpc"; fi
+        if [ -z "$BEST" ]; then BEST="$name"; BEST_SESSION="$session"; BEST_GRPC="$grpc"; BEST_BUILDER="${builder#-}"; fi
         RESULTS+=("$label: build PASS")
     else
         bad "$label: build failed (exit $rc)"
-        echo "$out" | tail_of 8
+        tail_of 6 < "$CTX.out"
+        echo "      diagnostics:"
+        echo "      - requests the proxy denied (HTTP 403):"
+        docker logs "$PROXY" 2>&1 | grep -E ' 403 [0-9]+ ' | sed -E 's/.*"((GET|POST|PUT|DELETE|HEAD) [^"]*)".*/\1/' | sort | uniq -c | tail_of 10
+        echo "      - builders the client sees:"
+        cli docker buildx ls 2>&1 | tr -d '\0' | tail_of 6
         RESULTS+=("$label: build FAIL")
     fi
 done
+EXTRA_ENV=()
+[ -n "${BEST_BUILDER:-}" ] && EXTRA_ENV=(-e "BUILDX_BUILDER=$BEST_BUILDER")
 
 if [ -z "$BEST" ]; then
     say "Result"
@@ -205,7 +217,7 @@ say "Summary"
 printf '  %s\n' "${RESULTS[@]}"
 echo
 if [ $ALL_OK -eq 1 ]; then
-    echo "  Working proxy setting: SESSION=$BEST_SESSION GRPC=$BEST_GRPC (config $BEST)."
+    echo "  Working proxy setting: SESSION=$BEST_SESSION GRPC=$BEST_GRPC (config $BEST${BEST_BUILDER:+, builder=$BEST_BUILDER})."
     echo "  Use exactly these values in the docker-proxy service in compose.yaml."
     exit 0
 fi
