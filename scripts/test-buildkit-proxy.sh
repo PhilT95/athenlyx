@@ -1,17 +1,16 @@
 #!/bin/bash
-# Experiment: does the updater's Docker access work through the socket proxy,
-# in particular a BuildKit build?
+# Experiment: does the updater's Docker access work through the socket proxy
+# (classic image build, compose up, image listing and removal)?
 #
 # Everything runs in throwaway containers with the prefix "bktest" on its own
 # network. Your running stack is not touched. All test containers, networks and
 # images are removed at the end.
 #
 # What is tested (all through tecnativa/docker-socket-proxy, like the updater):
-#   1. docker build with BuildKit, with different proxy settings
-#        A: SESSION=0 GRPC=0   (expected to fail: shows why the settings are needed)
-#        B: SESSION=1 GRPC=0
-#        C: SESSION=1 GRPC=1
-#        D: SESSION=1 GRPC=1 and the plain "docker" buildx driver forced
+#   1. docker build through the proxy
+#        E: classic builder (what the updater uses today), proxy as in compose.yaml
+#        C: BuildKit with SESSION=1 GRPC=1 (for reference: known to fail, because
+#           buildx uses the docker-container driver which needs "docker exec")
 #      On a failure the script prints which requests the proxy denied.
 #   2. docker image ls / image rm          (used for pruning old images)
 #   3. docker compose up --wait            (start a container, wait until healthy)
@@ -21,7 +20,7 @@
 #   sudo scripts/test-buildkit-proxy.sh            # quick test with a tiny Dockerfile
 #   sudo scripts/test-buildkit-proxy.sh --full     # additionally build the real api/web images
 #
-# Exit code: 0 if at least one proxy configuration passed every test, else 1.
+# Exit code: 0 if a build configuration worked and all following tests passed, else 1.
 
 set -uo pipefail
 
@@ -49,6 +48,12 @@ tail_of() { sed 's/^/        | /' | tail -n "${1:-12}"; }
 
 # Run a command in a client container that talks to the proxy only.
 EXTRA_ENV=()
+set_builder_env() {   # classic = legacy builder (what the updater uses); - = BuildKit default
+    case "$1" in
+        classic) EXTRA_ENV=(-e DOCKER_BUILDKIT=0) ;;
+        *)       EXTRA_ENV=() ;;
+    esac
+}
 cli() {
     docker run --rm --network "$NET" --security-opt label=disable \
         -e DOCKER_HOST="tcp://${PROXY}:2375" \
@@ -119,12 +124,11 @@ EOF
 # Test 1: BuildKit build with different proxy settings
 # ---------------------------------------------------------------------------
 
-say "1. BuildKit build through the proxy"
-for cfg in "A 0 0 -" "B 1 0 -" "C 1 1 -" "D 1 1 default"; do
+say "1. Image build through the proxy"
+for cfg in "E 0 0 classic" "C 1 1 -"; do
     set -- $cfg; name="$1"; session="$2"; grpc="$3"; builder="$4"
-    label="config $name (SESSION=$session GRPC=$grpc${builder:+ builder=$builder})"
-    EXTRA_ENV=()
-    [ "$builder" != "-" ] && EXTRA_ENV=(-e "BUILDX_BUILDER=$builder")
+    label="config $name (SESSION=$session GRPC=$grpc, $([ "$builder" = classic ] && echo "classic builder" || echo "BuildKit"))"
+    set_builder_env "$builder"
 
     if ! start_proxy "$session" "$grpc"; then
         bad "$label: proxy did not start"; RESULTS+=("$label: proxy did not start"); continue
@@ -134,7 +138,7 @@ for cfg in "A 0 0 -" "B 1 0 -" "C 1 1 -" "D 1 1 default"; do
     cli docker build --no-cache --target web -t "${PREFIX}-web:test" /ctx 2>&1 | tr -d '\0' > "$CTX.out"; rc=${PIPESTATUS[0]}
     if [ $rc -eq 0 ] && docker image inspect "${PREFIX}-web:test" >/dev/null 2>&1; then
         ok "$label: build works"
-        if [ -z "$BEST" ]; then BEST="$name"; BEST_SESSION="$session"; BEST_GRPC="$grpc"; BEST_BUILDER="${builder#-}"; fi
+        if [ -z "$BEST" ]; then BEST="$name"; BEST_SESSION="$session"; BEST_GRPC="$grpc"; BEST_BUILDER="$builder"; fi
         RESULTS+=("$label: build PASS")
     else
         bad "$label: build failed (exit $rc)"
@@ -147,13 +151,12 @@ for cfg in "A 0 0 -" "B 1 0 -" "C 1 1 -" "D 1 1 default"; do
         RESULTS+=("$label: build FAIL")
     fi
 done
-EXTRA_ENV=()
-[ -n "${BEST_BUILDER:-}" ] && EXTRA_ENV=(-e "BUILDX_BUILDER=$BEST_BUILDER")
+set_builder_env "${BEST_BUILDER:--}"
 
 if [ -z "$BEST" ]; then
     say "Result"
-    echo "  BuildKit builds do not work through the proxy with any tested setting."
-    echo "  Recommendation: keep the classic builder for now (see updater/README.md)."
+    echo "  Neither the classic builder nor BuildKit works through the proxy."
+    echo "  The updater's build step would not work. Send the output above."
     printf '  %s\n' "${RESULTS[@]}"
     exit 1
 fi
@@ -217,8 +220,8 @@ say "Summary"
 printf '  %s\n' "${RESULTS[@]}"
 echo
 if [ $ALL_OK -eq 1 ]; then
-    echo "  Working proxy setting: SESSION=$BEST_SESSION GRPC=$BEST_GRPC (config $BEST${BEST_BUILDER:+, builder=$BEST_BUILDER})."
-    echo "  Use exactly these values in the docker-proxy service in compose.yaml."
+    echo "  Working setup: config $BEST (SESSION=$BEST_SESSION GRPC=$BEST_GRPC, builder=$BEST_BUILDER)."
+    [ "$BEST_BUILDER" = classic ] && echo "  The classic builder works through the proxy, so the updater's build step is fine as it is."
     exit 0
 fi
 echo "  Some tests failed. Send the output above to continue."
