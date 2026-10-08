@@ -76,6 +76,11 @@ start_proxy() {   # $1 = SESSION, $2 = GRPC
     return 1
 }
 
+show_denied() {
+    echo "      - requests the proxy denied (HTTP 403):"
+    docker logs "$PROXY" 2>&1 | grep -E ' 403 [0-9]+ ' | sed -E 's/.*"((GET|POST|PUT|DELETE|HEAD) [^"]*)".*/\1/' | sort | uniq -c | tail_of 10
+}
+
 cleanup() {
     say "Cleaning up"
     docker ps -aq --filter "label=com.docker.compose.project=${PREFIX}" | xargs -r docker rm -f >/dev/null 2>&1
@@ -144,8 +149,7 @@ for cfg in "E 0 0 classic" "C 1 1 -"; do
         bad "$label: build failed (exit $rc)"
         tail_of 6 < "$CTX.out"
         echo "      diagnostics:"
-        echo "      - requests the proxy denied (HTTP 403):"
-        docker logs "$PROXY" 2>&1 | grep -E ' 403 [0-9]+ ' | sed -E 's/.*"((GET|POST|PUT|DELETE|HEAD) [^"]*)".*/\1/' | sort | uniq -c | tail_of 10
+        show_denied
         echo "      - builders the client sees:"
         cli docker buildx ls 2>&1 | tr -d '\0' | tail_of 6
         RESULTS+=("$label: build FAIL")
@@ -167,11 +171,14 @@ fi
 
 say "Using config $BEST (SESSION=$BEST_SESSION GRPC=$BEST_GRPC) for the remaining tests"
 start_proxy "$BEST_SESSION" "$BEST_GRPC" || { bad "proxy did not start"; exit 1; }
+# Earlier configurations may have removed the test image: build it again with the chosen setup.
+cli docker build --target web -t "${PREFIX}-web:test" /ctx >/dev/null 2>&1 \
+    || { bad "could not rebuild the test image with config $BEST"; exit 1; }
 ALL_OK=1
 check() {   # check <description> <command...>
     local desc="$1"; shift
     local out; out="$("$@" 2>&1)"
-    if [ $? -eq 0 ]; then ok "$desc"; RESULTS+=("$desc: PASS"); else bad "$desc"; echo "$out" | tail_of 10; RESULTS+=("$desc: FAIL"); ALL_OK=0; fi
+    if [ $? -eq 0 ]; then ok "$desc"; RESULTS+=("$desc: PASS"); else bad "$desc"; echo "$out" | tail_of 10; show_denied; RESULTS+=("$desc: FAIL"); ALL_OK=0; fi
 }
 
 say "2. List images through the proxy (used when pruning)"
