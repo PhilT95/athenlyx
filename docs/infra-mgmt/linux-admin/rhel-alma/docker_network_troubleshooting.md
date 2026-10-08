@@ -1,6 +1,9 @@
-# Docker container has no internet access
+# Docker container internet connectivity troubleshooting
 
-Containers on a Docker Compose network can lose outbound access while the host and the default `docker0` bridge keep working. Typical symptoms are timeouts when a container downloads data, TLS handshakes that hang, or application errors that wait for a remote resource.
+Containers on a Docker Compose network can lose outbound access while the host and the default `docker0` bridge keep working. Typical symptoms are timeouts when a container downloads data, TLS handshakes that hang, or application errors that wait for a remote resource. 
+
+!!! info "Tuned for AlmaLinux 10"
+    This guide provides a few troubleshooting steps for AlmaLinux 10 specifically. It can also be used to troubleshoot docker connectivity problems on other systems but some command and configurations might differ.
 
 ## Quick steps
 
@@ -44,7 +47,7 @@ sudo iptables -t nat -S POSTROUTING   # needs a MASQUERADE rule for the Compose 
 sudo docker network inspect $NET --format 'internal={{.Internal}} opts={{json .Options}}'
 ```
 
-If firewalld is installed, see [firewalld basics](firewalld.md) and add the Docker bridges to the `trusted` zone.
+If `firewalld` is installed, see [firewalld basics](firewalld.md) and add the Docker bridges to the trusted zone.
 
 ### Step 2: compare the MTU
 Large packets are dropped when a Docker bridge uses a higher MTU than the uplink. Small packets, pings and DNS still work, while TLS handshakes with large certificate chains hang.

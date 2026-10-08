@@ -1,7 +1,7 @@
 """
 Search index loader and BM25 ranking engine.
 
-Reads the Zensical-generated search/search_index.json from the built site
+Reads the Zensical-generated search.json from the built site
 directory and provides full-text search with relevance ranking.
 
 BM25 parameters (Okapi BM25):
@@ -55,11 +55,15 @@ class SearchIndex:
         Safe to call from a background thread after a deployment; the lock
         ensures reads are never served against a partially-updated index.
         """
-        index_path = self._site_dir / "search" / "search_index.json"
+        # Zensical writes search.json ("items"); the MkDocs layout
+        # search/search_index.json ("docs") is kept as a fallback.
+        index_path = self._site_dir / "search.json"
+        if not index_path.exists():
+            index_path = self._site_dir / "search" / "search_index.json"
         with open(index_path, encoding="utf-8") as fh:
             data = json.load(fh)
 
-        raw_docs: list[dict] = data.get("docs", [])
+        raw_docs: list[dict] = data.get("items") or data.get("docs", [])
 
         # Pre-tokenize every document so scoring doesn't re-parse strings on
         # every query.

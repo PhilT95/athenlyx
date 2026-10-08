@@ -11,3 +11,6 @@
 .config/styles/Google/
 .config/styles/proselint/
 .config/styles/write-good/
+
+# Local deployment configuration
+.env

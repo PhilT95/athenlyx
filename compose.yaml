@@ -1,0 +1,36 @@
+name: athenlyx
+
+services:
+  api:
+    build:
+      context: .
+      target: api
+    image: athenlyx-api:${IMAGE_TAG:-local}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+
+  web:
+    build:
+      context: .
+      target: web
+    image: athenlyx-web:${IMAGE_TAG:-local}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      # Only reachable from the host; the host nginx proxies to this port.
+      - "127.0.0.1:${APP_PORT:-6559}:80"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+
+networks:
+  internal:
