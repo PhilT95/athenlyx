@@ -65,7 +65,7 @@ cli() {
 start_proxy() {   # $1 = SESSION, $2 = GRPC
     docker rm -f "$PROXY" >/dev/null 2>&1
     docker run -d --name "$PROXY" --network "$NET" --security-opt label=disable \
-        -e CONTAINERS=1 -e IMAGES=1 -e NETWORKS=1 -e BUILD=1 -e INFO=1 -e POST=1 \
+        -e CONTAINERS=1 -e IMAGES=1 -e NETWORKS=1 -e VOLUMES=1 -e BUILD=1 -e INFO=1 -e POST=1 \
         -e SESSION="$1" -e GRPC="$2" \
         -v /var/run/docker.sock:/var/run/docker.sock \
         "$PROXY_IMAGE" >/dev/null || return 1

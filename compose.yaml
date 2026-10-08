@@ -75,6 +75,8 @@ services:
       CONTAINERS: 1
       IMAGES: 1
       NETWORKS: 1
+      # Compose lists the project's volumes before it starts containers.
+      VOLUMES: 1
       BUILD: 1
       INFO: 1
       POST: 1

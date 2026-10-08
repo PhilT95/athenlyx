@@ -85,9 +85,12 @@ To build images and replace containers, the updater must talk to the Docker
 daemon. Access to the Docker socket (`/var/run/docker.sock`) is equivalent to
 root on the host. The updater therefore gets no socket. It sets
 `DOCKER_HOST=tcp://docker-proxy:2375` and talks to `tecnativa/docker-socket-proxy`,
-which allows only these API sections: `CONTAINERS`, `IMAGES`, `NETWORKS`, `BUILD`,
-`INFO`, `POST`. All other sections (volumes, secrets, swarm, exec and others)
-are blocked. The `docker-api` network between them is `internal` (no internet
+which allows only these API sections: `CONTAINERS`, `IMAGES`, `NETWORKS`,
+`VOLUMES`, `BUILD`, `INFO` and `POST`. All other sections (secrets, swarm, exec
+and others) are blocked. `VOLUMES` is needed because `docker compose up` lists
+the project's volumes before it starts containers. The proxy cannot restrict a
+section to read access only, so together with `POST` the updater could also
+create or delete volumes. The `docker-api` network between them is `internal` (no internet
 access, no published ports).
 
 > **Be aware of the limit:** the proxy filters by API section, not by intent.
