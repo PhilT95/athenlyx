@@ -4,8 +4,14 @@
 FROM python:3.12-slim AS site-build
 WORKDIR /src
 
-RUN pip install --no-cache-dir zensical==0.0.57 mkdocs-ultralytics-plugin
+# git is required by the ultralytics plugin, which reads page creation/modification
+# dates and authors from the repository history.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends git \
+ && rm -rf /var/lib/apt/lists/* \
+ && pip install --no-cache-dir zensical==0.0.57 mkdocs-ultralytics-plugin
 
+COPY .git ./.git
 COPY zensical.toml ./
 COPY docs ./docs
 COPY includes ./includes

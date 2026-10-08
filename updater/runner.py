@@ -129,10 +129,12 @@ class Runner:
     def _fetch(self, workdir: str) -> str:
         self._say(f"Fetching {self.cfg.allowed_ref} from {self.cfg.repo_url} …")
         self._run(["git", "init", "-q", workdir])
+        # "origin" is read by the SEO plugin; the full history (no --depth) gives
+        # it real creation/modification dates and authors per page.
+        self._run(["git", "-C", workdir, "remote", "add", "origin", self.cfg.repo_url])
         self._run(
-            ["git", "-C", workdir, "fetch", "-q", "--depth", "1", "--no-tags",
-             self.cfg.repo_url, self.cfg.allowed_ref],
-            timeout=180,
+            ["git", "-C", workdir, "fetch", "-q", "--no-tags", "origin", self.cfg.allowed_ref],
+            timeout=300,
         )
         sha = self._run(["git", "-C", workdir, "rev-parse", "FETCH_HEAD"]).strip()
         self._run(["git", "-C", workdir, "checkout", "-q", "--detach", "FETCH_HEAD"])
