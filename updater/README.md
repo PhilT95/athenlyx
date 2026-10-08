@@ -546,9 +546,31 @@ python -m pytest -q
 (they need a Docker daemon). `_fetch()` was checked manually against a local
 repository. A real end-to-end run on the server is the verification for these.
 
+## Verification of the Docker access
+
+The updater's Docker access was tested against a real Docker Engine 29.x with
+`scripts/test-buildkit-proxy.sh` (run with `sudo`). The script starts its own
+proxy and client containers (prefix `bktest`, separate network) and removes
+everything afterwards. It uses the same proxy settings as `compose.yaml`.
+
+| Test | Result |
+|---|---|
+| Classic image build through the proxy | Works |
+| `docker image ls` with a filter (pruning) | Works |
+| `docker compose up -d --wait` (waits until healthy) | Works. Needs the `VOLUMES` section, because compose lists the project's volumes first. |
+| Compose with a new `IMAGE_TAG` (the version switch) | Works. The container is replaced. |
+| Removing an old image tag | Works |
+| BuildKit build (`SESSION=1`, `GRPC=1`) | **Fails**, because buildx uses `docker exec` (see Limitations). |
+
+Run the script again after changing the proxy settings in `compose.yaml`, or
+after a Docker major upgrade. `--full` additionally builds the real `api` and
+`web` images through the proxy.
+
 ## Limitations and design decisions
 
-- **Classic builder (deprecated by Docker).** `_build()` uses the Docker SDK for Python, which talks to the engine's classic build endpoint. Docker has deprecated this builder ("will be removed in a future release"). It still works in Docker Engine 29.x. The `Docker Check` workflow builds with the classic builder so a future incompatibility is found in CI. If it is removed, `_build()` must switch to BuildKit (`docker buildx build`). This needs the `SESSION` and `GRPC` sections to be allowed in `docker-proxy`, and a builder that works over a TCP endpoint. Keep the `Dockerfile` free of BuildKit-only features until then.
+- **Classic builder (deprecated by Docker).** `_build()` uses the Docker SDK for Python, which talks to the engine's classic build endpoint. Docker has deprecated this builder ("will be removed in a future release"). It still works in Docker Engine 29.x. The `Docker Check` workflow builds with the classic builder, so a future incompatibility is found in CI.
+  - **BuildKit does not work through the socket proxy.** This was tested (see [Verification](#verification-of-the-docker-access)). The `docker` CLI selects the `docker-container` buildx driver, which starts a separate BuildKit container and talks to it with `docker exec`. The proxy blocks `exec`, also with `SESSION=1` and `GRPC=1`. Allowing `EXEC` would weaken the proxy, so it is not done.
+  - **Options when the classic builder is removed:** (1) a dedicated rootless `buildkitd` container on an internal network, used through a buildx *remote* driver, with the finished image loaded into the engine through the proxy (`--load`). This needs no `EXEC`. (2) Build the images outside the server and only pull them. Both need changes to `_build()`, the compose file and the CI check.
 - **Builds happen on the server.** CPU and memory are used while a build runs. The live site keeps serving, but a very small server can slow down.
 - **Full history fetch.** Needed for the SEO plugin's page dates. It is small for this repository but grows with it.
 - **Not self-updating.** Deliberate, to avoid an updater that kills itself half-way. Update it by hand.
