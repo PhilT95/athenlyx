@@ -29,12 +29,12 @@ Most examples use `sample.txt` as a stand-in for any file you want to work on.
 |`cd -`|Go back to the previous directory.||
 |`cp -r`|Copy files or directories recursively.|`cp -r /etc/nginx /tmp/nginx-backup`|
 |`mv`|Move or rename a file.|`mv old.txt new.txt`|
-|`rm -r`|Delete a directory and its contents. There is no recycle bin, so double-check the path.|`rm -r /tmp/nginx-backup`|
+|`rm -r`|Delete a directory and its contents. No recycle bin exists, so double-check the path.|`rm -r /tmp/nginx-backup`|
 |`mkdir -p`|Create a directory including missing parent directories.|`mkdir -p /opt/app/config`|
 |`ln -s`|Create a symbolic link.|`ln -s /opt/app/config /etc/app`|
-|`find`|Search for files by name, type, size or age.|`find /var/log -name "*.log" -mtime -1`|
+|`find`|Search for files by name, type, size, or age.|`find /var/log -name "*.log" -mtime -1`|
 |`tree`|Show a directory as a tree. May need to be installed first.|`tree -L 2 /etc`|
-|`stat`|Show detailed file information such as size, owner and timestamps.|`stat sample.txt`|
+|`stat`|Show detailed file information such as size, owner, and timestamps.|`stat sample.txt`|
 |`file`|Detect the type of a file.|`file sample.txt`|
 
 ## Reading files
@@ -50,7 +50,7 @@ Most examples use `sample.txt` as a stand-in for any file you want to work on.
 
 ## Finding and filtering text
 
-These commands are usually combined with pipes (`|`), where the output of one command becomes the input of the next.
+These commands are often combined with pipes (`|`), where the output of one command becomes the input of the next.
 
 |Command|Purpose|Example|
 |:------|:------|:------|
@@ -99,7 +99,7 @@ These commands are usually combined with pipes (`|`), where the output of one co
 |`who`|Show who is logged in right now.||
 
 !!! info
-    Permissions are written as three digits for **owner**, **group** and **others**. Each digit is the sum of read (`4`), write (`2`) and execute (`1`). `640` therefore means: owner can read and write, the group can read, everyone else has no access.
+    Permissions are written as three digits for **owner**, **group**, and **others**. Each digit is the sum of read (`4`), write (`2`) and execute (`1`). `640` therefore means: owner can read and write, the group can read, everyone else has no access.
 
 ## Processes and services
 
@@ -110,7 +110,7 @@ These commands are usually combined with pipes (`|`), where the output of one co
 |`kill`|Stop a process by its ID. Use `-9` only if a normal stop does not work.|`kill 1234`|
 |`pkill`|Stop processes by name.|`pkill nginx`|
 |`systemctl status`|Show the state of a service.|`systemctl status sshd`|
-|`systemctl start` / `stop` / `restart`|Start, stop or restart a service.|`sudo systemctl restart sshd`|
+|`systemctl start` / `stop` / `restart`|Start, stop, or restart a service.|`sudo systemctl restart sshd`|
 |`systemctl enable --now`|Start a service and enable it at boot.|`sudo systemctl enable --now nginx`|
 |`systemctl list-units --failed`|List all failed services.||
 
@@ -122,7 +122,7 @@ These commands are usually combined with pipes (`|`), where the output of one co
 |`journalctl -f`|Follow the system journal live.|`journalctl -u sshd -f`|
 |`journalctl --since`|Show logs from a certain time.|`journalctl --since "1 hour ago"`|
 |`journalctl -p err`|Show only errors and worse.|`journalctl -p err -b`|
-|`dmesg`|Show kernel messages, for example hardware and driver problems.|`sudo dmesg \| tail`|
+|`dmesg`|Show kernel messages, for example hardware, and driver problems.|`sudo dmesg \| tail`|
 
 ## Disk and system information
 
@@ -150,9 +150,10 @@ These commands are usually combined with pipes (`|`), where the output of one co
 |`traceroute`|Show the path packets take to a host.|`traceroute athenlyx.com`|
 |`ssh`|Connect to a remote host.|`ssh alice@192.168.1.10`|
 |`scp`|Copy files over SSH.|`scp sample.txt alice@192.168.1.10:/tmp/`|
-|`rsync -avz`|Synchronize directories efficiently, locally or over SSH.|`rsync -avz /opt/app/ alice@192.168.1.10:/opt/app/`|
+|`rsync -avz`|Synchronize directories efficiently, locally, or over SSH.|`rsync -avz /opt/app/ alice@192.168.1.10:/opt/app/`|
 
 ## Web requests
+<!-- vale Vale.Terms = NO -->
 
 |Command|Purpose|Example|
 |:------|:------|:------|
@@ -161,6 +162,8 @@ These commands are usually combined with pipes (`|`), where the output of one co
 |`curl -L`|Follow redirects.|`curl -L http://athenlyx.com`|
 |`curl -o`|Save the response to a file.|`curl -o page.html https://athenlyx.com`|
 |`wget`|Download a file.|`wget https://example.com/file.tar.gz`|
+
+<!-- vale Vale.Terms = YES -->
 
 ## Package management
 

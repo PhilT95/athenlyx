@@ -159,3 +159,5 @@ RATs
 OpenCode
 Anthropic
 MCP
+MTU
+[Uu]plink

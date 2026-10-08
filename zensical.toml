@@ -76,6 +76,7 @@ nav = [
                 {"AlmaLinux Setup Guide" = "infra-mgmt/linux-admin/rhel-alma/almalinux_setup.md"},
                 {"firewalld basics" = "infra-mgmt/linux-admin/rhel-alma/firewalld.md"},
                 {"SELinux basics" = "infra-mgmt/linux-admin/rhel-alma/SELinux.md"},
+                {"Docker network troubleshooting" = "infra-mgmt/linux-admin/rhel-alma/docker_network_troubleshooting.md"},
                 {"Command Cheat Sheet" = "infra-mgmt/linux-admin/commands.md"}
             ]},
             {"Ansible" = [
@@ -106,12 +107,6 @@ nav = [
         "ai/index.md",
         {"Claude" = [
             "ai/tools/claude/index.md"
-        ]},
-        {"OpenCode" = [
-            "ai/tools/opencode/index.md"
-        ]},
-        {"MCP" = [
-            "ai/tools/mcp/index.md"
         ]},
         {"AI Tools Cheat Sheet" = "ai/tools-ai.md"}
     ]},
