@@ -1,8 +1,11 @@
-# Core build dependency
+# Core build dependency.
+# This is the single place for the Zensical version: the Dockerfile and the
+# Build Check workflow install it from this file.
 zensical==0.0.57
 
-# Optional: post-build SEO processing (scripts/ultralytics.py, invoked by scripts/sync.sh)
-# Not required by Zensical or CI — only needed on the production server
+# Post-build SEO processing (scripts/ultralytics.py) uses mkdocs-ultralytics-plugin.
+# The Dockerfile installs it for the production build. It is not needed for
+# "zensical build" or "zensical serve" locally.
 # mkdocs-ultralytics-plugin
 
 # Optional: prose linting (.config/.vale.ini)

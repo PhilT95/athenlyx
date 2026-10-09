@@ -43,7 +43,6 @@ interface that reads the same data (see [Relationship to the site search](#relat
 | `main.py` | The FastAPI application: routes, startup (loading the index), error handling. |
 | `search.py` | `SearchIndex`: loads `search.json`, builds the page index, ranks search results. |
 | `requirements.txt` | Python dependencies (`fastapi`, `uvicorn`). |
-| `api.env.example`, `api.service` | **Legacy.** Old systemd/env setup for running without Docker. Not used by the Docker setup and planned for removal. |
 
 The image is built from the `api` stage of the repository's root `Dockerfile`
 (not from a Dockerfile in this directory), because the image needs the built

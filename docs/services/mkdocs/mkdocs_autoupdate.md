@@ -1,4 +1,8 @@
 # Auto-update using git
+
+!!! tip "Running in Docker?"
+    This guide uses a cron job on the web server. If you run your site in Docker, the [Zensical in Docker with automatic updates](../zensical/zensical_docker_deployment.md) guide describes a setup that updates itself after every merge and rolls back on errors.
+
 Once you set up your server, you have to manually update your documentation and build the web pages again on the web server itself, as well as copying the newly generated files into the web directory. Using **crontab** you can automate this process so you don't have to worry about updating your website anymore.
 
 Just create a scripts directory within the git repository and create a new bash file.

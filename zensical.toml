@@ -95,7 +95,8 @@ nav = [
         ]},
         {"Zensical" = [
             "services/zensical/index.md",
-            {"Zensical Setup" = "services/zensical/zensical_setup.md"}
+            {"Zensical Setup" = "services/zensical/zensical_setup.md"},
+            {"Zensical in Docker with automatic updates" = "services/zensical/zensical_docker_deployment.md"}
         ]},
         {"Minecraft" = [
             "services/minecraft/index.md",

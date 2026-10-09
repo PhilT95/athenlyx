@@ -194,6 +194,9 @@ Once the nginx service it setup and running you can verify if the Zensical proje
 
 If you want to update the website you only need to update the files within the Zensical project, run `zensical build` and make sure the new files replace the old ones.
 
+!!! tip "Automatic updates"
+    To avoid copying files by hand, you can run the site in Docker and let it update itself after every merge. See [Zensical in Docker with automatic updates](zensical_docker_deployment.md).
+
 
 ## Extensions & plugins
 

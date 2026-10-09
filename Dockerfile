@@ -6,10 +6,11 @@ WORKDIR /src
 
 # git is required by the ultralytics plugin, which reads page creation/modification
 # dates and authors from the repository history.
+COPY requirements.txt ./
 RUN apt-get update \
  && apt-get install -y --no-install-recommends git \
  && rm -rf /var/lib/apt/lists/* \
- && pip install --no-cache-dir zensical==0.0.57 mkdocs-ultralytics-plugin
+ && pip install --no-cache-dir -r requirements.txt mkdocs-ultralytics-plugin
 
 COPY .git ./.git
 COPY zensical.toml ./
