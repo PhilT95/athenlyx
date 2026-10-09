@@ -74,6 +74,26 @@ def test_update_request_is_accepted(server):
     assert triggered == [1]
 
 
+def test_update_request_for_other_branch_is_ignored_by_default(server, monkeypatch):
+    url, triggered = server
+    res = _run("update-request.sh", "update", url, UPDATE_REF="refs/heads/other")
+    assert res.returncode == 0 and '"status":"ignored"' in res.stdout
+    assert triggered == []
+
+
+def test_update_request_ref_can_match_a_different_allowed_branch(server):
+    url, triggered = server
+    res = _run("update-request.sh", "update", url, UPDATE_REF="refs/heads/main")
+    assert '"status":"started"' in res.stdout and triggered == [1]
+
+
+def test_update_request_without_ref_is_accepted(server):
+    url, triggered = server
+    res = _run("update-request.sh", "update", url, UPDATE_REF="")
+    assert res.returncode == 0 and '"status":"started"' in res.stdout
+    assert triggered == [1]
+
+
 def test_update_request_with_wrong_secret_is_rejected(server):
     url, triggered = server
     res = _run("update-request.sh", "update", url, secret="x" * 40)

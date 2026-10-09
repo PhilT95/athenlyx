@@ -239,7 +239,7 @@ Both are in [`scripts/`](../../scripts) and also usable by hand. They need
 
 | Script | Purpose |
 |---|---|
-| `update-request.sh [update\|status] [base-url]` | Sends one signed request to the updater. Defaults: `update`, `http://127.0.0.1:6560`. Needs `UPDATE_SECRET`. |
+| `update-request.sh [update\|status] [base-url]` | Sends one signed request to the updater. Defaults: `update`, `http://127.0.0.1:6560`. Needs `UPDATE_SECRET`. `UPDATE_REF` sets the branch in the request (default `refs/heads/main`, empty = none). |
 | `wait-for-update.sh <base-url> <since-epoch> [timeout]` | Polls the status until the update finished. Exit codes 0/1/2 as in the table above. `POLL_INTERVAL` (seconds, default 15) can be overridden. |
 
 The signature format is described in

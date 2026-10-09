@@ -482,6 +482,8 @@ docker logs -f athenlyx-updater-1                     # live log of the update
 ```
 
 The script uses `http://127.0.0.1:6560` by default. A different base URL can be passed as the second argument.
+It names `refs/heads/main` in the request. Set `UPDATE_REF` to use another branch (see
+[Testing a branch other than `main`](#testing-a-branch-other-than-main)).
 
 ### Behind the host nginx
 
@@ -509,9 +511,22 @@ docker compose up -d --build updater
 
 ### Testing a branch other than `main`
 
-Set `ALLOWED_REF=refs/heads/<branch>` in `.env`, recreate the updater
-(`docker compose up -d updater`), and trigger an update. Remember to change it
-back. Requests with a `ref` different from `ALLOWED_REF` are ignored.
+1. Set `ALLOWED_REF=refs/heads/<branch>` in `.env`.
+2. **Recreate the updater** so it reads the new value: `docker compose up -d updater`.
+   Compose reads `.env` only when a container is created. A running updater
+   keeps its old settings. Check with `docker exec athenlyx-updater-1 printenv ALLOWED_REF`.
+3. Push the branch to `REPO_URL`. The updater fetches from there, not from your working copy.
+4. Trigger with the matching branch. The script sends `refs/heads/main` by default,
+   and the updater **ignores** a request for any branch other than `ALLOWED_REF`
+   (response `{"status":"ignored", ...}`):
+
+   ```bash
+   UPDATE_REF=refs/heads/<branch> scripts/update-request.sh update
+   # or send no branch at all; the updater then deploys ALLOWED_REF:
+   UPDATE_REF= scripts/update-request.sh update
+   ```
+
+Remember to set `ALLOWED_REF` back to `refs/heads/main` afterwards.
 
 ### Rolling back by hand
 
