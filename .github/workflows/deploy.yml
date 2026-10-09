@@ -1,0 +1,53 @@
+name: Deploy
+
+# Runs after every push to main. Because main is protected (pull request +
+# required checks), a push to main happens only when a merge was allowed.
+# The workflow asks the updater on the server to deploy the newest commit and
+# waits for the result, so a failed deployment shows up as a failed run here.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deployment at a time. A newer push replaces a waiting run; this is fine
+# because the updater always deploys the newest commit on main.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    permissions:
+      contents: read
+
+    env:
+      UPDATE_SECRET: ${{ secrets.UPDATE_SECRET }}
+      UPDATE_BASE_URL: ${{ vars.UPDATE_BASE_URL || 'https://athenlyx.com' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts
+
+      - name: Trigger update
+        run: |
+          echo "SINCE=$(date +%s)" >> "$GITHUB_ENV"
+          # Each attempt is signed again (new timestamp), because a signature
+          # can be used only once.
+          for attempt in 1 2 3; do
+            if scripts/update-request.sh update "$UPDATE_BASE_URL"; then
+              exit 0
+            fi
+            echo "Attempt $attempt failed."
+            sleep 10
+          done
+          echo "Could not reach the updater." >&2
+          exit 1
+
+      - name: Wait for the update to finish
+        run: scripts/wait-for-update.sh "$UPDATE_BASE_URL" "$SINCE" 1200

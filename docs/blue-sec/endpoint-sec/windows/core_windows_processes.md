@@ -251,7 +251,7 @@ The **Service Host** or **svchost.exe** is the Host Process for Windows Services
 
 ![svchost.exe Process View](images/process_svchost-overview.png)
 
-The services running in this process are implemented as DLLs. The DLL to implement is stored in the registry under the **Parameters** subkey in **ServiceDLL**. The path to this key is ``HKLM\SYSTEM\CurrentControlSet\Services\SERVICE NAME\``. See the example below for the ServiceDDL value of the *Dcomlaunch* service
+The services running in this process are implemented as DLLs. The DLL to implement is stored in the registry under the **Parameters** subkey in **ServiceDLL**. The path to this key is ``HKLM\SYSTEM\CurrentControlSet\Services\SERVICE NAME\``. See the example below for the ServiceDDL value of the `Dcomlaunch` service
 
 ![DLL Parameter Example](images/process_svchost-dllparameter.png)
 

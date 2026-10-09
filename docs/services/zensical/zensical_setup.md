@@ -16,7 +16,7 @@ The Zensical setup is a pretty straight-forward process and does not differ a lo
 
 ## Setup
 
-### Login & update
+### Login & updates
 
 To begin with the Zensical setup, connect to your system using SSH. Once logged in you need to verify that the system is fully updated. Since you need root permissions to update the system and you are going to need these permissions to install all required components as well you can switch into the root session using the ``su`` command.
 
@@ -193,6 +193,9 @@ systemctl start nginx
 Once the nginx service it setup and running you can verify if the Zensical project is reachable using the domain or IP-Address inserted at the `server_name` directive. You might need to edit firewall rules to allow communication via HTTP/HTTPS to reach your web server.
 
 If you want to update the website you only need to update the files within the Zensical project, run `zensical build` and make sure the new files replace the old ones.
+
+!!! tip "Automatic updates"
+    To avoid copying files by hand, you can run the site in Docker and let it update itself after every merge. See [Zensical in Docker with automatic updates](zensical_docker_deployment.md).
 
 
 ## Extensions & plugins

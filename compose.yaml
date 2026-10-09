@@ -1,0 +1,97 @@
+name: athenlyx
+
+services:
+  api:
+    build:
+      context: .
+      target: api
+    image: athenlyx-api:${IMAGE_TAG:-local}
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+
+  web:
+    build:
+      context: .
+      target: web
+    image: athenlyx-web:${IMAGE_TAG:-local}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      # Only reachable from the host; the host nginx proxies to this port.
+      - "127.0.0.1:${APP_PORT:-6559}:80"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+
+  # ---- Self-update ----------------------------------------------------
+  # Receives the signed update request from GitHub, builds the new images and
+  # recreates api/web. It is not updated by itself: rebuild it manually with
+  #   docker compose up -d --build updater
+  updater:
+    build:
+      context: .
+      dockerfile: updater/Dockerfile
+    image: athenlyx-updater:local
+    restart: unless-stopped
+    depends_on:
+      - docker-proxy
+    environment:
+      REPO_URL: ${REPO_URL:?Set REPO_URL in .env}
+      UPDATE_SECRET: ${UPDATE_SECRET:?Set UPDATE_SECRET in .env}
+      ALLOWED_REF: ${ALLOWED_REF:-refs/heads/main}
+      KEEP_IMAGES: ${KEEP_IMAGES:-3}
+      DOCKER_HOST: tcp://docker-proxy:2375
+    volumes:
+      - ./compose.yaml:/deploy/compose.yaml:ro,z
+      - ./.env:/deploy/.env:ro,z
+      - updater-state:/state
+    tmpfs:
+      - /work:size=1g,uid=10001
+      - /tmp
+    read_only: true
+    ports:
+      - "127.0.0.1:${UPDATER_PORT:-6560}:8000"
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - internal
+      - docker-api
+
+  # Restricted view of the Docker API for the updater. Reachable only from the
+  # updater (internal network without published ports).
+  docker-proxy:
+    image: tecnativa/docker-socket-proxy:v0.4.2
+    restart: unless-stopped
+    environment:
+      CONTAINERS: 1
+      IMAGES: 1
+      NETWORKS: 1
+      # Compose lists the project's volumes before it starts containers.
+      VOLUMES: 1
+      BUILD: 1
+      INFO: 1
+      POST: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    security_opt:
+      - label=disable
+      - no-new-privileges:true
+    networks:
+      - docker-api
+
+networks:
+  internal:
+  docker-api:
+    internal: true
+
+volumes:
+  updater-state:

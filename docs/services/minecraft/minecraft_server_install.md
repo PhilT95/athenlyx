@@ -15,7 +15,7 @@ Before you can start with the setup guide please ensure that you fulfill the fol
 - [x] SSH access to the system
 
 !!! tip "AlmaLinux 10 Setup"
-    If you don't know how to setup an AlmaLinux 10 system you can refer to [this](../../linux-admin/rhel-alma/almalinux_setup.md) guide which provides more information on how to set up a new user with root access.
+    If you don't know how to setup an AlmaLinux 10 system you can refer to [this](../../infra-mgmt/linux-admin/rhel-alma/almalinux_setup.md) guide which provides more information on how to set up a new user with root access.
 
 
 ## Setup
@@ -234,7 +234,7 @@ Now your server should run without any problems and you can start or stop the se
 
 ### Configuring the local firewall
 
-Since you are exposing a network service from your system it is best practice to lock down the network interface by only allowing connection to relevant ports. Since the Minecraft server application uses the port 25565 as a standard, you need to keep this port and SSH for management open to the system. AlmaLinux comes with a pre-installed but not enabled local firewall called [firewalld](../../linux-admin/rhel-alma/firewalld.md), which you can use. With AlmaLinux 10, firewalld is already bundled with a Minecraft service template which you can verify by accessing its configuration file at `/usr/lib/firewalld/services/minecraft.xml`. The file should look like this:
+Since you are exposing a network service from your system it is best practice to lock down the network interface by only allowing connection to relevant ports. Since the Minecraft server application uses the port 25565 as a standard, you need to keep this port and SSH for management open to the system. AlmaLinux comes with a pre-installed but not enabled local firewall called [firewalld](../../infra-mgmt/linux-admin/rhel-alma/firewalld.md), which you can use. With AlmaLinux 10, firewalld is already bundled with a Minecraft service template which you can verify by accessing its configuration file at `/usr/lib/firewalld/services/minecraft.xml`. The file should look like this:
 
 ```xml
 <service>

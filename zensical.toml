@@ -12,19 +12,6 @@ watch = ["includes","overrides"]
 
 nav = [
     {"Home" = "index.md"},
-    {"Linux Administration" = [
-                {"AlmaLinux" = [
-                    {"AlmaLinux Setup Guide" = "linux-admin/rhel-alma/almalinux_setup.md"},
-                    {"firewalld basics" = "linux-admin/rhel-alma/firewalld.md"},
-                    {"SELinux basics" = "linux-admin/rhel-alma/SELinux.md"},
-                    {"Command Cheat Sheet" = "linux-admin/rhel-alma/commands.md"}
-                ]},
-                {"Ansible" = [
-                    "linux-admin/ansible/index.md",
-                    {"Ansible Setup Guide" = "linux-admin/ansible/ansible_setup.md"},
-                    {"Semaphore Setup Guide" = "linux-admin/ansible/semaphore_setup.md"}
-                ]}
-    ]},
     {"Security - Blue Teaming" = [
         "blue-sec/index.md",
         {"Network Security" = [
@@ -81,6 +68,24 @@ nav = [
         ]},
         {"Resources" = "blue-sec/resources.md"}
     ]},
+    {"Infrastructure Management" = [
+        "infra-mgmt/index.md",
+        {"Linux Administration" = [
+            "infra-mgmt/linux-admin/index.md",
+            {"AlmaLinux" = [
+                {"AlmaLinux Setup Guide" = "infra-mgmt/linux-admin/rhel-alma/almalinux_setup.md"},
+                {"firewalld basics" = "infra-mgmt/linux-admin/rhel-alma/firewalld.md"},
+                {"SELinux basics" = "infra-mgmt/linux-admin/rhel-alma/SELinux.md"},
+                {"Docker network troubleshooting" = "infra-mgmt/linux-admin/rhel-alma/docker_network_troubleshooting.md"},
+                {"Command Cheat Sheet" = "infra-mgmt/linux-admin/commands.md"}
+            ]},
+            {"Ansible" = [
+                "infra-mgmt/ansible/index.md",
+                {"Ansible Setup Guide" = "infra-mgmt/ansible/ansible_setup.md"},
+                {"Semaphore Setup Guide" = "infra-mgmt/ansible/semaphore_setup.md"}
+            ]}
+        ]},
+    ]},
     {"Self-Hosted Apps & Services" = [
         "services/index.md",
         {"MkDocs" = [
@@ -90,7 +95,8 @@ nav = [
         ]},
         {"Zensical" = [
             "services/zensical/index.md",
-            {"Zensical Setup" = "services/zensical/zensical_setup.md"}
+            {"Zensical Setup" = "services/zensical/zensical_setup.md"},
+            {"Zensical in Docker with automatic updates" = "services/zensical/zensical_docker_deployment.md"}
         ]},
         {"Minecraft" = [
             "services/minecraft/index.md",
@@ -99,6 +105,10 @@ nav = [
         ]}
     ]},
     {"AI" = [
+        "ai/index.md",
+        {"Claude" = [
+            "ai/tools/claude/index.md"
+        ]},
         {"AI Tools Cheat Sheet" = "ai/tools-ai.md"}
     ]},
     {"About me" = [

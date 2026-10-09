@@ -14,3 +14,18 @@ Since this project mostly contains markdown documents that are compiled to webpa
 
 If you want to find out about how the Website is hosted and the infrastructure behind it, please refer to the website itself. (Way easier to navigate)
 
+## Deployment
+
+The website runs in Docker. After a merge to `main` the server builds and deploys the new version by itself and rolls back if it does not start. See [Zensical in Docker with automatic updates](docs/services/zensical/zensical_docker_deployment.md) for the setup, and the technical documentation of the parts:
+
+- [`updater/`](updater/README.md): the service that performs the updates
+- [`api/`](api/README.md): the content API for bots and AI agents
+- [`.github/workflows/`](.github/workflows/README.md): the CI/CD pipeline and GitHub settings
+
+## Local preview
+
+```sh
+pip install -r requirements.txt
+zensical serve
+```
+

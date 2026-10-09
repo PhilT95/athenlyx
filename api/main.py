@@ -1,25 +1,22 @@
 """
 AthenlyX API
 
-A single FastAPI application that serves two concerns:
+A FastAPI application exposing the documentation content:
 
-  POST /hooks/deploy          — deployment webhook (replaces the webhook tool)
+  GET  /api/v1/health         — health check
   GET  /api/v1/pages          — list all documentation pages
   GET  /api/v1/pages/{path}   — get content and sections of a single page
   GET  /api/v1/search?q=      — full-text search with BM25 relevance ranking
 
-Configuration is read from environment variables (see api.env.example).
-Run with: uvicorn main:app --host 127.0.0.1 --port 8000
+Configuration is read from environment variables (SITE_DIR).
+Run with: uvicorn main:app --host 0.0.0.0 --port 8000
 """
 
 import logging
 import os
-import subprocess
-import threading
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Header, HTTPException, Query, status
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, Query, status
 
 from search import SearchIndex
 
@@ -28,11 +25,6 @@ from search import SearchIndex
 # ---------------------------------------------------------------------------
 
 SITE_DIR = os.environ.get("SITE_DIR", "/www")
-SYNC_SCRIPT = os.environ.get("SYNC_SCRIPT", "/usr/athenlyx/scripts/sync.sh")
-DEPLOY_TOKEN = os.environ.get("DEPLOY_TOKEN", "")
-
-if not DEPLOY_TOKEN:
-    raise RuntimeError("DEPLOY_TOKEN environment variable must be set.")
 
 logging.basicConfig(
     level=logging.INFO,
@@ -60,8 +52,8 @@ async def lifespan(app: FastAPI):
         log.info("Search index loaded (%d documents).", len(index._docs))
     except FileNotFoundError:
         log.warning(
-            "search_index.json not found at startup — the site may not have been "
-            "built yet. Run a deploy to populate it."
+            "search index not found at startup — the site may not have been "
+            "built yet."
         )
     yield
 
@@ -82,58 +74,6 @@ app = FastAPI(
     # docs_url=None,
     # redoc_url=None,
 )
-
-
-# ---------------------------------------------------------------------------
-# Deploy webhook
-# ---------------------------------------------------------------------------
-
-
-@app.post(
-    "/hooks/deploy",
-    status_code=status.HTTP_202_ACCEPTED,
-    summary="Trigger a site deployment",
-    description=(
-        "Runs the sync script to pull the latest changes from Git and rebuild "
-        "the site. Secured with a static token passed in the X-Deploy-Token header. "
-        "The search index is automatically reloaded once the build completes."
-    ),
-    tags=["Deployment"],
-    include_in_schema=False,  # Hide from public OpenAPI docs
-)
-def deploy(x_deploy_token: str = Header(...)):
-    if x_deploy_token != DEPLOY_TOKEN:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized.")
-
-    def _run() -> None:
-        log.info("Deploy triggered — running %s", SYNC_SCRIPT)
-        try:
-            result = subprocess.run(
-                [SYNC_SCRIPT],
-                capture_output=True,
-                text=True,
-                timeout=300,
-            )
-            if result.returncode != 0:
-                log.error("Sync script exited with code %d:\n%s", result.returncode, result.stderr)
-                return
-            log.info("Sync script completed successfully.")
-        except subprocess.TimeoutExpired:
-            log.error("Sync script timed out after 300 seconds.")
-            return
-        except Exception as exc:
-            log.exception("Unexpected error running sync script: %s", exc)
-            return
-
-        log.info("Reloading search index …")
-        try:
-            index.load()
-            log.info("Search index reloaded.")
-        except Exception as exc:
-            log.exception("Failed to reload search index: %s", exc)
-
-    threading.Thread(target=_run, daemon=True, name="deploy").start()
-    return {"message": "Deploy triggered."}
 
 
 # ---------------------------------------------------------------------------
@@ -168,7 +108,7 @@ def list_pages():
     if not index.loaded:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Search index not yet available. Try again after the first deploy.",
+            detail="Search index not yet available. Try again later.",
         )
     pages = index.list_pages()
     return {"count": len(pages), "pages": pages}
@@ -187,7 +127,7 @@ def get_page(path: str):
     if not index.loaded:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Search index not yet available. Try again after the first deploy.",
+            detail="Search index not yet available. Try again later.",
         )
     page = index.get_page(path)
     if page is None:
@@ -219,7 +159,7 @@ def search(
     if not index.loaded:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Search index not yet available. Try again after the first deploy.",
+            detail="Search index not yet available. Try again later.",
         )
     results = index.search(q, limit=limit)
     return {

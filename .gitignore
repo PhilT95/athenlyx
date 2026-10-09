@@ -11,3 +11,10 @@
 .config/styles/Google/
 .config/styles/proselint/
 .config/styles/write-good/
+
+# Local deployment configuration
+.env
+
+# Python caches
+__pycache__/
+.pytest_cache/

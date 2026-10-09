@@ -1,0 +1,10 @@
+.github
+.vscode
+.cache
+.config
+site
+api/__pycache__
+**/__pycache__
+*.log
+.env
+docs/**/*.log
