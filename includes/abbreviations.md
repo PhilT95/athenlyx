@@ -62,3 +62,4 @@
 *[CDN]: Content Delivery Network
 *[PoP]: Point of Presence
 *[GDPR]: General Data Protection Regulation 
+*[CE]: Community Edition
