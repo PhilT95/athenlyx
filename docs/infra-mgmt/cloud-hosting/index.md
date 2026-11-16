@@ -1,1 +1,1 @@
-# Cloud Hosting
+# Cloud hosting
