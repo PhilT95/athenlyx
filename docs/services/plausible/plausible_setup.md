@@ -108,5 +108,4 @@ sudo docker compose up -d
 
 ### Setting up Plausible
 
-
-
+Now that you can access the website you have to create an *Plausible* account which will is required for the login.
