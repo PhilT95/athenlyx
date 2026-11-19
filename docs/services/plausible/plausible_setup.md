@@ -137,5 +137,99 @@ Now your Plausible instance is waiting for the first connection. Trigger it your
 
 ![Add Website - Step 03](images/plausible_add03.png)
 
+### Masking Plausible
 
+As mentioned before, to avoid the Plausible script being blocked by adblockers and other similar tools, you can use a proxy like *nginx* to hide the Plausible instance domain behind the websites own.
 
+```mermaid
+---
+title: Plausible Traffic flow without proxy
+---
+graph LR
+A([User opens the website website.example.com]) --> B[Website points user towards the script path on plausible.example.com for the Plausible script];
+B --> C[User gets the script from plausible.example.com and executes it];
+C --> D([Scritp gets executed and sends data to Plausible])
+```
+
+Adblockers tend to look at the domain where the script needs to be retrieved from and block the download of the script. This way it won't be executed and Plausible can't see these users connecting. The proxy setup solves this by hiding Plausible domain.
+
+!!! note
+    The script path is the App/Website-unique path on your Plausible instance, for example *https://plausible.example.com/js/pa-XXXXXXX.js*.
+
+```mermaid
+---
+title: Plausible Traffic flow with proxy
+---
+graph LR
+A([User opens the website website.example.com]) --> B[Website points user towards website.example.com for the Plausible script];
+B --> C[User sends a requests to the Plausible script path on website.example.com];
+C --> D[The requests gets proxied on the web server to plausible.example.com]
+D --> E([Scritp gets executed and sends data to Plausible])
+```
+
+In this case the user never gets to see where the script is actually from. All he can see is that script from *https://website.example.com/js/script.js* instead from *https://plausible.example.com/js/pa-XXXXXX.js*.
+
+To set up this scenario follow these 3 steps:
+
+1. Get the Plausible snippet that you had to integrate into your website
+2. Update your nginx configuration of your website with a redirect for 2 specific paths
+3. Adjust the deployed script snippet on your website to reflect the nginx change.
+
+<!-- vale off -->
+??? example "nginx example configuration"
+    ```nginx
+    # Cache for the Plausible script. The directory must exist and be writable by the nginx user.
+    proxy_cache_path /var/run/nginx-cache/jscache levels=1:2 keys_zone=jscache:100m inactive=30d use_temp_path=off max_size=100m;
+
+    server {
+        listen 443 ssl;
+        server_name website.example.com;
+
+        ssl_certificate     /etc/letsencrypt/live/website.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/website.example.com/privkey.pem;
+
+        # Remove if a resolver is already set
+        resolver 9.9.9.9;
+        set $plausible_script_url https://plausible.example.com/js/pa-XXXXXXX.js;   # Script path from step 1
+        set $plausible_event_url  https://plausible.example.com/api/event;
+
+        location = /js/script.js {
+            proxy_pass            $plausible_script_url;
+            proxy_set_header      Host plausible.example.com;
+            proxy_ssl_server_name on;
+
+            proxy_cache           jscache;
+            proxy_cache_valid     200 5m;
+            proxy_cache_use_stale updating error timeout invalid_header http_500;
+        }
+
+        location = /api/event {
+            proxy_pass            $plausible_event_url;
+            proxy_set_header      Host plausible.example.com;
+            proxy_ssl_server_name on;
+            proxy_buffering       on;
+            proxy_http_version    1.1;
+
+            proxy_set_header      X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header      X-Forwarded-Proto $scheme;
+            proxy_set_header      X-Forwarded-Host  $host;
+        }
+
+        location / {
+            # Your existing website configuration
+        }
+    }
+    ```
+<!-- vale on -->
+
+??? example "script snippet example for proxy scenario"
+
+    ```html
+    <script async src="/js/script.js"></script>
+    <script>
+    window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+    plausible.init({
+        endpoint: "/api/event"
+    })
+    </script>
+    ``

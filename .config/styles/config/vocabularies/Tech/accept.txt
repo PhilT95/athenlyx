@@ -165,3 +165,4 @@ Plausible
 Let's Encrypt
 [Cc]yber
 WordPress
+[Aa]dblocker?s
