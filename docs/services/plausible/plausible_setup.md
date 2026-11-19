@@ -232,4 +232,4 @@ To set up this scenario follow these 3 steps:
         endpoint: "/api/event"
     })
     </script>
-    ``
+    ```
