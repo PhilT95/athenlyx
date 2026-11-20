@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Vale no longer checks bold text (UI elements such as buttons and menus) and `<kbd>` keys, in addition to code (`IgnoredScopes` in `.config/.vale.ini`)
 
+### Fixed
+
+- Pinned Vale style packages (`Google` v0.7.2, `proselint` v0.3.4, `write-good` v0.4.1) so new upstream releases no longer break CI. `proselint` v0.4.0 flagged every admonition marker (`!!!`, `???`) as hyperbole.
+
 ## [2.0.1] - 2026-10-12
 
 ### Changed
