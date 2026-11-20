@@ -84,7 +84,7 @@ No matching files were found.
 
 The NTFS file system provides applications the ability to create alternate data streams of information. By default, all data is stored in a file's main unnamed data stream, but by using the syntax *file:stream*, alternates can be written and read.
 
-**Alternate Data Streams** (ADS) is a file attribute specific to Windows NTFS. Every file has at least on data stream ($Data) and ADS allows files to contain more than one stream of data. Natively the Windows Explorer doesn't display ADS to the user. Using the [**Streams**](https://learn.microsoft.com/en-us/sysinternals/downloads/streams) utility, you can view these information. 
+ADS is a file attribute specific to Windows NTFS. Every file has at least on data stream ($Data) and ADS allows files to contain more than one stream of data. Natively the Windows Explorer doesn't display ADS to the user. Using the [**Streams**](https://learn.microsoft.com/en-us/sysinternals/downloads/streams) utility, you can view these information. 
 
 ```batch
 C:\Users\Administrator\Desktop>SysinternalsSuite\streams.exe file.txt

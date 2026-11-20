@@ -102,6 +102,10 @@ nav = [
             "services/minecraft/index.md",
             {"Minecraft Java Server Setup with Mod support" = "services/minecraft/minecraft_server_install.md" },
             {"Minecraft Server Dashboard Setup - VoxelDash" = "services/minecraft/voxeldash_install.md"}
+        ]},
+        {"Plausible" = [
+            "services/plausible/index.md",
+            {"Plausible Setup Guide" = "services/plausible/plausible_setup.md"}
         ]}
     ]},
     {"AI" = [

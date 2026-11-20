@@ -26,6 +26,7 @@
 *[SMTP]: Simple Mail Transfer Protocol
 *[ACL]: Access-control list
 *[IPS]: Intrusion Prevention System
+*[DAQ]: Data Acquisition
 *[CLI]: Command Line Interface
 *[BPF]: Berkeley Packet Filters
 *[IANA]: Internet Assigned Numbers Authority
@@ -44,6 +45,7 @@
 *[RDP]: Remote Desktop Protocol
 *[NTFS]: New Technology File System
 *[ADS]: Alternate Data Streams
+*[SAS]: Secure Attention Sequence
 *[MMC]: Microsoft Management Console
 *[RAT]: Remote Access Trojan
 *[SQL]: Structured query language
@@ -62,3 +64,4 @@
 *[CDN]: Content Delivery Network
 *[PoP]: Point of Presence
 *[GDPR]: General Data Protection Regulation 
+*[CE]: Community Edition

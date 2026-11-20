@@ -30,7 +30,7 @@ All commands are options for launching the **Snort** binary.
 |`-A fast`| This starts Snort as an IDP/IPS with a fast mode that provides **alerts, messages, timestamps and source/destination IP addresses (-A fast)**. No console output is shown. Instead a alert file is created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A fast`|
 |`-A full`| This starts Snort as an IDP/IPS with a full mode that provides **all information (-A full)**. Instead a alert file is created. The alert file can be created by appending `-l .` to the command.|`sudo snort -c snort.conf -A full`|
 |`-A none`| This starts Snort as an IDP/IPS with a none mode that **doesn't create an alert file. (-A full)**|`sudo snort -c snort.conf -A none`|
-|`-Q --daq afpacket` `-i`| This starts Snort with an activated **Data Acquisition (DAQ)** module and use the `afpacket` module to use Snort as an IPS on the given interface **eth0:eth1**. The DAQ is needed for enabling Snort to drop packages.|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
+|`-Q --daq afpacket` `-i`| This starts Snort with an activated DAQ module and use the `afpacket` module to use Snort as an IPS on the given interface **eth0:eth1**. The DAQ is needed for enabling Snort to drop packages.|`sudo snort -c /etc/snort/snort.conf -q -Q --daq afpacket -i eth0:eth1 -A console`|
 
 
 ## How to read pcaps with Snort

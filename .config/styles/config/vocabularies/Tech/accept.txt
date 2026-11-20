@@ -161,3 +161,8 @@ Anthropic
 MCP
 MTU
 [Uu]plink
+Plausible
+Let's Encrypt
+[Cc]yber
+WordPress
+[Aa]dblocker?s

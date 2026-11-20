@@ -107,7 +107,7 @@ TShark uses Wireshark's capture filter syntax here. Below are a few examples, bu
 
 |Qualifier|Details and Available Options|Examples|
 |:--------|:----------------------------|:-------|
-|**Type**|You can filter IP addresses, host names, IP ranges  and port numbers. If you don't set a qualifier, the *host* qualifier is used by default.|Filtering a host<br>`tshark -f "host 10.0.0.10"`|
+|**Type**|You can filter IP addresses, host names, IP ranges, and port numbers. If you don't set a qualifier, the *host* qualifier is used by default.|Filtering a host<br>`tshark -f "host 10.0.0.10"`|
 |||Filtering a network range<br>`tshark -f "net 10.0.10.0/24"`|
 |||Filtering a port<br>`tshark -f "port 80"`|
 |||Filtering a port range<br>`tshark -f "portrange 80-100"`|
