@@ -1,6 +1,6 @@
 # Plausible analytics setup guide for AlmaLinux 10
 
-This guide provides the steps to install and set up **Plausible analytics - CE** on an AlmaLinux 10 system using Docker. The targeted version for this setup is ``v3.2.1``. If you want to install any other version you should just be able to change the version number in the installation step.
+This guide provides the steps to install and set up **Plausible analytics - CE** on an AlmaLinux 10 system using Docker. The targeted version for this setup is `v3.2.1`. To install a different version, change the version number in the installation step and check the upstream README of that version, since the setup steps can differ between major versions.
 
 !!! note
     Please be aware that there is no official non-Docker setup. For more information refer to the [official Plausible GitHub page](https://github.com/plausible/community-edition).
@@ -13,10 +13,11 @@ The Plausible setup is Docker-based and therefore simple but there are still a f
     - [x] SSH access
     - [x] Root permissions
     - [x] Internet access
-    - [x] At least 2 GB of RAM 
+    - [x] At least 2 GB of RAM
+    - [x] Ports 80 and 443 reachable from the internet
 - [x] A basic understanding of docker and the Linux shell
 - [x] A domain which can be used to host Plausible
-- [x] A DNS Record for the domain which points to the future Plausible instance 
+- [x] A DNS Record for the domain which points to the future Plausible instance
 
 ## Setup
 
@@ -68,7 +69,8 @@ Before you can start the Plausible container the environment and docker compose 
 openssl rand -base64 48
 nano .env
 ```
-The `.env` contains the base settings for the Plausible instance. Make sure the following four variables are inside your environment file. 
+
+The `.env` contains the base settings for the Plausible instance. Make sure the following four variables are inside your environment file.
 
 !!! note
     Choosing the port 80/443 enables automatic Let's Encrypt TLS certificate issuance. You can choose different values if you want to run Plausible behind a reverse proxy. You need to have a DNS Record set up that points to the server or this certificate creation won't work.
@@ -83,7 +85,6 @@ HTTPS_PORT=443
 !!! warning
     When choosing a domain you want to host your Plausible instance on please be aware that names that contain *analytics* or similar terms are frequently blocked by ad blockers. You can still use for example analytics.example.com without it being blocked by implementing a reverse proxy setup which obscures the Plausible domain with the domain name of the web server itself. Plausible offers a straight setup for common proxies [here](https://plausible.io/docs/proxy/introduction).
 
-
 Now you can configure the compose file. Create the file and edit it.
 
 ```bash
@@ -91,7 +92,6 @@ nano compose.override.yml
 ```
 
 Make sure you add the following content to the file, then save it.
-
 
 ```yml
 services:
@@ -101,7 +101,7 @@ services:
             - 443:443
 ```
 
-With all preparation done you can start the docker container and log in to the website `https://plausible.example.com`.
+With all preparation done you can start the docker container and open the website `https://plausible.example.com`.
 
 ```bash
 sudo docker compose up -d
@@ -133,7 +133,7 @@ You can choose between 3 different deployment options:
 ![Add Website - Step 02](images/plausible_add02.png)
 
 Once you are done with the integration return to the setup page and click **Verify**.
-Now your Plausible instance is waiting for the first connection. Trigger it yourself by accessing the website where the integration is set  up. As soon as Plausible gets connected by the script, which is executed by anyone accessing your website, the verification and setup is done.
+Now your Plausible instance is waiting for the first connection. Trigger it yourself by accessing the website where the integration is set up. As soon as Plausible gets connected by the script, which is executed by anyone accessing your website, the verification and setup is done.
 
 ![Add Website - Step 03](images/plausible_add03.png)
 
@@ -146,12 +146,12 @@ As mentioned before, to avoid the Plausible script being blocked by adblockers a
 title: Plausible Traffic flow without proxy
 ---
 graph LR
-A([User opens the website website.example.com]) --> B[Website points user towards the script path on plausible.example.com for the Plausible script];
-B --> C[User gets the script from plausible.example.com and executes it];
-C --> D([Scritp gets executed and sends data to Plausible])
+A([User opens the website website.example.com]) --> B[Website points user towards the script path on plausible.example.com for the Plausible script]
+B --> C[User gets the script from plausible.example.com]
+C --> D([Script gets executed and sends data to plausible.example.com/api/event])
 ```
 
-Adblockers tend to look at the domain where the script needs to be retrieved from and block the download of the script. This way it won't be executed and Plausible can't see these users connecting. The proxy setup solves this by hiding Plausible domain.
+Adblockers tend to look at the domain where the script needs to be retrieved from and block the download of the script. They also block the requests the script sends to the event endpoint of known Plausible domains. This way Plausible can't see these users connecting. The proxy setup solves this by hiding the Plausible domain for both the script and the event requests.
 
 !!! note
     The script path is the App/Website-unique path on your Plausible instance, for example *https://plausible.example.com/js/pa-XXXXXXX.js*.
@@ -161,25 +161,27 @@ Adblockers tend to look at the domain where the script needs to be retrieved fro
 title: Plausible Traffic flow with proxy
 ---
 graph LR
-A([User opens the website website.example.com]) --> B[Website points user towards website.example.com for the Plausible script];
-B --> C[User sends a requests to the Plausible script path on website.example.com];
-C --> D[The requests gets proxied on the web server to plausible.example.com]
-D --> E([Scritp gets executed and sends data to Plausible])
+A([User opens the website website.example.com]) --> B[Website points user towards website.example.com for the Plausible script]
+B --> C[User sends a request to the Plausible script path on website.example.com]
+C --> D[The request gets proxied on the web server to plausible.example.com]
+D --> E[Script gets executed and sends data to website.example.com/api/event]
+E --> F([The event request gets proxied on the web server to plausible.example.com])
 ```
 
 In this case the user never gets to see where the script is actually from. All he can see is that script from *https://website.example.com/js/script.js* instead from *https://plausible.example.com/js/pa-XXXXXX.js*.
 
 To set up this scenario follow these 3 steps:
 
-1. Get the Plausible snippet that you had to integrate into your website
-2. Update your nginx configuration of your website with a redirect for 2 specific paths
+1. Get the Plausible snippet that you had to integrate into your website.
+2. Update your nginx configuration of your website with a proxy rule for 2 specific paths.
 3. Adjust the deployed script snippet on your website to reflect the nginx change.
 
 <!-- vale off -->
 ??? example "nginx example configuration"
     ```nginx
-    # Cache for the Plausible script. The directory must exist and be writable by the nginx user.
-    proxy_cache_path /var/run/nginx-cache/jscache levels=1:2 keys_zone=jscache:100m inactive=30d use_temp_path=off max_size=100m;
+    # Cache for the Plausible script. The parent directory must exist and be writable by the nginx user.
+    # Don't use /run or /var/run, they're emptied on every reboot.
+    proxy_cache_path /var/cache/nginx/jscache levels=1:2 keys_zone=jscache:100m inactive=30d use_temp_path=off max_size=100m;
 
     server {
         listen 443 ssl;
