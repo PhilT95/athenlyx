@@ -79,12 +79,19 @@ nav = [
                 {"Docker network troubleshooting" = "infra-mgmt/linux-admin/rhel-alma/docker_network_troubleshooting.md"},
                 {"Command Cheat Sheet" = "infra-mgmt/linux-admin/commands.md"}
             ]},
-            {"Ansible" = [
-                "infra-mgmt/ansible/index.md",
-                {"Ansible Setup Guide" = "infra-mgmt/ansible/ansible_setup.md"},
-                {"Semaphore Setup Guide" = "infra-mgmt/ansible/semaphore_setup.md"}
-            ]}
         ]},
+        {"Ansible" = [
+            "infra-mgmt/ansible/index.md",
+            {"Ansible Setup Guide" = "infra-mgmt/ansible/ansible_setup.md"},
+            {"Semaphore Setup Guide" = "infra-mgmt/ansible/semaphore_setup.md"}
+        ]},
+        {"Cloud providers" = [
+            "infra-mgmt/cloud-providers/index.md",
+            {"Hetzner" = [
+                "infra-mgmt/cloud-providers/hetzner/index.md",
+                {"AlmaLinux 10 Hetzner private networking fix" = "infra-mgmt/cloud-providers/hetzner/almalinux_10_networkfix.md"}
+            ]}
+        ]}
     ]},
     {"Self-Hosted Apps & Services" = [
         "services/index.md",
